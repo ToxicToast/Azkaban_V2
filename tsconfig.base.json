@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@azkaban/shared": ["libs/shared/src/index.ts"],
-      "@azkaban/toasty": ["libs/toasty/src/index.ts"]
+      "@azkaban/toasty": ["libs/toasty/src/index.ts"],
+      "@azkaban/toasty-events": ["libs/toasty-events/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
