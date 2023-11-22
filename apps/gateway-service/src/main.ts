@@ -3,22 +3,31 @@
  * This is only a minimal backend to get started.
  */
 
-import { INestApplication, Logger } from '@nestjs/common';
+import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { WsAdapter } from '@nestjs/platform-ws';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
     snapshot: true,
+    rawBody: true,
   });
 }
 
 function configureApp(app: INestApplication): void {
   const globalPrefix = 'api';
+  const exclude = [
+    { path: 'health', method: RequestMethod.ALL },
+    { path: 'sse/twitch', method: RequestMethod.ALL },
+  ];
   //
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(globalPrefix, {
+    exclude,
+  });
+  app.useWebSocketAdapter(new WsAdapter());
 }
 
 function configureSwagger(app: INestApplication): void {
