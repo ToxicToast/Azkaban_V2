@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { AppModule } from './app/app.module';
 import compression from 'compression';
+import helmet from 'helmet';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
@@ -24,6 +25,7 @@ function configureApp(app: INestApplication): void {
   });
   app.useWebSocketAdapter(new WsAdapter());
   app.use(compression({}));
+  app.use(helmet());
 }
 
 function configureSwagger(app: INestApplication): void {
