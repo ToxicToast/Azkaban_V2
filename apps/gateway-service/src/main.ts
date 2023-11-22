@@ -1,14 +1,9 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
-import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WsAdapter } from '@nestjs/platform-ws';
+import { AppModule } from './app/app.module';
+import compression from 'compression';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
@@ -28,6 +23,7 @@ function configureApp(app: INestApplication): void {
     exclude,
   });
   app.useWebSocketAdapter(new WsAdapter());
+  app.use(compression({}));
 }
 
 function configureSwagger(app: INestApplication): void {
