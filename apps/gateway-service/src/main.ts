@@ -18,6 +18,7 @@ function configureApp(app: INestApplication): void {
   const exclude = [
     { path: 'health', method: RequestMethod.ALL },
     { path: 'sse/twitch', method: RequestMethod.ALL },
+    { path: 'metrics', method: RequestMethod.ALL },
   ];
   //
   app.setGlobalPrefix(globalPrefix, {
