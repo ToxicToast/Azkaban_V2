@@ -1,1 +1,1 @@
-export * from './lib/toasty';
+export {};
