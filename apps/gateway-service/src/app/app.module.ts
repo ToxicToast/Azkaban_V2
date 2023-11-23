@@ -1,21 +1,16 @@
 import { Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { RouterModule } from '@nestjs/core';
 import { HealthModule } from './health/health.module';
-import { DevtoolsModule } from '@nestjs/devtools-integration';
 import { SseModule } from './sse/sse.module';
+import { MetricsModule } from './metrics/metrics.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
-    DevtoolsModule.register({
-      http: true,
-      port: 3001,
-    }),
-    //
     HealthModule,
     SseModule,
+    MetricsModule,
+    InventoryModule,
     //
     RouterModule.register([
       {
@@ -26,9 +21,15 @@ import { SseModule } from './sse/sse.module';
         path: 'sse',
         module: SseModule,
       },
+      {
+        path: 'metrics',
+        module: MetricsModule,
+      },
+      {
+        path: 'inventory',
+        module: InventoryModule,
+      },
     ]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
