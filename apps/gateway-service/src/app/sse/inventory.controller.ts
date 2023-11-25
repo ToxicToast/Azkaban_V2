@@ -1,16 +1,16 @@
 import { Controller, Sse } from '@nestjs/common';
-import { fromEvent, map, Observable } from 'rxjs';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { fromEvent, map, Observable } from 'rxjs';
 
-@Controller('twitch')
-export class TwitchController {
+@Controller('inventory')
+export class InventoryController {
   constructor(private readonly eventEmitter: EventEmitter2) {}
 
   @Sse()
   onEvents(): Observable<MessageEvent> {
-    return fromEvent(this.eventEmitter, 'twitch.event').pipe(
+    return fromEvent(this.eventEmitter, 'inventory.event').pipe(
       map((data) => {
-        return new MessageEvent('twitch.event', { data });
+        return new MessageEvent('inventory.event', { data });
       })
     );
   }
