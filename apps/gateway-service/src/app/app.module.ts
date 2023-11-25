@@ -4,6 +4,7 @@ import { HealthModule } from './health/health.module';
 import { SseModule } from './sse/sse.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { TwitchModule } from './twitch/twitch.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { InventoryModule } from './inventory/inventory.module';
     SseModule,
     MetricsModule,
     InventoryModule,
+    TwitchModule,
     //
     RouterModule.register([
       {
@@ -28,6 +30,10 @@ import { InventoryModule } from './inventory/inventory.module';
       {
         path: 'inventory',
         module: InventoryModule,
+      },
+      {
+        path: 'twitch',
+        module: TwitchModule,
       },
     ]),
   ],
