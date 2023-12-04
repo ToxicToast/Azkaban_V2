@@ -1,7 +1,9 @@
 import { Controller, Sse } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { fromEvent, map, Observable } from 'rxjs';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('server-sent-events')
 @Controller('inventory')
 export class InventoryController {
   constructor(private readonly eventEmitter: EventEmitter2) {}

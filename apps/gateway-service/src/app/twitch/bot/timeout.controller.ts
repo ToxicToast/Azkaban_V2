@@ -3,14 +3,18 @@ import { BotService } from './bot.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('twitch-bot')
-@Controller('message')
-export class MessageController {
+@Controller('timeout')
+export class TimeoutController {
   constructor(private readonly service: BotService) {}
-
   @Post()
-  onMessage(
-    @Body() body: { channel: string; username: string; message: string }
+  onTimeout(
+    @Body()
+    body: {
+      channel: string;
+      username: string;
+      duration: number;
+    }
   ) {
-    this.service.onMessage(body.channel, body.username, body.message);
+    this.service.onTimeout(body.channel, body.username, body.duration);
   }
 }

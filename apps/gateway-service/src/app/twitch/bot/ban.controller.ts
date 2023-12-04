@@ -3,12 +3,12 @@ import { BotService } from './bot.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('twitch-bot')
-@Controller('part')
-export class PartController {
+@Controller('ban')
+export class BanController {
   constructor(private readonly service: BotService) {}
 
   @Post()
-  onPart(@Body() body: { channel: string; username: string }) {
-    this.service.onPart(body.channel, body.username);
+  onBan(@Body() body: { channel: string; username: string }): void {
+    this.service.onBan(body.channel, body.username);
   }
 }
