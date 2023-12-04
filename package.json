@@ -8,7 +8,9 @@
     "update:all": "npx npm-check-updates -u",
     "upgrade:workspace": "nx migrate latest",
     "dep-graph": "nx dep-graph",
-    "serve:gateway": "nx serve gateway-service"
+    "serve:gateway": "nx serve gateway-service",
+    "build:gateway": "nx build gateway-service",
+    "docker:gateway": "nx docker-build gateway-service"
   },
   "private": true,
   "devDependencies": {
