@@ -1,19 +1,14 @@
 import { Controller, Sse } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { fromEvent, map, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('server-sent-events')
 @Controller('inventory')
 export class InventoryController {
-  constructor(private readonly eventEmitter: EventEmitter2) {}
+  private readonly events$ = new Subject<MessageEvent>();
 
   @Sse()
   onEvents(): Observable<MessageEvent> {
-    return fromEvent(this.eventEmitter, 'inventory.event').pipe(
-      map((data) => {
-        return new MessageEvent('inventory.event', { data });
-      })
-    );
+    return this.events$.asObservable();
   }
 }
