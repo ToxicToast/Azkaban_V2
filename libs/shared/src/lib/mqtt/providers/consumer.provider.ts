@@ -11,6 +11,7 @@ export const consumerProvider = (brokerQueue: string): MicroserviceOptions => ({
     urls: [
       `amqp://${process.env.BROKER_USERNAME}:${process.env.BROKER_PASSWORD}@${process.env.BROKER_HOST}:${process.env.BROKER_PORT}`,
     ],
+    noAck: process.env.BROKER_ACK === 'yes' ? true : false,
   },
 });
 

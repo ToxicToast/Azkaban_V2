@@ -52,10 +52,17 @@ async function startApp(app: INestApplication): Promise<void> {
   Logger.log(`🚀 Listening on Port: ${port}`);
 }
 
+async function configureCors(app: INestApplication): Promise<void> {
+  app.enableCors({
+    origin: '*',
+  });
+}
+
 async function bootstrap() {
   const app = await createApp();
   configureApp(app);
   configureSwagger(app);
+  configureCors(app);
   await startApp(app);
   Logger.log(`🚀 Azkaban-Gateway is running`);
 }
