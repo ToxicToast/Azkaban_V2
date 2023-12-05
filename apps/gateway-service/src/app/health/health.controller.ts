@@ -7,7 +7,6 @@ import {
 } from '@nestjs/terminus';
 import { ApiTags } from '@nestjs/swagger';
 import { Transport } from '@nestjs/microservices';
-import * as process from 'process';
 
 @ApiTags('monitoring')
 @Controller()
