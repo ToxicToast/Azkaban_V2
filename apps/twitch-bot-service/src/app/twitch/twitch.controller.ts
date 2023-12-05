@@ -1,38 +1,40 @@
 import { Controller, OnModuleInit } from '@nestjs/common';
 
-import { AppService } from './app.service';
+import { TwitchService } from './twitch.service';
 import { Events } from '@azkaban/shared';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('twitch')
 @Controller()
-export class AppController implements OnModuleInit {
-  constructor(private readonly appService: AppService) {}
+export class TwitchController implements OnModuleInit {
+  constructor(private readonly twitchService: TwitchService) {}
 
   async onTwitchEventJoin(): Promise<void> {
-    this.appService.toasty.addPlugin({
+    this.twitchService.toasty.addPlugin({
       name: 'Gateway-Join',
       event: Events.JOIN,
       execute: (data) => {
-        this.appService.postEvent('join', data);
+        this.twitchService.postEvent('join', data);
       },
     });
   }
 
   async onTwitchEventPart(): Promise<void> {
-    this.appService.toasty.addPlugin({
+    this.twitchService.toasty.addPlugin({
       name: 'Gateway-Part',
       event: Events.PART,
       execute: (data) => {
-        this.appService.postEvent('part', data);
+        this.twitchService.postEvent('part', data);
       },
     });
   }
 
   async onTwitchEventMessage(): Promise<void> {
-    this.appService.toasty.addPlugin({
+    this.twitchService.toasty.addPlugin({
       name: 'Gateway-Message',
       event: Events.MESSAGE,
       execute: (data) => {
-        this.appService.postEvent('message', data);
+        this.twitchService.postEvent('message', data);
       },
     });
   }
@@ -42,6 +44,6 @@ export class AppController implements OnModuleInit {
     await this.onTwitchEventPart();
     await this.onTwitchEventMessage();
     //
-    this.appService.toasty.initBot();
+    this.twitchService.toasty.initBot();
   }
 }

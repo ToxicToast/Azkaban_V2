@@ -3,7 +3,7 @@ import { Bot } from '@azkaban/toasty';
 import { HttpService } from '@nestjs/axios';
 
 @Injectable()
-export class AppService {
+export class TwitchService {
   private bot: Bot;
 
   constructor(

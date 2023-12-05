@@ -1,0 +1,42 @@
+import { Module } from '@nestjs/common';
+
+import { TwitchController } from './twitch.controller';
+import { TwitchService } from './twitch.service';
+import { HttpModule } from '@nestjs/axios';
+
+@Module({
+  imports: [HttpModule],
+  controllers: [TwitchController],
+  providers: [
+    {
+      provide: 'TWITCH_CLIENT_ID',
+      useValue: process.env.TWITCH_CLIENT_ID ?? '',
+    },
+    {
+      provide: 'TWITCH_SECRET_ID',
+      useValue: process.env.TWITCH_CLIENT_SECRET ?? '',
+    },
+    {
+      provide: 'TWITCH_CHANNELS',
+      useValue: process.env.TWITCH_CHANNELS ?? '',
+    },
+    {
+      provide: 'TWITCH_USER_ID',
+      useValue: process.env.TWITCH_USER_ID ?? '',
+    },
+    {
+      provide: 'TWITCH_ACCESS_TOKEN',
+      useValue: process.env.TWITCH_ACCESS_TOKEN ?? '',
+    },
+    {
+      provide: 'TWITCH_REFRESH_TOKEN',
+      useValue: process.env.TWITCH_REFRESH_TOKEN ?? '',
+    },
+    {
+      provide: 'GATEWAY_URL',
+      useValue: process.env.GATEWAY_URL ?? '',
+    },
+    TwitchService,
+  ],
+})
+export class TwitchModule {}
