@@ -18,17 +18,15 @@ export class HealthController {
     private readonly memory: MemoryHealthIndicator
   ) {}
 
-  private checkKafka() {
+  private checkBroker() {
     return [
       () =>
-        this.microservices.pingCheck('kafka', {
-          transport: Transport.KAFKA,
+        this.microservices.pingCheck('rabbitmq', {
+          transport: Transport.RMQ,
           options: {
-            client: {
-              brokers: [
-                `${process.env.BROKER_HOST}:${process.env.BROKER_PORT}`,
-              ],
-            },
+            urls: [
+              `amqp://${process.env.BROKER_USERNAME}:${process.env.BROKER_PASSWORD}@${process.env.BROKER_HOST}:${process.env.BROKER_PORT}`,
+            ],
           },
         }),
     ];
@@ -58,7 +56,7 @@ export class HealthController {
   @HealthCheck()
   check() {
     return this.health.check([
-      ...this.checkKafka(),
+      ...this.checkBroker(),
       ...this.checkHeap(),
       ...this.checkRss(),
     ]);

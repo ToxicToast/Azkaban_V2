@@ -48,6 +48,8 @@ async function startApp(app: INestApplication): Promise<void> {
   const port = process.env.PORT || 3000;
   //
   await app.listen(port);
+  //
+  Logger.log(`🚀 Listening on Port: ${port}`);
 }
 
 async function bootstrap() {
@@ -58,4 +60,4 @@ async function bootstrap() {
   Logger.log(`🚀 Azkaban-Gateway is running`);
 }
 
-bootstrap();
+bootstrap().catch((err) => Logger.error(err));

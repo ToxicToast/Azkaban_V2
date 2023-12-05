@@ -8,28 +8,22 @@ export class ChannelController {
   constructor(private readonly service: ChannelService) {}
 
   @Get()
-  getChannelList(): Array<any> {
-    return [];
+  getChannelList(): Promise<Array<any>> {
+    return this.service.getChannelList().toPromise();
   }
 
   @Get('id/:id')
-  getChannelById(@Param('id') id: string): any {
-    return {
-      id,
-    };
+  getChannelById(@Param('id') id: string): Promise<any> {
+    return this.service.getChannelById(id).toPromise();
   }
 
   @Get('title/:title')
-  getChannelByTitle(@Param('title') title: string): any {
-    return {
-      title,
-    };
+  getChannelByTitle(@Param('title') title: string): Promise<any> {
+    return this.service.getChannelByTitle(title).toPromise();
   }
 
   @Get('game/:game')
-  getChannelByGame(@Param('game') game: string): any {
-    return {
-      game,
-    };
+  getChannelByGame(@Param('game') game: string): Promise<any> {
+    return this.service.getChannelByGame(game).toPromise();
   }
 }

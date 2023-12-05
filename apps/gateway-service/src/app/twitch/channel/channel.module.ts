@@ -11,7 +11,7 @@ import { clientProvider } from '@azkaban/shared';
     ClientsModule.register([
       {
         name: 'TWITCH_CHANNEL_SERVICE',
-        ...clientProvider,
+        ...clientProvider('twitch_queue'),
       },
     ]),
   ],
