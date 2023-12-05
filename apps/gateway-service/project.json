@@ -51,6 +51,10 @@
       "options": {
         "jestConfig": "apps/gateway-service/jest.config.ts"
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/gateway-service/Dockerfile . -t toxictoast/gateway-service:latest"
     }
   },
   "tags": []
