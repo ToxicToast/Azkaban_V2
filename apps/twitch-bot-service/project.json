@@ -51,6 +51,10 @@
       "options": {
         "jestConfig": "apps/twitch-bot-service/jest.config.ts"
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/twitch-bot-service/Dockerfile . -t toxictoast/twitch-bot-service:v.0.0.1"
     }
   },
   "tags": ["scope:twitch"]
