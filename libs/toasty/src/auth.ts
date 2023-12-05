@@ -1,5 +1,6 @@
 import { Authentication, Nullable } from '@azkaban/shared';
 import { AccessToken, RefreshingAuthProvider } from '@twurple/auth';
+import { Logger } from '@nestjs/common';
 
 export class Auth {
   private readonly userId: Nullable<string>;
@@ -11,7 +12,7 @@ export class Auth {
 
   constructor(options: Authentication) {
     this.authProvider = null;
-    this.accessToken = options.acessToken ?? null;
+    this.accessToken = options.accessToken ?? null;
     this.refreshToken = options.refreshToken ?? null;
     this.clientId = options.clientId ?? null;
     this.clientSecret = options.clientSecret ?? null;
@@ -41,9 +42,11 @@ export class Auth {
       },
       ['chat']
     );
+    Logger.debug('Successfully authenticated');
     this.authProvider.onRefresh((_, tokenData: AccessToken) => {
       this.accessToken = tokenData.accessToken;
       this.refreshToken = tokenData.refreshToken;
+      Logger.debug('Refreshing access token for user', this.userId);
     });
   }
 

@@ -4,6 +4,6 @@ export interface Authentication {
   userId: Optional<string>;
   clientId: Optional<string>;
   clientSecret: Optional<string>;
-  acessToken?: Optional<string>;
+  accessToken?: Optional<string>;
   refreshToken?: Optional<string>;
 }

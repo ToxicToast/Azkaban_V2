@@ -14,29 +14,12 @@ export class Chat {
     return new ChatClient({
       authProvider: this.authProvider.instance,
       channels: this.channels,
+      requestMembershipEvents: true,
     });
   }
 
   public init(): void {
     this.chatProvider.connect();
-    this.chatProvider.onConnect(() => {
-      console.debug(
-        '[Chat]',
-        'Joining Channels:',
-        this.chatProvider.join(', ')
-      );
-      console.debug('[Chat]', 'Successfully connected to Twitch Chat.');
-    });
-    this.chatProvider.onAuthenticationFailure(
-      (text: string, retryCount: number) => {
-        console.error(
-          '[Chat]',
-          'Authentication Failure:',
-          text,
-          `(Retries: ${retryCount})`
-        );
-      }
-    );
   }
 
   get instance(): ChatClient {
