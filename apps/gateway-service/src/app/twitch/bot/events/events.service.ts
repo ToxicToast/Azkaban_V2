@@ -1,29 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { ClientRMQ } from '@nestjs/microservices';
 
 @Injectable()
 export class EventsService {
-  constructor(private readonly eventEmitter: EventEmitter2) {}
+  constructor(
+    @Inject('TWITCH_MESSAGE_SERVICE') private readonly client: ClientRMQ
+  ) {}
 
   onJoin(channel: string, username: string): void {
-    this.eventEmitter.emit('twitch.join', {
-      channel,
-      username,
-    });
+    Logger.log('[onJoin]', { channel, username });
   }
 
   onPart(channel: string, username: string): void {
-    this.eventEmitter.emit('twitch.part', {
-      channel,
-      username,
-    });
+    Logger.log('[onPart]', { channel, username });
   }
 
   onMessage(channel: string, username: string, message: string): void {
-    this.eventEmitter.emit('twitch.message', {
-      channel,
-      username,
-      message,
-    });
+    Logger.log('[onMessage]', { channel, username, message });
   }
 }

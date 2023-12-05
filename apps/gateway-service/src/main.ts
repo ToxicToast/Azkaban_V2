@@ -26,6 +26,7 @@ function configureApp(app: INestApplication): void {
   app.setGlobalPrefix(globalPrefix, {
     exclude,
   });
+  app.enableShutdownHooks();
   app.useWebSocketAdapter(new WsAdapter());
   app.use(compression({}));
   app.use(helmet());

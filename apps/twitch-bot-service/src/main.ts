@@ -32,6 +32,7 @@ function configureApp(app: INestApplication): void {
   app.setGlobalPrefix(globalPrefix, {
     exclude,
   });
+  app.enableShutdownHooks();
   app.use(compression({}));
   app.use(helmet());
 }
