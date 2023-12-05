@@ -13,8 +13,20 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:toasty",
+                "onlyDependOnLibsWithTags": ["scope:toasty", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:gateway",
+                "onlyDependOnLibsWithTags": ["scope:gateway", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:twitch",
+                "onlyDependOnLibsWithTags": ["scope:twitch", "scope:toasty", "scope:shared"]
               }
             ]
           }
