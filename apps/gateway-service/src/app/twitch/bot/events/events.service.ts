@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
-export class BotService {
+export class EventsService {
   constructor(private readonly eventEmitter: EventEmitter2) {}
 
   onJoin(channel: string, username: string): void {
@@ -24,21 +24,6 @@ export class BotService {
       channel,
       username,
       message,
-    });
-  }
-
-  onTimeout(channel: string, username: string, duration: number): void {
-    this.eventEmitter.emit('twitch.timeout', {
-      channel,
-      username,
-      duration,
-    });
-  }
-
-  onBan(channel: string, username: string): void {
-    this.eventEmitter.emit('twitch.ban', {
-      channel,
-      username,
     });
   }
 }
