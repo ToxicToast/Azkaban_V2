@@ -5,12 +5,12 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ClientKafka } from '@nestjs/microservices';
+import { ClientRMQ } from '@nestjs/microservices';
 
 @Injectable()
 export class MessageService implements OnModuleInit, OnModuleDestroy {
   constructor(
-    @Inject('TWITCH_MESSAGE_SERVICE') private readonly client: ClientKafka
+    @Inject('TWITCH_MESSAGE_SERVICE') private readonly client: ClientRMQ
   ) {}
 
   async onModuleInit(): Promise<void> {
@@ -27,11 +27,10 @@ export class MessageService implements OnModuleInit, OnModuleDestroy {
     username: string;
     message: string;
   }): void {
-    console.log(
-      'onMessage',
-      payload.channel,
-      payload.username,
-      payload.message
-    ); // Insert Message
+    this.client.send('message_create', {
+      channel: payload.channel,
+      username: payload.username,
+      message: payload.message,
+    });
   }
 }
