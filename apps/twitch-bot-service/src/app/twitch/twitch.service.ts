@@ -32,9 +32,9 @@ export class TwitchService {
     return this.bot;
   }
 
-  postEvent(endpoint: string, data: unknown): void {
+  postEvent<Data>(endpoint: string, data: Data): void {
     this.http
-      .post(`${this.gatewayUrl}/api/twitch/bot/${endpoint}`, data)
+      .post<void>(`${this.gatewayUrl}/api/twitch/bot/${endpoint}`, data)
       .toPromise()
       .catch((err) => Logger.error(err));
   }

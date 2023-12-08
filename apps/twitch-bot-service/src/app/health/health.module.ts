@@ -5,7 +5,7 @@ import { TerminusModule } from '@nestjs/terminus';
 @Module({
   imports: [
     TerminusModule.forRoot({
-      errorLogStyle: 'pretty',
+      errorLogStyle: 'json',
     }),
   ],
   controllers: [HealthController],

@@ -8,6 +8,7 @@ import helmet from 'helmet';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
+    cors: true,
     snapshot: true,
     rawBody: true,
   });
@@ -21,6 +22,8 @@ function configureApp(app: INestApplication): void {
     { path: 'sse/notification', method: RequestMethod.ALL },
     { path: 'sse/twitch', method: RequestMethod.ALL },
     { path: 'metrics', method: RequestMethod.ALL },
+    { path: 'swagger', method: RequestMethod.ALL },
+    { path: '/', method: RequestMethod.ALL },
   ];
   //
   app.setGlobalPrefix(globalPrefix, {
@@ -30,6 +33,7 @@ function configureApp(app: INestApplication): void {
   app.useWebSocketAdapter(new WsAdapter());
   app.use(compression({}));
   app.use(helmet());
+  //
 }
 
 function configureSwagger(app: INestApplication): void {
@@ -55,7 +59,9 @@ async function startApp(app: INestApplication): Promise<void> {
 
 async function configureCors(app: INestApplication): Promise<void> {
   app.enableCors({
-    origin: '*',
+    origin: ['localhost', 'toxictoast.de'],
+    maxAge: 3600,
+    optionsSuccessStatus: 200,
   });
 }
 

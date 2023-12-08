@@ -3,6 +3,7 @@ import {
   HealthCheckService,
   HealthCheck,
   MemoryHealthIndicator,
+  HttpHealthIndicator,
 } from '@nestjs/terminus';
 import * as process from 'process';
 import { ApiTags } from '@nestjs/swagger';
@@ -12,32 +13,29 @@ import { ApiTags } from '@nestjs/swagger';
 export class HealthController {
   constructor(
     private readonly health: HealthCheckService,
-    private readonly memory: MemoryHealthIndicator
+    private readonly memory: MemoryHealthIndicator,
+    private readonly http: HttpHealthIndicator
   ) {}
 
-  private checkHeap() {
-    return [
-      () =>
-        this.memory.checkHeap(
-          'memory_heap',
-          Number(process.env.MEMORY_HEAP_TRESHOLD)
-        ),
-    ];
+  private checkHeap(heapThreshold: number) {
+    return [() => this.memory.checkHeap('memory_heap', heapThreshold)];
   }
 
-  private checkRss() {
-    return [
-      () =>
-        this.memory.checkRSS(
-          'memory_rss',
-          Number(process.env.MEMORY_RSS_TRESHOLD)
-        ),
-    ];
+  private checkRss(rssThreshold: number) {
+    return [() => this.memory.checkRSS('memory_rss', rssThreshold)];
+  }
+
+  private checkGateway(gatewayPath: string) {
+    return [() => this.http.pingCheck('gateway', gatewayPath)];
   }
 
   @Get()
   @HealthCheck()
   check() {
-    return this.health.check([...this.checkHeap(), ...this.checkRss()]);
+    return this.health.check([
+      ...this.checkHeap(Number(process.env.MEMORY_HEAP_TRESHOLD)),
+      ...this.checkRss(Number(process.env.MEMORY_RSS_TRESHOLD)),
+      ...this.checkGateway(String(process.env.GATEWAY_URL + '/health')),
+    ]);
   }
 }
