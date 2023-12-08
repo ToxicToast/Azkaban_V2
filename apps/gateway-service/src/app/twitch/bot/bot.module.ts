@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { BotService } from './bot.service';
-import { JoinController } from './join.controller';
-import { PartController } from './part.controller';
-import { MessageController } from './message.controller';
-import { TimeoutController } from './timeout.controller';
-import { BanController } from './ban.controller';
+import { EventsModule } from './events/events.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
-  imports: [EventEmitterModule],
-  controllers: [
-    JoinController,
-    PartController,
-    MessageController,
-    TimeoutController,
-    BanController,
+  imports: [
+    EventsModule,
+    RouterModule.register([
+      {
+        path: 'twitch',
+        children: [
+          {
+            path: 'bot',
+            module: EventsModule,
+          },
+        ],
+      },
+    ]),
   ],
-  providers: [BotService],
 })
 export class BotModule {}

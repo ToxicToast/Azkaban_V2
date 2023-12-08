@@ -1,4 +1,4 @@
-import { Controller, Sse } from '@nestjs/common';
+import { Controller, Logger, Sse } from '@nestjs/common';
 import { Observable, Subject } from 'rxjs';
 import { OnEvent } from '@nestjs/event-emitter';
 import { ApiTags } from '@nestjs/swagger';
@@ -15,6 +15,11 @@ export class TwitchController {
 
   @OnEvent('twitch.join')
   onJoin(payload: { channel: string; username: string }): void {
+    Logger.debug({
+      channel: payload.channel,
+      username: payload.username,
+      type: 'join',
+    });
     const message = new MessageEvent('twitch.join', {
       data: {
         channel: payload.channel,
@@ -28,6 +33,11 @@ export class TwitchController {
 
   @OnEvent('twitch.part')
   onPart(payload: { channel: string; username: string }): void {
+    Logger.debug({
+      channel: payload.channel,
+      username: payload.username,
+      type: 'part',
+    });
     const message = new MessageEvent('twitch.part', {
       data: {
         channel: payload.channel,
@@ -45,30 +55,18 @@ export class TwitchController {
     username: string;
     message: string;
   }): void {
+    Logger.debug({
+      channel: payload.channel,
+      username: payload.username,
+      message: payload.message,
+      type: 'message',
+    });
     const message = new MessageEvent('twitch.message', {
       data: {
         channel: payload.channel,
         username: payload.username,
         message: payload.message,
         type: 'message',
-        date: new Date().getTime(),
-      },
-    });
-    this.events$.next(message);
-  }
-
-  @OnEvent('twitch.timeout')
-  onTimeout(payload: {
-    channel: string;
-    username: string;
-    duration: number;
-  }): void {
-    const message = new MessageEvent('twitch.timeout', {
-      data: {
-        channel: payload.channel,
-        username: payload.username,
-        duration: payload.duration,
-        type: 'timeout',
         date: new Date().getTime(),
       },
     });

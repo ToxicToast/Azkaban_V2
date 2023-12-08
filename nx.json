@@ -30,6 +30,10 @@
           "codeCoverage": true
         }
       }
+    },
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -88,6 +92,20 @@
     },
     "@nx/angular:component": {
       "style": "scss"
+    },
+    "@nx/web": {
+      "application": {
+        "projectNameAndRootFormat": "derived"
+      },
+      "library": {
+        "projectNameAndRootFormat": "derived"
+      }
+    },
+    "@nx/web:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "vitest",
+      "e2eTestRunner": "none"
     }
   }
 }

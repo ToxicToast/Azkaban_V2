@@ -57,5 +57,5 @@
       "command": "docker build -f apps/gateway-service/Dockerfile . -t toxictoast/gateway-service:v.0.0.1"
     }
   },
-  "tags": []
+  "tags": ["scope:gateway"]
 }

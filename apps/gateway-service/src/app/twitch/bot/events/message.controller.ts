@@ -1,11 +1,11 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { BotService } from './bot.service';
 import { ApiTags } from '@nestjs/swagger';
+import { EventsService } from './events.service';
 
 @ApiTags('twitch-bot')
 @Controller('message')
 export class MessageController {
-  constructor(private readonly service: BotService) {}
+  constructor(private readonly service: EventsService) {}
 
   @Post()
   onMessage(
