@@ -27,6 +27,10 @@
               {
                 "sourceTag": "scope:twitch",
                 "onlyDependOnLibsWithTags": ["scope:twitch", "scope:toasty", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:inventory",
+                "onlyDependOnLibsWithTags": ["scope:inventory", "scope:shared"]
               }
             ]
           }
