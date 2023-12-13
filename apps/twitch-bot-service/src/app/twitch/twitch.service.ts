@@ -1,10 +1,11 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Bot } from '@azkaban/toasty';
 import { HttpService } from '@nestjs/axios';
+import { ClientRMQ } from '@nestjs/microservices';
 
 @Injectable()
 export class TwitchService {
-  private bot: Bot;
+  private readonly bot: Bot;
 
   constructor(
     @Inject('TWITCH_CLIENT_ID') private readonly clientId: string,
@@ -13,8 +14,7 @@ export class TwitchService {
     @Inject('TWITCH_ACCESS_TOKEN') private readonly accessToken: string,
     @Inject('TWITCH_REFRESH_TOKEN') private readonly refreshToken: string,
     @Inject('TWITCH_CHANNELS') private readonly channels: string,
-    @Inject('GATEWAY_URL') private readonly gatewayUrl: string,
-    private readonly http: HttpService
+    @Inject('TWITCH_SERVICE') private readonly client: ClientRMQ
   ) {
     this.bot = new Bot({
       authentication: {
@@ -32,10 +32,11 @@ export class TwitchService {
     return this.bot;
   }
 
-  postEvent<Data>(endpoint: string, data: Data): void {
-    this.http
-      .post<void>(`${this.gatewayUrl}/api/twitch/bot/${endpoint}`, data)
+  async emitEvent<Data>(event: string, data: Data): Promise<void> {
+    await this.client
+      .send<void, Data>(event, data)
       .toPromise()
-      .catch((err) => Logger.error(err));
+      .catch((err) => Logger.error(err))
+      .then(() => Logger.debug(`Send ${event}`));
   }
 }

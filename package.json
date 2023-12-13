@@ -36,6 +36,7 @@
     "@types/compression": "^1.7.5",
     "@types/jest": "^29.4.0",
     "@types/node": "~18.7.1",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "@vitest/coverage-v8": "~0.34.6",
@@ -74,6 +75,8 @@
     "@twurple/api": "^7.0.6",
     "@twurple/auth": "^7.0.6",
     "@twurple/chat": "^7.0.6",
+    "@twurple/eventsub-http": "^7.0.6",
+    "@twurple/eventsub-ws": "^7.0.6",
     "@willsoto/nestjs-prometheus": "^6.0.0",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
@@ -85,6 +88,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "save": "^2.9.0",
-    "tslib": "^2.3.0"
+    "slugify": "^1.6.6",
+    "tslib": "^2.3.0",
+    "uuid": "^9.0.1"
   }
 }

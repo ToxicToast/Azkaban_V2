@@ -1,16 +1,28 @@
-import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
+import {
+  INestApplication,
+  INestMicroservice,
+  Logger,
+  RequestMethod,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { AppModule } from './app/app.module';
 import compression from 'compression';
 import helmet from 'helmet';
+import { consumerProvider } from '@azkaban/shared';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
     cors: true,
     snapshot: true,
     rawBody: true,
+  });
+}
+
+async function createTwitchMicroService(app: INestApplication): Promise<void> {
+  app.connectMicroservice({
+    ...consumerProvider('twitch_queue'),
   });
 }
 
@@ -52,6 +64,7 @@ function configureSwagger(app: INestApplication): void {
 async function startApp(app: INestApplication): Promise<void> {
   const port = process.env.PORT || 3000;
   //
+  await app.startAllMicroservices();
   await app.listen(port);
   //
   Logger.log(`🚀 Listening on Port: ${port}`);
@@ -70,6 +83,7 @@ async function bootstrap() {
   configureApp(app);
   configureSwagger(app);
   configureCors(app);
+  await createTwitchMicroService(app);
   await startApp(app);
   Logger.log(`🚀 Azkaban-Gateway is running`);
 }

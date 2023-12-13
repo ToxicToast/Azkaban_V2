@@ -1,1 +1,1 @@
-export * from './lib/inventory-domain';
+export * from './lib';

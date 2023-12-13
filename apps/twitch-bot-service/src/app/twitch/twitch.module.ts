@@ -3,9 +3,19 @@ import { Module } from '@nestjs/common';
 import { TwitchController } from './twitch.controller';
 import { TwitchService } from './twitch.service';
 import { HttpModule } from '@nestjs/axios';
+import { ClientsModule } from '@nestjs/microservices';
+import { clientProvider } from '@azkaban/shared';
 
 @Module({
-  imports: [HttpModule],
+  imports: [
+    HttpModule,
+    ClientsModule.register([
+      {
+        name: 'TWITCH_SERVICE',
+        ...clientProvider('twitch_queue'),
+      },
+    ]),
+  ],
   controllers: [TwitchController],
   providers: [
     {
@@ -33,8 +43,12 @@ import { HttpModule } from '@nestjs/axios';
       useValue: process.env.TWITCH_REFRESH_TOKEN ?? '',
     },
     {
-      provide: 'GATEWAY_URL',
-      useValue: process.env.GATEWAY_URL ?? '',
+      provide: 'SSL_CERT',
+      useValue: process.env.SSL_CERT ?? null,
+    },
+    {
+      provide: 'SSL_KEY',
+      useValue: process.env.SSL_KEY ?? null,
     },
     TwitchService,
   ],

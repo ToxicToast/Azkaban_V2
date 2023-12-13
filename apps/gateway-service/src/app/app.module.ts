@@ -5,18 +5,9 @@ import { SseModule } from './sse/sse.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { TwitchModule } from './twitch/twitch.module';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
-    EventEmitterModule.forRoot({
-      wildcard: true,
-      delimiter: '.',
-      newListener: true,
-      removeListener: true,
-      verboseMemoryLeak: true,
-    }),
-    //
     HealthModule,
     SseModule,
     MetricsModule,

@@ -3,10 +3,11 @@ import {
   HealthCheckService,
   HealthCheck,
   MemoryHealthIndicator,
-  HttpHealthIndicator,
+  MicroserviceHealthIndicator,
 } from '@nestjs/terminus';
 import * as process from 'process';
 import { ApiTags } from '@nestjs/swagger';
+import { Transport } from '@nestjs/microservices';
 
 @ApiTags('monitoring')
 @Controller()
@@ -14,7 +15,7 @@ export class HealthController {
   constructor(
     private readonly health: HealthCheckService,
     private readonly memory: MemoryHealthIndicator,
-    private readonly http: HttpHealthIndicator
+    private readonly microservices: MicroserviceHealthIndicator
   ) {}
 
   private checkHeap(heapThreshold: number) {
@@ -25,8 +26,18 @@ export class HealthController {
     return [() => this.memory.checkRSS('memory_rss', rssThreshold)];
   }
 
-  private checkGateway(gatewayPath: string) {
-    return [() => this.http.pingCheck('gateway', gatewayPath)];
+  private checkBroker() {
+    return [
+      () =>
+        this.microservices.pingCheck('rabbitmq', {
+          transport: Transport.RMQ,
+          options: {
+            urls: [
+              `amqp://${process.env.BROKER_USERNAME}:${process.env.BROKER_PASSWORD}@${process.env.BROKER_HOST}:${process.env.BROKER_PORT}`,
+            ],
+          },
+        }),
+    ];
   }
 
   @Get()
@@ -35,7 +46,7 @@ export class HealthController {
     return this.health.check([
       ...this.checkHeap(Number(process.env.MEMORY_HEAP_TRESHOLD)),
       ...this.checkRss(Number(process.env.MEMORY_RSS_TRESHOLD)),
-      ...this.checkGateway(String(process.env.GATEWAY_URL + '/health')),
+      ...this.checkBroker(),
     ]);
   }
 }
