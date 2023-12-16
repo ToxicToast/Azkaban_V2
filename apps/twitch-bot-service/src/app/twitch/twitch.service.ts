@@ -1,6 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Bot } from '@azkaban/toasty';
-import { HttpService } from '@nestjs/axios';
 import { ClientRMQ } from '@nestjs/microservices';
 
 @Injectable()
@@ -36,7 +35,7 @@ export class TwitchService {
     await this.client
       .send<void, Data>(event, data)
       .toPromise()
-      .catch((err) => Logger.error(err))
-      .then(() => Logger.debug(`Send ${event}`));
+      .catch((err) => Logger.error(err, event))
+      .then(() => Logger.debug(data, event));
   }
 }

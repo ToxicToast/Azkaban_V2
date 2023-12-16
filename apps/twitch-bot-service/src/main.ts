@@ -13,10 +13,9 @@ import { consumerProvider } from '@azkaban/shared';
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule);
 }
-
-async function createMicroService(): Promise<INestMicroservice> {
-  return await NestFactory.createMicroservice(AppModule, {
-    ...consumerProvider('twitch-bot'),
+async function createMicroService(app: INestApplication): Promise<void> {
+  app.connectMicroservice({
+    ...consumerProvider('twitch_queue'),
   });
 }
 
@@ -46,8 +45,8 @@ async function startApp(app: INestApplication): Promise<void> {
 
 async function bootstrap() {
   const app = await createApp();
-  await createMicroService();
   configureApp(app);
+  await createMicroService(app);
   await startApp(app);
   Logger.log(`🚀 Twitch-Bot is running`);
 }

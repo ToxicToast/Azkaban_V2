@@ -61,7 +61,7 @@ export class TwitchController
     endpoint: string
   ): Promise<void> {
     this.twitchService.toasty.addPlugin<TData>({
-      name: `Gateway-${eventName.charAt(0).toUpperCase() + eventName.slice(1)}`,
+      name: `Broker-${eventName.charAt(0).toUpperCase() + eventName.slice(1)}`,
       event: eventName,
       execute: async (data) => {
         await this.twitchService.emitEvent<TData>(`twitch.${endpoint}`, data);
@@ -69,19 +69,6 @@ export class TwitchController
     });
   }
 
-  private async onTwitchEventSub(): Promise<void> {
-    // ToxicToast
-    this.twitchService.toasty.eventSub.onStreamOnline('28004350');
-    this.twitchService.toasty.eventSub.onStreamOffline('28004350');
-    // TheDevDad_
-    this.twitchService.toasty.eventSub.onStreamOnline('722784403');
-    this.twitchService.toasty.eventSub.onStreamOffline('722784403');
-    // MeltedMonsterGames
-    this.twitchService.toasty.eventSub.onStreamOnline('898917515');
-    this.twitchService.toasty.eventSub.onStreamOffline('898917515');
-    //
-    this.twitchService.toasty.startEventSub();
-  }
   async onModuleInit(): Promise<void> {
     await this.onTwitchEvent<JoinData>(Events.JOIN, 'join');
     await this.onTwitchEvent<PartData>(Events.PART, 'part');

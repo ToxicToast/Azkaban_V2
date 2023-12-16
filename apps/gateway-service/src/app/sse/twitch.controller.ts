@@ -1,4 +1,4 @@
-import { Controller, Sse } from '@nestjs/common';
+import { Controller, Logger, Sse } from '@nestjs/common';
 import { Observable, Subject } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger';
 import { MessagePattern, Payload } from '@nestjs/microservices';
@@ -32,6 +32,7 @@ export class TwitchController {
       },
     });
     this.events$.next(message);
+    Logger.debug(data, 'twitch.join');
   }
 
   @MessagePattern('twitch.part')
@@ -45,6 +46,7 @@ export class TwitchController {
       },
     });
     this.events$.next(message);
+    Logger.debug(data, 'twitch.part');
   }
 
   @MessagePattern('twitch.message')
@@ -59,6 +61,7 @@ export class TwitchController {
       },
     });
     this.events$.next(message);
+    Logger.debug(data, 'twitch.message');
   }
 
   @MessagePattern('twitch.timeout')
@@ -73,6 +76,7 @@ export class TwitchController {
       },
     });
     this.events$.next(message);
+    Logger.debug(data, 'twitch.timeout');
   }
 
   @MessagePattern('twitch.ban')
@@ -86,6 +90,7 @@ export class TwitchController {
       },
     });
     this.events$.next(message);
+    Logger.debug(data, 'twitch.ban');
   }
 
   @MessagePattern('twitch.raid')
@@ -99,5 +104,6 @@ export class TwitchController {
       },
     });
     this.events$.next(message);
+    Logger.debug(data, 'twitch.raid');
   }
 }

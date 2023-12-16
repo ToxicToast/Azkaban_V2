@@ -4,7 +4,6 @@ import { UserModule } from './user/user.module';
 import { ChannelModule } from './channel/channel.module';
 import { StreamModule } from './stream/stream.module';
 import { MessageModule } from './message/message.module';
-import { PubSubModule } from './pubsub/pubsub.module';
 
 @Module({
   imports: [
@@ -32,10 +31,6 @@ import { PubSubModule } from './pubsub/pubsub.module';
           {
             path: 'message',
             module: MessageModule,
-          },
-          {
-            path: 'pubsub',
-            module: PubSubModule,
           },
         ],
       },
