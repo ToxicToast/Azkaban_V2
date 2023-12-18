@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ClientsModule } from '@nestjs/microservices';
-import { clientProvider } from '@azkaban/shared';
+import { clientProvider, Queues } from '@azkaban/shared';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 @Module({
@@ -10,7 +10,7 @@ import { UserService } from './user.service';
     ClientsModule.register([
       {
         name: 'TWITCH_USER_SERVICE',
-        ...clientProvider('twitch_queue'),
+        ...clientProvider(Queues.TWITCH),
       },
     ]),
   ],

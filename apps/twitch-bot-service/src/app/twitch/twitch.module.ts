@@ -4,7 +4,7 @@ import { TwitchController } from './twitch.controller';
 import { TwitchService } from './twitch.service';
 import { HttpModule } from '@nestjs/axios';
 import { ClientsModule } from '@nestjs/microservices';
-import { clientProvider } from '@azkaban/shared';
+import { clientProvider, Queues } from '@azkaban/shared';
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import { clientProvider } from '@azkaban/shared';
     ClientsModule.register([
       {
         name: 'TWITCH_SERVICE',
-        ...clientProvider('twitch_queue'),
+        ...clientProvider(Queues.TWITCH),
       },
     ]),
   ],

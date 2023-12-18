@@ -14,6 +14,9 @@
     "serve:twitch-bot": "nx serve twitch-bot-service",
     "build:twitch-bot": "nx build twitch-bot-service",
     "docker:twitch-bot": "nx docker-build twitch-bot-service",
+    "serve:inventory-category": "nx serve inventory-category-service",
+    "build:inventory-category": "nx build inventory-category-service",
+    "docker:inventory-category": "nx docker-build inventory-category-service",
     "test:all": "nx run-many --target=test --all"
   },
   "private": true,
@@ -72,6 +75,7 @@
     "@nestjs/swagger": "^7.1.16",
     "@nestjs/terminus": "^10.1.1",
     "@nestjs/throttler": "^5.0.1",
+    "@nestjs/typeorm": "^10.0.1",
     "@nestjs/websockets": "^10.2.10",
     "@twurple/api": "^7.0.6",
     "@twurple/auth": "^7.0.6",

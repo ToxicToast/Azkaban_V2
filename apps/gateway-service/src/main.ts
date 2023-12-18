@@ -10,7 +10,7 @@ import { WsAdapter } from '@nestjs/platform-ws';
 import { AppModule } from './app/app.module';
 import compression from 'compression';
 import helmet from 'helmet';
-import { consumerProvider } from '@azkaban/shared';
+import { consumerProvider, Queues } from '@azkaban/shared';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
@@ -22,7 +22,7 @@ async function createApp(): Promise<INestApplication> {
 
 async function createTwitchMicroService(app: INestApplication): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider('twitch_queue'),
+    ...consumerProvider(Queues.TWITCH),
   });
 }
 

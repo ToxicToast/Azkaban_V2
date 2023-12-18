@@ -22,7 +22,7 @@
               },
               {
                 "sourceTag": "scope:gateway",
-                "onlyDependOnLibsWithTags": ["scope:gateway", "scope:toasty", "scope:shared"]
+                "onlyDependOnLibsWithTags": ["scope:gateway", "scope:infrastructure", "scope:toasty", "scope:shared"]
               },
               {
                 "sourceTag": "scope:twitch",

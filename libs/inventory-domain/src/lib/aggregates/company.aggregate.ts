@@ -38,7 +38,7 @@ export class CompanyAggregate
       id: this.id,
       title: this.getTitle(),
       slug: this.getSlug(),
-      active: this.isActive(),
+      active: this.getActive(),
       created_at: this.getCreatedAt(),
       updated_at: this.getUpdatedAt(),
       deleted_at: this.getDeletedAt(),

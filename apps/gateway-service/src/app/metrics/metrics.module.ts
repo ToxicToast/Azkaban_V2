@@ -8,6 +8,9 @@ import { MetricsController } from './metrics.controller';
       defaultMetrics: {
         enabled: true,
       },
+      defaultLabels: {
+        app: 'gateway-service',
+      },
       path: '/metrics',
       controller: MetricsController,
     }),

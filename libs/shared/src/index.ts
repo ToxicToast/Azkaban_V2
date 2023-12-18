@@ -6,3 +6,4 @@ export * from './lib/mqtt';
 export * from './lib/types';
 export * from './lib/interfaces';
 export * from './lib/twitch';
+export * from './lib/enums';

@@ -1,0 +1,61 @@
+{
+  "name": "inventory-category-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/inventory-category-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/inventory-category-service",
+        "main": "apps/inventory-category-service/src/main.ts",
+        "tsConfig": "apps/inventory-category-service/tsconfig.app.json",
+        "assets": ["apps/inventory-category-service/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/inventory-category-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "inventory-category-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "inventory-category-service:build:development"
+        },
+        "production": {
+          "buildTarget": "inventory-category-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/inventory-category-service/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/inventory-category-service/jest.config.ts"
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/inventory-category-service/Dockerfile . -t toxictoast/inventory-category-service:v.0.0.4"
+    }
+  },
+  "tags": ["scope:inventory", "scope:application"]
+}

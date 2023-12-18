@@ -38,6 +38,7 @@ export class SizeAggregate
       id: this.id,
       title: this.getTitle(),
       slug: this.getSlug(),
+      active: this.getActive(),
       created_at: this.getCreatedAt(),
       updated_at: this.getUpdatedAt(),
       deleted_at: this.getDeletedAt(),

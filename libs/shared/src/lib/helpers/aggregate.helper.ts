@@ -93,4 +93,8 @@ export class AggregateHelper<Anemic extends AnemicHelper> {
   protected getSlug(): string {
     return this.data.slug;
   }
+
+  protected getActive(): boolean {
+    return this.data.active;
+  }
 }
