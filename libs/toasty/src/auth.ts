@@ -1,17 +1,23 @@
 import { Authentication, Nullable } from '@azkaban/shared';
-import { AccessToken, RefreshingAuthProvider } from '@twurple/auth';
+import {
+  AccessToken,
+  AppTokenAuthProvider,
+  RefreshingAuthProvider,
+} from '@twurple/auth';
 import { Logger } from '@nestjs/common';
 
 export class Auth {
   private readonly userId: Nullable<string>;
-  private authProvider: Nullable<RefreshingAuthProvider>;
+  private authBotProvider: Nullable<RefreshingAuthProvider>;
+  private authAppProvider: Nullable<AppTokenAuthProvider>;
   private accessToken: Nullable<string>;
   private refreshToken: Nullable<string>;
   private readonly clientId: Nullable<string>;
   private readonly clientSecret: Nullable<string>;
 
   constructor(options: Authentication) {
-    this.authProvider = null;
+    this.authBotProvider = null;
+    this.authAppProvider = null;
     this.accessToken = options.accessToken ?? null;
     this.refreshToken = options.refreshToken ?? null;
     this.clientId = options.clientId ?? null;
@@ -25,14 +31,15 @@ export class Auth {
     if (!this.clientId || !this.clientSecret) {
       throw new Error('Missing Client Id and/or Client Secret');
     }
-    this.authProvider = new RefreshingAuthProvider({
+    //
+    this.authBotProvider = new RefreshingAuthProvider({
       clientId: this.clientId,
       clientSecret: this.clientSecret,
     });
     if (!this.userId) {
       throw new Error('Missing User Id');
     }
-    this.authProvider.addUser(
+    this.authBotProvider.addUser(
       this.userId,
       {
         accessToken: this.accessToken,
@@ -43,17 +50,29 @@ export class Auth {
       ['chat']
     );
     Logger.debug('Successfully authenticated');
-    this.authProvider.onRefresh((_, tokenData: AccessToken) => {
+    this.authBotProvider.onRefresh((_, tokenData: AccessToken) => {
       this.accessToken = tokenData.accessToken;
       this.refreshToken = tokenData.refreshToken;
-      Logger.debug('Refreshing access token for user', this.userId);
+      Logger.debug('Refreshing access token for user', this.userId, tokenData);
     });
+    //
+    this.authAppProvider = new AppTokenAuthProvider(
+      this.clientId,
+      this.clientSecret
+    );
   }
 
-  get instance(): RefreshingAuthProvider {
-    if (!this.authProvider) {
-      throw new Error('Auth Provider not initialized');
+  get instanceBot(): RefreshingAuthProvider {
+    if (!this.authBotProvider) {
+      throw new Error('Auth Bot Provider not initialized');
     }
-    return this.authProvider;
+    return this.authBotProvider;
+  }
+
+  get instanceApp(): AppTokenAuthProvider {
+    if (!this.authAppProvider) {
+      throw new Error('Auth App Provider not initialized');
+    }
+    return this.authAppProvider;
   }
 }

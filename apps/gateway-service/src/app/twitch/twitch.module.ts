@@ -4,7 +4,6 @@ import { UserModule } from './user/user.module';
 import { ChannelModule } from './channel/channel.module';
 import { StreamModule } from './stream/stream.module';
 import { MessageModule } from './message/message.module';
-import { BotModule } from './bot/bot.module';
 
 @Module({
   imports: [
@@ -12,7 +11,6 @@ import { BotModule } from './bot/bot.module';
     ChannelModule,
     StreamModule,
     MessageModule,
-    BotModule,
     //
     RouterModule.register([
       {
@@ -33,10 +31,6 @@ import { BotModule } from './bot/bot.module';
           {
             path: 'message',
             module: MessageModule,
-          },
-          {
-            path: 'bot',
-            module: BotModule,
           },
         ],
       },

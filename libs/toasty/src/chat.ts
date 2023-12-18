@@ -12,7 +12,7 @@ export class Chat {
 
   private initChat(): ChatClient {
     return new ChatClient({
-      authProvider: this.authProvider.instance,
+      authProvider: this.authProvider.instanceBot,
       channels: this.channels,
       requestMembershipEvents: true,
     });
@@ -23,9 +23,6 @@ export class Chat {
   }
 
   get instance(): ChatClient {
-    if (!this.chatProvider) {
-      throw new Error('Chat Provider not initialized');
-    }
     return this.chatProvider;
   }
 }

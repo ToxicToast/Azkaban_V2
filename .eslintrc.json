@@ -22,11 +22,15 @@
               },
               {
                 "sourceTag": "scope:gateway",
-                "onlyDependOnLibsWithTags": ["scope:gateway", "scope:shared"]
+                "onlyDependOnLibsWithTags": ["scope:gateway", "scope:toasty", "scope:shared"]
               },
               {
                 "sourceTag": "scope:twitch",
                 "onlyDependOnLibsWithTags": ["scope:twitch", "scope:toasty", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:inventory",
+                "onlyDependOnLibsWithTags": ["scope:inventory", "scope:shared"]
               }
             ]
           }

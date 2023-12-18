@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@azkaban/inventory-domain": ["libs/inventory-domain/src/index.ts"],
       "@azkaban/shared": ["libs/shared/src/index.ts"],
       "@azkaban/toasty": ["libs/toasty/src/index.ts"],
       "@azkaban/toasty-events": ["libs/toasty-events/src/index.ts"]

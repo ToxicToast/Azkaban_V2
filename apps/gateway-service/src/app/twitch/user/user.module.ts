@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ClientsModule } from '@nestjs/microservices';
 import { clientProvider } from '@azkaban/shared';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
 @Module({
   imports: [
     EventEmitterModule,
@@ -12,7 +14,7 @@ import { clientProvider } from '@azkaban/shared';
       },
     ]),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [UserController],
+  providers: [UserService],
 })
 export class UserModule {}

@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ClientsModule } from '@nestjs/microservices';
 import { clientProvider } from '@azkaban/shared';
+import { StreamController } from './stream.controller';
+import { StreamService } from './stream.service';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { clientProvider } from '@azkaban/shared';
       },
     ]),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [StreamController],
+  providers: [StreamService],
 })
 export class StreamModule {}
