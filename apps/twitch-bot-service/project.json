@@ -54,7 +54,7 @@
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/twitch-bot-service/Dockerfile . -t toxictoast/twitch-bot-service:v.0.0.3"
+      "command": "docker build -f apps/twitch-bot-service/Dockerfile . -t toxictoast/twitch-bot-service:v.0.0.4"
     }
   },
   "tags": ["scope:twitch", "scope:application"]
