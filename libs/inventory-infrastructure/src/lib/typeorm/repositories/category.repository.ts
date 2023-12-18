@@ -68,15 +68,4 @@ export class CategoryTypeORMRepository implements CategoryRepository {
     }
     return null;
   }
-
-  async findBySlug(slug: string): Promise<CategoryDao> {
-    const entity = await this.repository.findOne({
-      withDeleted: true,
-      where: { slug: slug },
-    });
-    if (entity) {
-      return this.mapper.entityToDomain(entity);
-    }
-    return null;
-  }
 }

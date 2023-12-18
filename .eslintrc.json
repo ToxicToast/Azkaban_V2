@@ -31,6 +31,18 @@
               {
                 "sourceTag": "scope:inventory",
                 "onlyDependOnLibsWithTags": ["scope:inventory", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:domain",
+                "onlyDependOnLibsWithTags": ["scope:domain", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:infrastructure",
+                "onlyDependOnLibsWithTags": ["scope:infrastructure", "scope:domain", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:application",
+                "onlyDependOnLibsWithTags": ["scope:application", "scope:infrastructure", "scope:shared"]
               }
             ]
           }

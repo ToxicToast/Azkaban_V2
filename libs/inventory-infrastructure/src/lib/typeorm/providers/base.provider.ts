@@ -3,7 +3,11 @@ import { buildDataSource } from '@azkaban/shared';
 import {
   CategoryTypeORMEntity,
   CompanyTypeORMEntity,
+  ItemDetailTypeORMEntity,
+  ItemTypeORMEntity,
   LocationTypeORMEntity,
+  SizeTypeORMEntity,
+  TypeTypeORMEntity,
 } from '../entities';
 
 function environmentSwitcher(): Promise<DataSource> {
@@ -12,6 +16,10 @@ function environmentSwitcher(): Promise<DataSource> {
     CategoryTypeORMEntity,
     CompanyTypeORMEntity,
     LocationTypeORMEntity,
+    SizeTypeORMEntity,
+    TypeTypeORMEntity,
+    ItemTypeORMEntity,
+    ItemDetailTypeORMEntity,
   ] as unknown as MixedList<string | EntitySchema>);
 }
 

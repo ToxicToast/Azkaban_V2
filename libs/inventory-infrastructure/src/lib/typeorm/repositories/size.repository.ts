@@ -1,15 +1,16 @@
-import { CompanyRepository } from '@azkaban/inventory-domain';
-import { CompanyTypeORMMapper } from '../mappers';
+import { SizeRepository } from '@azkaban/inventory-domain';
+import { SizeTypeORMMapper } from '../mappers';
 import { Repository } from 'typeorm';
-import { CompanyTypeORMEntity } from '../entities';
-import { CompanyDao } from '../../daos';
+import { SizeTypeORMEntity } from '../entities';
+import { SizeDao } from '../../daos';
+import { Nullable } from '@azkaban/shared';
 
-export class CompanyTypeORMRepository implements CompanyRepository {
-  private readonly mapper: CompanyTypeORMMapper = new CompanyTypeORMMapper();
+export class SizeTypeORMRepository implements SizeRepository {
+  private readonly mapper: SizeTypeORMMapper = new SizeTypeORMMapper();
 
-  constructor(private readonly repository: Repository<CompanyTypeORMEntity>) {}
+  constructor(private readonly repository: Repository<SizeTypeORMEntity>) {}
 
-  async save(data: CompanyDao): Promise<string> {
+  async save(data: SizeDao): Promise<string> {
     const entity = this.mapper.domainToEntity(data);
     await this.repository.save(entity);
     return entity.id;
@@ -19,19 +20,19 @@ export class CompanyTypeORMRepository implements CompanyRepository {
     await this.repository.softDelete(id);
   }
 
-  async findList(): Promise<Array<CompanyDao>> {
+  async findList(): Promise<Array<SizeDao>> {
     const entity = await this.repository.find({
       withDeleted: true,
     });
     if (entity) {
-      return entity.map((entity: CompanyTypeORMEntity) =>
+      return entity.map((entity: SizeTypeORMEntity) =>
         this.mapper.entityToDomain(entity)
       );
     }
     return [];
   }
 
-  async findById(id: string): Promise<CompanyDao> {
+  async findById(id: string): Promise<Nullable<SizeDao>> {
     const entity = await this.repository.findOne({
       withDeleted: true,
       where: { id },
@@ -42,10 +43,10 @@ export class CompanyTypeORMRepository implements CompanyRepository {
     return null;
   }
 
-  async findByTitle(title: string): Promise<CompanyDao> {
+  async findByTitle(title: string): Promise<Nullable<SizeDao>> {
     const entity = await this.repository.findOne({
       withDeleted: true,
-      where: { title: title },
+      where: { title },
     });
     if (entity) {
       return this.mapper.entityToDomain(entity);

@@ -29,10 +29,6 @@ export class LocationService {
     return await this.repository.findByTitle(title);
   }
 
-  async getLocationBySlug(slug: string): Promise<Nullable<LocationAnemic>> {
-    return await this.repository.findBySlug(slug);
-  }
-
   async getLocationByFreezer(
     isFreezer: boolean
   ): Promise<Array<LocationAnemic>> {

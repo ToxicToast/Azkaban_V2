@@ -54,17 +54,6 @@ export class LocationTypeORMRepository implements LocationRepository {
     return null;
   }
 
-  async findBySlug(slug: string): Promise<Nullable<LocationDao>> {
-    const entity = await this.repository.findOne({
-      withDeleted: true,
-      where: { slug },
-    });
-    if (entity) {
-      return this.mapper.entityToDomain(entity);
-    }
-    return null;
-  }
-
   async findByParentId(parent_id: string): Promise<Array<LocationDao>> {
     const entity = await this.repository.find({
       withDeleted: true,

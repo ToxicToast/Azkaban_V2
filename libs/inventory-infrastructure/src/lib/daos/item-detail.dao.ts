@@ -16,4 +16,5 @@ export interface ItemDetailDao {
   isDeleted: boolean;
   isExpired: boolean;
   isOpen: boolean;
+  isReturnable: boolean;
 }

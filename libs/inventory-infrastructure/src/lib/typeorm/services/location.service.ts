@@ -27,10 +27,6 @@ export class LocationTypeOrmService {
     return await this.domainService.getLocationByTitle(title);
   }
 
-  async getLocationBySlug(slug: string): Promise<Nullable<LocationDao>> {
-    return await this.domainService.getLocationBySlug(slug);
-  }
-
   async getLocationByParentId(
     parent_id: Nullable<string>
   ): Promise<Array<LocationDao>> {

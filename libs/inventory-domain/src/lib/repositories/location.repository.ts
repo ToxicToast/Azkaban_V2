@@ -3,7 +3,6 @@ import { LocationAnemic } from '../anemics';
 
 interface LocationAdditions {
   findByTitle(title: string): Promise<Nullable<LocationAnemic>>;
-  findBySlug(slug: string): Promise<Nullable<LocationAnemic>>;
   findByParentId(parent_id: Nullable<string>): Promise<Array<LocationAnemic>>;
   findByFreezer(isFreezer: boolean): Promise<Array<LocationAnemic>>;
 }

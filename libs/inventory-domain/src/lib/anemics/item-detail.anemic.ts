@@ -5,6 +5,7 @@ export interface ItemDetailAnemic extends Anemic {
   readonly purchase_date: Date;
   readonly expiration_date: Nullable<Date>;
   readonly opening_date: Nullable<Date>;
+  readonly returnable: boolean;
   readonly isReturnable: boolean;
   readonly isExpired: boolean;
   readonly isOpen: boolean;

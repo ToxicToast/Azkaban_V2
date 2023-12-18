@@ -19,5 +19,5 @@
       }
     }
   },
-  "tags": ["scope:inventory"]
+  "tags": ["scope:inventory","scope:domain"]
 }
