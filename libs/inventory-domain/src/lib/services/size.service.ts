@@ -25,12 +25,8 @@ export class SizeService {
     return await this.repository.findById(id);
   }
 
-  async getLocationByTitle(title: string): Promise<Nullable<SizeAnemic>> {
+  async getSizeByTitle(title: string): Promise<Nullable<SizeAnemic>> {
     return await this.repository.findByTitle(title);
-  }
-
-  async getLocationBySlug(slug: string): Promise<Nullable<SizeAnemic>> {
-    return await this.repository.findBySlug(slug);
   }
 
   async updateTitle(id: string, title: string): Promise<void> {

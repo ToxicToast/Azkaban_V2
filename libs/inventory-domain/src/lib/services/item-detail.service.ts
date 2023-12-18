@@ -81,4 +81,40 @@ export class ItemDetailService {
       await this.save(aggregate.toAnemic());
     }
   }
+
+  async activateItemDetail(id: string): Promise<void> {
+    const itemDetail = await this.getItemDetailById(id);
+    if (itemDetail) {
+      const aggregate = new ItemDetailFactory().reconstitute(itemDetail);
+      aggregate.activate();
+      await this.save(aggregate.toAnemic());
+    }
+  }
+
+  async deactivateItemDetail(id: string): Promise<void> {
+    const itemDetail = await this.getItemDetailById(id);
+    if (itemDetail) {
+      const aggregate = new ItemDetailFactory().reconstitute(itemDetail);
+      aggregate.deactivate();
+      await this.save(aggregate.toAnemic());
+    }
+  }
+
+  async deleteItemDetail(id: string): Promise<void> {
+    const itemDetail = await this.getItemDetailById(id);
+    if (itemDetail) {
+      const aggregate = new ItemDetailFactory().reconstitute(itemDetail);
+      aggregate.delete();
+      await this.save(aggregate.toAnemic());
+    }
+  }
+
+  async restoreItemDetail(id: string): Promise<void> {
+    const itemDetail = await this.getItemDetailById(id);
+    if (itemDetail) {
+      const aggregate = new ItemDetailFactory().reconstitute(itemDetail);
+      aggregate.restore();
+      await this.save(aggregate.toAnemic());
+    }
+  }
 }

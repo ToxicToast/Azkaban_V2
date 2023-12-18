@@ -10,7 +10,7 @@ export interface ItemData {
   readonly current_sku?: Optional<Nullable<number>>;
   readonly min_sku?: Optional<Nullable<number>>;
   readonly max_sku?: Optional<Nullable<number>>;
-  readonly ean: Nullable<string>;
-  readonly price: Nullable<number>;
+  readonly ean?: Optional<Nullable<string>>;
+  readonly price?: Optional<Nullable<number>>;
   readonly active?: Optional<boolean>;
 }

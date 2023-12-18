@@ -29,14 +29,16 @@ export class LocationService {
     return await this.repository.findByTitle(title);
   }
 
-  async getLocationBySlug(slug: string): Promise<Nullable<LocationAnemic>> {
-    return await this.repository.findBySlug(slug);
-  }
-
   async getLocationByFreezer(
     isFreezer: boolean
   ): Promise<Array<LocationAnemic>> {
     return await this.repository.findByFreezer(isFreezer);
+  }
+
+  async getLocationByParentId(
+    parent_id: Nullable<string>
+  ): Promise<Array<LocationAnemic>> {
+    return await this.repository.findByParentId(parent_id);
   }
 
   async updateParentId(id: string, parent_id: Nullable<string>): Promise<void> {
