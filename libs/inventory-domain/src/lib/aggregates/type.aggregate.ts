@@ -38,6 +38,7 @@ export class TypeAggregate
       id: this.id,
       title: this.getTitle(),
       slug: this.getSlug(),
+      active: this.isActive(),
       created_at: this.getCreatedAt(),
       updated_at: this.getUpdatedAt(),
       deleted_at: this.getDeletedAt(),

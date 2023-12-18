@@ -15,4 +15,5 @@ export interface ItemAnemic extends Anemic {
   readonly price: Nullable<number>;
   readonly isStockAlert: boolean;
   readonly isOverStocked: boolean;
+  readonly active: boolean;
 }

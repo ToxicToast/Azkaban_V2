@@ -39,6 +39,12 @@ export class LocationService {
     return await this.repository.findByFreezer(isFreezer);
   }
 
+  async getLocationByParentId(
+    parent_id: Nullable<string>
+  ): Promise<Array<LocationAnemic>> {
+    return await this.repository.findByParentId(parent_id);
+  }
+
   async updateParentId(id: string, parent_id: Nullable<string>): Promise<void> {
     const location = await this.getLocationById(id);
     if (location !== null) {

@@ -8,4 +8,5 @@ export interface ItemDetailAnemic extends Anemic {
   readonly isReturnable: boolean;
   readonly isExpired: boolean;
   readonly isOpen: boolean;
+  readonly active: boolean;
 }
