@@ -13,7 +13,8 @@
     "docker:gateway": "nx docker-build gateway-service",
     "serve:twitch-bot": "nx serve twitch-bot-service",
     "build:twitch-bot": "nx build twitch-bot-service",
-    "docker:twitch-bot": "nx docker-build twitch-bot-service"
+    "docker:twitch-bot": "nx docker-build twitch-bot-service",
+    "test:all": "nx run-many --target=test --all"
   },
   "private": true,
   "devDependencies": {

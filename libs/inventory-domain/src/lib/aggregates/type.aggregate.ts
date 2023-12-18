@@ -1,7 +1,7 @@
 import { AggregateHelper, Domain, Nullable } from '@azkaban/shared';
-import { CategoryAnemic } from '../anemics';
+import { TypeAnemic } from '../anemics';
 
-interface CategoryAggregateHelper {
+interface TypeAggregateHelper {
   created_at: Date;
   updated_at: Nullable<Date>;
   deleted_at: Nullable<Date>;
@@ -10,19 +10,18 @@ interface CategoryAggregateHelper {
   slug: string;
 }
 
-export class CategoryAggregate
-  extends AggregateHelper<CategoryAggregateHelper>
-  implements Domain<CategoryAnemic>
+export class TypeAggregate
+  extends AggregateHelper<TypeAggregateHelper>
+  implements Domain<TypeAnemic>
 {
   constructor(
     private readonly id: string,
-    private parent_id: Nullable<string>,
     private title: string,
     private slug: string,
     private active: boolean,
     private readonly created_at: Date,
-    private updated_at: Nullable<Date>,
-    private deleted_at: Nullable<Date>
+    private updated_at: Date,
+    private deleted_at: Date
   ) {
     super({
       created_at,
@@ -34,18 +33,9 @@ export class CategoryAggregate
     });
   }
 
-  isParent(): boolean {
-    return this.parent_id === null;
-  }
-
-  isChild(): boolean {
-    return this.parent_id !== null;
-  }
-
-  toAnemic(): CategoryAnemic {
+  toAnemic(): TypeAnemic {
     return {
       id: this.id,
-      parent_id: this.parent_id,
       title: this.getTitle(),
       slug: this.getSlug(),
       created_at: this.getCreatedAt(),
@@ -54,13 +44,6 @@ export class CategoryAggregate
       isUpdated: this.isUpdated(),
       isDeleted: this.isDeleted(),
       isActive: this.isActive(),
-      isParent: this.isParent(),
-      isChild: this.isChild(),
     };
-  }
-
-  updateParentId(parent_id: Nullable<string>): void {
-    this.updateUpdatedAt();
-    this.parent_id = parent_id;
   }
 }

@@ -1,7 +1,7 @@
 import { AggregateHelper, Domain, Nullable } from '@azkaban/shared';
-import { CategoryAnemic } from '../anemics';
+import { LocationAnemic } from '../anemics';
 
-interface CategoryAggregateHelper {
+interface LocationAggregateHelper {
   created_at: Date;
   updated_at: Nullable<Date>;
   deleted_at: Nullable<Date>;
@@ -10,15 +10,16 @@ interface CategoryAggregateHelper {
   slug: string;
 }
 
-export class CategoryAggregate
-  extends AggregateHelper<CategoryAggregateHelper>
-  implements Domain<CategoryAnemic>
+export class LocationAggregate
+  extends AggregateHelper<LocationAggregateHelper>
+  implements Domain<LocationAnemic>
 {
   constructor(
     private readonly id: string,
     private parent_id: Nullable<string>,
     private title: string,
     private slug: string,
+    private freezer: boolean,
     private active: boolean,
     private readonly created_at: Date,
     private updated_at: Nullable<Date>,
@@ -42,7 +43,11 @@ export class CategoryAggregate
     return this.parent_id !== null;
   }
 
-  toAnemic(): CategoryAnemic {
+  isFreezer(): boolean {
+    return this.freezer;
+  }
+
+  toAnemic(): LocationAnemic {
     return {
       id: this.id,
       parent_id: this.parent_id,
@@ -56,11 +61,17 @@ export class CategoryAggregate
       isActive: this.isActive(),
       isParent: this.isParent(),
       isChild: this.isChild(),
+      isFreezer: this.isFreezer(),
     };
   }
 
   updateParentId(parent_id: Nullable<string>): void {
     this.updateUpdatedAt();
     this.parent_id = parent_id;
+  }
+
+  updateFreezer(isFreezer: boolean): void {
+    this.updateUpdatedAt();
+    this.freezer = isFreezer;
   }
 }
