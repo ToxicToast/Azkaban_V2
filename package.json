@@ -17,6 +17,9 @@
     "serve:inventory-category": "nx serve inventory-category-service",
     "build:inventory-category": "nx build inventory-category-service",
     "docker:inventory-category": "nx docker-build inventory-category-service",
+    "serve:inventory-company": "nx serve inventory-company-service",
+    "build:inventory-company": "nx build inventory-company-service",
+    "docker:inventory-company": "nx docker-build inventory-company-service",
     "test:all": "nx run-many --target=test --all"
   },
   "private": true,

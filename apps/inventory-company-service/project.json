@@ -1,0 +1,61 @@
+{
+  "name": "inventory-company-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/inventory-company-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/inventory-company-service",
+        "main": "apps/inventory-company-service/src/main.ts",
+        "tsConfig": "apps/inventory-company-service/tsconfig.app.json",
+        "assets": ["apps/inventory-company-service/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/inventory-company-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "inventory-company-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "inventory-company-service:build:development"
+        },
+        "production": {
+          "buildTarget": "inventory-company-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/inventory-company-service/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/inventory-company-service/jest.config.ts"
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/inventory-company-service/Dockerfile . -t toxictoast/inventory-company-service:v.0.0.5"
+    }
+  },
+  "tags": ["scope:inventory", "scope:application"]
+}
