@@ -1,7 +1,7 @@
 {
-  "name": "gateway-service",
+  "name": "inventory-category-service",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/gateway-service/src",
+  "sourceRoot": "apps/inventory-category-service/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,12 +11,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/gateway-service",
-        "main": "apps/gateway-service/src/main.ts",
-        "tsConfig": "apps/gateway-service/tsconfig.app.json",
-        "assets": ["apps/gateway-service/src/assets"],
+        "outputPath": "dist/apps/inventory-category-service",
+        "main": "apps/inventory-category-service/src/main.ts",
+        "tsConfig": "apps/inventory-category-service/tsconfig.app.json",
+        "assets": ["apps/inventory-category-service/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/gateway-service/webpack.config.js"
+        "webpackConfig": "apps/inventory-category-service/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -27,14 +27,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "gateway-service:build"
+        "buildTarget": "inventory-category-service:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "gateway-service:build:development"
+          "buildTarget": "inventory-category-service:build:development"
         },
         "production": {
-          "buildTarget": "gateway-service:build:production"
+          "buildTarget": "inventory-category-service:build:production"
         }
       }
     },
@@ -42,20 +42,20 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/gateway-service/**/*.ts"]
+        "lintFilePatterns": ["apps/inventory-category-service/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/gateway-service/jest.config.ts"
+        "jestConfig": "apps/inventory-category-service/jest.config.ts"
       }
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/gateway-service/Dockerfile . -t toxictoast/gateway-service:v.0.0.5"
+      "command": "docker build -f apps/inventory-category-service/Dockerfile . -t toxictoast/inventory-category-service:v.0.0.5"
     }
   },
-  "tags": ["scope:gateway"]
+  "tags": ["scope:inventory", "scope:application"]
 }

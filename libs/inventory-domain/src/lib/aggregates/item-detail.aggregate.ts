@@ -55,6 +55,8 @@ export class ItemDetailAggregate
       purchase_date: this.purchase_date,
       expiration_date: this.expiration_date,
       opening_date: this.opening_date,
+      active: this.getActive(),
+      returnable: this.returnable,
       created_at: this.getCreatedAt(),
       updated_at: this.getUpdatedAt(),
       deleted_at: this.getDeletedAt(),

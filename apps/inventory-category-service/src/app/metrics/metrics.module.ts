@@ -9,7 +9,7 @@ import { MetricsController } from './metrics.controller';
         enabled: true,
       },
       defaultLabels: {
-        app: 'twitch-bot-service',
+        app: 'inventory-category-service',
       },
       path: '/metrics',
       controller: MetricsController,

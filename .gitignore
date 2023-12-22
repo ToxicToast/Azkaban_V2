@@ -39,3 +39,8 @@ testem.log
 Thumbs.db
 
 .nx/cache
+
+# Environment variables
+/apps/gateway-service/.env
+/apps/twitch-bot-service/.env
+/apps/inventory-category-service/.env

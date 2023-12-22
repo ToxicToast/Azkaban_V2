@@ -66,6 +66,7 @@ export class ItemAggregate
       max_sku: this.max_sku,
       ean: this.ean,
       price: this.price,
+      active: this.getActive(),
       created_at: this.getCreatedAt(),
       updated_at: this.getUpdatedAt(),
       deleted_at: this.getDeletedAt(),

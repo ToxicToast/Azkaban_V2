@@ -3,7 +3,7 @@ import { MessageController } from './message.controller';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MessageService } from './message.service';
 import { ClientsModule } from '@nestjs/microservices';
-import { clientProvider } from '@azkaban/shared';
+import { clientProvider, Queues } from '@azkaban/shared';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { clientProvider } from '@azkaban/shared';
     ClientsModule.register([
       {
         name: 'TWITCH_MESSAGE_SERVICE',
-        ...clientProvider('twitch_queue'),
+        ...clientProvider(Queues.TWITCH),
       },
     ]),
   ],

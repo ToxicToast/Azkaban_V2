@@ -48,6 +48,7 @@ export class CategoryAggregate
       parent_id: this.parent_id,
       title: this.getTitle(),
       slug: this.getSlug(),
+      active: this.getActive(),
       created_at: this.getCreatedAt(),
       updated_at: this.getUpdatedAt(),
       deleted_at: this.getDeletedAt(),
