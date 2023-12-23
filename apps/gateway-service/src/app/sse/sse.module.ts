@@ -5,7 +5,7 @@ import { NotificationController } from './notification.controller';
 
 @Module({
   imports: [],
-  controllers: [TwitchController, InventoryController, NotificationController],
+  // controllers: [TwitchController, InventoryController, NotificationController],
   providers: [],
 })
 export class SseModule {}

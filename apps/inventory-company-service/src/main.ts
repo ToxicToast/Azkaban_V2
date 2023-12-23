@@ -6,16 +6,12 @@ import helmet from 'helmet';
 import { consumerProvider, Queues } from '@azkaban/shared';
 
 async function createApp(): Promise<INestApplication> {
-  return await NestFactory.create(AppModule, {
-    cors: true,
-    snapshot: true,
-    rawBody: true,
-  });
+  return await NestFactory.create(AppModule);
 }
 
 async function createTwitchMicroService(app: INestApplication): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.INVENTORY),
+    ...consumerProvider(Queues.INVENTORY_COMPANIES),
   });
 }
 
@@ -30,9 +26,6 @@ function configureApp(app: INestApplication): void {
     exclude,
   });
   app.enableShutdownHooks();
-  app.use(compression({}));
-  app.use(helmet());
-  //
 }
 
 async function startApp(app: INestApplication): Promise<void> {

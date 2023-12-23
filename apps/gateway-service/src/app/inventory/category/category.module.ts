@@ -9,7 +9,7 @@ import { CategoryService } from './category.service';
     ClientsModule.register([
       {
         name: 'CATEGORY_SERVICE',
-        ...clientProvider(Queues.INVENTORY),
+        ...clientProvider(Queues.INVENTORY_CATEGORIES),
       },
     ]),
   ],
