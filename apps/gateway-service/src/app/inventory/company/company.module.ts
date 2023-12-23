@@ -9,7 +9,7 @@ import { CompanyService } from './company.service';
     ClientsModule.register([
       {
         name: 'COMPANY_SERVICE',
-        ...clientProvider(Queues.INVENTORY),
+        ...clientProvider(Queues.INVENTORY_COMPANIES),
       },
     ]),
   ],
