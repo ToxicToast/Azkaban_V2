@@ -11,6 +11,7 @@ import { TypeModule } from './type/type.module';
 @Module({
   imports: [
     CategoryModule,
+    CompanyModule,
     //
     RouterModule.register([
       {
