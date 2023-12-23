@@ -9,3 +9,14 @@ export enum InventoryCategoryTopics {
   RESTORE = 'inventory.category.restore',
   DELETE = 'inventory.category.delete',
 }
+
+export enum InventoryCompanyTopics {
+  LIST = 'inventory.company.list',
+  ID = 'inventory.company.id',
+  CREATE = 'inventory.company.create',
+  UPDATE = 'inventory.company.update',
+  ACTIVATE = 'inventory.company.activate',
+  DEACTIVATE = 'inventory.company.deactivate',
+  RESTORE = 'inventory.company.restore',
+  DELETE = 'inventory.company.delete',
+}

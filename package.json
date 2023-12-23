@@ -1,6 +1,6 @@
 {
   "name": "@azkaban",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -17,7 +17,12 @@
     "serve:inventory-category": "nx serve inventory-category-service",
     "build:inventory-category": "nx build inventory-category-service",
     "docker:inventory-category": "nx docker-build inventory-category-service",
-    "test:all": "nx run-many --target=test --all"
+    "serve:inventory-company": "nx serve inventory-company-service",
+    "build:inventory-company": "nx build inventory-company-service",
+    "docker:inventory-company": "nx docker-build inventory-company-service",
+    "test:all": "nx run-many --target=test --all",
+    "build:all": "nx run-many --target=build --all",
+    "docker:all": "nx run-many --target=docker-build --all"
   },
   "private": true,
   "devDependencies": {
