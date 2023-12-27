@@ -16,7 +16,8 @@
       ]
     },
     "e2e": {
-      "cache": true
+      "cache": true,
+      "inputs": ["default", "^production"]
     },
     "@nx/jest:jest": {
       "cache": true,
@@ -74,7 +75,27 @@
     },
     "@nx/react": {
       "application": {
-        "projectNameAndRootFormat": "derived"
+        "style": "scss",
+        "linter": "eslint",
+        "bundler": "webpack",
+        "projectNameAndRootFormat": "derived",
+        "babel": true
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint",
+        "projectNameAndRootFormat": "derived",
+        "unitTestRunner": "jest"
+      },
+      "component": {
+        "style": "scss"
+      }
+    },
+    "@nx/next": {
+      "application": {
+        "projectNameAndRootFormat": "derived",
+        "style": "scss",
+        "linter": "eslint"
       },
       "library": {
         "projectNameAndRootFormat": "derived"
