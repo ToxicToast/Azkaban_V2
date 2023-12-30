@@ -19,7 +19,7 @@
           "apps/inventory-admin/src/favicon.ico",
           "apps/inventory-admin/src/assets"
         ],
-        "styles": ["apps/inventory-admin/src/styles.scss"],
+        "styles": ["apps/inventory-admin/src/styles.css"],
         "scripts": [],
         "webpackConfig": "apps/inventory-admin/webpack.config.js",
         "postcssConfig": "apps/inventory-admin/postcss.config.js"

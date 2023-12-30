@@ -65,7 +65,7 @@ module.exports = {
         sans: ['var(--font-sans)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
         exo: ['Exo', ...fontFamily.sans],
-        exo2: ['Exo 2', ...fontFamily.sans],
+        exotwo: ['Exo 2', ...fontFamily.sans],
       },
       keyframes: {
         'accordion-down': {
