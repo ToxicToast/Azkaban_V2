@@ -5,3 +5,4 @@ export * from './Card';
 export * from './NavigationMenu';
 export * from './Avatar';
 export * from './Dialog';
+export * from './PopOver';

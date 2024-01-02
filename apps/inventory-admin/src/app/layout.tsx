@@ -1,6 +1,7 @@
-import { memo, useMemo } from 'react';
-import { Header, ThemeProvider, useAzkabanAuth } from '@azkaban/ui-components';
+import { memo, useMemo, useState } from 'react';
+import { ThemeProvider, useAzkabanAuth } from '@azkaban/ui-components';
 import App from './app';
+import { Header } from '@azkaban/ui-inventory-layout';
 
 function Layout() {
   const {
@@ -18,22 +19,32 @@ function Layout() {
     return isAuthenticated && hasInventoryGroup();
   }, [hasInventoryGroup, isAuthenticated]);
 
+  const [searchModalOpen, setSearchModalOpen] = useState<boolean>(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
   return (
     <ThemeProvider>
-      <div />
       <Header
-        key="Inventory-Header"
-        appName="Azkaban - Inventory Admin"
-        isAuthenticated={canAuthenticate}
-        username={getUserName()}
-        avatarUrl={null}
-        givenName={getGivenName()}
-        initials={getUserInitials()}
-        signIn={signIn}
-        signOut={signOut}
+        searchModalOpen={searchModalOpen}
+        sidebarOpen={sidebarOpen}
+        dropdownOpen={dropdownOpen}
+        setSearchModalOpen={(value: boolean) => {
+          setSearchModalOpen(value);
+        }}
+        setSidebarOpen={(value: boolean) => {
+          setSidebarOpen(value);
+        }}
+        setDropdownOpen={(value: boolean) => {
+          setDropdownOpen(value);
+        }}
       />
+      <hr />
+      <b>searchModalOpen</b>: {JSON.stringify(searchModalOpen)} <br />
+      <b>sidebarOpen</b>: {JSON.stringify(sidebarOpen)} <br />
+      <b>dropdownOpen</b>: {JSON.stringify(dropdownOpen)} <br />
+      <hr />
       <App
-        key="Inventory-App"
         isAuthenticated={canAuthenticate}
         user={getUserObject() ?? undefined}
       />

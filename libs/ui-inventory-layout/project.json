@@ -1,0 +1,20 @@
+{
+  "name": "ui-inventory-layout",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui-inventory-layout/src",
+  "projectType": "library",
+  "tags": ["scope:inventory"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ui-inventory-layout/jest.config.ts"
+      }
+    }
+  }
+}

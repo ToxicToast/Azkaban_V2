@@ -5,6 +5,7 @@ import {
   useState,
   useEffect,
 } from 'react';
+import { Optional } from '@azkaban/shared';
 
 interface ContextProps {
   theme: string;
@@ -13,8 +14,12 @@ interface ContextProps {
 
 export const ThemeContext = createContext({} as ContextProps);
 
-export function ThemeProvider(props: PropsWithChildren) {
-  const [theme, setTheme] = useState<string>('light');
+interface Props {
+  defaultTheme?: Optional<'light' | 'dark'>;
+}
+
+export function ThemeProvider(props: PropsWithChildren<Props>) {
+  const [theme, setTheme] = useState<string>(props.defaultTheme ?? 'light');
 
   const toggleTheme = useCallback((theme: 'light' | 'dark') => {
     setTheme(theme);
@@ -22,11 +27,12 @@ export function ThemeProvider(props: PropsWithChildren) {
   }, []);
 
   useEffect(() => {
-    const localTheme = window.localStorage.getItem('theme') ?? null;
+    const localTheme =
+      window.localStorage.getItem('theme') ?? props.defaultTheme ?? null;
     if (localTheme !== null) {
       setTheme(localTheme);
     }
-  }, []);
+  }, [props.defaultTheme]);
 
   useEffect(() => {
     const body = document.getElementsByTagName('body')[0];

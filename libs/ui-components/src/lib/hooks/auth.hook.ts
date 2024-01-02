@@ -40,8 +40,8 @@ export function useAzkabanAuth() {
   }, [signinPopup]);
 
   const signOut = useCallback(() => {
-    signoutPopup();
-  }, [signoutPopup]);
+    signoutSilent();
+  }, [signoutSilent]);
 
   useEffect(() => {
     if (user && !hasInventoryGroup()) {

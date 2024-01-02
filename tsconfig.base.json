@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@azkaban/data-access-inventory": [
+        "libs/data-access-inventory/src/index.ts"
+      ],
+      "@azkaban/inventory-components": [
+        "libs/inventory-components/src/index.ts"
+      ],
       "@azkaban/inventory-domain": ["libs/inventory-domain/src/index.ts"],
       "@azkaban/inventory-infrastructure": [
         "libs/inventory-infrastructure/src/index.ts"
@@ -22,7 +28,8 @@
       "@azkaban/shared": ["libs/shared/src/index.ts"],
       "@azkaban/toasty": ["libs/toasty/src/index.ts"],
       "@azkaban/toasty-events": ["libs/toasty-events/src/index.ts"],
-      "@azkaban/ui-components": ["libs/ui-components/src/index.ts"]
+      "@azkaban/ui-components": ["libs/ui-components/src/index.ts"],
+      "@azkaban/ui-inventory-layout": ["libs/ui-inventory-layout/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

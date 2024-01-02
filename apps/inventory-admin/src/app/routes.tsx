@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { LoginPage } from './pages/login.page';
 import { Optional } from '@azkaban/shared';
 import { User } from 'oidc-client-ts';
+import { DashboardPage } from './pages/dashboard.page';
 
 interface Props {
   isAuthenticated: boolean;
@@ -19,12 +20,7 @@ export function Routes(props: Props) {
       return [
         {
           path: '/',
-          element: (
-            <div>
-              Inventory Admin <hr />
-              <pre>{JSON.stringify(props.user?.profile, null, 4)}</pre>
-            </div>
-          ),
+          element: <DashboardPage user={props.user ?? null} />,
         },
       ];
     }

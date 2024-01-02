@@ -9,16 +9,12 @@ export function LoginPage() {
       <div className="container h-full px-6 py-24">
         <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
           <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-            <img
-              src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-              className="w-full"
-              alt="Phone image"
-            />
+            <img src="/assets/draw2.svg" className="w-full" alt="Azkaban" />
           </div>
 
           <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
             <Button
-              className="mb-3 w-full x-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal"
+              className="w-full text-sm font-medium uppercase leading-normal"
               onClick={() => signIn()}
             >
               Sign in with Azkaban
@@ -31,8 +27,9 @@ export function LoginPage() {
             </div>
 
             <Button
-              className="mb-3 w-full x-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal"
+              className="w-full text-sm font-medium uppercase leading-normal"
               style={{ backgroundColor: '#9146FF' }}
+              onClick={() => alert('Not Implemented')}
             >
               <TwitchIcon className="mr-2 h-3.5 w-3.5" />
               Continue with Twitch
