@@ -1,14 +1,21 @@
 import { Routes } from './routes';
-import { Optional } from '@azkaban/shared';
-import { User } from 'oidc-client-ts';
+import { useAzkabanAuth } from '@azkaban/ui-components';
+import { memo, useMemo } from 'react';
 
-interface Props {
-  isAuthenticated: boolean;
-  user?: Optional<User>;
+function App() {
+  const { getUserObject, hasInventoryGroup, isAuthenticated } =
+    useAzkabanAuth();
+
+  const authenticated = useMemo(() => {
+    return isAuthenticated && hasInventoryGroup();
+  }, [hasInventoryGroup, isAuthenticated]);
+
+  return (
+    <Routes
+      isAuthenticated={authenticated}
+      user={getUserObject() ?? undefined}
+    />
+  );
 }
 
-export function App(props: Props) {
-  return <Routes isAuthenticated={props.isAuthenticated} user={props.user} />;
-}
-
-export default App;
+export default memo(App);

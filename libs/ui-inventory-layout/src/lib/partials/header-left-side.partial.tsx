@@ -1,4 +1,3 @@
-import { Button } from '@azkaban/ui-components';
 import { useCallback } from 'react';
 
 interface Props {

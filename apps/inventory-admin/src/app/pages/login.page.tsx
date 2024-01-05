@@ -1,42 +1,27 @@
 import { Button, useAzkabanAuth } from '@azkaban/ui-components';
-import { TwitchIcon } from 'lucide-react';
 
 export function LoginPage() {
   const { signIn } = useAzkabanAuth();
 
   return (
-    <section className="h-screen">
-      <div className="container h-full px-6 py-24">
-        <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-          <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-            <img src="/assets/draw2.svg" className="w-full" alt="Azkaban" />
-          </div>
+    <>
+      <h1 className="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">
+        Welcome Back ✨
+      </h1>
+      <Button className="w-full" onClick={() => signIn()}>
+        Sign In with Authentik
+      </Button>
+      <div className="border-t border-slate-200 dark:border-slate-700 pt-5 mt-6">
+        <div className="flex flex-row gap-4 w-full pb-4">
+          <div className="text-sm w-1/2">Username:</div>
+          <div className="text-sm w-1/2">Guest</div>
+        </div>
 
-          <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
-            <Button
-              className="w-full text-sm font-medium uppercase leading-normal"
-              onClick={() => signIn()}
-            >
-              Sign in with Azkaban
-            </Button>
-
-            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-              <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
-                OR
-              </p>
-            </div>
-
-            <Button
-              className="w-full text-sm font-medium uppercase leading-normal"
-              style={{ backgroundColor: '#9146FF' }}
-              onClick={() => alert('Not Implemented')}
-            >
-              <TwitchIcon className="mr-2 h-3.5 w-3.5" />
-              Continue with Twitch
-            </Button>
-          </div>
+        <div className="flex flex-row gap-4 w-full pb-4">
+          <div className="text-sm w-1/2">Password:</div>
+          <div className="text-sm w-1/2">Guest</div>
         </div>
       </div>
-    </section>
+    </>
   );
 }

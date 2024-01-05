@@ -1,3 +1,5 @@
+import { NotificationContentLoopPartial } from './notification-content-loop.partial';
+
 interface Props {
   notifications: Array<{
     icon: string;
@@ -14,25 +16,14 @@ export function NotificationContentPartial(props: Props) {
         Notifications ({props.notifications.length})
       </div>
       {props.notifications.map((notification, index) => (
-        <ul key={index}>
-          <li className="border-b border-slate-200 dark:border-slate-700 last:border-0">
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/20"
-            >
-              <span className="block text-sm mb-2">
-                {notification.icon}
-                <span className="font-medium text-slate-800 dark:text-slate-100">
-                  {notification.title}
-                </span>
-                {notification.description}
-              </span>
-              <span className="block text-xs font-medium text-slate-400 dark:text-slate-500">
-                {notification.date}
-              </span>
-            </a>
-          </li>
-        </ul>
+        <NotificationContentLoopPartial
+          key={index}
+          index={index}
+          icon={notification.icon}
+          title={notification.title}
+          description={notification.description}
+          date={notification.date}
+        />
       ))}
     </>
   );

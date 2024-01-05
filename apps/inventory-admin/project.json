@@ -86,5 +86,5 @@
       "command": "docker build -f apps/inventory-admin/Dockerfile . -t toxictoast/inventory-admin:v.0.0.7"
     }
   },
-  "tags": ["scope:inventory","scope:application"]
+  "tags": ["scope:inventory"]
 }

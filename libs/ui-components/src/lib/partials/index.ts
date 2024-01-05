@@ -1,3 +1,2 @@
-export * from './Header';
-export * from './DashboardCard';
 export * from './WelcomeBanner';
+export * from './Show';

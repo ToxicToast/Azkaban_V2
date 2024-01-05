@@ -20,7 +20,7 @@
     "serve:inventory-company": "nx serve inventory-company-service",
     "build:inventory-company": "nx build inventory-company-service",
     "docker:inventory-company": "nx docker-build inventory-company-service",
-    "serve:inventory-admin": "nx serve inventory-admin",
+    "serve:inventory-admin": "nx serve inventory-admin --port=4201",
     "build:inventory-admin": "nx build inventory-admin",
     "docker:inventory-admin": "nx docker-build inventory-admin",
     "test:all": "nx run-many --target=test --all",

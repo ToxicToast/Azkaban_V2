@@ -1,18 +1,19 @@
-import { useMemo } from 'react';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { Show } from '@azkaban/ui-components';
 
 interface Props {
   theme: string;
 }
 
 export function ThemeToggleIconPartial(props: Props) {
-  const showIcon = useMemo(() => {
-    if (props.theme === 'light') {
-      return <MoonIcon />;
-    } else {
-      return <SunIcon />;
-    }
-  }, [props.theme]);
-
-  return <>{showIcon}</>;
+  return (
+    <>
+      <Show show={props.theme === 'light'}>
+        <MoonIcon />
+      </Show>
+      <Show show={props.theme === 'dark'}>
+        <SunIcon />
+      </Show>
+    </>
+  );
 }

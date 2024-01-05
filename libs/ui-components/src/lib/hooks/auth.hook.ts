@@ -6,8 +6,7 @@ import { Nullable } from '@azkaban/shared';
 type ProfileWithGroups = IdTokenClaims & { groups: Array<string> };
 
 export function useAzkabanAuth() {
-  const { user, signinPopup, signoutPopup, isAuthenticated, signoutSilent } =
-    useAuth();
+  const { user, signinPopup, isAuthenticated, signoutSilent } = useAuth();
 
   const getUserObject = useCallback((): Nullable<User> => {
     return user ?? null;
@@ -17,6 +16,12 @@ export function useAzkabanAuth() {
     const userObject = getUserObject();
     const profileObject = (userObject?.profile as ProfileWithGroups) ?? null;
     return profileObject?.groups?.includes('inventory') ?? false;
+  }, [getUserObject]);
+
+  const hasInventoryAdminGroup = useCallback((): boolean => {
+    const userObject = getUserObject();
+    const profileObject = (userObject?.profile as ProfileWithGroups) ?? null;
+    return profileObject?.groups?.includes('inventory-admin') ?? false;
   }, [getUserObject]);
 
   const getUserName = useCallback(() => {
@@ -54,6 +59,7 @@ export function useAzkabanAuth() {
     signOut,
     getUserObject,
     hasInventoryGroup,
+    hasInventoryAdminGroup,
     getUserName,
     getGivenName,
     getUserInitials,

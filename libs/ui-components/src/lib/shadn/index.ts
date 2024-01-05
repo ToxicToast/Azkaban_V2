@@ -6,3 +6,4 @@ export * from './NavigationMenu';
 export * from './Avatar';
 export * from './Dialog';
 export * from './PopOver';
+export * from './Form';
