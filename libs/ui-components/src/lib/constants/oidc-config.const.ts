@@ -8,6 +8,3 @@ export const oidcConfig = {
   scope: 'openid profile email',
   loadUserInfo: true,
 } as AuthProviderProps;
-
-console.error('oidcConfig', oidcConfig);
-console.error('process.env', process.env);
