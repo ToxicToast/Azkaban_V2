@@ -11,6 +11,7 @@ import { DashboardPage } from './pages/dashboard.page';
 import AuthenticatedLayout from './layout/authenticated.layout';
 import GuestLayout from './layout/guest.layout';
 import { ErrorPage } from './pages/error.page';
+import { CategoryPage } from './pages/category.page';
 
 interface Props {
   isAuthenticated: boolean;
@@ -37,7 +38,11 @@ export function Routes(props: Props) {
         },
         {
           path: '/categories',
-          element: <AuthenticatedLayout>CATEGORY</AuthenticatedLayout>,
+          element: (
+            <AuthenticatedLayout>
+              <CategoryPage />
+            </AuthenticatedLayout>
+          ),
         },
       ];
     }
