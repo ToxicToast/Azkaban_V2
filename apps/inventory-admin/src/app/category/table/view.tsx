@@ -18,7 +18,7 @@ import {
 import { ArrowUpDown } from 'lucide-react';
 
 export function CategoryTableView() {
-  const { categoryData, openStatusModal, setCategoryId } =
+  const { categoryData, openStatusModal, openParentModal, setCategoryId } =
     useCategoryTableViewModel();
 
   const table = useReactTable({
@@ -38,7 +38,7 @@ export function CategoryTableView() {
         header: 'Status',
         cell: ({ row }) => (
           <Button
-            variant={row.getValue('active') ? 'outline' : 'destructive'}
+            variant="outline"
             onClick={() => {
               setCategoryId(row.original.id);
               openStatusModal();
@@ -54,9 +54,10 @@ export function CategoryTableView() {
         header: 'Is Parent',
         cell: ({ row }) => (
           <Button
-            variant={row.getValue('isParent') ? 'outline' : 'destructive'}
+            variant="outline"
             onClick={() => {
               setCategoryId(row.original.id);
+              openParentModal();
             }}
           >
             {row.getValue('isParent') ? 'Yes' : 'No'}
@@ -69,7 +70,7 @@ export function CategoryTableView() {
         header: 'Is Child',
         cell: ({ row }) => (
           <Button
-            variant={row.getValue('isChild') ? 'outline' : 'destructive'}
+            variant="outline"
             onClick={() => {
               setCategoryId(row.original.id);
             }}

@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { dynamicBaseQuery } from '../dynamicBaseQuery';
 import { Category } from './category.interface';
-import { Nullable } from '@azkaban/shared';
+import { Nullable, Optional } from '@azkaban/shared';
 
 export const categoryApi = createApi({
   reducerPath: 'categoryApi',
@@ -37,6 +37,30 @@ export const categoryApi = createApi({
       }),
       invalidatesTags: ['GetCategoryList', 'GetCategorySingle'],
     }),
+    updateCategory: builder.mutation<
+      void,
+      {
+        id: string;
+        parent_id?: Optional<Nullable<string>>;
+        title?: Optional<string>;
+        slug?: Optional<string>;
+      }
+    >({
+      query: ({
+        id,
+        ...data
+      }: {
+        id: string;
+        parent_id?: Optional<Nullable<string>>;
+        title?: Optional<string>;
+        slug?: Optional<string>;
+      }) => ({
+        url: `/category/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['GetCategoryList', 'GetCategorySingle'],
+    }),
   }),
 });
 
@@ -45,4 +69,5 @@ export const {
   useLazyFetchCategorySingleQuery,
   useUpdateActiveCategoryMutation,
   useUpdateInactiveCategoryMutation,
+  useUpdateCategoryMutation,
 } = categoryApi;

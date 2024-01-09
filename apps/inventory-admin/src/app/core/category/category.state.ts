@@ -8,6 +8,8 @@ export const categoryState: CategoryModel = {
   statusModal: false,
   parentModal: false,
   childModal: false,
+  addModal: false,
   editModal: false,
   deleteModal: false,
+  restoreModal: false,
 };

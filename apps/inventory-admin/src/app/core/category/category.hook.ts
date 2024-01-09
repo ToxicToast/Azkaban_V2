@@ -5,6 +5,7 @@ import {
   useLazyFetchCategoryListQuery,
   useLazyFetchCategorySingleQuery,
   useUpdateActiveCategoryMutation,
+  useUpdateCategoryMutation,
   useUpdateInactiveCategoryMutation,
 } from './category.api';
 import {
@@ -16,16 +17,16 @@ import {
   selectCategorySelectedId,
   selectCategoryStatusModal,
 } from './category.selector';
-import { setStatusModal } from './category.slice';
+import { setStatusModal, setParentModal } from './category.slice';
+import { Nullable, Optional } from '@azkaban/shared';
 
 export function useCategoryState() {
   const dispatch = useDispatch<AppDispatch>();
   const [fetchCategoryListTrigger] = useLazyFetchCategoryListQuery();
   const [fetchCategorySingleTrigger] = useLazyFetchCategorySingleQuery();
-  const [updateActiveCategoryMutation, updateActiveCategoryResult] =
-    useUpdateActiveCategoryMutation();
-  const [updateInactiveCategoryMutation, updateInactiveCategoryResult] =
-    useUpdateInactiveCategoryMutation();
+  const [updateActiveCategoryMutation] = useUpdateActiveCategoryMutation();
+  const [updateInactiveCategoryMutation] = useUpdateInactiveCategoryMutation();
+  const [updateCategoryMutation] = useUpdateCategoryMutation();
 
   const apiStatus = useAppSelector(selectCategoryApiStatus);
   const categoryData = useAppSelector(selectCategoryData);
@@ -57,9 +58,28 @@ export function useCategoryState() {
     [updateActiveCategoryMutation, updateInactiveCategoryMutation]
   );
 
+  const updateCategory = useCallback(
+    (
+      id: string,
+      parent_id?: Optional<Nullable<string>>,
+      title?: Optional<string>,
+      slug?: Optional<string>
+    ) => {
+      updateCategoryMutation({ id, parent_id, title, slug });
+    },
+    [updateCategoryMutation]
+  );
+
   const changeStatusModal = useCallback(
     (status: boolean) => {
       dispatch(setStatusModal(status));
+    },
+    [dispatch]
+  );
+
+  const changeParentModal = useCallback(
+    (status: boolean) => {
+      dispatch(setParentModal(status));
     },
     [dispatch]
   );
@@ -76,7 +96,9 @@ export function useCategoryState() {
     fetchCategoryList,
     fetchCategoryById,
     updateCategoryStatus,
+    updateCategory,
     //
     changeStatusModal,
+    changeParentModal,
   };
 }

@@ -10,6 +10,7 @@ export function useCategoryTableViewModel() {
   const {
     categoryData: categoryDataState,
     changeStatusModal,
+    changeParentModal,
     fetchCategoryById,
   } = useCategoryState();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -43,6 +44,26 @@ export function useCategoryTableViewModel() {
     changeStatusModal(true);
   }, [changeStatusModal]);
 
+  const openParentModal = useCallback(() => {
+    changeParentModal(true);
+  }, [changeParentModal]);
+
+  const openChildModal = useCallback(() => {
+    changeStatusModal(true);
+  }, [changeStatusModal]);
+
+  const openEditModal = useCallback(() => {
+    changeStatusModal(true);
+  }, [changeStatusModal]);
+
+  const openDeleteModal = useCallback(() => {
+    changeStatusModal(true);
+  }, [changeStatusModal]);
+
+  const openRestoreModal = useCallback(() => {
+    changeStatusModal(true);
+  }, [changeStatusModal]);
+
   return {
     categoryData,
     sorting,
@@ -53,5 +74,10 @@ export function useCategoryTableViewModel() {
     changeColumnVisibility,
     openStatusModal,
     setCategoryId,
+    openParentModal,
+    openChildModal,
+    openEditModal,
+    openDeleteModal,
+    openRestoreModal,
   };
 }

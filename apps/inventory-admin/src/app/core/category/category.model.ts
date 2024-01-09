@@ -9,6 +9,8 @@ export interface CategoryModel {
   statusModal: boolean;
   parentModal: boolean;
   childModal: boolean;
+  addModal: boolean;
   editModal: boolean;
   deleteModal: boolean;
+  restoreModal: boolean;
 }
