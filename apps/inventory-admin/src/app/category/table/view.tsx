@@ -27,11 +27,20 @@ export function CategoryTableView() {
     data: categoryData,
     columns: [
       {
-        id: 'select',
-        header: ({ table }) => <>CHECKBOX HERE</>,
-        cell: ({ row }) => <>CHECKBOX HERE</>,
-        enableSorting: false,
-        enableHiding: false,
+        accessorKey: 'title',
+        header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === 'asc')
+              }
+            >
+              Title
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          );
+        },
       },
       {
         id: 'active',
@@ -39,7 +48,7 @@ export function CategoryTableView() {
         header: 'Status',
         cell: ({ row }) => (
           <Button
-            variant="outline"
+            variant={row.getValue('active') ? 'default' : 'outline'}
             onClick={() => {
               setCategoryId(row.original.id);
               openStatusModal();
@@ -57,7 +66,7 @@ export function CategoryTableView() {
           <>
             <Show show={row.original.isParent}>
               <Button
-                variant="outline"
+                variant="default"
                 onClick={() => {
                   setCategoryId(row.original.id);
                   openParentModal();
@@ -80,7 +89,7 @@ export function CategoryTableView() {
           <>
             <Show show={row.original.isChild}>
               <Button
-                variant="outline"
+                variant="default"
                 onClick={() => {
                   setCategoryId(row.original.id);
                   openParentModal();
@@ -94,22 +103,6 @@ export function CategoryTableView() {
             </Show>
           </>
         ),
-      },
-      {
-        accessorKey: 'title',
-        header: ({ column }) => {
-          return (
-            <Button
-              variant="ghost"
-              onClick={() =>
-                column.toggleSorting(column.getIsSorted() === 'asc')
-              }
-            >
-              Title
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-          );
-        },
       },
       {
         id: 'actions',
