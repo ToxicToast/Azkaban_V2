@@ -1,6 +1,8 @@
 import { SidebarLinkPartial } from './partials/sidebar-link.partial';
 import { SidebarDashboardIconPartial } from './partials/sidebar-dashboard-icon.partial';
 import { SidebarCategoryIconPartial } from './partials/sidebar-category-icon.partial';
+import { SidebarProductIconPartial } from './partials/sidebar-product-icon.partial';
+import { SidebarBrandIconPartial } from './partials/sidebar-brand-icon.partial';
 
 interface Props {
   isOpen: boolean;
@@ -120,7 +122,7 @@ export function Sidebar(props: Props) {
                 currentPath={props.path}
                 shouldPath="/brands"
                 icon={
-                  <SidebarCategoryIconPartial
+                  <SidebarBrandIconPartial
                     currentPath={props.path}
                     shouldPath="/brands"
                   />
@@ -131,7 +133,7 @@ export function Sidebar(props: Props) {
                 currentPath={props.path}
                 shouldPath="/products"
                 icon={
-                  <SidebarCategoryIconPartial
+                  <SidebarProductIconPartial
                     currentPath={props.path}
                     shouldPath="/products"
                   />

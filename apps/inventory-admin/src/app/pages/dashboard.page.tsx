@@ -1,6 +1,4 @@
-import { WelcomeBanner } from '@azkaban/ui-components';
-import { Nullable } from '@azkaban/shared';
-import { User } from 'oidc-client-ts';
+import { useAzkabanAuth, WelcomeBanner } from '@azkaban/ui-components';
 import { DashboardCard } from '@azkaban/ui-inventory-layout';
 import { CubeIcon } from '@radix-ui/react-icons';
 import {
@@ -12,20 +10,22 @@ import {
   ScanBarcodeIcon,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCategoryState } from '../core/category/category.hook';
 
-interface Props {
-  user: Nullable<User>;
-}
+export function DashboardPage() {
+  const { getUserObject } = useAzkabanAuth();
+  const { categoryData } = useCategoryState();
 
-export function DashboardPage(props: Props) {
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-      <WelcomeBanner username={props.user?.profile?.preferred_username ?? ''} />
+      <WelcomeBanner
+        username={getUserObject()?.profile?.preferred_username ?? ''}
+      />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Link to="/categories">
           <DashboardCard
             title="Categories"
-            count="0"
+            count={`${String(categoryData.length)}`}
             icon={<CubeIcon className="w-6 h-6" />}
           />
         </Link>

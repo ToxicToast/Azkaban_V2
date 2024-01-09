@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import compression from 'compression';
 import helmet from 'helmet';
+import { Optional } from '@azkaban/shared';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {
@@ -56,8 +57,24 @@ async function startApp(app: INestApplication): Promise<void> {
 }
 
 async function configureCors(app: INestApplication): Promise<void> {
+  const whitelist = [
+    'gateway',
+    'http://localhost:4200',
+    'http://localhost:4201',
+    'https://toxictoast.de',
+    'https://inventory.toxictoast.de',
+    'https://api.toxictoast.de',
+  ];
+
   app.enableCors({
-    origin: ['localhost', 'toxictoast.de'],
+    origin: (origin: Optional<string>, callback) => {
+      const stringyfiedOrigin = origin ?? 'gateway';
+      if (whitelist.includes(stringyfiedOrigin)) {
+        callback(null, true);
+      } else if (!whitelist.includes(stringyfiedOrigin)) {
+        callback(new Error('Not allowed by CORS'), false);
+      }
+    },
     maxAge: 3600,
     optionsSuccessStatus: 200,
   });

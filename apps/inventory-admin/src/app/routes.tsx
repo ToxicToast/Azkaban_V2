@@ -1,63 +1,82 @@
-import {
-  createHashRouter,
-  RouteObject,
-  RouterProvider,
-} from 'react-router-dom';
-import { useMemo } from 'react';
-import { LoginPage } from './pages/login.page';
-import { Optional } from '@azkaban/shared';
-import { User } from 'oidc-client-ts';
-import { DashboardPage } from './pages/dashboard.page';
-import AuthenticatedLayout from './layout/authenticated.layout';
-import GuestLayout from './layout/guest.layout';
-import { ErrorPage } from './pages/error.page';
-import { CategoryPage } from './pages/category.page';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { lazy } from 'react';
+
+const LazyLoginPage = lazy(() =>
+  import('./pages/login.page').then((m) => ({ default: m.LoginPage }))
+);
+const LazyDashboardPage = lazy(() =>
+  import('./pages/dashboard.page').then((m) => ({ default: m.DashboardPage }))
+);
+const LazyErrorPage = lazy(() =>
+  import('./pages/error.page').then((m) => ({ default: m.ErrorPage }))
+);
+const LazyCategoryPage = lazy(() =>
+  import('./category/page').then((m) => ({ default: m.CategoryPage }))
+);
+const LazyAuthenticatedLayout = lazy(
+  () => import('./layout/authenticated.layout')
+);
+const LazyGuestLayout = lazy(() => import('./layout/guest.layout'));
 
 interface Props {
   isAuthenticated: boolean;
-  user?: Optional<User>;
 }
 
+const authenticatedRoutes = [
+  {
+    path: '/',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyDashboardPage />
+      </LazyAuthenticatedLayout>
+    ),
+    errorElement: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+  {
+    path: '/categories',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyCategoryPage />
+      </LazyAuthenticatedLayout>
+    ),
+    errorElement: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+  {
+    path: '*',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+];
+const guestRoutes = [
+  {
+    path: '*',
+    element: (
+      <LazyGuestLayout>
+        <LazyLoginPage />
+      </LazyGuestLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+];
+
 export function Routes(props: Props) {
-  const getRoutes = useMemo((): Array<RouteObject> => {
-    if (props.isAuthenticated) {
-      return [
-        {
-          path: '/',
-          element: (
-            <AuthenticatedLayout>
-              <DashboardPage user={props.user ?? null} />
-            </AuthenticatedLayout>
-          ),
-          errorElement: (
-            <AuthenticatedLayout>
-              <ErrorPage />
-            </AuthenticatedLayout>
-          ),
-          hasErrorBoundary: true,
-        },
-        {
-          path: '/categories',
-          element: (
-            <AuthenticatedLayout>
-              <CategoryPage />
-            </AuthenticatedLayout>
-          ),
-        },
-      ];
-    }
-    return [
-      {
-        path: '/',
-        element: (
-          <GuestLayout>
-            <LoginPage />
-          </GuestLayout>
-        ),
-      },
-    ];
-  }, [props.isAuthenticated, props.user]);
-  const router = createHashRouter(getRoutes);
+  const router = createHashRouter(
+    props.isAuthenticated ? authenticatedRoutes : guestRoutes
+  );
 
   return <RouterProvider router={router} />;
 }

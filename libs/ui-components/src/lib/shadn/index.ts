@@ -7,3 +7,6 @@ export * from './Avatar';
 export * from './Dialog';
 export * from './PopOver';
 export * from './Form';
+export * from './Table';
+export * from './DataTable';
+export * from './Switch';
