@@ -7,7 +7,6 @@ export function useCategoryModalViewModel() {
   const { hasInventoryAdminGroup } = useAzkabanAuth();
   const {
     selectedCategory,
-    childModal,
     statusModal,
     parentModal,
     changeStatusModal,
@@ -16,6 +15,7 @@ export function useCategoryModalViewModel() {
     updateCategoryStatus,
     updateCategory,
     categoryData,
+    selectedId,
   } = useCategoryState();
 
   const closeStatusModal = useCallback(() => {
@@ -55,7 +55,6 @@ export function useCategoryModalViewModel() {
   return {
     apiStatus,
     selectedCategory,
-    childModal,
     statusModal,
     parentModal,
     closeStatusModal,
@@ -66,5 +65,6 @@ export function useCategoryModalViewModel() {
     categoryData,
     closeParentModal,
     onSubmitParentId,
+    selectedId,
   };
 }

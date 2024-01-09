@@ -10,7 +10,6 @@ import {
 } from './category.api';
 import {
   selectCategoryApiStatus,
-  selectCategoryChildModal,
   selectCategoryData,
   selectCategoryParentModal,
   selectCategorySelectedCategory,
@@ -33,7 +32,6 @@ export function useCategoryState() {
   const selectedId = useAppSelector(selectCategorySelectedId);
   const statusModal = useAppSelector(selectCategoryStatusModal);
   const parentModal = useAppSelector(selectCategoryParentModal);
-  const childModal = useAppSelector(selectCategoryChildModal);
   const selectedCategory = useAppSelector(selectCategorySelectedCategory);
 
   const fetchCategoryList = useCallback(() => {
@@ -90,7 +88,6 @@ export function useCategoryState() {
     selectedId,
     statusModal,
     parentModal,
-    childModal,
     selectedCategory,
     //
     fetchCategoryList,

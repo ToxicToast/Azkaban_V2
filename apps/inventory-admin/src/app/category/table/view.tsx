@@ -11,6 +11,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -53,15 +54,22 @@ export function CategoryTableView() {
         accessorKey: 'isParent',
         header: 'Is Parent',
         cell: ({ row }) => (
-          <Button
-            variant="outline"
-            onClick={() => {
-              setCategoryId(row.original.id);
-              openParentModal();
-            }}
-          >
-            {row.getValue('isParent') ? 'Yes' : 'No'}
-          </Button>
+          <>
+            <Show show={row.original.isParent}>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setCategoryId(row.original.id);
+                  openParentModal();
+                }}
+              >
+                Yes
+              </Button>
+            </Show>
+            <Show show={!row.original.isParent}>
+              <Button variant="outline">No</Button>
+            </Show>
+          </>
         ),
       },
       {
@@ -69,14 +77,22 @@ export function CategoryTableView() {
         accessorKey: 'isChild',
         header: 'Is Child',
         cell: ({ row }) => (
-          <Button
-            variant="outline"
-            onClick={() => {
-              setCategoryId(row.original.id);
-            }}
-          >
-            {row.getValue('isChild') ? 'Yes' : 'No'}
-          </Button>
+          <>
+            <Show show={row.original.isChild}>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setCategoryId(row.original.id);
+                  openParentModal();
+                }}
+              >
+                Yes
+              </Button>
+            </Show>
+            <Show show={!row.original.isChild}>
+              <Button variant="outline">No</Button>
+            </Show>
+          </>
         ),
       },
       {
@@ -153,6 +169,11 @@ export function CategoryTableView() {
             </TableRow>
           </Show>
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={6}>&nbsp;</TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
     </div>
   );

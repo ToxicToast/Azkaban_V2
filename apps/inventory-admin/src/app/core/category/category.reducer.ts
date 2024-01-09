@@ -15,13 +15,6 @@ export function setParentModalAction(
   state.parentModal = action.payload;
 }
 
-export function setChildModalAction(
-  state: CategoryModel,
-  action: PayloadAction<boolean>
-) {
-  state.parentModal = action.payload;
-}
-
 export function setAddModalAction(
   state: CategoryModel,
   action: PayloadAction<boolean>

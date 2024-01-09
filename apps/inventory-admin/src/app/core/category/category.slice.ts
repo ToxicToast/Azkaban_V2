@@ -4,7 +4,6 @@ import { CategoryModel } from './category.model';
 import { onFullfiled, onPending, onRejected } from './category.extraReducer';
 import {
   setAddModalAction,
-  setChildModalAction,
   setDeleteModalAction,
   setEditModalAction,
   setParentModalAction,
@@ -18,7 +17,6 @@ export const categorySlice = createSlice({
   reducers: {
     setStatusModal: setStatusModalAction,
     setParentModal: setParentModalAction,
-    setChildModal: setChildModalAction,
     setAddModal: setAddModalAction,
     setEditModal: setEditModalAction,
     setDeleteModal: setDeleteModalAction,
@@ -34,7 +32,6 @@ export const categorySlice = createSlice({
 export const {
   setStatusModal,
   setParentModal,
-  setChildModal,
   setAddModal,
   setEditModal,
   setDeleteModal,

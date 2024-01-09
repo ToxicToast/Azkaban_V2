@@ -17,31 +17,32 @@ export function CategoryModalView() {
     categoryData,
     closeParentModal,
     onSubmitParentId,
+    selectedId,
   } = useCategoryModalViewModel();
 
   return (
     <>
       <Show show={statusModal && apiStatus === 'loaded'}>
         <CategoryModalChangeStatus
-          key={selectedCategory?.id}
+          key={selectedId}
           active={isCategoryActive}
           closeModal={() => closeStatusModal()}
-          changeStatus={(status) =>
-            onSubmitStatus(selectedCategory?.id ?? '', status)
-          }
+          changeStatus={(status) => onSubmitStatus(selectedId ?? '', status)}
           isAdmin={isAdmin}
         />
       </Show>
       <Show show={parentModal && apiStatus === 'loaded'}>
         <CategoryModalChangeParent
-          key={selectedCategory?.id}
+          key={selectedId}
           parent_id={selectCategoryParentId}
           closeModal={() => closeParentModal()}
           changeParent={(parent_id) =>
-            onSubmitParentId(selectedCategory?.id ?? '', parent_id)
+            onSubmitParentId(selectedId ?? '', parent_id)
           }
           isAdmin={isAdmin}
-          availableCategories={categoryData ?? []}
+          availableCategories={
+            categoryData.filter((category) => category.id !== selectedId) ?? []
+          }
         />
       </Show>
       <div />

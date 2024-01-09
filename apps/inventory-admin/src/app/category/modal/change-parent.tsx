@@ -25,7 +25,9 @@ interface Props {
 }
 
 export function CategoryModalChangeParent(props: Props) {
-  const [parentId, setParentId] = useState<Nullable<string>>(props.parent_id);
+  const [parentId, setParentId] = useState<Nullable<string>>(
+    props.parent_id ?? 'none'
+  );
 
   const onSubmit = useCallback(() => {
     props.changeParent(parentId !== 'none' ? parentId : null);
@@ -43,9 +45,7 @@ export function CategoryModalChangeParent(props: Props) {
         <div className="w-full">
           <Select
             defaultValue={parentId ?? undefined}
-            onValueChange={(value: string) =>
-              setParentId(value !== 'none' ? value : null)
-            }
+            onValueChange={(value: string) => setParentId(value)}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Category" />
