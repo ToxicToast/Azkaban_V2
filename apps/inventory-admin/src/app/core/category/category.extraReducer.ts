@@ -38,6 +38,13 @@ export const onFullfiled = (
       state.selectedId = action.payload?.id ?? null;
     }
   );
+
+  builder.addMatcher(
+    categoryApi.endpoints?.addCategory.matchFulfilled,
+    (state: CategoryModel, action: PayloadAction<void>) => {
+      state.addModal = false;
+    }
+  );
 };
 export const onRejected = (builder: ActionReducerMapBuilder<CategoryModel>) => {
   builder.addMatcher(

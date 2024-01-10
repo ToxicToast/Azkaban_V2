@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, useAppSelector } from '../store';
 import { useCallback } from 'react';
 import {
+  useAddCategoryMutation,
   useLazyFetchCategoryListQuery,
   useLazyFetchCategorySingleQuery,
   useUpdateActiveCategoryMutation,
@@ -9,6 +10,7 @@ import {
   useUpdateInactiveCategoryMutation,
 } from './category.api';
 import {
+  selectCategoryAddModal,
   selectCategoryApiStatus,
   selectCategoryData,
   selectCategoryParentModal,
@@ -16,7 +18,7 @@ import {
   selectCategorySelectedId,
   selectCategoryStatusModal,
 } from './category.selector';
-import { setStatusModal, setParentModal } from './category.slice';
+import { setStatusModal, setParentModal, setAddModal } from './category.slice';
 import { Nullable, Optional } from '@azkaban/shared';
 
 export function useCategoryState() {
@@ -26,12 +28,14 @@ export function useCategoryState() {
   const [updateActiveCategoryMutation] = useUpdateActiveCategoryMutation();
   const [updateInactiveCategoryMutation] = useUpdateInactiveCategoryMutation();
   const [updateCategoryMutation] = useUpdateCategoryMutation();
+  const [addCategoryMutation] = useAddCategoryMutation();
 
   const apiStatus = useAppSelector(selectCategoryApiStatus);
   const categoryData = useAppSelector(selectCategoryData);
   const selectedId = useAppSelector(selectCategorySelectedId);
   const statusModal = useAppSelector(selectCategoryStatusModal);
   const parentModal = useAppSelector(selectCategoryParentModal);
+  const addModal = useAppSelector(selectCategoryAddModal);
   const selectedCategory = useAppSelector(selectCategorySelectedCategory);
 
   const fetchCategoryList = useCallback(() => {
@@ -68,6 +72,13 @@ export function useCategoryState() {
     [updateCategoryMutation]
   );
 
+  const addCategory = useCallback(
+    (parent_id: Nullable<string>, title: string) => {
+      addCategoryMutation({ parent_id, title });
+    },
+    [addCategoryMutation]
+  );
+
   const changeStatusModal = useCallback(
     (status: boolean) => {
       dispatch(setStatusModal(status));
@@ -82,12 +93,20 @@ export function useCategoryState() {
     [dispatch]
   );
 
+  const changeAddModal = useCallback(
+    (status: boolean) => {
+      dispatch(setAddModal(status));
+    },
+    [dispatch]
+  );
+
   return {
     apiStatus,
     categoryData,
     selectedId,
     statusModal,
     parentModal,
+    addModal,
     selectedCategory,
     //
     fetchCategoryList,
@@ -97,5 +116,7 @@ export function useCategoryState() {
     //
     changeStatusModal,
     changeParentModal,
+    changeAddModal,
+    addCategory,
   };
 }

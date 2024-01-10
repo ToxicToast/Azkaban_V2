@@ -61,6 +61,17 @@ export const categoryApi = createApi({
       }),
       invalidatesTags: ['GetCategoryList', 'GetCategorySingle'],
     }),
+    addCategory: builder.mutation<
+      void,
+      { parent_id: Nullable<string>; title: string }
+    >({
+      query: (data) => ({
+        url: `/category/`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['GetCategoryList'],
+    }),
   }),
 });
 
@@ -70,4 +81,5 @@ export const {
   useUpdateActiveCategoryMutation,
   useUpdateInactiveCategoryMutation,
   useUpdateCategoryMutation,
+  useAddCategoryMutation,
 } = categoryApi;

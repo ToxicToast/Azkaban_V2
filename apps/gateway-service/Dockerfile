@@ -21,6 +21,6 @@ RUN chown -R gateway-service:gateway-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
-RUN npm --omit=dev -f install
+RUN npm ci --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]

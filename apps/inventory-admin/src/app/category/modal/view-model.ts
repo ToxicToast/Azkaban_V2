@@ -16,6 +16,9 @@ export function useCategoryModalViewModel() {
     updateCategory,
     categoryData,
     selectedId,
+    addModal,
+    changeAddModal,
+    addCategory,
   } = useCategoryState();
 
   const closeStatusModal = useCallback(() => {
@@ -25,6 +28,10 @@ export function useCategoryModalViewModel() {
   const closeParentModal = useCallback(() => {
     return changeParentModal(false);
   }, [changeParentModal]);
+
+  const closeAddModal = useCallback(() => {
+    return changeAddModal(false);
+  }, [changeAddModal]);
 
   const onSubmitStatus = useCallback(
     (id: string, status: boolean) => {
@@ -38,6 +45,13 @@ export function useCategoryModalViewModel() {
       updateCategory(id, parent_id);
     },
     [updateCategory]
+  );
+
+  const onSubmitAddCategory = useCallback(
+    (parent_id: Nullable<string>, title: string) => {
+      addCategory(parent_id, title);
+    },
+    [addCategory]
   );
 
   const isAdmin = useMemo(() => {
@@ -66,5 +80,8 @@ export function useCategoryModalViewModel() {
     closeParentModal,
     onSubmitParentId,
     selectedId,
+    closeAddModal,
+    addModal,
+    onSubmitAddCategory,
   };
 }

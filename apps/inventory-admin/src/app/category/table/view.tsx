@@ -2,6 +2,7 @@ import { useCategoryTableViewModel } from './view-model';
 import {
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 
@@ -17,13 +18,29 @@ import {
   TableRow,
 } from '@azkaban/ui-components';
 import { ArrowUpDown } from 'lucide-react';
+import { CategoryTableBodyRowPartial } from './partials/table-body-row.partial';
+import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
+import { TableFooterEmptyPartial } from './partials/table-footer-empty.partial';
+import { TableHeaderCountPartial } from './partials/table-header-count.partial';
 
 export function CategoryTableView() {
-  const { categoryData, openStatusModal, openParentModal, setCategoryId } =
-    useCategoryTableViewModel();
+  const {
+    categoryData,
+    openStatusModal,
+    openParentModal,
+    setCategoryId,
+    sorting,
+    setSorting,
+  } = useCategoryTableViewModel();
 
   const table = useReactTable({
+    state: {
+      sorting,
+    },
+    enableSorting: true,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     data: categoryData,
     columns: [
       {
@@ -118,6 +135,10 @@ export function CategoryTableView() {
   return (
     <div className="rounded-md border mt-8">
       <Table>
+        <TableHeaderCountPartial
+          count={categoryData.length ?? 0}
+          length={table.getAllColumns().length}
+        />
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -139,34 +160,23 @@ export function CategoryTableView() {
         <TableBody>
           <Show show={table.getRowModel().rows?.length > 0}>
             {table.getRowModel().rows.map((row) => (
-              <TableRow
+              <CategoryTableBodyRowPartial
                 key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
+                isSelected={Boolean(row.getIsSelected() && 'selected')}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-              </TableRow>
+              </CategoryTableBodyRowPartial>
             ))}
           </Show>
           <Show show={table.getRowModel().rows?.length === 0}>
-            <TableRow>
-              <TableCell
-                colSpan={table.getAllColumns().length}
-                className="h-24 text-center"
-              >
-                No results.
-              </TableCell>
-            </TableRow>
+            <TableBodyEmptyPartial length={table.getAllColumns().length} />
           </Show>
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={6}>&nbsp;</TableCell>
-          </TableRow>
-        </TableFooter>
+        <TableFooterEmptyPartial length={table.getAllColumns().length} />
       </Table>
     </div>
   );

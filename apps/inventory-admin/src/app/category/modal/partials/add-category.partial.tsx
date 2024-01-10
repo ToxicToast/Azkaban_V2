@@ -1,48 +1,44 @@
+import { Category } from '../../../core/category/category.interface';
 import {
-  DialogTitle,
+  Button,
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogDescription,
   DialogFooter,
-  Button,
-  SelectTrigger,
+  DialogHeader,
+  DialogTitle,
+  Input,
+  Label,
   Select,
-  SelectValue,
-  SelectItem,
   SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@azkaban/ui-components';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Nullable } from '@azkaban/shared';
-import { Category } from '../../core/category/category.interface';
 
 interface Props {
   availableCategories: Array<Category>;
-  parent_id: Nullable<string>;
-  changeParent: (value: Nullable<string>) => void;
   closeModal: () => void;
   isAdmin: boolean;
+  addCategory: (parentId: Nullable<string>, title: string) => void;
 }
 
-export function CategoryModalChangeParent(props: Props) {
-  const [parentId, setParentId] = useState<Nullable<string>>(
-    props.parent_id ?? 'none'
-  );
-
-  const onSubmit = useCallback(() => {
-    props.changeParent(parentId !== 'none' ? parentId : null);
-    props.closeModal();
-  }, [props, parentId]);
+export function CategoryModalAddCategoryPartial(props: Props) {
+  const [parentId, setParentId] = useState<Nullable<string>>('none');
+  const [title, setTitle] = useState<string>('');
 
   return (
     <Dialog open={true} modal={true} onOpenChange={() => props.closeModal()}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit Category</DialogTitle>
+          <DialogTitle>Add Category</DialogTitle>
           <DialogDescription>Click save when you're done.</DialogDescription>
         </DialogHeader>
 
         <div className="w-full">
+          <Label className="mb-2">Parent Category</Label>
           <Select
             defaultValue={parentId ?? undefined}
             onValueChange={(value: string) => setParentId(value)}
@@ -61,12 +57,22 @@ export function CategoryModalChangeParent(props: Props) {
           </Select>
         </div>
 
+        <div className="w-full">
+          <Label className="mb-2" htmlFor="title">
+            Title
+          </Label>
+          <Input
+            id="title"
+            onChange={(element) => setTitle(element.target.value)}
+          />
+        </div>
+
         <DialogFooter>
           <Button
             type="submit"
             disabled={!props.isAdmin}
             onClick={() => {
-              onSubmit();
+              props.addCategory(parentId !== 'none' ? parentId : null, title);
             }}
           >
             Save changes

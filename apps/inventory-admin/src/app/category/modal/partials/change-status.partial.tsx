@@ -17,7 +17,7 @@ interface Props {
   isAdmin: boolean;
 }
 
-export function CategoryModalChangeStatus(props: Props) {
+export function CategoryModalChangeStatusPartial(props: Props) {
   const [status, setStatus] = useState<boolean>(props.active);
 
   const onSubmit = useCallback(() => {

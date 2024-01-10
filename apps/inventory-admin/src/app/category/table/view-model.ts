@@ -21,18 +21,6 @@ export function useCategoryTableViewModel() {
     return categoryDataState ?? [];
   }, [categoryDataState]);
 
-  const changeSorting = useCallback((value: SortingState) => {
-    setSorting(value);
-  }, []);
-
-  const changeColumnFilters = useCallback((value: ColumnFiltersState) => {
-    setColumnFilters(value);
-  }, []);
-
-  const changeColumnVisibility = useCallback((value: VisibilityState) => {
-    setColumnVisibility(value);
-  }, []);
-
   const setCategoryId = useCallback(
     (value: string) => {
       fetchCategoryById(value);
@@ -67,11 +55,11 @@ export function useCategoryTableViewModel() {
   return {
     categoryData,
     sorting,
-    changeSorting,
+    setSorting,
     columnFilters,
-    changeColumnFilters,
+    setColumnFilters,
     columnVisibility,
-    changeColumnVisibility,
+    setColumnVisibility,
     openStatusModal,
     setCategoryId,
     openParentModal,

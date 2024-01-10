@@ -1,14 +1,21 @@
 import { useCategoryState } from '../../core/category/category.hook';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useAzkabanAuth } from '@azkaban/ui-components';
 
 export function useCategoryHeaderViewModel() {
-  const { categoryData } = useCategoryState();
+  const { hasInventoryAdminGroup } = useAzkabanAuth();
+  const { changeAddModal } = useCategoryState();
 
-  const categoryCount = useMemo(() => {
-    return categoryData.length;
-  }, [categoryData]);
+  const openAddModal = useCallback(() => {
+    changeAddModal(true);
+  }, [changeAddModal]);
+
+  const isAdmin = useMemo(() => {
+    return hasInventoryAdminGroup();
+  }, [hasInventoryAdminGroup]);
 
   return {
-    categoryCount,
+    openAddModal,
+    isAdmin,
   };
 }

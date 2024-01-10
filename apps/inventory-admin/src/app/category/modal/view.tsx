@@ -1,11 +1,11 @@
 import { Show } from '@azkaban/ui-components';
-import { CategoryModalChangeStatus } from './change-status';
+import { CategoryModalChangeStatusPartial } from './partials/change-status.partial';
 import { useCategoryModalViewModel } from './view-model';
-import { CategoryModalChangeParent } from './change-parent';
+import { CategoryModalChangeParentPartial } from './partials/change-parent.partial';
+import { CategoryModalAddCategoryPartial } from './partials/add-category.partial';
 
 export function CategoryModalView() {
   const {
-    selectedCategory,
     statusModal,
     parentModal,
     closeStatusModal,
@@ -18,12 +18,15 @@ export function CategoryModalView() {
     closeParentModal,
     onSubmitParentId,
     selectedId,
+    addModal,
+    closeAddModal,
+    onSubmitAddCategory,
   } = useCategoryModalViewModel();
 
   return (
     <>
       <Show show={statusModal && apiStatus === 'loaded'}>
-        <CategoryModalChangeStatus
+        <CategoryModalChangeStatusPartial
           key={selectedId}
           active={isCategoryActive}
           closeModal={() => closeStatusModal()}
@@ -32,7 +35,7 @@ export function CategoryModalView() {
         />
       </Show>
       <Show show={parentModal && apiStatus === 'loaded'}>
-        <CategoryModalChangeParent
+        <CategoryModalChangeParentPartial
           key={selectedId}
           parent_id={selectCategoryParentId}
           closeModal={() => closeParentModal()}
@@ -42,6 +45,16 @@ export function CategoryModalView() {
           isAdmin={isAdmin}
           availableCategories={
             categoryData.filter((category) => category.id !== selectedId) ?? []
+          }
+        />
+      </Show>
+      <Show show={addModal}>
+        <CategoryModalAddCategoryPartial
+          closeModal={() => closeAddModal()}
+          isAdmin={isAdmin}
+          availableCategories={categoryData}
+          addCategory={(parent_id, title) =>
+            onSubmitAddCategory(parent_id, title)
           }
         />
       </Show>

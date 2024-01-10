@@ -30,9 +30,9 @@ export const selectCategoryParentModal = createDraftSafeSelector(
   (category: CategoryModel) => category.parentModal
 );
 
-export const selectCategoryChildModal = createDraftSafeSelector(
+export const selectCategoryAddModal = createDraftSafeSelector(
   selectCategory,
-  (category: CategoryModel) => category.childModal
+  (category: CategoryModel) => category.addModal
 );
 
 export const selectCategorySelectedCategory = createDraftSafeSelector(
