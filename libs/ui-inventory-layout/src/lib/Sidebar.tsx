@@ -90,7 +90,7 @@ export function Sidebar(props: Props) {
                 •••
               </span>
               <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                FoodFolio / Freshstock / Grocerio Admin
+                FoodFolio Admin
               </span>
             </h3>
 
