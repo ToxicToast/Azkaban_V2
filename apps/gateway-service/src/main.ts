@@ -4,7 +4,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import compression from 'compression';
 import helmet from 'helmet';
-import { Optional } from '@azkaban/shared';
 
 async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule, {

@@ -57,5 +57,5 @@
       "command": "docker build -f apps/twitch-bot-service/Dockerfile . -t toxictoast/twitch-bot-service:v.0.0.7"
     }
   },
-  "tags": ["scope:twitch", "scope:application"]
+  "tags": ["scope:twitch"]
 }

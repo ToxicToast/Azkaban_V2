@@ -4,7 +4,6 @@ import {
   HealthCheck,
   MicroserviceHealthIndicator,
   MemoryHealthIndicator,
-  TypeOrmHealthIndicator,
 } from '@nestjs/terminus';
 import { ApiTags } from '@nestjs/swagger';
 import { Transport } from '@nestjs/microservices';

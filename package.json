@@ -27,6 +27,7 @@
     "build:all": "nx run-many --target=build --all",
     "docker:all": "nx run-many --target=docker-build --all",
     "serve:all": "nx run-many --target=serve --all",
+    "lint:all": "nx run-many --target=lint --all",
     "tailwind:inventory-admin": "npx tailwindcss -c ./apps/inventory-admin/tailwind.config.js -i apps/inventory-admin/src/styles.css -o ./apps/inventory-admin/src/tailwind.scss"
   },
   "private": true,

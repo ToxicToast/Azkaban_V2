@@ -1,9 +1,4 @@
-import {
-  INestApplication,
-  INestMicroservice,
-  Logger,
-  RequestMethod,
-} from '@nestjs/common';
+import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import compression from 'compression';
