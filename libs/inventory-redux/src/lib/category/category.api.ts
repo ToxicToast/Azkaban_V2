@@ -72,6 +72,22 @@ export const categoryApi = createApi({
       }),
       invalidatesTags: ['GetCategoryList'],
     }),
+    deleteCategory: builder.mutation<void, string>({
+      query: (id: string) => ({
+        url: `/category/${id}`,
+        method: 'DELETE',
+        body: {},
+      }),
+      invalidatesTags: ['GetCategoryList'],
+    }),
+    restoreCategory: builder.mutation<void, string>({
+      query: (id: string) => ({
+        url: `/category/${id}/restore`,
+        method: 'PUT',
+        body: {},
+      }),
+      invalidatesTags: ['GetCategoryList'],
+    }),
   }),
 });
 
@@ -82,4 +98,6 @@ export const {
   useUpdateInactiveCategoryMutation,
   useUpdateCategoryMutation,
   useAddCategoryMutation,
+  useDeleteCategoryMutation,
+  useRestoreCategoryMutation,
 } = categoryApi;

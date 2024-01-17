@@ -3,8 +3,10 @@ import { AppDispatch, useAppSelector } from '../store';
 import { useCallback } from 'react';
 import {
   useAddCategoryMutation,
+  useDeleteCategoryMutation,
   useLazyFetchCategoryListQuery,
   useLazyFetchCategorySingleQuery,
+  useRestoreCategoryMutation,
   useUpdateActiveCategoryMutation,
   useUpdateCategoryMutation,
   useUpdateInactiveCategoryMutation,
@@ -39,6 +41,8 @@ export function useCategoryState() {
   const [updateInactiveCategoryMutation] = useUpdateInactiveCategoryMutation();
   const [updateCategoryMutation] = useUpdateCategoryMutation();
   const [addCategoryMutation] = useAddCategoryMutation();
+  const [deleteCategoryMutation] = useDeleteCategoryMutation();
+  const [restoreCategoryMutation] = useRestoreCategoryMutation();
 
   const apiStatus = useAppSelector(selectCategoryApiStatus);
   const categoryData = useAppSelector(selectCategoryData);
@@ -90,6 +94,20 @@ export function useCategoryState() {
       addCategoryMutation({ parent_id, title });
     },
     [addCategoryMutation]
+  );
+
+  const deleteCategory = useCallback(
+    (id: string) => {
+      deleteCategoryMutation(id);
+    },
+    [deleteCategoryMutation]
+  );
+
+  const restoreCategory = useCallback(
+    (id: string) => {
+      restoreCategoryMutation(id);
+    },
+    [restoreCategoryMutation]
   );
 
   const changeStatusModal = useCallback(
@@ -149,7 +167,6 @@ export function useCategoryState() {
     fetchCategoryList,
     fetchCategoryById,
     updateCategoryStatus,
-    updateCategory,
     changeEditModal,
     changeDeleteModal,
     changeRestoreModal,
@@ -158,5 +175,8 @@ export function useCategoryState() {
     changeParentModal,
     changeAddModal,
     addCategory,
+    updateCategory,
+    deleteCategory,
+    restoreCategory,
   };
 }

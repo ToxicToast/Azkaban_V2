@@ -6,27 +6,35 @@ interface Props {
   isDeleted: boolean;
   isAdmin: boolean;
   onEdit: (id: string) => void;
-  onRestore: (id: string) => void;
   onDelete: (id: string) => void;
+  onRestore: (id: string) => void;
 }
 
 export function TableRowActionsPartial(props: Props) {
   return (
     <Show show={props.isAdmin}>
       <div className="flex gap-2">
-        <Button variant="outline" onClick={() => props.onEdit(props.id)}>
+        <Button
+          variant={props.isDeleted ? 'ghost' : 'outline'}
+          onClick={() => props.onEdit(props.id)}
+          disabled={props.isDeleted}
+        >
           <PencilIcon className="h-4 w-4" />
         </Button>
-        <Show show={!props.isDeleted}>
-          <Button variant="outline" onClick={() => props.onDelete(props.id)}>
-            <TrashIcon className="h-4 w-4" />
-          </Button>
-        </Show>
-        <Show show={props.isDeleted}>
-          <Button variant="outline" onClick={() => props.onRestore(props.id)}>
-            <ArchiveRestoreIcon className="h-4 w-4" />
-          </Button>
-        </Show>
+        <Button
+          variant={props.isDeleted ? 'ghost' : 'outline'}
+          onClick={() => props.onDelete(props.id)}
+          disabled={props.isDeleted}
+        >
+          <TrashIcon className="h-4 w-4" />
+        </Button>
+        <Button
+          variant={!props.isDeleted ? 'ghost' : 'outline'}
+          onClick={() => props.onRestore(props.id)}
+          disabled={!props.isDeleted}
+        >
+          <ArchiveRestoreIcon className="h-4 w-4" />
+        </Button>
       </div>
     </Show>
   );

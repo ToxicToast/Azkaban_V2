@@ -72,11 +72,18 @@ export function CategoryTableView() {
         header: 'Status',
         cell: ({ row }) => (
           <Button
-            variant={row.getValue('active') ? 'default' : 'outline'}
+            variant={
+              row.original.isDeleted
+                ? 'ghost'
+                : row.getValue('active')
+                ? 'default'
+                : 'outline'
+            }
             onClick={() => {
               setCategoryId(row.original.id);
               openStatusModal();
             }}
+            disabled={row.original.isDeleted}
           >
             {row.getValue('active') ? (
               <TableRowButtonTruePartial />
@@ -94,17 +101,21 @@ export function CategoryTableView() {
           <>
             <Show show={row.original.isParent}>
               <Button
-                variant="default"
+                variant={row.original.isDeleted ? 'ghost' : 'default'}
                 onClick={() => {
                   setCategoryId(row.original.id);
                   openParentModal();
                 }}
+                disabled={row.original.isDeleted}
               >
                 <TableRowButtonTruePartial />
               </Button>
             </Show>
             <Show show={!row.original.isParent}>
-              <Button variant="outline">
+              <Button
+                variant={row.original.isDeleted ? 'ghost' : 'outline'}
+                disabled={row.original.isDeleted}
+              >
                 <TableRowButtonFalsePartial />
               </Button>
             </Show>
@@ -119,17 +130,21 @@ export function CategoryTableView() {
           <>
             <Show show={row.original.isChild}>
               <Button
-                variant="default"
+                variant={row.original.isDeleted ? 'ghost' : 'default'}
                 onClick={() => {
                   setCategoryId(row.original.id);
                   openParentModal();
                 }}
+                disabled={row.original.isDeleted}
               >
                 <TableRowButtonTruePartial />
               </Button>
             </Show>
             <Show show={!row.original.isChild}>
-              <Button variant="outline">
+              <Button
+                variant={row.original.isDeleted ? 'ghost' : 'outline'}
+                disabled={row.original.isDeleted}
+              >
                 <TableRowButtonFalsePartial />
               </Button>
             </Show>
@@ -150,13 +165,13 @@ export function CategoryTableView() {
                 setCategoryId(id);
                 openEditModal();
               }}
-              onRestore={(id: string) => {
-                setCategoryId(id);
-                openRestoreModal();
-              }}
               onDelete={(id: string) => {
                 setCategoryId(id);
                 openDeleteModal();
+              }}
+              onRestore={(id: string) => {
+                setCategoryId(id);
+                openRestoreModal();
               }}
             />
           );

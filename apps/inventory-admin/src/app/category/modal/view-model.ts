@@ -22,6 +22,10 @@ export function useCategoryModalViewModel() {
     changeEditModal,
     deleteModal,
     restoreModal,
+    changeDeleteModal,
+    deleteCategory,
+    restoreCategory,
+    changeRestoreModal,
   } = useCategoryState();
 
   const closeStatusModal = useCallback(() => {
@@ -39,6 +43,14 @@ export function useCategoryModalViewModel() {
   const closeEditModal = useCallback(() => {
     return changeEditModal(false);
   }, [changeEditModal]);
+
+  const closeDeleteModal = useCallback(() => {
+    return changeDeleteModal(false);
+  }, [changeDeleteModal]);
+
+  const closeRestoreModal = useCallback(() => {
+    return changeRestoreModal(false);
+  }, [changeRestoreModal]);
 
   const onSubmitStatus = useCallback(
     (id: string, status: boolean) => {
@@ -66,6 +78,20 @@ export function useCategoryModalViewModel() {
       updateCategory(id, parent_id, title, slug);
     },
     [updateCategory]
+  );
+
+  const onSubmitDeleteCategory = useCallback(
+    (id: string) => {
+      deleteCategory(id);
+    },
+    [deleteCategory]
+  );
+
+  const onSubmitRestoreCategory = useCallback(
+    (id: string) => {
+      restoreCategory(id);
+    },
+    [restoreCategory]
   );
 
   const isCategoryActive = useMemo(() => {
@@ -98,5 +124,9 @@ export function useCategoryModalViewModel() {
     restoreModal,
     closeEditModal,
     onSubmitEditCategory,
+    closeDeleteModal,
+    onSubmitDeleteCategory,
+    onSubmitRestoreCategory,
+    closeRestoreModal,
   };
 }

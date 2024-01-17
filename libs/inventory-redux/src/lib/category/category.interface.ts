@@ -9,6 +9,8 @@ export interface Category {
   created_at: Date;
   updated_at: Nullable<Date>;
   deleted_at: Nullable<Date>;
+  isUpdated: boolean;
+  isDeleted: boolean;
   isActive: boolean;
   isParent: boolean;
   isChild: boolean;

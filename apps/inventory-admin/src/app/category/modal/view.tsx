@@ -4,6 +4,8 @@ import { useCategoryModalViewModel } from './view-model';
 import { CategoryModalChangeParentPartial } from './partials/change-parent.partial';
 import { CategoryModalAddCategoryPartial } from './partials/add-category.partial';
 import { CategoryModalEditCategoryPartial } from './partials/edit-category.partial';
+import { CategoryModalDeleteCategoryPartial } from './partials/delete-category.partial';
+import { CategoryModalRestoreCategoryPartial } from './partials/restore-category.partial';
 
 export function CategoryModalView() {
   const {
@@ -28,6 +30,10 @@ export function CategoryModalView() {
     restoreModal,
     selectedCategory,
     onSubmitEditCategory,
+    closeDeleteModal,
+    onSubmitDeleteCategory,
+    onSubmitRestoreCategory,
+    closeRestoreModal,
   } = useCategoryModalViewModel();
 
   return (
@@ -84,10 +90,28 @@ export function CategoryModalView() {
           />
         </Show>
         <Show show={deleteModal}>
-          {JSON.stringify(selectedCategory, null, 4)}
+          <CategoryModalDeleteCategoryPartial
+            closeModal={() => {
+              closeDeleteModal();
+            }}
+            isAdmin={isAdmin}
+            category={selectedCategory ?? null}
+            deleteCategory={(id) => {
+              onSubmitDeleteCategory(id);
+            }}
+          />
         </Show>
         <Show show={restoreModal}>
-          {JSON.stringify(selectedCategory, null, 4)}
+          <CategoryModalRestoreCategoryPartial
+            closeModal={() => {
+              closeRestoreModal();
+            }}
+            isAdmin={isAdmin}
+            category={selectedCategory ?? null}
+            restoreCategory={(id) => {
+              onSubmitRestoreCategory(id);
+            }}
+          />
         </Show>
       </pre>
       <div />

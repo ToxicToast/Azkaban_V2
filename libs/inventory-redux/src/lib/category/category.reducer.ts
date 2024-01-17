@@ -52,7 +52,7 @@ export function setRestoreModalAction(
   state: CategoryModel,
   action: PayloadAction<boolean>
 ) {
-  state.deleteModal = action.payload;
+  state.restoreModal = action.payload;
   if (!action.payload) {
     state.selectedId = null;
   }
