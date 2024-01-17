@@ -27,7 +27,7 @@ export const categoryApi = createApi({
         method: 'PUT',
         body: {},
       }),
-      invalidatesTags: ['GetCategoryList', 'GetCategorySingle'],
+      invalidatesTags: ['GetCategoryList'],
     }),
     updateInactiveCategory: builder.mutation<void, string>({
       query: (id: string) => ({
@@ -35,7 +35,7 @@ export const categoryApi = createApi({
         method: 'PUT',
         body: {},
       }),
-      invalidatesTags: ['GetCategoryList', 'GetCategorySingle'],
+      invalidatesTags: ['GetCategoryList'],
     }),
     updateCategory: builder.mutation<
       void,
@@ -59,7 +59,7 @@ export const categoryApi = createApi({
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: ['GetCategoryList', 'GetCategorySingle'],
+      invalidatesTags: ['GetCategoryList'],
     }),
     addCategory: builder.mutation<
       void,

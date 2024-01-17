@@ -1,10 +1,9 @@
-import { useCategoryState } from '../../core/category/category.hook';
+import { useAuthState, useCategoryState } from '@azkaban/inventory-redux';
 import { useCallback, useMemo } from 'react';
-import { useAzkabanAuth } from '@azkaban/ui-components';
 import { Nullable } from '@azkaban/shared';
 
 export function useCategoryModalViewModel() {
-  const { hasInventoryAdminGroup } = useAzkabanAuth();
+  const { isAdmin } = useAuthState();
   const {
     selectedCategory,
     statusModal,
@@ -19,6 +18,10 @@ export function useCategoryModalViewModel() {
     addModal,
     changeAddModal,
     addCategory,
+    editModal,
+    changeEditModal,
+    deleteModal,
+    restoreModal,
   } = useCategoryState();
 
   const closeStatusModal = useCallback(() => {
@@ -32,6 +35,10 @@ export function useCategoryModalViewModel() {
   const closeAddModal = useCallback(() => {
     return changeAddModal(false);
   }, [changeAddModal]);
+
+  const closeEditModal = useCallback(() => {
+    return changeEditModal(false);
+  }, [changeEditModal]);
 
   const onSubmitStatus = useCallback(
     (id: string, status: boolean) => {
@@ -54,9 +61,12 @@ export function useCategoryModalViewModel() {
     [addCategory]
   );
 
-  const isAdmin = useMemo(() => {
-    return hasInventoryAdminGroup();
-  }, [hasInventoryAdminGroup]);
+  const onSubmitEditCategory = useCallback(
+    (id: string, parent_id: Nullable<string>, title: string, slug: string) => {
+      updateCategory(id, parent_id, title, slug);
+    },
+    [updateCategory]
+  );
 
   const isCategoryActive = useMemo(() => {
     return selectedCategory?.active ?? false;
@@ -83,5 +93,10 @@ export function useCategoryModalViewModel() {
     closeAddModal,
     addModal,
     onSubmitAddCategory,
+    editModal,
+    deleteModal,
+    restoreModal,
+    closeEditModal,
+    onSubmitEditCategory,
   };
 }

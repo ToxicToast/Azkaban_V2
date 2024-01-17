@@ -18,6 +18,20 @@ export const onPending = (builder: ActionReducerMapBuilder<CategoryModel>) => {
       state.status = 'loading';
     }
   );
+
+  builder.addMatcher(
+    categoryApi.endpoints?.addCategory.matchPending,
+    (state: CategoryModel) => {
+      state.status = 'loading';
+    }
+  );
+
+  builder.addMatcher(
+    categoryApi.endpoints?.updateCategory.matchPending,
+    (state: CategoryModel) => {
+      state.status = 'loading';
+    }
+  );
 };
 export const onFullfiled = (
   builder: ActionReducerMapBuilder<CategoryModel>
@@ -41,8 +55,21 @@ export const onFullfiled = (
 
   builder.addMatcher(
     categoryApi.endpoints?.addCategory.matchFulfilled,
-    (state: CategoryModel, action: PayloadAction<void>) => {
+    (state: CategoryModel) => {
+      state.status = 'loaded';
       state.addModal = false;
+    }
+  );
+
+  builder.addMatcher(
+    categoryApi.endpoints?.updateCategory.matchFulfilled,
+    (state: CategoryModel) => {
+      state.status = 'loaded';
+      state.editModal = false;
+      state.parentModal = false;
+      state.statusModal = false;
+      state.selectedId = null;
+      state.selectedCategory = null;
     }
   );
 };

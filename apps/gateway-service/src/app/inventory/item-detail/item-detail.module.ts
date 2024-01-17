@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
+import { AuthGuard } from '../../../guard/auth.guard';
+import { GroupsGuard } from '../../../guard/groups.guard';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [],
+  imports: [JwtModule],
   controllers: [],
-  providers: [],
+  providers: [AuthGuard, GroupsGuard],
 })
 export class ItemDetailModule {}

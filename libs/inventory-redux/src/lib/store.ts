@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { GetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import AuthReducer from './auth/auth.slice';
 import CategoryReducer from './category/category.slice';
 import { categoryApi } from './category/category.api';
 
 export const store = configureStore({
   reducer: {
+    auth: AuthReducer,
     category: CategoryReducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
   },

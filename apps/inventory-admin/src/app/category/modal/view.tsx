@@ -3,6 +3,7 @@ import { CategoryModalChangeStatusPartial } from './partials/change-status.parti
 import { useCategoryModalViewModel } from './view-model';
 import { CategoryModalChangeParentPartial } from './partials/change-parent.partial';
 import { CategoryModalAddCategoryPartial } from './partials/add-category.partial';
+import { CategoryModalEditCategoryPartial } from './partials/edit-category.partial';
 
 export function CategoryModalView() {
   const {
@@ -21,6 +22,12 @@ export function CategoryModalView() {
     addModal,
     closeAddModal,
     onSubmitAddCategory,
+    editModal,
+    closeEditModal,
+    deleteModal,
+    restoreModal,
+    selectedCategory,
+    onSubmitEditCategory,
   } = useCategoryModalViewModel();
 
   return (
@@ -58,6 +65,31 @@ export function CategoryModalView() {
           }
         />
       </Show>
+      <pre>
+        <Show show={editModal && selectedCategory !== null}>
+          <CategoryModalEditCategoryPartial
+            closeModal={() => {
+              closeEditModal();
+            }}
+            isAdmin={isAdmin}
+            availableCategories={
+              categoryData.filter((category) => category.id !== selectedId) ??
+              []
+            }
+            category={selectedCategory ?? null}
+            editCategory={(id, parentId, title, slug) => {
+              const realParent = parentId === 'none' ? null : parentId;
+              onSubmitEditCategory(id, realParent, title, slug);
+            }}
+          />
+        </Show>
+        <Show show={deleteModal}>
+          {JSON.stringify(selectedCategory, null, 4)}
+        </Show>
+        <Show show={restoreModal}>
+          {JSON.stringify(selectedCategory, null, 4)}
+        </Show>
+      </pre>
       <div />
     </>
   );

@@ -13,12 +13,22 @@ import {
   selectCategoryAddModal,
   selectCategoryApiStatus,
   selectCategoryData,
+  selectCategoryDeleteModal,
+  selectCategoryEditModal,
   selectCategoryParentModal,
+  selectCategoryRestoreModal,
   selectCategorySelectedCategory,
   selectCategorySelectedId,
   selectCategoryStatusModal,
 } from './category.selector';
-import { setStatusModal, setParentModal, setAddModal } from './category.slice';
+import {
+  setStatusModal,
+  setParentModal,
+  setAddModal,
+  setEditModal,
+  setRestoreModal,
+  setDeleteModal,
+} from './category.slice';
 import { Nullable, Optional } from '@azkaban/shared';
 
 export function useCategoryState() {
@@ -36,6 +46,9 @@ export function useCategoryState() {
   const statusModal = useAppSelector(selectCategoryStatusModal);
   const parentModal = useAppSelector(selectCategoryParentModal);
   const addModal = useAppSelector(selectCategoryAddModal);
+  const editModal = useAppSelector(selectCategoryEditModal);
+  const deleteModal = useAppSelector(selectCategoryDeleteModal);
+  const restoreModal = useAppSelector(selectCategoryRestoreModal);
   const selectedCategory = useAppSelector(selectCategorySelectedCategory);
 
   const fetchCategoryList = useCallback(() => {
@@ -100,6 +113,27 @@ export function useCategoryState() {
     [dispatch]
   );
 
+  const changeEditModal = useCallback(
+    (status: boolean) => {
+      dispatch(setEditModal(status));
+    },
+    [dispatch]
+  );
+
+  const changeDeleteModal = useCallback(
+    (status: boolean) => {
+      dispatch(setDeleteModal(status));
+    },
+    [dispatch]
+  );
+
+  const changeRestoreModal = useCallback(
+    (status: boolean) => {
+      dispatch(setRestoreModal(status));
+    },
+    [dispatch]
+  );
+
   return {
     apiStatus,
     categoryData,
@@ -107,12 +141,18 @@ export function useCategoryState() {
     statusModal,
     parentModal,
     addModal,
+    editModal,
+    deleteModal,
+    restoreModal,
     selectedCategory,
     //
     fetchCategoryList,
     fetchCategoryById,
     updateCategoryStatus,
     updateCategory,
+    changeEditModal,
+    changeDeleteModal,
+    changeRestoreModal,
     //
     changeStatusModal,
     changeParentModal,

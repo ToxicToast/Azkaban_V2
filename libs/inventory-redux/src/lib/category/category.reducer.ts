@@ -6,6 +6,9 @@ export function setStatusModalAction(
   action: PayloadAction<boolean>
 ) {
   state.statusModal = action.payload;
+  if (!action.payload) {
+    state.selectedId = null;
+  }
 }
 
 export function setParentModalAction(
@@ -13,6 +16,9 @@ export function setParentModalAction(
   action: PayloadAction<boolean>
 ) {
   state.parentModal = action.payload;
+  if (!action.payload) {
+    state.selectedId = null;
+  }
 }
 
 export function setAddModalAction(
@@ -27,6 +33,9 @@ export function setEditModalAction(
   action: PayloadAction<boolean>
 ) {
   state.editModal = action.payload;
+  if (!action.payload) {
+    state.selectedId = null;
+  }
 }
 
 export function setDeleteModalAction(
@@ -34,6 +43,9 @@ export function setDeleteModalAction(
   action: PayloadAction<boolean>
 ) {
   state.deleteModal = action.payload;
+  if (!action.payload) {
+    state.selectedId = null;
+  }
 }
 
 export function setRestoreModalAction(
@@ -41,4 +53,7 @@ export function setRestoreModalAction(
   action: PayloadAction<boolean>
 ) {
   state.deleteModal = action.payload;
+  if (!action.payload) {
+    state.selectedId = null;
+  }
 }

@@ -12,7 +12,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -22,6 +21,10 @@ import { CategoryTableBodyRowPartial } from './partials/table-body-row.partial';
 import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
 import { TableFooterEmptyPartial } from './partials/table-footer-empty.partial';
 import { TableHeaderCountPartial } from './partials/table-header-count.partial';
+import { TableRowActionsPartial } from './partials/table-row-actions.partial';
+import { TableRowButtonFalsePartial } from './partials/table-row-button-false.partial';
+import { TableRowButtonTruePartial } from './partials/table-row-button-true.partial';
+import { Category } from '@azkaban/inventory-redux';
 
 export function CategoryTableView() {
   const {
@@ -31,6 +34,10 @@ export function CategoryTableView() {
     setCategoryId,
     sorting,
     setSorting,
+    isAdmin,
+    openEditModal,
+    openDeleteModal,
+    openRestoreModal,
   } = useCategoryTableViewModel();
 
   const table = useReactTable({
@@ -71,7 +78,11 @@ export function CategoryTableView() {
               openStatusModal();
             }}
           >
-            {row.getValue('active') ? 'Active' : 'Inactive'}
+            {row.getValue('active') ? (
+              <TableRowButtonTruePartial />
+            ) : (
+              <TableRowButtonFalsePartial />
+            )}
           </Button>
         ),
       },
@@ -89,11 +100,13 @@ export function CategoryTableView() {
                   openParentModal();
                 }}
               >
-                Yes
+                <TableRowButtonTruePartial />
               </Button>
             </Show>
             <Show show={!row.original.isParent}>
-              <Button variant="outline">No</Button>
+              <Button variant="outline">
+                <TableRowButtonFalsePartial />
+              </Button>
             </Show>
           </>
         ),
@@ -112,11 +125,13 @@ export function CategoryTableView() {
                   openParentModal();
                 }}
               >
-                Yes
+                <TableRowButtonTruePartial />
               </Button>
             </Show>
             <Show show={!row.original.isChild}>
-              <Button variant="outline">No</Button>
+              <Button variant="outline">
+                <TableRowButtonFalsePartial />
+              </Button>
             </Show>
           </>
         ),
@@ -125,8 +140,26 @@ export function CategoryTableView() {
         id: 'actions',
         enableHiding: false,
         cell: ({ row }) => {
-          const category = row.original;
-          return <>ACTIONS - {category.id}</>;
+          const category = row.original as Category;
+          return (
+            <TableRowActionsPartial
+              id={category.id}
+              isAdmin={isAdmin}
+              isDeleted={!!category.deleted_at}
+              onEdit={(id: string) => {
+                setCategoryId(id);
+                openEditModal();
+              }}
+              onRestore={(id: string) => {
+                setCategoryId(id);
+                openRestoreModal();
+              }}
+              onDelete={(id: string) => {
+                setCategoryId(id);
+                openDeleteModal();
+              }}
+            />
+          );
         },
       },
     ],

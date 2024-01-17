@@ -35,6 +35,21 @@ export const selectCategoryAddModal = createDraftSafeSelector(
   (category: CategoryModel) => category.addModal
 );
 
+export const selectCategoryEditModal = createDraftSafeSelector(
+  selectCategory,
+  (category: CategoryModel) => category.editModal
+);
+
+export const selectCategoryDeleteModal = createDraftSafeSelector(
+  selectCategory,
+  (category: CategoryModel) => category.deleteModal
+);
+
+export const selectCategoryRestoreModal = createDraftSafeSelector(
+  selectCategory,
+  (category: CategoryModel) => category.restoreModal
+);
+
 export const selectCategorySelectedCategory = createDraftSafeSelector(
   selectCategory,
   selectCategorySelectedId,

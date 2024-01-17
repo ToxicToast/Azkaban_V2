@@ -14,7 +14,7 @@ import {
 } from '@azkaban/ui-components';
 import { useCallback, useState } from 'react';
 import { Nullable } from '@azkaban/shared';
-import { Category } from '../../../core/category/category.interface';
+import { Category } from '@azkaban/inventory-redux';
 
 interface Props {
   availableCategories: Array<Category>;

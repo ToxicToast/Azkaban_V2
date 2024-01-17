@@ -5,7 +5,9 @@ const LazyLoginPage = lazy(() =>
   import('./pages/login.page').then((m) => ({ default: m.LoginPage }))
 );
 const LazyDashboardPage = lazy(() =>
-  import('./pages/dashboard.page').then((m) => ({ default: m.DashboardPage }))
+  import('./dashboard/page').then((m) => ({
+    default: m.DashboardPage,
+  }))
 );
 const LazyErrorPage = lazy(() =>
   import('./pages/error.page').then((m) => ({ default: m.ErrorPage }))

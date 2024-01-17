@@ -1,4 +1,3 @@
-import { Category } from '../../../core/category/category.interface';
 import {
   Button,
   Dialog,
@@ -17,6 +16,7 @@ import {
 } from '@azkaban/ui-components';
 import { useState } from 'react';
 import { Nullable } from '@azkaban/shared';
+import { Category } from '@azkaban/inventory-redux';
 
 interface Props {
   availableCategories: Array<Category>;

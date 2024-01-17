@@ -8,6 +8,7 @@ interface Props {
   isOpen: boolean;
   closeSidebar: () => void;
   path: string;
+  apiVersion: string;
 }
 
 export function Sidebar(props: Props) {
@@ -94,7 +95,7 @@ export function Sidebar(props: Props) {
               </span>
             </h3>
 
-            <ul className="mt-3">
+            <ul className="mt-3 mb-3">
               <SidebarLinkPartial
                 title="Dashboard"
                 currentPath={props.path}
@@ -173,6 +174,18 @@ export function Sidebar(props: Props) {
                 }
               />
             </ul>
+
+            <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3">
+              <span
+                className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6"
+                aria-hidden="true"
+              >
+                •••
+              </span>
+              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                API Version: {props.apiVersion}
+              </span>
+            </h3>
           </div>
         </div>
       </div>

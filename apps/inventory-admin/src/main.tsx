@@ -4,7 +4,7 @@ import { AuthProvider } from 'react-oidc-context';
 import { ThemeProvider, oidcConfig } from '@azkaban/ui-components';
 import App from './app/app';
 import { Provider } from 'react-redux';
-import { store } from './app/core/store';
+import { store } from '@azkaban/inventory-redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

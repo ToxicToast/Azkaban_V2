@@ -12,6 +12,11 @@ import { TypeModule } from './type/type.module';
   imports: [
     CategoryModule,
     CompanyModule,
+    ItemModule,
+    ItemDetailModule,
+    LocationModule,
+    SizeModule,
+    TypeModule,
     //
     RouterModule.register([
       {

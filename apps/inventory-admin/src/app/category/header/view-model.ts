@@ -1,18 +1,13 @@
-import { useCategoryState } from '../../core/category/category.hook';
-import { useCallback, useMemo } from 'react';
-import { useAzkabanAuth } from '@azkaban/ui-components';
+import { useAuthState, useCategoryState } from '@azkaban/inventory-redux';
+import { useCallback } from 'react';
 
 export function useCategoryHeaderViewModel() {
-  const { hasInventoryAdminGroup } = useAzkabanAuth();
+  const { isAdmin } = useAuthState();
   const { changeAddModal } = useCategoryState();
 
   const openAddModal = useCallback(() => {
     changeAddModal(true);
   }, [changeAddModal]);
-
-  const isAdmin = useMemo(() => {
-    return hasInventoryAdminGroup();
-  }, [hasInventoryAdminGroup]);
 
   return {
     openAddModal,

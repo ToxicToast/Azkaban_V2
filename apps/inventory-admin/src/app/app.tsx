@@ -1,26 +1,21 @@
 import { Routes } from './routes';
-import { useAzkabanAuth } from '@azkaban/ui-components';
-import { memo, useEffect, useMemo } from 'react';
+import { memo, useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useCategoryState } from './core/category/category.hook';
+import { useAuthState, useCategoryState } from '@azkaban/inventory-redux';
 
 function App() {
-  const { hasInventoryGroup, isAuthenticated } = useAzkabanAuth();
   const { fetchCategoryList } = useCategoryState();
-
-  const authenticated = useMemo(() => {
-    return isAuthenticated && hasInventoryGroup();
-  }, [hasInventoryGroup, isAuthenticated]);
+  const { isAuth } = useAuthState();
 
   useEffect(() => {
-    if (authenticated) {
+    if (isAuth) {
       fetchCategoryList();
     }
-  }, [authenticated, fetchCategoryList]);
+  }, [isAuth, fetchCategoryList]);
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      <Routes isAuthenticated={authenticated} />
+      <Routes isAuthenticated={isAuth} />
     </ErrorBoundary>
   );
 }

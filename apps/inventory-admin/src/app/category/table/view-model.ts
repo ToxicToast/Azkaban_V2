@@ -1,10 +1,10 @@
-import { useCategoryState } from '../../core/category/category.hook';
 import { useCallback, useMemo, useState } from 'react';
 import {
   ColumnFiltersState,
   SortingState,
   VisibilityState,
 } from '@tanstack/react-table';
+import { useAuthState, useCategoryState } from '@azkaban/inventory-redux';
 
 export function useCategoryTableViewModel() {
   const {
@@ -12,7 +12,11 @@ export function useCategoryTableViewModel() {
     changeStatusModal,
     changeParentModal,
     fetchCategoryById,
+    changeEditModal,
+    changeDeleteModal,
+    changeRestoreModal,
   } = useCategoryState();
+  const { isAdmin } = useAuthState();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -41,16 +45,16 @@ export function useCategoryTableViewModel() {
   }, [changeStatusModal]);
 
   const openEditModal = useCallback(() => {
-    changeStatusModal(true);
-  }, [changeStatusModal]);
+    changeEditModal(true);
+  }, [changeEditModal]);
 
   const openDeleteModal = useCallback(() => {
-    changeStatusModal(true);
-  }, [changeStatusModal]);
+    changeDeleteModal(true);
+  }, [changeDeleteModal]);
 
   const openRestoreModal = useCallback(() => {
-    changeStatusModal(true);
-  }, [changeStatusModal]);
+    changeRestoreModal(true);
+  }, [changeRestoreModal]);
 
   return {
     categoryData,
@@ -67,5 +71,6 @@ export function useCategoryTableViewModel() {
     openEditModal,
     openDeleteModal,
     openRestoreModal,
+    isAdmin,
   };
 }

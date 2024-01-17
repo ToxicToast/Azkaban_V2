@@ -25,6 +25,7 @@
       "@azkaban/inventory-infrastructure": [
         "libs/inventory-infrastructure/src/index.ts"
       ],
+      "@azkaban/inventory-redux": ["libs/inventory-redux/src/index.ts"],
       "@azkaban/shared": ["libs/shared/src/index.ts"],
       "@azkaban/toasty": ["libs/toasty/src/index.ts"],
       "@azkaban/toasty-events": ["libs/toasty-events/src/index.ts"],
