@@ -22,15 +22,29 @@
               },
               {
                 "sourceTag": "scope:gateway",
-                "onlyDependOnLibsWithTags": ["scope:gateway", "scope:infrastructure", "scope:toasty", "scope:shared"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:gateway",
+                  "scope:infrastructure",
+                  "scope:toasty",
+                  "scope:shared"
+                ]
               },
               {
                 "sourceTag": "scope:twitch",
-                "onlyDependOnLibsWithTags": ["scope:twitch", "scope:toasty", "scope:shared", "scope:redux"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:twitch",
+                  "scope:toasty",
+                  "scope:shared",
+                  "scope:redux"
+                ]
               },
               {
                 "sourceTag": "scope:inventory",
-                "onlyDependOnLibsWithTags": ["scope:inventory", "scope:shared", "scope:redux"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:inventory",
+                  "scope:shared",
+                  "scope:redux"
+                ]
               },
               {
                 "sourceTag": "scope:domain",
@@ -38,11 +52,19 @@
               },
               {
                 "sourceTag": "scope:infrastructure",
-                "onlyDependOnLibsWithTags": ["scope:infrastructure", "scope:domain", "scope:shared"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:infrastructure",
+                  "scope:domain",
+                  "scope:shared"
+                ]
               },
               {
                 "sourceTag": "scope:application",
-                "onlyDependOnLibsWithTags": ["scope:application", "scope:infrastructure", "scope:shared"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:application",
+                  "scope:infrastructure",
+                  "scope:shared"
+                ]
               },
               {
                 "sourceTag": "scope:redux",

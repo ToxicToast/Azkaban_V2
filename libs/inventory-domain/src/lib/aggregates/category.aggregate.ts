@@ -62,7 +62,6 @@ export class CategoryAggregate
 
   updateParentId(parent_id: Nullable<string>): void {
     this.updateUpdatedAt();
-    console.error(this, parent_id);
     this.parent_id = parent_id;
   }
 }
