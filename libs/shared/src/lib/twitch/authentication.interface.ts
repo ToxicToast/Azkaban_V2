@@ -1,4 +1,4 @@
-import { Either, Optional } from '../types';
+import { Optional } from '../types';
 
 export interface Authentication {
   userId: Optional<string>;

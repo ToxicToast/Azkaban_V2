@@ -1,7 +1,7 @@
 import { AuthModel } from './auth.model';
 import { Nullable } from '@azkaban/shared';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { IdTokenClaims, User } from 'oidc-client-ts';
+import { IdTokenClaims } from 'oidc-client-ts';
 
 type ProfileWithGroups = IdTokenClaims & { groups: Array<string> };
 

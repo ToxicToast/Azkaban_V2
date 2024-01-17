@@ -1,9 +1,7 @@
 import { Factory, FactoryConstituteHelper, UuidHelper } from '@azkaban/shared';
-import {
-  ItemDetailAggregate,
-  ItemDetailAnemic,
-  ItemDetailData,
-} from '@azkaban/inventory-domain';
+import { ItemDetailAnemic } from '../anemics';
+import { ItemDetailAggregate } from '../aggregates';
+import { ItemDetailData } from '../data';
 
 export class ItemDetailFactory
   extends FactoryConstituteHelper<ItemDetailAnemic>
