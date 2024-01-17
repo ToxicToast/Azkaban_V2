@@ -66,6 +66,9 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/inventory-admin/**/*.ts","apps/inventory-admin/**/*.tsx"]
+      },
       "outputs": ["{options.outputFile}"]
     },
     "serve-static": {

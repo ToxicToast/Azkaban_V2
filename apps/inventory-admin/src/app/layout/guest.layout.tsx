@@ -11,7 +11,7 @@ function GuestLayout(props: PropsWithChildren<Props>) {
             <div className="min-h-screen h-full flex flex-col after:flex-1">
               <div className="flex-1">
                 <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-                  <a className="block" href="#">
+                  <button className="block">
                     <svg width="32" height="32" viewBox="0 0 32 32">
                       <defs>
                         <linearGradient
@@ -57,7 +57,7 @@ function GuestLayout(props: PropsWithChildren<Props>) {
                         fill="url(#logo-b)"
                       />
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
 

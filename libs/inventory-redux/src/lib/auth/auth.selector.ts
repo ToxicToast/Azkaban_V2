@@ -41,7 +41,7 @@ export const selectAuthIsAuth = createDraftSafeSelector(
 
 export const selectAuthUserInitials = createDraftSafeSelector(
   selectAuth,
-  selectAuthUsername,
+  selectAuthName,
   (_, name: Nullable<string>) => {
     const nameArray = name?.split(' ') ?? [];
     const firstInitials = nameArray[0]?.charAt(0) ?? '';

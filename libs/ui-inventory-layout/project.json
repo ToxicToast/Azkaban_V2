@@ -7,6 +7,9 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["libs/ui-inventory-layout/**/*.ts","libs/ui-inventory-layout/**/*.tsx"]
+      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {

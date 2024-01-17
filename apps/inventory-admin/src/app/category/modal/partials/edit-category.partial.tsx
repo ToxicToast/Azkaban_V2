@@ -32,7 +32,6 @@ interface Props {
 }
 
 export function CategoryModalEditCategoryPartial(props: Props) {
-  const [id, _] = useState<Nullable<string>>(props.category?.id ?? '');
   const [parentId, setParentId] = useState<Nullable<string>>(
     props.category?.parent_id ?? 'none'
   );
@@ -99,7 +98,7 @@ export function CategoryModalEditCategoryPartial(props: Props) {
             disabled={!props.isAdmin}
             onClick={() => {
               props.editCategory(
-                id ?? '',
+                props.category?.id ?? '',
                 parentId ?? null,
                 title ?? '',
                 slug ?? ''
