@@ -15,6 +15,15 @@ const LazyErrorPage = lazy(() =>
 const LazyCategoryPage = lazy(() =>
   import('./category/page').then((m) => ({ default: m.CategoryPage }))
 );
+const LazyBrandPage = lazy(() =>
+  import('./brands/page').then((m) => ({ default: m.BrandPage }))
+);
+const LazyProductPage = lazy(() =>
+  import('./products/page').then((m) => ({ default: m.ProductPage }))
+);
+const LazyLocationPage = lazy(() =>
+  import('./locations/page').then((m) => ({ default: m.LocationPage }))
+);
 const LazyAuthenticatedLayout = lazy(
   () => import('./layout/authenticated.layout')
 );
@@ -44,6 +53,48 @@ const authenticatedRoutes = [
     element: (
       <LazyAuthenticatedLayout>
         <LazyCategoryPage />
+      </LazyAuthenticatedLayout>
+    ),
+    errorElement: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+  {
+    path: '/brands',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyBrandPage />
+      </LazyAuthenticatedLayout>
+    ),
+    errorElement: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+  {
+    path: '/products',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyProductPage />
+      </LazyAuthenticatedLayout>
+    ),
+    errorElement: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+  {
+    path: '/locations',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyLocationPage />
       </LazyAuthenticatedLayout>
     ),
     errorElement: (

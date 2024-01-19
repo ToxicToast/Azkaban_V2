@@ -76,8 +76,8 @@ export function CategoryTableView() {
               row.original.isDeleted
                 ? 'ghost'
                 : row.getValue('active')
-                ? 'default'
-                : 'outline'
+                ? 'success'
+                : 'ghost'
             }
             onClick={() => {
               setCategoryId(row.original.id);
@@ -101,7 +101,7 @@ export function CategoryTableView() {
           <>
             <Show show={row.original.isParent}>
               <Button
-                variant={row.original.isDeleted ? 'ghost' : 'default'}
+                variant={row.original.isDeleted ? 'ghost' : 'success'}
                 onClick={() => {
                   setCategoryId(row.original.id);
                   openParentModal();
@@ -112,10 +112,7 @@ export function CategoryTableView() {
               </Button>
             </Show>
             <Show show={!row.original.isParent}>
-              <Button
-                variant={row.original.isDeleted ? 'ghost' : 'outline'}
-                disabled={row.original.isDeleted}
-              >
+              <Button variant="ghost" disabled={row.original.isDeleted}>
                 <TableRowButtonFalsePartial />
               </Button>
             </Show>
@@ -130,7 +127,7 @@ export function CategoryTableView() {
           <>
             <Show show={row.original.isChild}>
               <Button
-                variant={row.original.isDeleted ? 'ghost' : 'default'}
+                variant={row.original.isDeleted ? 'ghost' : 'success'}
                 onClick={() => {
                   setCategoryId(row.original.id);
                   openParentModal();
@@ -141,10 +138,7 @@ export function CategoryTableView() {
               </Button>
             </Show>
             <Show show={!row.original.isChild}>
-              <Button
-                variant={row.original.isDeleted ? 'ghost' : 'outline'}
-                disabled={row.original.isDeleted}
-              >
+              <Button variant="ghost" disabled={row.original.isDeleted}>
                 <TableRowButtonFalsePartial />
               </Button>
             </Show>

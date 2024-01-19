@@ -11,3 +11,4 @@ export * from './Table';
 export * from './DataTable';
 export * from './Switch';
 export * from './Select';
+export * from './Alert';
