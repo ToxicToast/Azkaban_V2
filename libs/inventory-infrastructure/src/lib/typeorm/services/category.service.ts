@@ -2,6 +2,7 @@ import { CategoryService } from '@azkaban/inventory-domain';
 import { CategoryTypeORMRepository } from '../repositories/category.repository';
 import { CreateCategoryDto } from '../../dtos/category.dto';
 import { CategoryDao } from '../../daos/category.dao';
+import { Nullable } from '@azkaban/shared';
 
 export class CategoryTypeORMService {
   private readonly domainService: CategoryService;
@@ -30,7 +31,10 @@ export class CategoryTypeORMService {
     return await this.domainService.getCategoryByParentId(parent_id);
   }
 
-  async updateCategoryParentId(id: string, parent_id: string): Promise<void> {
+  async updateCategoryParentId(
+    id: string,
+    parent_id: Nullable<string>
+  ): Promise<void> {
     await this.domainService.updateParentId(id, parent_id);
   }
 

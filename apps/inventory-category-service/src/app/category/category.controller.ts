@@ -36,10 +36,9 @@ export class CategoryController {
 
   @MessagePattern(InventoryCategoryTopics.UPDATE)
   async updateCategory(
-    @Payload() data: Chainable<{ id: string }, UpdateCategoryDto>
+    @Payload() data: Chainable<{ id: string }, { data: UpdateCategoryDto }>
   ): Promise<void> {
-    const { id, ...body } = data;
-    return await this.service.updateCategory(id, body);
+    return await this.service.updateCategory(data.id, data.data);
   }
 
   @MessagePattern(InventoryCategoryTopics.ACTIVATE)

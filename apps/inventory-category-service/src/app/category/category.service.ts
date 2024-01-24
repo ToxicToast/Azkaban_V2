@@ -46,14 +46,16 @@ export class CategoryService {
   }
 
   async updateCategory(id: string, data: UpdateCategoryDto): Promise<void> {
-    if (data.parent_id) {
+    if (data.parent_id !== undefined) {
       await this.infrastructureService.updateCategoryParentId(
         id,
         data.parent_id
       );
-    } else if (data.title) {
+    }
+    if (data.title !== undefined) {
       await this.infrastructureService.updateCategoryTitle(id, data.title);
-    } else if (data.slug) {
+    }
+    if (data.slug !== undefined) {
       await this.infrastructureService.updateCategorySlug(id, data.slug);
     }
   }

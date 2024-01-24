@@ -1,8 +1,6 @@
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import compression from 'compression';
-import helmet from 'helmet';
 import { consumerProvider, Queues } from '@azkaban/shared';
 
 async function createApp(): Promise<INestApplication> {

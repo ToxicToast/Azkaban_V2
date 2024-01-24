@@ -43,6 +43,7 @@ describe('CategoryAggregate', () => {
       parent_id: parentId,
       title,
       slug,
+      active,
       created_at: createdAt,
       updated_at: updatedAt,
       deleted_at: deletedAt,

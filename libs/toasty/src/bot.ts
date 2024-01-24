@@ -4,7 +4,6 @@ import { Chat } from './chat';
 import { Logger } from '@nestjs/common';
 import { PluginLoader } from '@azkaban/toasty-events';
 import { Api } from './api';
-import { EventSub } from './eventsub';
 
 export class Bot {
   private readonly channels: Array<string>;
@@ -12,7 +11,6 @@ export class Bot {
   private readonly authProvider: Auth;
   private readonly chatProvider: Chat;
   private readonly apiProvider: Api;
-  private readonly eventSubProvider: EventSub;
   private plugins: Array<Plugin<unknown>>;
 
   constructor(private readonly options: Option) {
@@ -22,9 +20,6 @@ export class Bot {
     this.authProvider = this.initAuth();
     this.chatProvider = this.initChat();
     this.apiProvider = this.initApi();
-    if (this.options.ssl) {
-      this.eventSubProvider = this.initEventSub();
-    }
   }
 
   private initAuth(): Auth {
@@ -37,15 +32,6 @@ export class Bot {
 
   private initApi(): Api {
     return new Api(this.authProvider);
-  }
-
-  private initEventSub(): EventSub {
-    return new EventSub(
-      this.apiProvider,
-      this.options.ssl.cert,
-      this.options.ssl.key,
-      this.options.ssl.secret
-    );
   }
 
   private initPlugins(): void {
@@ -70,20 +56,11 @@ export class Bot {
     this.chatProvider.init();
   }
 
-  public startEventSub(): void {
-    this.eventSubProvider.startListener();
-  }
-
   public stopBot(): void {
-    this.eventSubProvider.stopListener();
     this.chatProvider.instance.quit();
   }
 
   get api(): Api {
     return this.apiProvider;
-  }
-
-  get eventSub(): EventSub {
-    return this.eventSubProvider;
   }
 }

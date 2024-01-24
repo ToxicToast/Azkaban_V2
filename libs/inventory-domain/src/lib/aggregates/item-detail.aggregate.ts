@@ -1,5 +1,5 @@
 import { AggregateHelper, Domain, Nullable } from '@azkaban/shared';
-import { ItemDetailAnemic } from '@azkaban/inventory-domain';
+import { ItemDetailAnemic } from '../anemics';
 
 interface ItemDetailAggregateHelper {
   created_at: Date;

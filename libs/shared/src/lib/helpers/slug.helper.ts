@@ -12,7 +12,7 @@ export class SlugHelper {
     return new SlugHelper(title);
   }
 
-  private slugifyConfig(value) {
+  private slugifyConfig(value: string) {
     return slugify(value, {
       replacement: '-',
       lower: true,

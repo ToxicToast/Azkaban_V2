@@ -57,7 +57,7 @@ async function startApp(app: INestApplication): Promise<void> {
 
 async function configureCors(app: INestApplication): Promise<void> {
   app.enableCors({
-    origin: ['localhost', 'toxictoast.de'],
+    origin: '*',
     maxAge: 3600,
     optionsSuccessStatus: 200,
   });
