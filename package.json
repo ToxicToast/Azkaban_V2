@@ -134,7 +134,7 @@
     "@twurple/auth": "^7.0.6",
     "@twurple/chat": "^7.0.6",
     "@twurple/eventsub-http": "^7.0.6",
-    "@twurple/eventsub-ws": "^7.0.6",
+    "@twurple/eventsub-ws": "^7.0.7",
     "@willsoto/nestjs-prometheus": "^6.0.0",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
