@@ -111,7 +111,7 @@
     "@nestjs/microservices": "^10.2.10",
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/platform-socket.io": "^10.2.10",
-    "@nestjs/platform-ws": "^10.2.10",
+    "@nestjs/platform-ws": "^10.3.1",
     "@nestjs/serve-static": "^4.0.0",
     "@nestjs/swagger": "^7.1.16",
     "@nestjs/terminus": "^10.1.1",
