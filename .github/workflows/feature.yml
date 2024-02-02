@@ -42,7 +42,7 @@ jobs:
       - name: Build Apps
         run: npm run nx affected:build --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3
 
-      - name: Minor version for each merge
+      - name: Patch version for each merge
         id: taggerDryRun
         uses: anothrNick/github-tag-action@1.67.0
         env:
