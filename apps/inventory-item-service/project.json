@@ -46,7 +46,11 @@
       "options": {
         "jestConfig": "apps/inventory-item-service/jest.config.ts"
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/inventory-item-service/Dockerfile . -t toxictoast/inventory-item-service:v.0.0.71"
     }
   },
-  "tags": []
+  "tags": ["scope:inventory", "scope:application"]
 }
