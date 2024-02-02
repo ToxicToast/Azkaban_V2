@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Logger, Res } from '@nestjs/common';
 import { PrometheusController } from '@willsoto/nestjs-prometheus';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
@@ -8,6 +8,7 @@ import { Response } from 'express';
 export class MetricsController extends PrometheusController {
   @Get()
   index(@Res({ passthrough: true }) response: Response) {
+    Logger.debug('MetricsController.index', response);
     if (response) {
       return super.index(response);
     }
