@@ -55,5 +55,5 @@ jobs:
       - name: Build Docker Images
         run: npm run docker:all -- --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
 
-      - name: Build Docker Images
+      - name: Push Docker Images
         run: npm run docker:push -- --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
