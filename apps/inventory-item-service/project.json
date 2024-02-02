@@ -50,6 +50,9 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/inventory-item-service/Dockerfile . -t toxictoast/inventory-item-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/inventory-item-service:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory", "scope:application"]

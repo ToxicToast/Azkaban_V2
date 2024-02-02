@@ -90,6 +90,9 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/inventory-admin/Dockerfile . -t toxictoast/inventory-admin:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/inventory-admin:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory"]

@@ -55,6 +55,9 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/gateway-service/Dockerfile . -t toxictoast/gateway-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/gateway-service:{args.VERSION}"
     }
   },
   "tags": ["scope:gateway"]
