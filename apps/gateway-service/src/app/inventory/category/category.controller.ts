@@ -57,7 +57,7 @@ export class CategoryController {
   @Put(':id')
   async updateCategory(
     @Param('id') id: string,
-    @Body() data: UpdateCategoryDto
+    @Body() data: UpdateCategoryDto,
   ) {
     return await this.service.updateCategory(id, data);
   }

@@ -5,6 +5,7 @@ import { SseModule } from './sse/sse.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { TwitchModule } from './twitch/twitch.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { TwitchModule } from './twitch/twitch.module';
     MetricsModule,
     InventoryModule,
     TwitchModule,
+    AuthModule,
     //
     RouterModule.register([
       {
@@ -34,6 +36,10 @@ import { TwitchModule } from './twitch/twitch.module';
       {
         path: 'twitch',
         module: TwitchModule,
+      },
+      {
+        path: 'auth',
+        module: AuthModule,
       },
     ]),
   ],
