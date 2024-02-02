@@ -53,4 +53,4 @@ jobs:
           echo "${{ steps.taggerDryRun.outputs.new_tag }}"
 
       - name: Build Docker Images
-        run: npm run nx affected:docker --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3 --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
+        run: npm run docker:all --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
