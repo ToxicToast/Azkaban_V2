@@ -9,7 +9,7 @@ import { MetricsController } from './metrics.controller';
         enabled: true,
       },
       defaultLabels: {
-        app: 'inventory-company-service',
+        app: 'inventory-item-service',
       },
       path: '/metrics',
       controller: MetricsController,
