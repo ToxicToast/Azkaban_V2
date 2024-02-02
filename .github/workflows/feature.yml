@@ -65,4 +65,4 @@ jobs:
           echo "${{ steps.taggerDryRun.outputs.new_tag }}"
 
       - name: Build Docker Images
-        run: npm run docker:all --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
+        run: npm run docker:all -- --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
