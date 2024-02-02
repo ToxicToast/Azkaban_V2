@@ -7,7 +7,9 @@ async function createApp(): Promise<INestApplication> {
   return await NestFactory.create(AppModule);
 }
 
-async function createTwitchMicroService(app: INestApplication): Promise<void> {
+async function createInventoryMicroService(
+  app: INestApplication,
+): Promise<void> {
   app.connectMicroservice({
     ...consumerProvider(Queues.INVENTORY_CATEGORIES),
   });
@@ -38,7 +40,7 @@ async function startApp(app: INestApplication): Promise<void> {
 async function bootstrap() {
   const app = await createApp();
   configureApp(app);
-  await createTwitchMicroService(app);
+  await createInventoryMicroService(app);
   await startApp(app);
   Logger.log(`🚀 Inventory-Category-Service is running`);
 }
