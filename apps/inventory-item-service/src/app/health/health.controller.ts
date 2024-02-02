@@ -14,7 +14,7 @@ export class HealthController {
   constructor(
     private readonly health: HealthCheckService,
     private readonly microservices: MicroserviceHealthIndicator,
-    private readonly memory: MemoryHealthIndicator
+    private readonly memory: MemoryHealthIndicator,
   ) {}
 
   private checkBroker() {
@@ -36,7 +36,7 @@ export class HealthController {
       () =>
         this.memory.checkHeap(
           'memory_heap',
-          Number(process.env.MEMORY_HEAP_TRESHOLD)
+          Number(process.env.MEMORY_HEAP_TRESHOLD),
         ),
     ];
   }
@@ -46,7 +46,7 @@ export class HealthController {
       () =>
         this.memory.checkRSS(
           'memory_rss',
-          Number(process.env.MEMORY_RSS_TRESHOLD)
+          Number(process.env.MEMORY_RSS_TRESHOLD),
         ),
     ];
   }
