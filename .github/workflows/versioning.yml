@@ -45,17 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           WITH_V: true
-          DRY_RUN: true
           DEFAULT_BUMP: minor
 
       - name: echo new tag
         run: |
           echo "${{ steps.taggerDryRun.outputs.new_tag }}"
-
-      - name: echo tag
-        run: |
-          echo "${{ steps.taggerDryRun.outputs.tag }}"
-
-      - name: echo part
-        run: |
-          echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
