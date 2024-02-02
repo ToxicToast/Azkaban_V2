@@ -24,6 +24,7 @@ jobs:
           WITH_V: true
           DRY_RUN: true
           DEFAULT_BUMP: major
+          PRE_RELEASE: false
 
       - name: echo new tag
         run: |

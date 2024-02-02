@@ -49,7 +49,7 @@
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/inventory-item-service/Dockerfile . -t toxictoast/inventory-item-service:v.0.0.71"
+      "command": "docker build -f apps/inventory-item-service/Dockerfile . -t toxictoast/inventory-item-service:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory", "scope:application"]

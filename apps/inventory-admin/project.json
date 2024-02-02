@@ -89,7 +89,7 @@
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/inventory-admin/Dockerfile . -t toxictoast/inventory-admin:v.0.0.71"
+      "command": "docker build -f apps/inventory-admin/Dockerfile . -t toxictoast/inventory-admin:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory"]

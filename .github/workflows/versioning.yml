@@ -46,7 +46,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: minor
+          PRE_RELEASE: true
 
       - name: echo new tag
         run: |
           echo "${{ steps.taggerDryRun.outputs.new_tag }}"
+
+      - name: Build Docker Images
+        run: npm run nx affected:docker --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3 --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
+
