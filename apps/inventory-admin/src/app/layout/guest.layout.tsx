@@ -1,8 +1,6 @@
 import { memo, PropsWithChildren } from 'react';
 
-interface Props {}
-
-function GuestLayout(props: PropsWithChildren<Props>) {
+function GuestLayout(props: PropsWithChildren) {
   return (
     <div className="font-exo antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
       <main className="bg-slate-100 dark:bg-slate-900">
