@@ -8,7 +8,6 @@ import { Response } from 'express';
 export class MetricsController extends PrometheusController {
   @Get()
   index(@Res({ passthrough: true }) response: Response) {
-    Logger.debug('MetricsController.index', response);
     if (response) {
       return super.index(response);
     }

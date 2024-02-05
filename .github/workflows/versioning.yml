@@ -18,28 +18,28 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Setup Node.js
+      - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 21
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Lint Apps
+      - name: 🚀 Lint Apps
         run: npm run nx affected:lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3
 
-      - name: Test Apps
+      - name: 🚀 Test Apps
         run: npm run nx affected:test --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3
 
-      - name: e2e Apps
+      - name: 🚀 e2e Apps
         run: npm run nx affected:e2e --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3
 
-      - name: Build Apps
+      - name: 🚀 Build Apps
         run: npm run nx affected:build --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD  }}  --parallel --maxParallel=3
 
-      - name: Minor version for each merge
+      - name: 🪐 Minor version for each merge
         id: taggerDryRun
         uses: anothrNick/github-tag-action@1.67.0
         env:
@@ -48,12 +48,12 @@ jobs:
           DEFAULT_BUMP: minor
           PRE_RELEASE: true
 
-      - name: echo new tag
+      - name: 🪐 Output Tag
         run: |
           echo "${{ steps.taggerDryRun.outputs.new_tag }}"
 
-      - name: Build Docker Images
+      - name: 🏗 Build Docker Images
         run: npm run docker:all -- --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
 
-      - name: Push Docker Images
+      - name: 🏗 Push Docker Images
         run: npm run docker:push -- --VERSION=${{ steps.taggerDryRun.outputs.new_tag }}
