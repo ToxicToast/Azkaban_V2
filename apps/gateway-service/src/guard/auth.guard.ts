@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivate {
     }
     try {
       const payload = await this.jwtService.decode(token);
+      this.checkExpireTime(payload.exp * 1000);
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
@@ -30,5 +31,12 @@ export class AuthGuard implements CanActivate {
     const authorization = request.headers?.['authorization'] ?? '';
     const [type, token] = authorization.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
+  }
+
+  private checkExpireTime(expireTime: number): void {
+    const currentTime = Date.now();
+    if (currentTime >= expireTime) {
+      throw new UnauthorizedException();
+    }
   }
 }
