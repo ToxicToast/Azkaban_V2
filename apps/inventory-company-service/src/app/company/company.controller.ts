@@ -13,7 +13,7 @@ export class CompanyController {
   constructor(private readonly service: CompanyService) {}
 
   @MessagePattern(InventoryCompanyTopics.LIST)
-  async getCategories(): Promise<Array<CompanyDao>> {
+  async getCompanies(): Promise<Array<CompanyDao>> {
     return await this.service.getList();
   }
 
@@ -29,7 +29,7 @@ export class CompanyController {
 
   @MessagePattern(InventoryCompanyTopics.UPDATE)
   async updateCompany(
-    @Payload() data: Chainable<{ id: string }, UpdateCompanyDto>
+    @Payload() data: Chainable<{ id: string }, UpdateCompanyDto>,
   ): Promise<void> {
     const { id, ...body } = data;
     return await this.service.updateCompany(id, body);

@@ -36,3 +36,14 @@ export enum InventoryItemTopics {
   RESTORE = 'inventory.item.restore',
   DELETE = 'inventory.item.delete',
 }
+
+export enum InventoryLocationTopics {
+  LIST = 'inventory.location.list',
+  ID = 'inventory.location.id',
+  CREATE = 'inventory.location.create',
+  UPDATE = 'inventory.location.update',
+  ACTIVATE = 'inventory.location.activate',
+  DEACTIVATE = 'inventory.location.deactivate',
+  RESTORE = 'inventory.location.restore',
+  DELETE = 'inventory.location.delete',
+}
