@@ -1,6 +1,6 @@
 {
   "name": "@azkaban",
-  "version": "0.0.71",
+  "version": "0.0.82",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -32,6 +32,10 @@
     "build:inventory-admin": "nx build inventory-admin",
     "docker:inventory-admin": "nx docker-build inventory-admin --VERSION=local",
     "docker:push:inventory-admin": "nx docker-push inventory-admin --VERSION=local",
+    "serve:inventory-location": "nx serve inventory-location-service",
+    "build:inventory-location": "nx build inventory-location-service",
+    "docker:inventory-location": "nx docker-build inventory-location-service --VERSION=local",
+    "docker:push:inventory-location": "nx docker-push inventory-location-service --VERSION=local",
     "e2e:all": "nx run-many --target=e2e --all",
     "test:all": "nx run-many --target=test --all",
     "build:all": "nx run-many --target=build --all",
