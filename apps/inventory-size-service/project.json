@@ -1,0 +1,52 @@
+{
+  "name": "inventory-size-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/inventory-size-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/inventory-size-service",
+        "main": "apps/inventory-size-service/src/main.ts",
+        "tsConfig": "apps/inventory-size-service/tsconfig.app.json",
+        "assets": ["apps/inventory-size-service/src/assets"],
+        "webpackConfig": "apps/inventory-size-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "inventory-size-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "inventory-size-service:build:development"
+        },
+        "production": {
+          "buildTarget": "inventory-size-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/inventory-size-service/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:inventory", "scope:application"]
+}

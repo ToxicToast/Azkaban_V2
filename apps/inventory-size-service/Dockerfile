@@ -7,17 +7,17 @@
 FROM docker.io/node:lts-alpine
 
 ENV HOST=0.0.0.0
-ENV PORT=3005
+ENV PORT=3006
 
 WORKDIR /app
 
-RUN addgroup --system inventory-location-service && \
-          adduser --system -G inventory-location-service inventory-location-service
+RUN addgroup --system inventory-size-service && \
+          adduser --system -G inventory-size-service inventory-size-service
 
 COPY package.json .
 COPY package-lock.json .
-COPY dist/apps/inventory-location-service .
-RUN chown -R inventory-location-service:inventory-location-service .
+COPY dist/apps/inventory-size-service .
+RUN chown -R inventory-size-service:inventory-size-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.

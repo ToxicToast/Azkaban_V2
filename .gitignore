@@ -47,4 +47,5 @@ Thumbs.db
 /apps/inventory-company-service/.env
 /apps/inventory-item-service/.env
 /apps/inventory-location-service/.env
+/apps/inventory-size-service/.env
 /apps/inventory-admin/.env
