@@ -47,3 +47,14 @@ export enum InventoryLocationTopics {
   RESTORE = 'inventory.location.restore',
   DELETE = 'inventory.location.delete',
 }
+
+export enum InventorySizeTopics {
+  LIST = 'inventory.size.list',
+  ID = 'inventory.size.id',
+  CREATE = 'inventory.size.create',
+  UPDATE = 'inventory.size.update',
+  ACTIVATE = 'inventory.size.activate',
+  DEACTIVATE = 'inventory.size.deactivate',
+  RESTORE = 'inventory.size.restore',
+  DELETE = 'inventory.size.delete',
+}

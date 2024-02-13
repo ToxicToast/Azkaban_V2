@@ -16,10 +16,10 @@ export class LocationService {
 
   constructor(
     @Inject('LOCATION_REPOSITORY')
-    private readonly companyRepository: Repository<LocationTypeORMEntity>,
+    private readonly locationRepository: Repository<LocationTypeORMEntity>,
   ) {
     this.infrastructureRepository = new LocationTypeORMRepository(
-      this.companyRepository,
+      this.locationRepository,
     );
     this.infrastructureService = new LocationTypeOrmService(
       this.infrastructureRepository,
