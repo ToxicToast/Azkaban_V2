@@ -48,5 +48,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:inventory", "scope:application"]
 }
