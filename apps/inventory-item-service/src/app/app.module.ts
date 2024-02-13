@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { RouterModule } from '@nestjs/core';
-import { HealthModule } from './health/health.module';
 import { MetricsModule } from './metrics/metrics.module';
-import { CompanyModule } from './company/company.module';
+import { HealthModule } from './health/health.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
   imports: [
     HealthModule,
     MetricsModule,
-    CompanyModule,
+    ItemModule,
     RouterModule.register([
       {
         path: 'health',
@@ -20,7 +20,7 @@ import { CompanyModule } from './company/company.module';
       },
       {
         path: '',
-        module: CompanyModule,
+        module: ItemModule,
       },
     ]),
   ],

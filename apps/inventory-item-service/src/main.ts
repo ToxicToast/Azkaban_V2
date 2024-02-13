@@ -11,7 +11,7 @@ async function createInventoryMicroService(
   app: INestApplication,
 ): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.INVENTORY_COMPANIES),
+    ...consumerProvider(Queues.INVENTORY_ITEMS),
   });
 }
 
@@ -42,7 +42,7 @@ async function bootstrap() {
   configureApp(app);
   await createInventoryMicroService(app);
   await startApp(app);
-  Logger.log(`🚀 Inventory-Company-Service is running`);
+  Logger.log(`🚀 Inventory-Item-Service is running`);
 }
 
 bootstrap().catch((err) => Logger.error(err));

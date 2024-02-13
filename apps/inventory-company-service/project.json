@@ -54,7 +54,10 @@
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/inventory-company-service/Dockerfile . -t toxictoast/inventory-company-service:v.0.0.71"
+      "command": "docker build -f apps/inventory-company-service/Dockerfile . -t toxictoast/inventory-company-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/inventory-company-service:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory", "scope:application"]

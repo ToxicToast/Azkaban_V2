@@ -20,3 +20,19 @@ export enum InventoryCompanyTopics {
   RESTORE = 'inventory.company.restore',
   DELETE = 'inventory.company.delete',
 }
+
+export enum InventoryItemTopics {
+  LIST = 'inventory.item.list',
+  CATEGORY = 'inventory.item.category',
+  COMPANY = 'inventory.item.company',
+  LOCATION = 'inventory.item.location',
+  SIZE = 'inventory.item.size',
+  TYPE = 'inventory.item.type',
+  ID = 'inventory.item.id',
+  CREATE = 'inventory.item.create',
+  UPDATE = 'inventory.item.update',
+  ACTIVATE = 'inventory.item.activate',
+  DEACTIVATE = 'inventory.item.deactivate',
+  RESTORE = 'inventory.item.restore',
+  DELETE = 'inventory.item.delete',
+}

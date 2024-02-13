@@ -45,4 +45,5 @@ Thumbs.db
 /apps/twitch-bot-service/.env
 /apps/inventory-category-service/.env
 /apps/inventory-company-service/.env
+/apps/inventory-item-service/.env
 /apps/inventory-admin/.env
