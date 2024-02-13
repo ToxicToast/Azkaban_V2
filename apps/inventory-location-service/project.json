@@ -46,7 +46,14 @@
       "options": {
         "jestConfig": "apps/inventory-location-service/jest.config.ts"
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/inventory-location-service/Dockerfile . -t toxictoast/inventory-location-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/inventory-location-service:{args.VERSION}"
     }
   },
-  "tags": []
+  "tags": ["scope:inventory", "scope:application"]
 }
