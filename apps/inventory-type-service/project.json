@@ -1,0 +1,59 @@
+{
+  "name": "inventory-type-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/inventory-type-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/inventory-type-service",
+        "main": "apps/inventory-type-service/src/main.ts",
+        "tsConfig": "apps/inventory-type-service/tsconfig.app.json",
+        "assets": ["apps/inventory-type-service/src/assets"],
+        "webpackConfig": "apps/inventory-type-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "inventory-type-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "inventory-type-service:build:development"
+        },
+        "production": {
+          "buildTarget": "inventory-type-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/inventory-type-service/jest.config.ts"
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/inventory-type-service/Dockerfile . -t toxictoast/inventory-type-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/inventory-type-service:{args.VERSION}"
+    }
+  },
+  "tags": ["scope:inventory", "scope:application"]
+}
