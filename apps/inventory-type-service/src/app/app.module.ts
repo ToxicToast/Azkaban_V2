@@ -1,11 +1,28 @@
 import { Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { RouterModule } from '@nestjs/core';
+import { MetricsModule } from './metrics/metrics.module';
+import { HealthModule } from './health/health.module';
+import { TypeModule } from './type/type.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    HealthModule,
+    MetricsModule,
+    TypeModule,
+    RouterModule.register([
+      {
+        path: 'health',
+        module: HealthModule,
+      },
+      {
+        path: 'metrics',
+        module: MetricsModule,
+      },
+      {
+        path: '',
+        module: TypeModule,
+      },
+    ]),
+  ],
 })
 export class AppModule {}
