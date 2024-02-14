@@ -46,6 +46,13 @@
       "options": {
         "jestConfig": "apps/inventory-size-service/jest.config.ts"
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/inventory-size-service/Dockerfile . -t toxictoast/inventory-size-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/inventory-size-service:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory", "scope:application"]
