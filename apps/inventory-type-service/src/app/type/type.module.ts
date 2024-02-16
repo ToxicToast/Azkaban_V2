@@ -3,9 +3,11 @@ import {
   datasourceProvider,
   typeProvider,
 } from '@azkaban/inventory-infrastructure';
+import { TypeService } from './type.service';
+import { TypeController } from './type.controller';
 
 @Module({
-  controllers: [],
-  providers: [...datasourceProvider, ...typeProvider],
+  controllers: [TypeController],
+  providers: [...datasourceProvider, ...typeProvider, TypeService],
 })
 export class TypeModule {}
