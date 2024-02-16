@@ -1,7 +1,7 @@
 {
-  "name": "inventory-size-service",
+  "name": "inventory-type-service",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/inventory-size-service/src",
+  "sourceRoot": "apps/inventory-type-service/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,11 +11,11 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/inventory-size-service",
-        "main": "apps/inventory-size-service/src/main.ts",
-        "tsConfig": "apps/inventory-size-service/tsconfig.app.json",
-        "assets": ["apps/inventory-size-service/src/assets"],
-        "webpackConfig": "apps/inventory-size-service/webpack.config.js"
+        "outputPath": "dist/apps/inventory-type-service",
+        "main": "apps/inventory-type-service/src/main.ts",
+        "tsConfig": "apps/inventory-type-service/tsconfig.app.json",
+        "assets": ["apps/inventory-type-service/src/assets"],
+        "webpackConfig": "apps/inventory-type-service/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -26,14 +26,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "inventory-size-service:build"
+        "buildTarget": "inventory-type-service:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "inventory-size-service:build:development"
+          "buildTarget": "inventory-type-service:build:development"
         },
         "production": {
-          "buildTarget": "inventory-size-service:build:production"
+          "buildTarget": "inventory-type-service:build:production"
         }
       }
     },
@@ -44,15 +44,15 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/inventory-size-service/jest.config.ts"
+        "jestConfig": "apps/inventory-type-service/jest.config.ts"
       }
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/inventory-size-service/Dockerfile . -t toxictoast/inventory-size-service:{args.VERSION}"
+      "command": "docker build -f apps/inventory-type-service/Dockerfile . -t toxictoast/inventory-type-service:{args.VERSION}"
     },
     "docker-push": {
-      "command": "docker push toxictoast/inventory-size-service:{args.VERSION}"
+      "command": "docker push toxictoast/inventory-type-service:{args.VERSION}"
     }
   },
   "tags": ["scope:inventory", "scope:application"]
