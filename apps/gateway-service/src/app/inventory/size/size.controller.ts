@@ -9,11 +9,11 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { LocationService } from './location.service';
+import { SizeService } from './size.service';
 import { ApiTags } from '@nestjs/swagger';
 import {
-  CreateLocationDto,
-  UpdateLocationDto,
+  CreateSizeDto,
+  UpdateSizeDto,
 } from '@azkaban/inventory-infrastructure';
 import { AuthGuard } from '../../../guard/auth.guard';
 import { GroupsGuard } from '../../../guard/groups.guard';
@@ -23,18 +23,18 @@ import { Groups } from '../../../decorator/groups.decorator';
 @ApiTags('inventory-location')
 @Controller()
 export class SizeController {
-  constructor(private readonly service: LocationService) {}
+  constructor(private readonly service: SizeService) {}
 
   @Groups('inventory')
   @Get()
-  async getLocations() {
-    return await this.service.getLocations();
+  async getSizes() {
+    return await this.service.getSizes();
   }
 
   @Groups('inventory')
   @Get(':id')
-  async getLocationById(@Param('id') id: string) {
-    const data = await this.service.getLocationById(id);
+  async getSizeById(@Param('id') id: string) {
+    const data = await this.service.getSizeById(id);
     if (!data) {
       throw new HttpException('Not Found', 404);
     }
@@ -43,40 +43,37 @@ export class SizeController {
 
   @Groups('inventory-admin')
   @Post()
-  async createLocation(@Body() data: CreateLocationDto) {
-    return await this.service.createLocation(data);
+  async createSize(@Body() data: CreateSizeDto) {
+    return await this.service.createSize(data);
   }
 
   @Groups('inventory-admin')
   @Put(':id')
-  async updateLocation(
-    @Param('id') id: string,
-    @Body() data: UpdateLocationDto,
-  ) {
-    return await this.service.updateLocation(id, data);
+  async updateSize(@Param('id') id: string, @Body() data: UpdateSizeDto) {
+    return await this.service.updateSize(id, data);
   }
 
   @Groups('inventory-admin')
   @Delete(':id')
-  async deleteLocation(@Param('id') id: string) {
-    return await this.service.deleteLocation(id);
+  async deleteSize(@Param('id') id: string) {
+    return await this.service.deleteSize(id);
   }
 
   @Groups('inventory-admin')
   @Put(':id/restore')
-  async restoreLocation(@Param('id') id: string) {
-    return await this.service.restoreLocation(id);
+  async restoreSize(@Param('id') id: string) {
+    return await this.service.restoreSize(id);
   }
 
   @Groups('inventory-admin')
   @Put(':id/activate')
-  async activateLocation(@Param('id') id: string) {
-    return await this.service.activateLocation(id);
+  async activateSize(@Param('id') id: string) {
+    return await this.service.activateSize(id);
   }
 
   @Groups('inventory-admin')
   @Put(':id/deactivate')
-  async deactivateLocation(@Param('id') id: string) {
-    return await this.service.deactivateLocation(id);
+  async deactivateSize(@Param('id') id: string) {
+    return await this.service.deactivateSize(id);
   }
 }
