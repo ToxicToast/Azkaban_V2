@@ -8,7 +8,7 @@ import {
 import { InventoryLocationTopics, Nullable } from '@azkaban/shared';
 
 @Injectable()
-export class ItemService {
+export class LocationService {
   constructor(@Inject('LOCATION_SERVICE') private readonly client: ClientRMQ) {}
 
   async getLocations(): Promise<Array<LocationDao>> {
@@ -29,7 +29,7 @@ export class ItemService {
       .toPromise();
   }
 
-  async updateLocation(id: string, data: CreateLocationDto): Promise<void> {
+  async updateLocation(id: string, data: UpdateLocationDto): Promise<void> {
     return await this.client
       .send<
         void,
@@ -44,19 +44,19 @@ export class ItemService {
       .toPromise();
   }
 
-  async restoreItem(id: string): Promise<void> {
+  async restoreLocation(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryLocationTopics.RESTORE, id)
       .toPromise();
   }
 
-  async activateItem(id: string): Promise<void> {
+  async activateLocation(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryLocationTopics.ACTIVATE, id)
       .toPromise();
   }
 
-  async deactivateItem(id: string): Promise<void> {
+  async deactivateLocation(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryLocationTopics.DEACTIVATE, id)
       .toPromise();

@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ItemService } from '../item/item.service';
 import { ClientsModule } from '@nestjs/microservices';
 import { clientProvider, Queues } from '@azkaban/shared';
+import { LocationController } from './location.controller';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { clientProvider, Queues } from '@azkaban/shared';
       },
     ]),
   ],
-  controllers: [],
+  controllers: [LocationController],
   providers: [AuthGuard, GroupsGuard, ItemService],
 })
 export class LocationModule {}
