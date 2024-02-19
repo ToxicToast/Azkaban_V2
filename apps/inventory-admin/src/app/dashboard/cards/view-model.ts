@@ -1,16 +1,17 @@
 import { useMemo } from 'react';
-import { useCategoryState } from '@azkaban/inventory-redux';
+import { useBrandState, useCategoryState } from '@azkaban/inventory-redux';
 
 export function useDashboardCardsViewModel() {
   const { categoryData } = useCategoryState();
+  const { brandData } = useBrandState();
 
   const getCategoryCountString = useMemo(() => {
     return String(categoryData.length ?? 0);
   }, [categoryData]);
 
   const getBrandsCountString = useMemo(() => {
-    return String(0);
-  }, []);
+    return String(brandData.length ?? 0);
+  }, [brandData]);
 
   const getProductsCountString = useMemo(() => {
     return String(0);

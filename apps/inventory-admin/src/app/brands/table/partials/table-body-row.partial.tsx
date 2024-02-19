@@ -5,7 +5,7 @@ interface Props {
   isSelected: boolean;
 }
 
-export function CategoryTableBodyRowPartial(props: PropsWithChildren<Props>) {
+export function BrandTableBodyRowPartial(props: PropsWithChildren<Props>) {
   return (
     <TableBodyRow isSelected={props.isSelected}>{props.children}</TableBodyRow>
   );

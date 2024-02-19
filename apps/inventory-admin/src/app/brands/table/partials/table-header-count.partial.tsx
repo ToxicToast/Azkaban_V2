@@ -8,7 +8,7 @@ interface Props {
 export function TableHeaderCountPartial(props: Props) {
   return (
     <TableHeaderCount
-      title="Categories"
+      title="Brands"
       count={props.count}
       length={props.length}
     />

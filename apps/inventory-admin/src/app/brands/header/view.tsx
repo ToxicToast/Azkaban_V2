@@ -1,7 +1,10 @@
 import { Button } from '@azkaban/ui-components';
 import { PlusIcon } from 'lucide-react';
+import { useBrandHeaderViewModel } from './view-model';
 
 export function BrandHeaderView() {
+  const { openAddModal, isAdmin } = useBrandHeaderViewModel();
+
   return (
     <div className="flex items-center justify-center">
       <div className="w-1/2">
@@ -10,10 +13,7 @@ export function BrandHeaderView() {
         </h1>
       </div>
       <div className="w-1/2 text-right">
-        <Button
-          onClick={() => console.error('Not Implemented')}
-          disabled={true}
-        >
+        <Button onClick={() => openAddModal()} disabled={!isAdmin}>
           <PlusIcon className="w-6 h-6" /> &nbsp; Add Brand
         </Button>
       </div>

@@ -173,6 +173,17 @@ export function Sidebar(props: Props) {
                   />
                 }
               />
+              <SidebarLinkPartial
+                title="Receipts"
+                currentPath={props.path}
+                shouldPath="/receipts"
+                icon={
+                  <SidebarCategoryIconPartial
+                    currentPath={props.path}
+                    shouldPath="/receipts"
+                  />
+                }
+              />
             </ul>
 
             <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3">
