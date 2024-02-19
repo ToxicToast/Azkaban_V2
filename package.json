@@ -42,7 +42,7 @@
     "docker:push:inventory-size": "nx docker-push inventory-size-service --VERSION=local",
     "serve:inventory-type": "nx serve inventory-type-service",
     "build:inventory-type": "nx build inventory-type-service",
-    "docker:inventory-type": "nx docker-build inventory-type-service --VERSION=v0.2.0",
+    "docker:inventory-type": "nx docker-build inventory-type-service --VERSION=local",
     "docker:push:inventory-type": "nx docker-push inventory-type-service --VERSION=local",
     "e2e:all": "nx run-many --target=e2e --all",
     "test:all": "nx run-many --target=test --all",

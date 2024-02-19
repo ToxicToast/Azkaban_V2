@@ -20,7 +20,7 @@ import { GroupsGuard } from '../../../guard/groups.guard';
 import { Groups } from '../../../decorator/groups.decorator';
 
 @UseGuards(AuthGuard, GroupsGuard)
-@ApiTags('inventory-location')
+@ApiTags('inventory-size')
 @Controller()
 export class SizeController {
   constructor(private readonly service: SizeService) {}
