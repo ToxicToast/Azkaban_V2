@@ -22,7 +22,7 @@ import { Groups } from '../../../decorator/groups.decorator';
 @UseGuards(AuthGuard, GroupsGuard)
 @ApiTags('inventory-location')
 @Controller()
-export class LocationController {
+export class SizeController {
   constructor(private readonly service: LocationService) {}
 
   @Groups('inventory')
