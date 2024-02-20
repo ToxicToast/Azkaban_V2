@@ -15,6 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableTitleSort,
 } from '@azkaban/ui-components';
 import { ArrowUpDown } from 'lucide-react';
 import { CategoryTableBodyRowPartial } from './partials/table-body-row.partial';
@@ -54,15 +55,11 @@ export function CategoryTableView() {
         accessorKey: 'title',
         header: ({ column }) => {
           return (
-            <Button
-              variant="ghost"
+            <TableTitleSort
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === 'asc')
               }
-            >
-              Title
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
+            />
           );
         },
       },
@@ -76,8 +73,8 @@ export function CategoryTableView() {
               row.original.isDeleted
                 ? 'ghost'
                 : row.getValue('active')
-                ? 'success'
-                : 'ghost'
+                  ? 'success'
+                  : 'ghost'
             }
             onClick={() => {
               setCategoryId(row.original.id);
@@ -191,7 +188,7 @@ export function CategoryTableView() {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 );
