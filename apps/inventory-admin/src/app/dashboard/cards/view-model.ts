@@ -37,6 +37,10 @@ export function useDashboardCardsViewModel() {
     return `0,00 €`;
   }, []);
 
+  const getReceiptsCountString = useMemo(() => {
+    return String(0);
+  }, []);
+
   return {
     getCategoryCountString,
     getBrandsCountString,
@@ -46,5 +50,6 @@ export function useDashboardCardsViewModel() {
     getTypesCountString,
     getLowStockCountString,
     getTotalStockValueString,
+    getReceiptsCountString,
   };
 }
