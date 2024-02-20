@@ -18,7 +18,7 @@ export function TableRowActionsPartial(props: Props) {
       onEdit={props.onEdit}
       onDelete={props.onDelete}
       onRestore={props.onRestore}
-      onForceDelete={() => {}}
+      onForceDelete={console.error}
     />
   );
 }
