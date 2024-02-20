@@ -1,5 +1,7 @@
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { lazy } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './routes.css';
 
 const LazyLoginPage = lazy(() =>
   import('./pages/login.page').then((m) => ({ default: m.LoginPage })),
@@ -103,5 +105,11 @@ export function Routes(props: Props) {
     props.isAuthenticated ? authenticatedRoutes : guestRoutes,
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <TransitionGroup>
+      <CSSTransition timeout={300} classNames="fade">
+        <RouterProvider router={router} />
+      </CSSTransition>
+    </TransitionGroup>
+  );
 }
