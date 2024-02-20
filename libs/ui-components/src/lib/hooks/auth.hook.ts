@@ -2,11 +2,11 @@ import { useAuth } from 'react-oidc-context';
 import { useCallback } from 'react';
 
 export function useAzkabanAuth() {
-  const { signoutSilent, signinRedirect } = useAuth();
+  const { signoutSilent, signinPopup } = useAuth();
 
   const signIn = useCallback(() => {
-    signinRedirect();
-  }, [signinRedirect]);
+    signinPopup();
+  }, [signinPopup]);
 
   const signOut = useCallback(() => {
     signoutSilent();
