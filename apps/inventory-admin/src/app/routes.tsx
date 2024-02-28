@@ -20,12 +20,6 @@ const LazyCategoryPage = lazy(() =>
 const LazyBrandPage = lazy(() =>
   import('./brands/page').then((m) => ({ default: m.BrandPage })),
 );
-const LazyProductPage = lazy(() =>
-  import('./products/page').then((m) => ({ default: m.ProductPage })),
-);
-const LazyLocationPage = lazy(() =>
-  import('./locations/page').then((m) => ({ default: m.LocationPage })),
-);
 const LazyAuthenticatedLayout = lazy(
   () => import('./layout/authenticated.layout'),
 );

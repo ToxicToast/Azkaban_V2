@@ -10,3 +10,4 @@ export * from './TableRowButtonFalse';
 export * from './TableTitleSort';
 
 export * from './RestoreModal';
+export * from './HeaderOverview';
