@@ -16,7 +16,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
 import { Brand } from '@azkaban/inventory-redux';
 import { TableHeaderCountPartial } from './partials/table-header-count.partial';
 import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
@@ -27,7 +26,17 @@ import { TableRowButtonTruePartial } from './partials/table-row-button-true.part
 import { TableRowButtonFalsePartial } from './partials/table-row-button-false.partial';
 
 export function BrandsTableView() {
-  const { brandData, sorting, setSorting, isAdmin } = useBrandTableViewModel();
+  const {
+    brandData,
+    sorting,
+    setSorting,
+    isAdmin,
+    openEditModal,
+    openDeleteModal,
+    openRestoreModal,
+    openStatusModal,
+    setBrandId,
+  } = useBrandTableViewModel();
 
   const table = useReactTable({
     state: {
@@ -65,8 +74,8 @@ export function BrandsTableView() {
                   : 'ghost'
             }
             onClick={() => {
-              console.error('setBrandId', row.original.id);
-              console.error('openStatusModal');
+              setBrandId(row.original.id);
+              openStatusModal();
             }}
             disabled={row.original.isDeleted}
           >
@@ -89,16 +98,16 @@ export function BrandsTableView() {
               isAdmin={isAdmin}
               isDeleted={!!category.deleted_at}
               onEdit={(id: string) => {
-                console.error('setBrandId', id);
-                console.error('openEditModal');
+                setBrandId(id);
+                openEditModal();
               }}
               onDelete={(id: string) => {
-                console.error('setBrandId', id);
-                console.error('openDeleteModal');
+                setBrandId(id);
+                openDeleteModal();
               }}
               onRestore={(id: string) => {
-                console.error('setBrandId', id);
-                console.error('openRestoreModal');
+                setBrandId(id);
+                openRestoreModal();
               }}
             />
           );

@@ -18,6 +18,34 @@ export const onPending = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.status = 'loading';
     },
   );
+
+  builder.addMatcher(
+    brandApi.endpoints.addBrand.matchPending,
+    (state: BrandModel) => {
+      state.status = 'loading';
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints.updateBrand.matchPending,
+    (state: BrandModel) => {
+      state.status = 'loading';
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints.deleteBrand.matchPending,
+    (state: BrandModel) => {
+      state.status = 'loading';
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints.restoreBrand.matchPending,
+    (state: BrandModel) => {
+      state.status = 'loading';
+    },
+  );
 };
 
 export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
@@ -37,6 +65,45 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedId = action.payload?.id ?? null;
     },
   );
+
+  builder.addMatcher(
+    brandApi.endpoints?.addBrand.matchFulfilled,
+    (state: BrandModel) => {
+      state.status = 'loaded';
+      state.addModal = false;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.updateBrand.matchFulfilled,
+    (state: BrandModel) => {
+      state.status = 'loaded';
+      state.editModal = false;
+      state.statusModal = false;
+      state.selectedId = null;
+      state.selectedBrand = null;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.deleteBrand.matchFulfilled,
+    (state: BrandModel) => {
+      state.status = 'loaded';
+      state.deleteModal = false;
+      state.selectedId = null;
+      state.selectedBrand = null;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.restoreBrand.matchFulfilled,
+    (state: BrandModel) => {
+      state.status = 'loaded';
+      state.deleteModal = false;
+      state.selectedId = null;
+      state.selectedBrand = null;
+    },
+  );
 };
 
 export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
@@ -53,6 +120,45 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.status = 'error';
       state.selectedBrand = null;
       state.selectedId = null;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.addBrand.matchRejected,
+    (state: BrandModel) => {
+      state.status = 'error';
+      state.addModal = false;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.updateBrand.matchRejected,
+    (state: BrandModel) => {
+      state.status = 'error';
+      state.editModal = false;
+      state.statusModal = false;
+      state.selectedId = null;
+      state.selectedBrand = null;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.deleteBrand.matchRejected,
+    (state: BrandModel) => {
+      state.status = 'error';
+      state.deleteModal = false;
+      state.selectedId = null;
+      state.selectedBrand = null;
+    },
+  );
+
+  builder.addMatcher(
+    brandApi.endpoints?.restoreBrand.matchRejected,
+    (state: BrandModel) => {
+      state.status = 'error';
+      state.deleteModal = false;
+      state.selectedId = null;
+      state.selectedBrand = null;
     },
   );
 };

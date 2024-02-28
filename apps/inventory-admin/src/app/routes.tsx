@@ -107,7 +107,7 @@ export function Routes(props: Props) {
 
   return (
     <TransitionGroup>
-      <CSSTransition timeout={300} classNames="fade">
+      <CSSTransition timeout={500} classNames="fade">
         <RouterProvider router={router} />
       </CSSTransition>
     </TransitionGroup>

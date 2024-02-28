@@ -9,7 +9,7 @@ import {
   selectAuthUserInitials,
   selectAuthUsername,
 } from './auth.selector';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { AppDispatch, useAppSelector } from '../store';
 import { setUser } from './auth.slice';
@@ -27,13 +27,13 @@ export function useAuthState() {
   const isAuth = useAppSelector(selectAuthIsAuth);
   const initials = useAppSelector(selectAuthUserInitials);
 
-  useEffect(() => {
+  const loginUser = useCallback(() => {
     const userObject = user ?? null;
     dispatch(
       setUser({
         profile: userObject?.profile ?? null,
         id_token: userObject?.id_token ?? null,
-      })
+      }),
     );
   }, [user]);
 
@@ -46,5 +46,6 @@ export function useAuthState() {
     isAdmin,
     isAuth,
     initials,
+    loginUser,
   };
 }

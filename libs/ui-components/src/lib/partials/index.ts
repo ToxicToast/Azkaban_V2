@@ -8,3 +8,5 @@ export * from './TableBodyRow';
 export * from './TableRowButtonTrue';
 export * from './TableRowButtonFalse';
 export * from './TableTitleSort';
+
+export * from './RestoreModal';

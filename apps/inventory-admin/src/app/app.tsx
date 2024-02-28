@@ -10,7 +10,11 @@ import {
 function App() {
   const { fetchCategoryList } = useCategoryState();
   const { fetchBrandList } = useBrandState();
-  const { isAuth } = useAuthState();
+  const { isAuth, loginUser } = useAuthState();
+
+  useEffect(() => {
+    loginUser();
+  }, [loginUser]);
 
   useEffect(() => {
     if (isAuth) {

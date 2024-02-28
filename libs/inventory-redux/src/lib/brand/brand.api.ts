@@ -63,7 +63,7 @@ export const brandApi = createApi({
       }),
       invalidatesTags: ['GetBrandList'],
     }),
-    restoreCategory: builder.mutation<void, string>({
+    restoreBrand: builder.mutation<void, string>({
       query: (id: string) => ({
         url: `/company/${id}/restore`,
         method: 'PUT',
@@ -82,5 +82,5 @@ export const {
   useUpdateBrandMutation,
   useAddBrandMutation,
   useDeleteBrandMutation,
-  useRestoreCategoryMutation,
+  useRestoreBrandMutation,
 } = brandApi;

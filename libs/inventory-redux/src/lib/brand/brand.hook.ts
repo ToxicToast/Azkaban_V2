@@ -10,7 +10,7 @@ import {
   useUpdateBrandMutation,
   useAddBrandMutation,
   useDeleteBrandMutation,
-  useRestoreCategoryMutation,
+  useRestoreBrandMutation,
 } from './brand.api';
 import {
   selectBrandAddModal,
@@ -40,7 +40,7 @@ export function useBrandState() {
   const [updateBrandMutation] = useUpdateBrandMutation();
   const [addBrandMutation] = useAddBrandMutation();
   const [deleteBrandMutation] = useDeleteBrandMutation();
-  const [restoreBrandMutation] = useRestoreCategoryMutation();
+  const [restoreBrandMutation] = useRestoreBrandMutation();
 
   const apiStatus = useAppSelector(selectBrandApiStatus);
   const brandData = useAppSelector(selectBrandData);
