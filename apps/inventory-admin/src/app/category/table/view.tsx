@@ -17,7 +17,6 @@ import {
   TableRow,
   TableTitleSort,
 } from '@azkaban/ui-components';
-import { ArrowUpDown } from 'lucide-react';
 import { CategoryTableBodyRowPartial } from './partials/table-body-row.partial';
 import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
 import { TableFooterEmptyPartial } from './partials/table-footer-empty.partial';

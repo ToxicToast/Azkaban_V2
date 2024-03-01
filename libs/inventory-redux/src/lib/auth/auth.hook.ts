@@ -9,7 +9,7 @@ import {
   selectAuthUserInitials,
   selectAuthUsername,
 } from './auth.selector';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { AppDispatch, useAppSelector } from '../store';
 import { setUser } from './auth.slice';

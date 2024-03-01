@@ -11,6 +11,7 @@ import {
   DialogTitle,
   Input,
   Label,
+  UpdateModal,
 } from '@azkaban/ui-components';
 
 interface Props {
@@ -28,47 +29,35 @@ export function BrandModalEditBrandPartial(props: Props) {
   const [slug, setSlug] = useState<Nullable<string>>(props.brand?.slug ?? null);
 
   return (
-    <Dialog open={true} modal={true} onOpenChange={() => props.closeModal()}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit {title}</DialogTitle>
-          <DialogDescription>Click save when you're done.</DialogDescription>
-        </DialogHeader>
+    <UpdateModal
+      title={title ?? 'Brand'}
+      isAdmin={props.isAdmin}
+      closeModal={() => props.closeModal()}
+      submitModal={() => {
+        props.editBrand(props.brand?.id ?? '', title ?? '', slug ?? '');
+      }}
+    >
+      <div className="w-full">
+        <Label className="mb-2" htmlFor="title">
+          Title
+        </Label>
+        <Input
+          id="title"
+          defaultValue={title ?? undefined}
+          onChange={(element) => setTitle(element.target.value)}
+        />
+      </div>
 
-        <div className="w-full">
-          <Label className="mb-2" htmlFor="title">
-            Title
-          </Label>
-          <Input
-            id="title"
-            defaultValue={title ?? undefined}
-            onChange={(element) => setTitle(element.target.value)}
-          />
-        </div>
-
-        <div className="w-full">
-          <Label className="mb-2" htmlFor="slug">
-            Slug
-          </Label>
-          <Input
-            id="slug"
-            defaultValue={slug ?? undefined}
-            onChange={(element) => setSlug(element.target.value)}
-          />
-        </div>
-
-        <DialogFooter>
-          <Button
-            type="submit"
-            disabled={!props.isAdmin}
-            onClick={() => {
-              props.editBrand(props.brand?.id ?? '', title ?? '', slug ?? '');
-            }}
-          >
-            Save changes
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      <div className="w-full">
+        <Label className="mb-2" htmlFor="slug">
+          Slug
+        </Label>
+        <Input
+          id="slug"
+          defaultValue={slug ?? undefined}
+          onChange={(element) => setSlug(element.target.value)}
+        />
+      </div>
+    </UpdateModal>
   );
 }

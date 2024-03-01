@@ -12,11 +12,12 @@ interface Props {
 export function BrandModalRestoreBrandPartial(props: Props) {
   return (
     <RestoreModal
-      id={props.brand?.id ?? ''}
       title={props.brand?.title ?? ''}
       isAdmin={props.isAdmin}
       closeModal={props.closeModal}
-      submitModal={props.restoreBrand}
+      submitModal={() => {
+        props.restoreBrand(props.brand?.id ?? '');
+      }}
     />
   );
 }

@@ -71,49 +71,46 @@ export function CategoryModalView() {
           }
         />
       </Show>
-      <pre>
-        <Show show={editModal && selectedCategory !== null}>
-          <CategoryModalEditCategoryPartial
-            closeModal={() => {
-              closeEditModal();
-            }}
-            isAdmin={isAdmin}
-            availableCategories={
-              categoryData.filter((category) => category.id !== selectedId) ??
-              []
-            }
-            category={selectedCategory ?? null}
-            editCategory={(id, parentId, title, slug) => {
-              const realParent = parentId === 'none' ? null : parentId;
-              onSubmitEditCategory(id, realParent, title, slug);
-            }}
-          />
-        </Show>
-        <Show show={deleteModal}>
-          <CategoryModalDeleteCategoryPartial
-            closeModal={() => {
-              closeDeleteModal();
-            }}
-            isAdmin={isAdmin}
-            category={selectedCategory ?? null}
-            deleteCategory={(id) => {
-              onSubmitDeleteCategory(id);
-            }}
-          />
-        </Show>
-        <Show show={restoreModal}>
-          <CategoryModalRestoreCategoryPartial
-            closeModal={() => {
-              closeRestoreModal();
-            }}
-            isAdmin={isAdmin}
-            category={selectedCategory ?? null}
-            restoreCategory={(id) => {
-              onSubmitRestoreCategory(id);
-            }}
-          />
-        </Show>
-      </pre>
+      <Show show={editModal && selectedCategory !== null}>
+        <CategoryModalEditCategoryPartial
+          closeModal={() => {
+            closeEditModal();
+          }}
+          isAdmin={isAdmin}
+          availableCategories={
+            categoryData.filter((category) => category.id !== selectedId) ?? []
+          }
+          category={selectedCategory ?? null}
+          editCategory={(id, parentId, title, slug) => {
+            const realParent = parentId === 'none' ? null : parentId;
+            onSubmitEditCategory(id, realParent, title, slug);
+          }}
+        />
+      </Show>
+      <Show show={deleteModal}>
+        <CategoryModalDeleteCategoryPartial
+          closeModal={() => {
+            closeDeleteModal();
+          }}
+          isAdmin={isAdmin}
+          category={selectedCategory ?? null}
+          deleteCategory={(id) => {
+            onSubmitDeleteCategory(id);
+          }}
+        />
+      </Show>
+      <Show show={restoreModal}>
+        <CategoryModalRestoreCategoryPartial
+          closeModal={() => {
+            closeRestoreModal();
+          }}
+          isAdmin={isAdmin}
+          category={selectedCategory ?? null}
+          restoreCategory={(id) => {
+            onSubmitRestoreCategory(id);
+          }}
+        />
+      </Show>
       <div />
     </>
   );

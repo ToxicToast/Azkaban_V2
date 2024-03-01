@@ -12,11 +12,12 @@ interface Props {
 export function CategoryModalRestoreCategoryPartial(props: Props) {
   return (
     <RestoreModal
-      id={props.category?.id ?? ''}
       title={props.category?.title ?? ''}
       isAdmin={props.isAdmin}
       closeModal={props.closeModal}
-      submitModal={props.restoreCategory}
+      submitModal={() => {
+        props.restoreCategory(props.category?.id ?? '');
+      }}
     />
   );
 }

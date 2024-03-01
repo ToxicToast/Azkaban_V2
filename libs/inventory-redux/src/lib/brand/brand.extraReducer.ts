@@ -99,7 +99,7 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
     brandApi.endpoints?.restoreBrand.matchFulfilled,
     (state: BrandModel) => {
       state.status = 'loaded';
-      state.deleteModal = false;
+      state.restoreModal = false;
       state.selectedId = null;
       state.selectedBrand = null;
     },
@@ -156,7 +156,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
     brandApi.endpoints?.restoreBrand.matchRejected,
     (state: BrandModel) => {
       state.status = 'error';
-      state.deleteModal = false;
+      state.restoreModal = false;
       state.selectedId = null;
       state.selectedBrand = null;
     },

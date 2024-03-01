@@ -1,13 +1,4 @@
-import {
-  DialogTitle,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogDescription,
-  DialogFooter,
-  Button,
-  Switch,
-} from '@azkaban/ui-components';
+import { Switch, UpdateModal } from '@azkaban/ui-components';
 import { useCallback, useState } from 'react';
 
 interface Props {
@@ -26,39 +17,25 @@ export function CategoryModalChangeStatusPartial(props: Props) {
   }, [props, status]);
 
   return (
-    <Dialog open={true} modal={true} onOpenChange={() => props.closeModal()}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit Category</DialogTitle>
-          <DialogDescription>Click save when you're done.</DialogDescription>
-        </DialogHeader>
-
-        <div>
-          <h3 className="mb-4 text-lg font-medium">Status</h3>
-          <div className="flex items-center justify-center">
-            <div className="space-y-0.5 font-light text-sm pr-4">
-              Make changes to the Visibility of your Category.
-            </div>
-            <Switch
-              defaultChecked={status}
-              onCheckedChange={(checked) => setStatus(checked)}
-              disabled={!props.isAdmin}
-            />
+    <UpdateModal
+      title="Category"
+      isAdmin={props.isAdmin}
+      closeModal={() => props.closeModal()}
+      submitModal={() => onSubmit()}
+    >
+      <div>
+        <h3 className="mb-4 text-lg font-medium">Status</h3>
+        <div className="flex items-center justify-center">
+          <div className="space-y-0.5 font-light text-sm pr-4">
+            Make changes to the Visibility of your Category.
           </div>
-        </div>
-
-        <DialogFooter>
-          <Button
-            type="submit"
+          <Switch
+            defaultChecked={status}
+            onCheckedChange={(checked) => setStatus(checked)}
             disabled={!props.isAdmin}
-            onClick={() => {
-              onSubmit();
-            }}
-          >
-            Save changes
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          />
+        </div>
+      </div>
+    </UpdateModal>
   );
 }
