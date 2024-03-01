@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import { Button, DialogDescription, DialogTitle } from '../shadn';
 import { BaseModal } from './BaseModal';
 
@@ -8,13 +9,13 @@ interface Props {
   submitModal: () => void;
 }
 
-export function RestoreModal(props: Props) {
+export function DeleteModal(props: PropsWithChildren<Props>) {
   return (
     <BaseModal
       onClose={() => props.closeModal()}
       header={
         <>
-          <DialogTitle>Restore {props.title}</DialogTitle>
+          <DialogTitle>Delete {props.title}</DialogTitle>
           <DialogDescription>Are you sure?</DialogDescription>
         </>
       }
@@ -36,10 +37,12 @@ export function RestoreModal(props: Props) {
               props.submitModal();
             }}
           >
-            Restore
+            Delete
           </Button>
         </>
       }
-    />
+    >
+      {props.children}
+    </BaseModal>
   );
 }
