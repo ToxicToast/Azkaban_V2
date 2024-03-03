@@ -1,8 +1,9 @@
 import { Brand } from './brand.interface';
 import { Nullable } from '@azkaban/shared';
+import { Status } from '../status.enum';
 
 export interface BrandModel {
-  status: 'loading' | 'loaded' | 'error' | 'unknown';
+  status: Status;
   data: Array<Brand>;
   selectedId: Nullable<string>;
   selectedBrand: Nullable<Brand>;

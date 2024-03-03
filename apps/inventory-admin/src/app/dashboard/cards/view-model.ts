@@ -1,9 +1,14 @@
 import { useMemo } from 'react';
-import { useBrandState, useCategoryState } from '@azkaban/inventory-redux';
+import {
+  useBrandState,
+  useCategoryState,
+  useLocationState,
+} from '@azkaban/inventory-redux';
 
 export function useDashboardCardsViewModel() {
   const { categoryData } = useCategoryState();
   const { brandData } = useBrandState();
+  const { locationData } = useLocationState();
 
   const getCategoryCountString = useMemo(() => {
     return String(categoryData.length ?? 0);
@@ -18,8 +23,8 @@ export function useDashboardCardsViewModel() {
   }, []);
 
   const getLocationsCountString = useMemo(() => {
-    return String(0);
-  }, []);
+    return String(locationData.length ?? 0);
+  }, [locationData]);
 
   const getSizesCountString = useMemo(() => {
     return String(0);

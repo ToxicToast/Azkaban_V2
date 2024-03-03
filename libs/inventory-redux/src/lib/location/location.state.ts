@@ -1,11 +1,12 @@
-import { BrandModel } from './brand.model';
+import { LocationModel } from './location.model';
 import { Status } from '../status.enum';
 
-export const brandState: BrandModel = {
+export const locationState: LocationModel = {
   status: Status.UNKNOWN,
   data: [],
   selectedId: null,
-  selectedBrand: null,
+  selectedLocation: null,
+  parentModal: false,
   statusModal: false,
   addModal: false,
   editModal: false,

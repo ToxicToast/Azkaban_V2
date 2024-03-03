@@ -1,5 +1,5 @@
 import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
-import { memo, PropsWithChildren, useState } from 'react';
+import { memo, PropsWithChildren, useEffect, useState } from 'react';
 import { useAzkabanAuth } from '@azkaban/ui-components';
 import { useLocation } from 'react-router-dom';
 import { useAuthState } from '@azkaban/inventory-redux';
@@ -10,6 +10,15 @@ function AuthenticatedLayout(props: PropsWithChildren) {
   const { username, initials, isAdmin, name } = useAuthState();
 
   const { signOut } = useAzkabanAuth();
+
+  useEffect(() => {
+    if (
+      window.location.search.includes('code=') &&
+      window.location.search.includes('state=')
+    ) {
+      window.location.href = window.location.origin;
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

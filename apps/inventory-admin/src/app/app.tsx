@@ -5,11 +5,13 @@ import {
   useAuthState,
   useBrandState,
   useCategoryState,
+  useLocationState,
 } from '@azkaban/inventory-redux';
 
 function App() {
   const { fetchCategoryList } = useCategoryState();
   const { fetchBrandList } = useBrandState();
+  const { fetchLocationList } = useLocationState();
   const { isAuth, loginUser } = useAuthState();
 
   useEffect(() => {
@@ -20,8 +22,9 @@ function App() {
     if (isAuth) {
       fetchCategoryList();
       fetchBrandList();
+      fetchLocationList();
     }
-  }, [isAuth, fetchCategoryList, fetchBrandList]);
+  }, [isAuth, fetchCategoryList, fetchBrandList, fetchLocationList]);
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>

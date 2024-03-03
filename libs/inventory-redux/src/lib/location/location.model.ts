@@ -1,15 +1,14 @@
+import { Location } from './location.interface';
 import { Nullable } from '@azkaban/shared';
-import { Category } from './category.interface';
 import { Status } from '../status.enum';
 
-export interface CategoryModel {
+export interface LocationModel {
   status: Status;
-  data: Array<Category>;
+  data: Array<Location>;
   selectedId: Nullable<string>;
-  selectedCategory: Nullable<Category>;
-  statusModal: boolean;
+  selectedLocation: Nullable<Location>;
   parentModal: boolean;
-  childModal: boolean;
+  statusModal: boolean;
   addModal: boolean;
   editModal: boolean;
   deleteModal: boolean;

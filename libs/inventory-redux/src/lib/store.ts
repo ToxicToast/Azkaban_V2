@@ -7,6 +7,8 @@ import CategoryReducer from './category/category.slice';
 import { categoryApi } from './category/category.api';
 import BrandReducer from './brand/brand.slice';
 import { brandApi } from './brand/brand.api';
+import LocationReducer from './location/location.slice';
+import { locationApi } from './location/location.api';
 
 export const store = configureStore({
   reducer: {
@@ -15,11 +17,14 @@ export const store = configureStore({
     [categoryApi.reducerPath]: categoryApi.reducer,
     brand: BrandReducer,
     [brandApi.reducerPath]: brandApi.reducer,
+    location: LocationReducer,
+    [locationApi.reducerPath]: locationApi.reducer,
   },
   middleware: (getDefaultMiddleware: GetDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(categoryApi.middleware)
-      .concat(brandApi.middleware),
+      .concat(brandApi.middleware)
+      .concat(locationApi.middleware),
   devTools: true,
   enhancers: (getDefaultEnhancers) => getDefaultEnhancers(),
 });

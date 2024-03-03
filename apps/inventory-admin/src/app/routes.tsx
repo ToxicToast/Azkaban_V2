@@ -20,6 +20,9 @@ const LazyCategoryPage = lazy(() =>
 const LazyBrandPage = lazy(() =>
   import('./brands/page').then((m) => ({ default: m.BrandPage })),
 );
+const LazyLocationPage = lazy(() =>
+  import('./locations/page').then((m) => ({ default: m.LocationsPage })),
+);
 const LazyAuthenticatedLayout = lazy(
   () => import('./layout/authenticated.layout'),
 );
@@ -63,6 +66,20 @@ const authenticatedRoutes = [
     element: (
       <LazyAuthenticatedLayout>
         <LazyBrandPage />
+      </LazyAuthenticatedLayout>
+    ),
+    errorElement: (
+      <LazyAuthenticatedLayout>
+        <LazyErrorPage />
+      </LazyAuthenticatedLayout>
+    ),
+    hasErrorBoundary: true,
+  },
+  {
+    path: '/locations',
+    element: (
+      <LazyAuthenticatedLayout>
+        <LazyLocationPage />
       </LazyAuthenticatedLayout>
     ),
     errorElement: (
