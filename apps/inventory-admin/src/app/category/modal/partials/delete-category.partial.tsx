@@ -1,13 +1,4 @@
-import {
-  Button,
-  DeleteModal,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@azkaban/ui-components';
+import { DeleteModal } from '@azkaban/ui-components';
 import { Nullable } from '@azkaban/shared';
 import { Category } from '@azkaban/inventory-redux';
 

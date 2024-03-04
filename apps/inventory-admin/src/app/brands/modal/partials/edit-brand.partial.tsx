@@ -1,18 +1,7 @@
 import { Brand } from '@azkaban/inventory-redux';
 import { Nullable } from '@azkaban/shared';
 import { useState } from 'react';
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  Input,
-  Label,
-  UpdateModal,
-} from '@azkaban/ui-components';
+import { Input, Label, UpdateModal } from '@azkaban/ui-components';
 
 interface Props {
   availableBrands: Array<Brand>;

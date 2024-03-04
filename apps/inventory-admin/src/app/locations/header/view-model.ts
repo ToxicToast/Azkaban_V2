@@ -7,7 +7,7 @@ export function useLocationHeaderViewModel() {
 
   const openAddModal = useCallback(() => {
     changeAddModal(true);
-  }, []);
+  }, [changeAddModal]);
 
   return {
     openAddModal,

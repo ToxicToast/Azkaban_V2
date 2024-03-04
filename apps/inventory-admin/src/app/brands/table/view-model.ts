@@ -36,6 +36,10 @@ export function useBrandTableViewModel() {
     return changeStatusModal(true);
   }, [changeStatusModal]);
 
+  const openAddModal = useCallback(() => {
+    return changeAddModal(true);
+  }, [changeAddModal]);
+
   const openEditModal = useCallback(() => {
     return changeEditModal(true);
   }, [changeEditModal]);

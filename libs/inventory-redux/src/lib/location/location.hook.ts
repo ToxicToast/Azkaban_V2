@@ -105,11 +105,13 @@ export function useLocationState() {
 
   const changeStatusModal = useCallback((status: boolean) => {
     // dispatch(setStatusModal(status));
+    console.error('changeStatusModal', status);
   }, []);
 
   const changeParentModal = useCallback(
     (status: boolean) => {
       // dispatch(setParentModal(status));
+      console.error('setParentModal', status);
     },
     [dispatch],
   );
@@ -117,6 +119,7 @@ export function useLocationState() {
   const changeAddModal = useCallback(
     (status: boolean) => {
       // dispatch(setAddModal(status));
+      console.error('setAddModal', status);
     },
     [dispatch],
   );
@@ -124,6 +127,7 @@ export function useLocationState() {
   const changeEditModal = useCallback(
     (status: boolean) => {
       // dispatch(setEditModal(status));
+      console.error('changeEditModal', status);
     },
     [dispatch],
   );
@@ -131,6 +135,7 @@ export function useLocationState() {
   const changeDeleteModal = useCallback(
     (status: boolean) => {
       // dispatch(setDeleteModal(status));
+      console.error('changeDeleteModal', status);
     },
     [dispatch],
   );
@@ -138,6 +143,7 @@ export function useLocationState() {
   const changeRestoreModal = useCallback(
     (status: boolean) => {
       // dispatch(setRestoreModal(status));
+      console.error('changeRestoreModal', status);
     },
     [dispatch],
   );

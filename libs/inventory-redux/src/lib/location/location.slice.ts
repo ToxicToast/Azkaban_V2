@@ -6,7 +6,9 @@ import { onFullfiled, onPending, onRejected } from './location.extraReducer';
 export const locationSlice = createSlice({
   name: 'location',
   initialState: locationState,
-  reducers: {},
+  reducers: {
+    // NO REDUCERS
+  },
   extraReducers: (builder: ActionReducerMapBuilder<LocationModel>) => {
     onPending(builder);
     onFullfiled(builder);
