@@ -127,7 +127,7 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
       toastService.sendToast({
         title: brandTitle,
         type: 'success',
-        text: 'Brand deleted successfully',
+        text: 'Deleted successfully',
       });
     },
   );
@@ -145,7 +145,7 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
       toastService.sendToast({
         title: brandTitle,
         type: 'success',
-        text: 'Brand restored successfully',
+        text: 'Restored successfully',
       });
     },
   );
@@ -164,7 +164,7 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
       toastService.sendToast({
         title: brandTitle,
         type: 'success',
-        text: 'Deactivated successfully',
+        text: 'Activated successfully',
       });
     },
   );
@@ -183,7 +183,7 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<BrandModel>) => {
       toastService.sendToast({
         title: brandTitle,
         type: 'success',
-        text: 'Activated successfully',
+        text: 'Deactivated successfully',
       });
     },
   );
@@ -196,7 +196,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.status = Status.ERROR;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to retrieve brand data',
       });
     },
@@ -210,7 +210,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedId = null;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to retrieve brand data',
       });
     },
@@ -223,7 +223,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.addModal = false;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to add brand data',
       });
     },
@@ -239,7 +239,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedBrand = null;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to update brand data',
       });
     },
@@ -254,7 +254,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedBrand = null;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to delete brand data',
       });
     },
@@ -269,7 +269,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedBrand = null;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to restore brand data',
       });
     },
@@ -284,7 +284,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedBrand = null;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to activate brand data',
       });
     },
@@ -299,7 +299,7 @@ export const onRejected = (builder: ActionReducerMapBuilder<BrandModel>) => {
       state.selectedBrand = null;
       //
       toastService.sendToast({
-        type: 'danger',
+        type: 'warning',
         text: 'Unable to deactivate brand data',
       });
     },
