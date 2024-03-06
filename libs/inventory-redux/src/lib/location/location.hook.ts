@@ -24,6 +24,14 @@ import {
   useUpdateLocationMutation,
   useUpdateInactiveLocationMutation,
 } from './location.api';
+import {
+  setAddModal,
+  setDeleteModal,
+  setEditModal,
+  setParentModal,
+  setRestoreModal,
+  setStatusModal,
+} from './location.slice';
 
 export function useLocationState() {
   const dispatch = useDispatch<AppDispatch>();
@@ -104,46 +112,40 @@ export function useLocationState() {
   );
 
   const changeStatusModal = useCallback((status: boolean) => {
-    // dispatch(setStatusModal(status));
-    console.error('changeStatusModal', status);
+    dispatch(setStatusModal(status));
   }, []);
 
   const changeParentModal = useCallback(
     (status: boolean) => {
-      // dispatch(setParentModal(status));
-      console.error('setParentModal', status);
+      dispatch(setParentModal(status));
     },
     [dispatch],
   );
 
   const changeAddModal = useCallback(
     (status: boolean) => {
-      // dispatch(setAddModal(status));
-      console.error('setAddModal', status);
+      dispatch(setAddModal(status));
     },
     [dispatch],
   );
 
   const changeEditModal = useCallback(
     (status: boolean) => {
-      // dispatch(setEditModal(status));
-      console.error('changeEditModal', status);
+      dispatch(setEditModal(status));
     },
     [dispatch],
   );
 
   const changeDeleteModal = useCallback(
     (status: boolean) => {
-      // dispatch(setDeleteModal(status));
-      console.error('changeDeleteModal', status);
+      dispatch(setDeleteModal(status));
     },
     [dispatch],
   );
 
   const changeRestoreModal = useCallback(
     (status: boolean) => {
-      // dispatch(setRestoreModal(status));
-      console.error('changeRestoreModal', status);
+      dispatch(setRestoreModal(status));
     },
     [dispatch],
   );

@@ -6,6 +6,7 @@ export function BrandHeaderView() {
 
   return (
     <HeaderOverview
+      key="BrandHeaderOverview"
       title="Brands"
       buttonTitle="Add Brand"
       openModal={openAddModal}
