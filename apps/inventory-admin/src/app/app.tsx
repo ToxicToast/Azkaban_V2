@@ -7,6 +7,7 @@ import {
   useCategoryState,
   useLocationState,
 } from '@azkaban/inventory-redux';
+import { Toaster } from './toaster';
 
 function App() {
   const { fetchCategoryList } = useCategoryState();

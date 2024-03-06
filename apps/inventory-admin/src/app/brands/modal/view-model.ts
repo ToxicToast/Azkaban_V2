@@ -1,5 +1,6 @@
 import { useAuthState, useBrandState } from '@azkaban/inventory-redux';
 import { useCallback, useMemo } from 'react';
+import { useToasts } from '@azkaban/ui-components';
 
 export function useBrandModalViewModel() {
   const { isAdmin } = useAuthState();
