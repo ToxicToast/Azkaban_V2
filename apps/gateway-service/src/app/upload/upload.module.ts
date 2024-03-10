@@ -7,8 +7,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import * as path from 'path';
 import { AuthGuard } from '../../guard/auth.guard';
 import { GroupsGuard } from '../../guard/groups.guard';
-import { ReceipeController } from './receipe.controller';
-import { ReceipeService } from './receipe.service';
+import { OCRController } from './ocr.controller';
+import { OCRService } from './ocr.service';
 
 @Module({
   imports: [
@@ -19,12 +19,12 @@ import { ReceipeService } from './receipe.service';
     JwtModule,
     ClientsModule.register([
       {
-        name: 'RECEIPE_SERVICE',
-        ...clientProvider(Queues.INVENTORY_RECEIPE),
+        name: 'AZKABAN_OCR',
+        ...clientProvider(Queues.AZKABAN_OCR),
       },
     ]),
   ],
-  controllers: [ReceipeController],
-  providers: [AuthGuard, GroupsGuard, ReceipeService],
+  controllers: [OCRController],
+  providers: [AuthGuard, GroupsGuard, OCRService],
 })
 export class UploadModule {}

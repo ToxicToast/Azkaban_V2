@@ -41,6 +41,7 @@ Thumbs.db
 .nx/cache
 
 # Environment variables
+/apps/azkaban-ocr-service/.env
 /apps/gateway-service/.env
 /apps/twitch-bot-service/.env
 /apps/inventory-category-service/.env

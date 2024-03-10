@@ -10,20 +10,17 @@ import { AuthGuard } from '../../guard/auth.guard';
 import { GroupsGuard } from '../../guard/groups.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ClientRMQ } from '@nestjs/microservices';
-import { readFile } from 'fs/promises';
-import { InventoryReceipeTopics } from '@azkaban/shared';
-import { ReceipeService } from './receipe.service';
+import { OCRService } from './ocr.service';
 import { Groups } from '../../decorator/groups.decorator';
 
-// @ts-ignore
+// @ts-expect-error
 type ExpressMulterFile = Express.Multer.File;
 
 @UseGuards(AuthGuard, GroupsGuard)
 @ApiTags('upload-receipe')
-@Controller('receipe')
-export class ReceipeController {
-  constructor(private readonly service: ReceipeService) {}
+@Controller('ocr')
+export class OCRController {
+  constructor(private readonly service: OCRService) {}
 
   @Groups('inventory')
   @UseInterceptors(FileInterceptor('image'))

@@ -1,4 +1,7 @@
 export enum Queues {
+  // Azkaban
+  AZKABAN_OCR = 'azkaban_ocr_queue',
+
   // Inventory
   INVENTORY_CATEGORIES = 'inventory_category_queue',
   INVENTORY_COMPANIES = 'inventory_company_queue',
@@ -6,7 +9,6 @@ export enum Queues {
   INVENTORY_LOCATION = 'inventory_location_queue',
   INVENTORY_SIZE = 'inventory_size_queue',
   INVENTORY_TYPE = 'inventory_type_queue',
-  INVENTORY_RECEIPE = 'inventory_receipe_queue',
   // Twitch
   TWITCH = 'twitch_queue',
 }
