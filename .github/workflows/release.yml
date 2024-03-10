@@ -34,6 +34,6 @@ jobs:
         uses: apialerts/notify-action@v1
         with:
           api_key: ${{ secrets.API_ALERTS_KEY }}
-          message: '🚢 Feature - New Version Released'
+          message: '🚢 Feature - New Version Released (${{ steps.taggerDryRun.outputs.new_tag }})'
           tags: 'Azkaban,Release'
           link: 'https://api.toxictoast.de/swagger'
