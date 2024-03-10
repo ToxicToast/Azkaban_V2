@@ -32,6 +32,30 @@ export function useLocationTableViewModel() {
     [fetchLocationById],
   );
 
+  const openStatusModal = useCallback(() => {
+    changeStatusModal(true);
+  }, [changeStatusModal]);
+
+  const openParentModal = useCallback(() => {
+    changeParentModal(true);
+  }, [changeParentModal]);
+
+  const openChildModal = useCallback(() => {
+    changeStatusModal(true);
+  }, [changeStatusModal]);
+
+  const openEditModal = useCallback(() => {
+    changeEditModal(true);
+  }, [changeEditModal]);
+
+  const openDeleteModal = useCallback(() => {
+    changeDeleteModal(true);
+  }, [changeDeleteModal]);
+
+  const openRestoreModal = useCallback(() => {
+    changeRestoreModal(true);
+  }, [changeRestoreModal]);
+
   return {
     locationData,
     sorting,
@@ -40,13 +64,13 @@ export function useLocationTableViewModel() {
     setColumnFilters,
     columnVisibility,
     setColumnVisibility,
-    // openStatusModal,
+    openStatusModal,
     setLocationId,
-    // openParentModal,
-    // openChildModal,
-    // openEditModal,
-    // openDeleteModal,
-    // openRestoreModal,
+    openParentModal,
+    openChildModal,
+    openEditModal,
+    openDeleteModal,
+    openRestoreModal,
     isAdmin,
   };
 }

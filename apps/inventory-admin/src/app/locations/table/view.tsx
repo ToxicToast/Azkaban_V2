@@ -24,8 +24,18 @@ import { Category } from '@azkaban/inventory-redux';
 import { TableRowActionsPartial } from '../../category/table/partials/table-row-actions.partial';
 
 export function LocationTableView() {
-  const { locationData, isAdmin, sorting, setSorting, setLocationId } =
-    useLocationTableViewModel();
+  const {
+    locationData,
+    isAdmin,
+    sorting,
+    setSorting,
+    setLocationId,
+    openEditModal,
+    openDeleteModal,
+    openRestoreModal,
+    openParentModal,
+    openStatusModal,
+  } = useLocationTableViewModel();
 
   const table = useReactTable({
     state: {
@@ -64,7 +74,7 @@ export function LocationTableView() {
             }
             onClick={() => {
               setLocationId(row.original.id);
-              // openStatusModal();
+              openStatusModal();
             }}
             disabled={row.original.isDeleted}
           >
@@ -87,7 +97,7 @@ export function LocationTableView() {
                 variant={row.original.isDeleted ? 'ghost' : 'success'}
                 onClick={() => {
                   setLocationId(row.original.id);
-                  // openParentModal();
+                  openParentModal();
                 }}
                 disabled={row.original.isDeleted}
               >
@@ -113,7 +123,7 @@ export function LocationTableView() {
                 variant={row.original.isDeleted ? 'ghost' : 'success'}
                 onClick={() => {
                   setLocationId(row.original.id);
-                  // openParentModal();
+                  openParentModal();
                 }}
                 disabled={row.original.isDeleted}
               >
@@ -140,15 +150,15 @@ export function LocationTableView() {
               isDeleted={!!category.deleted_at}
               onEdit={(id: string) => {
                 setLocationId(id);
-                // openEditModal();
+                openEditModal();
               }}
               onDelete={(id: string) => {
                 setLocationId(id);
-                // openDeleteModal();
+                openDeleteModal();
               }}
               onRestore={(id: string) => {
                 setLocationId(id);
-                // openRestoreModal();
+                openRestoreModal();
               }}
             />
           );

@@ -6,6 +6,7 @@ export enum Queues {
   INVENTORY_LOCATION = 'inventory_location_queue',
   INVENTORY_SIZE = 'inventory_size_queue',
   INVENTORY_TYPE = 'inventory_type_queue',
+  INVENTORY_RECEIPE = 'inventory_receipe_queue',
   // Twitch
   TWITCH = 'twitch_queue',
 }

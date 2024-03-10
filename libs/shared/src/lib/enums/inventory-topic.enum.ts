@@ -69,3 +69,7 @@ export enum InventoryTypeTopics {
   RESTORE = 'inventory.type.restore',
   DELETE = 'inventory.type.delete',
 }
+
+export enum InventoryReceipeTopics {
+  OCR = 'inventory.receipe.ocr',
+}
