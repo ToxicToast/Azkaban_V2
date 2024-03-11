@@ -13,7 +13,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { OCRService } from './ocr.service';
 import { Groups } from '../../decorator/groups.decorator';
 
-// @ts-expect-error This is an Error that should not be possible, but it is...
+// @ts-expect-error This is an Error that should not be possible, but it is... cuz express is a b...
 type ExpressMulterFile = Express.Multer.File;
 
 @UseGuards(AuthGuard, GroupsGuard)

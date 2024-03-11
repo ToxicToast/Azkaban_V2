@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { InventoryReceipeTopics } from '@azkaban/shared';
+import { AzkabanUploadTopics } from '@azkaban/shared';
 import { readFile } from 'fs/promises';
 import { ClientRMQ } from '@nestjs/microservices';
 
@@ -11,7 +11,7 @@ export class OCRService {
     const file = await readFile(filePath, 'base64');
 
     await this.client
-      .emit<string, string>(InventoryReceipeTopics.OCR, file)
+      .emit<string, string>(AzkabanUploadTopics.OCR, file)
       .toPromise();
   }
 }
