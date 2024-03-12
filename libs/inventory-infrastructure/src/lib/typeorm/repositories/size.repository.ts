@@ -10,10 +10,10 @@ export class SizeTypeORMRepository implements SizeRepository {
 
   constructor(private readonly repository: Repository<SizeTypeORMEntity>) {}
 
-  async save(data: SizeDao): Promise<string> {
+  async save(data: SizeDao): Promise<SizeDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -26,7 +26,7 @@ export class SizeTypeORMRepository implements SizeRepository {
     });
     if (entity) {
       return entity.map((entity: SizeTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];

@@ -17,13 +17,13 @@ export class CategoryService {
 
   constructor(
     @Inject('CATEGORY_REPOSITORY')
-    private readonly categoryRepository: Repository<CategoryTypeORMEntity>
+    private readonly categoryRepository: Repository<CategoryTypeORMEntity>,
   ) {
     this.infrastructureRepository = new CategoryTypeORMRepository(
-      this.categoryRepository
+      this.categoryRepository,
     );
     this.infrastructureService = new CategoryTypeORMService(
-      this.infrastructureRepository
+      this.infrastructureRepository,
     );
   }
 
@@ -36,20 +36,20 @@ export class CategoryService {
   }
 
   async getByParentId(
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<Array<CategoryDao>> {
     return await this.infrastructureService.getCategoryByParentId(parent_id);
   }
 
-  async createCategory(data: CreateCategoryDto): Promise<void> {
-    await this.infrastructureService.createCategory(data);
+  async createCategory(data: CreateCategoryDto): Promise<CategoryDao> {
+    return await this.infrastructureService.createCategory(data);
   }
 
   async updateCategory(id: string, data: UpdateCategoryDto): Promise<void> {
     if (data.parent_id !== undefined) {
       await this.infrastructureService.updateCategoryParentId(
         id,
-        data.parent_id
+        data.parent_id,
       );
     }
     if (data.title !== undefined) {

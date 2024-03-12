@@ -11,8 +11,8 @@ export class CompanyTypeORMService {
     this.domainService = new CompanyService(repository);
   }
 
-  async createCompany(data: CreateCompanyDto): Promise<void> {
-    await this.domainService.createCompany(data);
+  async createCompany(data: CreateCompanyDto): Promise<CompanyDao> {
+    return await this.domainService.createCompany(data);
   }
 
   async getCompanyList(): Promise<Array<CompanyDao>> {

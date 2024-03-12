@@ -11,8 +11,8 @@ export class ItemTypeORMService {
     this.domainService = new ItemService(repository);
   }
 
-  async createItem(data: CreateItemDto): Promise<void> {
-    await this.domainService.createItem(data);
+  async createItem(data: CreateItemDto): Promise<ItemDao> {
+    return await this.domainService.createItem(data);
   }
 
   async getItemList(): Promise<Array<ItemDao>> {
@@ -28,19 +28,19 @@ export class ItemTypeORMService {
   }
 
   async getItemByCategoryId(
-    category_id: Nullable<string>
+    category_id: Nullable<string>,
   ): Promise<Array<ItemDao>> {
     return await this.domainService.getItemByCategoryId(category_id);
   }
 
   async getItemByCompanyId(
-    company_id: Nullable<string>
+    company_id: Nullable<string>,
   ): Promise<Array<ItemDao>> {
     return await this.domainService.getItemByCompanyId(company_id);
   }
 
   async getItemByLocationId(
-    location_id: Nullable<string>
+    location_id: Nullable<string>,
   ): Promise<Array<ItemDao>> {
     return await this.domainService.getItemByLocationId(location_id);
   }
@@ -55,21 +55,21 @@ export class ItemTypeORMService {
 
   async updateCategoryId(
     id: string,
-    category_id: Nullable<string>
+    category_id: Nullable<string>,
   ): Promise<void> {
     await this.domainService.updateCategoryId(id, category_id);
   }
 
   async updateCompanyId(
     id: string,
-    company_id: Nullable<string>
+    company_id: Nullable<string>,
   ): Promise<void> {
     await this.domainService.updateCompanyId(id, company_id);
   }
 
   async updateLocationId(
     id: string,
-    location_id: Nullable<string>
+    location_id: Nullable<string>,
   ): Promise<void> {
     await this.domainService.updateLocationId(id, location_id);
   }

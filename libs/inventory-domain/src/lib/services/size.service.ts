@@ -7,14 +7,14 @@ import { SizeRepository } from '../repositories';
 export class SizeService {
   constructor(private readonly repository: SizeRepository) {}
 
-  async save(anemic: SizeAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: SizeAnemic): Promise<SizeAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createSize(data: SizeData): Promise<void> {
+  async createSize(data: SizeData): Promise<SizeAnemic> {
     const factory = new SizeFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getSizes(): Promise<Array<SizeAnemic>> {

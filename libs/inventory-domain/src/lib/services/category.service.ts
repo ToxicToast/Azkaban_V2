@@ -7,14 +7,14 @@ import { Nullable } from '@azkaban/shared';
 export class CategoryService {
   constructor(private readonly repository: CategoryRepository) {}
 
-  async save(anemic: CategoryAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: CategoryAnemic): Promise<CategoryAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createCategory(data: CategoryData): Promise<void> {
+  async createCategory(data: CategoryData): Promise<CategoryAnemic> {
     const factory = new CategoryFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getCategories(): Promise<Array<CategoryAnemic>> {
@@ -30,7 +30,7 @@ export class CategoryService {
   }
 
   async getCategoryByParentId(
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<Array<CategoryAnemic>> {
     return await this.repository.findByParentId(parent_id);
   }

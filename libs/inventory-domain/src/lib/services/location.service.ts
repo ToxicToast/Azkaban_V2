@@ -7,14 +7,14 @@ import { LocationRepository } from '../repositories';
 export class LocationService {
   constructor(private readonly repository: LocationRepository) {}
 
-  async save(anemic: LocationAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: LocationAnemic): Promise<LocationAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createLocation(data: LocationData): Promise<void> {
+  async createLocation(data: LocationData): Promise<LocationAnemic> {
     const factory = new LocationFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getLocations(): Promise<Array<LocationAnemic>> {
@@ -30,13 +30,13 @@ export class LocationService {
   }
 
   async getLocationByFreezer(
-    isFreezer: boolean
+    isFreezer: boolean,
   ): Promise<Array<LocationAnemic>> {
     return await this.repository.findByFreezer(isFreezer);
   }
 
   async getLocationByParentId(
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<Array<LocationAnemic>> {
     return await this.repository.findByParentId(parent_id);
   }

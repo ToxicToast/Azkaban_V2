@@ -11,8 +11,8 @@ export class ItemDetailTypeOrmService {
     this.domainService = new ItemDetailService(repository);
   }
 
-  async createItemDetail(data: CreateItemDetailDto): Promise<void> {
-    await this.domainService.createItemDetail(data);
+  async createItemDetail(data: CreateItemDetailDto): Promise<ItemDetailDao> {
+    return await this.domainService.createItemDetail(data);
   }
 
   async getItemDetailList(): Promise<Array<ItemDetailDao>> {
@@ -37,14 +37,14 @@ export class ItemDetailTypeOrmService {
 
   async updateExpirationDate(
     id: string,
-    expiration_date: Nullable<Date>
+    expiration_date: Nullable<Date>,
   ): Promise<void> {
     await this.domainService.updateExpirationDate(id, expiration_date);
   }
 
   async updateOpeningDate(
     id: string,
-    opening_date: Nullable<Date>
+    opening_date: Nullable<Date>,
   ): Promise<void> {
     await this.domainService.updateOpeningDate(id, opening_date);
   }

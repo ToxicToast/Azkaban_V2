@@ -50,3 +50,4 @@ Thumbs.db
 /apps/inventory-size-service/.env
 /apps/inventory-type-service/.env
 /apps/inventory-admin/.env
+/apps/webhook-service/.env

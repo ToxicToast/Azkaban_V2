@@ -11,8 +11,8 @@ export class TypeTypeOrmService {
     this.domainService = new TypeService(repository);
   }
 
-  async createType(data: CreateTypeDto): Promise<void> {
-    await this.domainService.createType(data);
+  async createType(data: CreateTypeDto): Promise<TypeDao> {
+    return await this.domainService.createType(data);
   }
 
   async getTypeList(): Promise<Array<TypeDao>> {

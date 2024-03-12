@@ -10,10 +10,10 @@ export class LocationTypeORMRepository implements LocationRepository {
 
   constructor(private readonly repository: Repository<LocationTypeORMEntity>) {}
 
-  async save(data: LocationDao): Promise<string> {
+  async save(data: LocationDao): Promise<LocationDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -26,7 +26,7 @@ export class LocationTypeORMRepository implements LocationRepository {
     });
     if (entity) {
       return entity.map((entity: LocationTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -61,7 +61,7 @@ export class LocationTypeORMRepository implements LocationRepository {
     });
     if (entity) {
       return entity.map((entity: LocationTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -74,7 +74,7 @@ export class LocationTypeORMRepository implements LocationRepository {
     });
     if (entity) {
       return entity.map((entity: LocationTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];

@@ -9,10 +9,10 @@ export class CompanyTypeORMRepository implements CompanyRepository {
 
   constructor(private readonly repository: Repository<CompanyTypeORMEntity>) {}
 
-  async save(data: CompanyDao): Promise<string> {
+  async save(data: CompanyDao): Promise<CompanyDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -25,7 +25,7 @@ export class CompanyTypeORMRepository implements CompanyRepository {
     });
     if (entity) {
       return entity.map((entity: CompanyTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
