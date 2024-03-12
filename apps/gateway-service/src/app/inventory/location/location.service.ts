@@ -6,10 +6,14 @@ import {
   UpdateLocationDto,
 } from '@azkaban/inventory-infrastructure';
 import { InventoryLocationTopics, Nullable } from '@azkaban/shared';
+import { LocationWebhookService } from './webhook.service';
 
 @Injectable()
 export class LocationService {
-  constructor(@Inject('LOCATION_SERVICE') private readonly client: ClientRMQ) {}
+  constructor(
+    @Inject('LOCATION_SERVICE') private readonly client: ClientRMQ,
+    private readonly webhookService: LocationWebhookService,
+  ) {}
 
   async getLocations(): Promise<Array<LocationDao>> {
     return await this.client
@@ -23,10 +27,17 @@ export class LocationService {
       .toPromise();
   }
 
-  async createLocation(data: CreateLocationDto): Promise<string> {
+  async createLocation(data: CreateLocationDto): Promise<LocationDao> {
     return await this.client
-      .send<string, CreateLocationDto>(InventoryLocationTopics.CREATE, data)
-      .toPromise();
+      .send<LocationDao, CreateLocationDto>(
+        InventoryLocationTopics.CREATE,
+        data,
+      )
+      .toPromise()
+      .then((data: LocationDao) => {
+        this.webhookService.onLocationCreated(data);
+        return data;
+      });
   }
 
   async updateLocation(id: string, data: UpdateLocationDto): Promise<void> {

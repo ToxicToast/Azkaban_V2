@@ -6,10 +6,14 @@ import {
   UpdateSizeDto,
 } from '@azkaban/inventory-infrastructure';
 import { InventorySizeTopics, Nullable } from '@azkaban/shared';
+import { SizeWebhookService } from './webhook.service';
 
 @Injectable()
 export class SizeService {
-  constructor(@Inject('SIZE_SERVICE') private readonly client: ClientRMQ) {}
+  constructor(
+    @Inject('SIZE_SERVICE') private readonly client: ClientRMQ,
+    private readonly webhookService: SizeWebhookService,
+  ) {}
 
   async getSizes(): Promise<Array<SizeDao>> {
     return await this.client
@@ -23,10 +27,14 @@ export class SizeService {
       .toPromise();
   }
 
-  async createSize(data: CreateSizeDto): Promise<string> {
+  async createSize(data: CreateSizeDto): Promise<SizeDao> {
     return await this.client
-      .send<string, CreateSizeDto>(InventorySizeTopics.CREATE, data)
-      .toPromise();
+      .send<SizeDao, CreateSizeDto>(InventorySizeTopics.CREATE, data)
+      .toPromise()
+      .then((data: SizeDao) => {
+        this.webhookService.onSizeCreated(data);
+        return data;
+      });
   }
 
   async updateSize(id: string, data: UpdateSizeDto): Promise<void> {

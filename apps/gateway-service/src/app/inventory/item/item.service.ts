@@ -6,10 +6,14 @@ import {
   CreateItemDto,
   UpdateItemDto,
 } from '@azkaban/inventory-infrastructure';
+import { ItemWebhookService } from './webhook.service';
 
 @Injectable()
 export class ItemService {
-  constructor(@Inject('ITEM_SERVICE') private readonly client: ClientRMQ) {}
+  constructor(
+    @Inject('ITEM_SERVICE') private readonly client: ClientRMQ,
+    private readonly webhookService: ItemWebhookService,
+  ) {}
 
   async getItems(): Promise<Array<ItemDao>> {
     return await this.client
@@ -53,10 +57,14 @@ export class ItemService {
       .toPromise();
   }
 
-  async createItem(data: CreateItemDto): Promise<string> {
+  async createItem(data: CreateItemDto): Promise<ItemDao> {
     return await this.client
-      .send<string, CreateItemDto>(InventoryItemTopics.CREATE, data)
-      .toPromise();
+      .send<ItemDao, CreateItemDto>(InventoryItemTopics.CREATE, data)
+      .toPromise()
+      .then((data: ItemDao) => {
+        this.webhookService.onItemCreated(data);
+        return data;
+      });
   }
 
   async updateItem(id: string, data: UpdateItemDto): Promise<void> {

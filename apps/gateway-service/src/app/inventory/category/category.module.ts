@@ -6,6 +6,7 @@ import { CategoryService } from './category.service';
 import { AuthGuard } from '../../../guard/auth.guard';
 import { GroupsGuard } from '../../../guard/groups.guard';
 import { JwtModule } from '@nestjs/jwt';
+import { CategoryWebhookService } from './webhook.service';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { JwtModule } from '@nestjs/jwt';
     ]),
   ],
   controllers: [CategoryController],
-  providers: [AuthGuard, GroupsGuard, CategoryService],
+  providers: [AuthGuard, GroupsGuard, CategoryService, CategoryWebhookService],
 })
 export class CategoryModule {}
