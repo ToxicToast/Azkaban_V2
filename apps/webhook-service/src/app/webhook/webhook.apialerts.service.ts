@@ -3,15 +3,18 @@ import alerts from '@apialerts/js';
 
 @Injectable()
 export class WebhookApiAlertsService {
-  async sendApiAlertsHook<TData>(data: TData): Promise<void> {
+  async sendApiAlertsHook(
+    message: string,
+    tags: Array<string>,
+    link: string,
+  ): Promise<void> {
     alerts.setApiKey(process.env.MAGPIE_KEY ?? 'api-key');
     //
     try {
-      const item = data as { title: string };
       alerts.send({
-        message: `Created new Inventory-Category: ${item.title}`,
-        tags: ['azkaban'],
-        link: 'https://www.toxictoast.de',
+        message,
+        tags,
+        link,
       });
     } catch (error) {
       Logger.error(error, WebhookApiAlertsService.name);

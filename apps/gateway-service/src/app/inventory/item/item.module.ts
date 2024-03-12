@@ -6,6 +6,7 @@ import { ClientsModule } from '@nestjs/microservices';
 import { clientProvider, Queues } from '@azkaban/shared';
 import { ItemController } from './item.controller';
 import { ItemService } from './item.service';
+import { ItemWebhookService } from './webhook.service';
 
 @Module({
   imports: [
@@ -15,9 +16,13 @@ import { ItemService } from './item.service';
         name: 'ITEM_SERVICE',
         ...clientProvider(Queues.INVENTORY_ITEMS),
       },
+      {
+        name: 'WEBHOOK_SERVICE',
+        ...clientProvider(Queues.AZKABAN_WEBHOOK),
+      },
     ]),
   ],
   controllers: [ItemController],
-  providers: [AuthGuard, GroupsGuard, ItemService],
+  providers: [AuthGuard, GroupsGuard, ItemService, ItemWebhookService],
 })
 export class ItemModule {}

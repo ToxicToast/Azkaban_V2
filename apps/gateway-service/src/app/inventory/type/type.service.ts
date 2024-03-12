@@ -6,10 +6,14 @@ import {
   UpdateTypeDto,
 } from '@azkaban/inventory-infrastructure';
 import { InventoryTypeTopics, Nullable } from '@azkaban/shared';
+import { TypeWebhookService } from './webhook.service';
 
 @Injectable()
 export class TypeService {
-  constructor(@Inject('TYPE_SERVICE') private readonly client: ClientRMQ) {}
+  constructor(
+    @Inject('TYPE_SERVICE') private readonly client: ClientRMQ,
+    private readonly webhookService: TypeWebhookService,
+  ) {}
 
   async getTypes(): Promise<Array<TypeDao>> {
     return await this.client
@@ -23,10 +27,14 @@ export class TypeService {
       .toPromise();
   }
 
-  async createType(data: CreateTypeDto): Promise<string> {
+  async createType(data: CreateTypeDto): Promise<TypeDao> {
     return await this.client
-      .send<string, CreateTypeDto>(InventoryTypeTopics.CREATE, data)
-      .toPromise();
+      .send<TypeDao, CreateTypeDto>(InventoryTypeTopics.CREATE, data)
+      .toPromise()
+      .then((data: TypeDao) => {
+        this.webhookService.onTypeCreated(data);
+        return data;
+      });
   }
 
   async updateType(id: string, data: UpdateTypeDto): Promise<void> {

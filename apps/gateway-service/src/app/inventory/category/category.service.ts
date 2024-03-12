@@ -10,14 +10,13 @@ import {
   CreateCategoryDto,
   UpdateCategoryDto,
 } from '@azkaban/inventory-infrastructure';
+import { CategoryWebhookService } from './webhook.service';
 
 @Injectable()
 export class CategoryService {
-  private readonly logger: Logger = new Logger(CategoryService.name);
-
   constructor(
     @Inject('CATEGORY_SERVICE') private readonly client: ClientRMQ,
-    @Inject('WEBHOOK_SERVICE') private readonly webhook: ClientRMQ,
+    private readonly webhookService: CategoryWebhookService,
   ) {}
 
   async getCategories(): Promise<Array<CategoryDao>> {
@@ -51,9 +50,7 @@ export class CategoryService {
       )
       .toPromise()
       .then((data: CategoryDao) => {
-        this.webhook
-          .emit(WebhookInventoryTopics.CATEGORYCREATED, data)
-          .toPromise();
+        this.webhookService.onCategoryCreated(data);
         return data;
       });
   }

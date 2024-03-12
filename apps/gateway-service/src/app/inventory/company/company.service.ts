@@ -6,10 +6,14 @@ import {
   CreateCompanyDto,
   UpdateCompanyDto,
 } from '@azkaban/inventory-infrastructure';
+import { CompanyWebhookService } from './webhook.service';
 
 @Injectable()
 export class CompanyService {
-  constructor(@Inject('COMPANY_SERVICE') private readonly client: ClientRMQ) {}
+  constructor(
+    @Inject('COMPANY_SERVICE') private readonly client: ClientRMQ,
+    private readonly webhookService: CompanyWebhookService,
+  ) {}
 
   async getCategories(): Promise<Array<CompanyDao>> {
     return await this.client
@@ -23,18 +27,22 @@ export class CompanyService {
       .toPromise();
   }
 
-  async createCompany(data: CreateCompanyDto): Promise<string> {
+  async createCompany(data: CreateCompanyDto): Promise<CompanyDao> {
     return await this.client
-      .send<string, CreateCompanyDto>(InventoryCompanyTopics.CREATE, data)
-      .toPromise();
+      .send<CompanyDao, CreateCompanyDto>(InventoryCompanyTopics.CREATE, data)
+      .toPromise()
+      .then((data: CompanyDao) => {
+        this.webhookService.onCompanyCreated(data);
+        return data;
+      });
   }
 
   async updateCompany(id: string, data: UpdateCompanyDto): Promise<void> {
     return await this.client
-      .send<void, { id: string; data: UpdateCompanyDto }>(
-        InventoryCompanyTopics.UPDATE,
-        { id, data }
-      )
+      .send<
+        void,
+        { id: string; data: UpdateCompanyDto }
+      >(InventoryCompanyTopics.UPDATE, { id, data })
       .toPromise();
   }
 
