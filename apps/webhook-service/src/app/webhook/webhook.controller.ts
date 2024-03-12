@@ -18,6 +18,10 @@ export class WebhookController {
       'inventory-category',
       data,
     );
-    await this.webhookApiAlerts.sendApiAlertsHook<CategoryDao>(data);
+    await this.webhookApiAlerts.sendApiAlertsHook(
+      `📦 Created new Inventory-Category: ${data.title}`,
+      ['azkaban', 'inventory', 'category'],
+      'https://api.toxictoast.de',
+    );
   }
 }
