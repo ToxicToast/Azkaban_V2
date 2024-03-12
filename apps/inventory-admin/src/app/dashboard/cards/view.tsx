@@ -9,6 +9,7 @@ import {
   EuroIcon,
   ScanBarcodeIcon,
   ShoppingCart,
+  BookmarkIcon,
 } from 'lucide-react';
 
 export function DashboardCardsView() {
@@ -21,6 +22,7 @@ export function DashboardCardsView() {
     getTypesCountString,
     getLowStockCountString,
     getTotalStockValueString,
+    getReceiptsCountString,
   } = useDashboardCardsViewModel();
 
   return (
@@ -86,6 +88,14 @@ export function DashboardCardsView() {
           title="Total Stock Value"
           count={getTotalStockValueString}
           icon={<EuroIcon className="w-6 h-6" />}
+        />
+      </Link>
+
+      <Link to="/receipts">
+        <DashboardCard
+          title="Receipts"
+          count={getReceiptsCountString}
+          icon={<BookmarkIcon className="w-6 h-6" />}
         />
       </Link>
     </div>

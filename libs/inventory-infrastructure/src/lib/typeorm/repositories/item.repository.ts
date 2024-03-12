@@ -10,10 +10,10 @@ export class ItemTypeORMRepository implements ItemRepository {
 
   constructor(private readonly repository: Repository<ItemTypeORMEntity>) {}
 
-  async save(data: ItemDao): Promise<string> {
+  async save(data: ItemDao): Promise<ItemDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -26,7 +26,7 @@ export class ItemTypeORMRepository implements ItemRepository {
     });
     if (entity) {
       return entity.map((entity: ItemTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -55,7 +55,7 @@ export class ItemTypeORMRepository implements ItemRepository {
   }
 
   async findByCategoryId(
-    category_id: Nullable<string>
+    category_id: Nullable<string>,
   ): Promise<Array<ItemDao>> {
     const entity = await this.repository.find({
       withDeleted: true,
@@ -63,7 +63,7 @@ export class ItemTypeORMRepository implements ItemRepository {
     });
     if (entity) {
       return entity.map((entity: ItemTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -76,14 +76,14 @@ export class ItemTypeORMRepository implements ItemRepository {
     });
     if (entity) {
       return entity.map((entity: ItemTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
   }
 
   async findByLocationId(
-    location_id: Nullable<string>
+    location_id: Nullable<string>,
   ): Promise<Array<ItemDao>> {
     const entity = await this.repository.find({
       withDeleted: true,
@@ -91,7 +91,7 @@ export class ItemTypeORMRepository implements ItemRepository {
     });
     if (entity) {
       return entity.map((entity: ItemTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -104,7 +104,7 @@ export class ItemTypeORMRepository implements ItemRepository {
     });
     if (entity) {
       return entity.map((entity: ItemTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -117,7 +117,7 @@ export class ItemTypeORMRepository implements ItemRepository {
     });
     if (entity) {
       return entity.map((entity: ItemTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];

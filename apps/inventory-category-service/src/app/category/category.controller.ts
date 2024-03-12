@@ -24,19 +24,21 @@ export class CategoryController {
 
   @MessagePattern(InventoryCategoryTopics.PARENT)
   async getCategoryByParentId(
-    @Payload() id: Nullable<string>
+    @Payload() id: Nullable<string>,
   ): Promise<Array<CategoryDao>> {
     return await this.service.getByParentId(id);
   }
 
   @MessagePattern(InventoryCategoryTopics.CREATE)
-  async createCategory(@Payload() data: CreateCategoryDto): Promise<void> {
+  async createCategory(
+    @Payload() data: CreateCategoryDto,
+  ): Promise<CategoryDao> {
     return await this.service.createCategory(data);
   }
 
   @MessagePattern(InventoryCategoryTopics.UPDATE)
   async updateCategory(
-    @Payload() data: Chainable<{ id: string }, { data: UpdateCategoryDto }>
+    @Payload() data: Chainable<{ id: string }, { data: UpdateCategoryDto }>,
   ): Promise<void> {
     return await this.service.updateCategory(data.id, data.data);
   }

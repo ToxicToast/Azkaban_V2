@@ -29,3 +29,11 @@ jobs:
       - name: echo new tag
         run: |
           echo "${{ steps.taggerDryRun.outputs.new_tag }}"
+
+      - name: API Alerts Notify
+        uses: apialerts/notify-action@v1
+        with:
+          api_key: ${{ secrets.API_ALERTS_KEY }}
+          message: '🚢 Feature - New Version Released (${{ steps.taggerDryRun.outputs.new_tag }})'
+          tags: 'Azkaban,Release'
+          link: 'https://api.toxictoast.de/swagger'

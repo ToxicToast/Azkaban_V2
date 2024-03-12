@@ -1,12 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@azkaban/ui-components';
+import { DeleteModal } from '@azkaban/ui-components';
 import { Nullable } from '@azkaban/shared';
 import { Category } from '@azkaban/inventory-redux';
 
@@ -19,34 +11,13 @@ interface Props {
 
 export function CategoryModalDeleteCategoryPartial(props: Props) {
   return (
-    <Dialog open={true} modal={true} onOpenChange={() => props.closeModal()}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Delete {props.category?.title}</DialogTitle>
-          <DialogDescription>Are you sure?</DialogDescription>
-        </DialogHeader>
-
-        <DialogFooter>
-          <Button
-            variant="secondary"
-            type="button"
-            onClick={() => {
-              props.closeModal();
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            disabled={!props.isAdmin}
-            onClick={() => {
-              props.deleteCategory(props.category?.id ?? '');
-            }}
-          >
-            Delete
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <DeleteModal
+      title={props.category?.title ?? ''}
+      isAdmin={props.isAdmin}
+      closeModal={() => props.closeModal()}
+      submitModal={() => {
+        props.deleteCategory(props.category?.id ?? '');
+      }}
+    />
   );
 }

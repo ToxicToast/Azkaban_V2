@@ -58,13 +58,17 @@ export class TwitchController
 
   private async onTwitchEvent<TData>(
     eventName: Events,
-    endpoint: string
+    endpoint: string,
   ): Promise<void> {
     this.twitchService.toasty.addPlugin<TData>({
       name: `Broker-${eventName.charAt(0).toUpperCase() + eventName.slice(1)}`,
       event: eventName,
       execute: async (data) => {
-        await this.twitchService.emitEvent<TData>(`twitch.${endpoint}`, data);
+        await this.twitchService
+          .emitEvent<TData>(`twitch.${endpoint}`, data)
+          .catch((err) => {
+            Logger.error(err);
+          });
       },
     });
   }
@@ -77,21 +81,21 @@ export class TwitchController
     await this.onTwitchEvent<BanData>(Events.BAN, 'ban');
     await this.onTwitchEvent<BitsBadgeUpgradeData>(
       Events.BITSBADGEUPGRADE,
-      'bitsbadgeupgrade'
+      'bitsbadgeupgrade',
     );
     await this.onTwitchEvent<ChatClearData>(Events.CHATCLEAR, 'chatclear');
     await this.onTwitchEvent<EmoteOnlyData>(Events.EMOTEONLY, 'emoteonly');
     await this.onTwitchEvent<FollowersOnlyData>(
       Events.FOLLOWERSONLY,
-      'followersonly'
+      'followersonly',
     );
     await this.onTwitchEvent<JoinFailureData>(
       Events.JOINFAILURE,
-      'joinfailure'
+      'joinfailure',
     );
     await this.onTwitchEvent<MessageRemoveData>(
       Events.MESSAGEREMOVE,
-      'messageremove'
+      'messageremove',
     );
     await this.onTwitchEvent<UniqueChatData>(Events.UNIQUECHAT, 'uniquechat');
     await this.onTwitchEvent<RaidData>(Events.RAID, 'raid');
@@ -104,58 +108,58 @@ export class TwitchController
     await this.onTwitchEvent<SubGiftData>(Events.SUBGIFT, 'subgift');
     await this.onTwitchEvent<CommunitySubData>(
       Events.COMMUNITYSUB,
-      'communitysub'
+      'communitysub',
     );
     await this.onTwitchEvent<SubExtendData>(Events.SUBEXTEND, 'subextend');
     await this.onTwitchEvent<RewardGiftData>(Events.REWARDGIFT, 'rewardgift');
     await this.onTwitchEvent<PrimePaidUpgradeData>(
       Events.PRIMEPAIDUPGRADE,
-      'primepaidupgrade'
+      'primepaidupgrade',
     );
     await this.onTwitchEvent<GiftPaidUpgradeData>(
       Events.GIFTPAIDUPGRADE,
-      'giftpaidupgrade'
+      'giftpaidupgrade',
     );
     await this.onTwitchEvent<PrimeCommunityGiftData>(
       Events.PRIMECOMMUNITYGIFT,
-      'primecommunitygift'
+      'primecommunitygift',
     );
     await this.onTwitchEvent<StandardPayForwardData>(
       Events.STANDARDPAYFORWARD,
-      'standardpayforward'
+      'standardpayforward',
     );
     await this.onTwitchEvent<CommunityPayForwardData>(
       Events.COMMUNITYPAYFORWARD,
-      'communitypayforward'
+      'communitypayforward',
     );
     await this.onTwitchEvent<AnnouncementData>(
       Events.ANNOUNCEMENT,
-      'announcement'
+      'announcement',
     );
     await this.onTwitchEvent<WhisperData>(Events.WHISPER, 'whisper');
     await this.onTwitchEvent<NoPermissionData>(
       Events.NOPERMISSION,
-      'nopermission'
+      'nopermission',
     );
     await this.onTwitchEvent<MessageRatelimitData>(
       Events.MESSAGERATELIMIT,
-      'messageratelimit'
+      'messageratelimit',
     );
     await this.onTwitchEvent<AuthenticationSuccessData>(
       Events.AUTHENTICATIONSUCCESS,
-      'authenticationsuccess'
+      'authenticationsuccess',
     );
     await this.onTwitchEvent<AuthenticationFailureData>(
       Events.AUTHENTICATIONFAILURE,
-      'authenticationfailure'
+      'authenticationfailure',
     );
     await this.onTwitchEvent<TokenFetchFailureData>(
       Events.TOKENFETCHFAILURE,
-      'tokenfetchfailure'
+      'tokenfetchfailure',
     );
     await this.onTwitchEvent<MessageFailedData>(
       Events.MESSAGEFAILED,
-      'messagefailed'
+      'messagefailed',
     );
     await this.onTwitchEvent<ActionData>(Events.ACTION, 'action');
 

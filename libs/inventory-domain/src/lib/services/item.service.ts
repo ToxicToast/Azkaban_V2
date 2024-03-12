@@ -6,14 +6,14 @@ import { ItemRepository } from '../repositories';
 export class ItemService {
   constructor(private readonly repository: ItemRepository) {}
 
-  async save(anemic: ItemAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: ItemAnemic): Promise<ItemAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createItem(data: ItemData): Promise<void> {
+  async createItem(data: ItemData): Promise<ItemAnemic> {
     const factory = new ItemFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getItems(): Promise<Array<ItemAnemic>> {
@@ -29,19 +29,19 @@ export class ItemService {
   }
 
   async getItemByCategoryId(
-    category_id: Nullable<string>
+    category_id: Nullable<string>,
   ): Promise<Array<ItemAnemic>> {
     return await this.repository.findByCategoryId(category_id);
   }
 
   async getItemByCompanyId(
-    company_id: Nullable<string>
+    company_id: Nullable<string>,
   ): Promise<Array<ItemAnemic>> {
     return await this.repository.findByCompanyId(company_id);
   }
 
   async getItemByLocationId(
-    location_id: Nullable<string>
+    location_id: Nullable<string>,
   ): Promise<Array<ItemAnemic>> {
     return await this.repository.findByLocationId(location_id);
   }
@@ -56,7 +56,7 @@ export class ItemService {
 
   async updateCategoryId(
     id: string,
-    category_id: Nullable<string>
+    category_id: Nullable<string>,
   ): Promise<void> {
     const item = await this.getItemById(id);
     if (item !== null) {
@@ -68,7 +68,7 @@ export class ItemService {
 
   async updateCompanyId(
     id: string,
-    company_id: Nullable<string>
+    company_id: Nullable<string>,
   ): Promise<void> {
     const item = await this.getItemById(id);
     if (item !== null) {
@@ -80,7 +80,7 @@ export class ItemService {
 
   async updateLocationId(
     id: string,
-    location_id: Nullable<string>
+    location_id: Nullable<string>,
   ): Promise<void> {
     const item = await this.getItemById(id);
     if (item !== null) {

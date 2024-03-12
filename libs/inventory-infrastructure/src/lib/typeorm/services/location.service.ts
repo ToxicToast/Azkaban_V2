@@ -11,8 +11,8 @@ export class LocationTypeOrmService {
     this.domainService = new LocationService(repository);
   }
 
-  async createLocation(data: CreateLocationDto): Promise<void> {
-    await this.domainService.createLocation(data);
+  async createLocation(data: CreateLocationDto): Promise<LocationDao> {
+    return await this.domainService.createLocation(data);
   }
 
   async getLocationList(): Promise<Array<LocationDao>> {
@@ -28,7 +28,7 @@ export class LocationTypeOrmService {
   }
 
   async getLocationByParentId(
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<Array<LocationDao>> {
     return await this.domainService.getLocationByParentId(parent_id);
   }
@@ -39,7 +39,7 @@ export class LocationTypeOrmService {
 
   async updateLocationParentId(
     id: string,
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<void> {
     await this.domainService.updateParentId(id, parent_id);
   }

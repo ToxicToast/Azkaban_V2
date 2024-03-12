@@ -10,13 +10,13 @@ export class ItemDetailTypeORMRepository implements ItemDetailRepository {
     new ItemDetailTypeORMMapper();
 
   constructor(
-    private readonly repository: Repository<ItemDetailTypeORMEntity>
+    private readonly repository: Repository<ItemDetailTypeORMEntity>,
   ) {}
 
-  async save(data: ItemDetailDao): Promise<string> {
+  async save(data: ItemDetailDao): Promise<ItemDetailDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -29,7 +29,7 @@ export class ItemDetailTypeORMRepository implements ItemDetailRepository {
     });
     if (entity) {
       return entity.map((entity: ItemDetailTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -53,7 +53,7 @@ export class ItemDetailTypeORMRepository implements ItemDetailRepository {
     });
     if (entity) {
       return entity.map((entity: ItemDetailTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return null;

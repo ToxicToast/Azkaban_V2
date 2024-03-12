@@ -1,8 +1,9 @@
 import { Nullable } from '@azkaban/shared';
 import { Category } from './category.interface';
+import { Status } from '../status.enum';
 
 export interface CategoryModel {
-  status: 'loading' | 'loaded' | 'error' | 'unknown';
+  status: Status;
   data: Array<Category>;
   selectedId: Nullable<string>;
   selectedCategory: Nullable<Category>;

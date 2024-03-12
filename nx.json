@@ -54,7 +54,7 @@
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/eslint.config.js"
     ],
-    "sharedGlobals": []
+    "sharedGlobals": ["{workspaceRoot}/go.work"]
   },
   "nxCloudAccessToken": "MjMwNjZiZGEtOGNlNS00ZWM4LTkzN2YtNmE3ZmMyMTc2MTY2fHJlYWQtd3JpdGU=",
   "workspaceLayout": {
@@ -133,5 +133,6 @@
       "unitTestRunner": "vitest",
       "e2eTestRunner": "none"
     }
-  }
+  },
+  "plugins": ["@nx-go/nx-go"]
 }

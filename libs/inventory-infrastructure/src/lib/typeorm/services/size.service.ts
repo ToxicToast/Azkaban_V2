@@ -11,8 +11,8 @@ export class SizeTypeOrmService {
     this.domainService = new SizeService(repository);
   }
 
-  async createSize(data: CreateSizeDto): Promise<void> {
-    await this.domainService.createSize(data);
+  async createSize(data: CreateSizeDto): Promise<SizeDao> {
+    return await this.domainService.createSize(data);
   }
 
   async getSizeList(): Promise<Array<SizeDao>> {

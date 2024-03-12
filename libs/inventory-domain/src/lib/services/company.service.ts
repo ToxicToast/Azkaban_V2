@@ -7,14 +7,14 @@ import { CompanyRepository } from '../repositories';
 export class CompanyService {
   constructor(private readonly repository: CompanyRepository) {}
 
-  async save(anemic: CompanyAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: CompanyAnemic): Promise<CompanyAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createCompany(data: CompanyData): Promise<void> {
+  async createCompany(data: CompanyData): Promise<CompanyAnemic> {
     const factory = new CompanyFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getCompanies(): Promise<Array<CompanyAnemic>> {

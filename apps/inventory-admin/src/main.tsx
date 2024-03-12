@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from '@azkaban/inventory-redux';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 
 root.render(
@@ -21,5 +21,5 @@ root.render(
         </AuthProvider>
       </ThemeProvider>
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );

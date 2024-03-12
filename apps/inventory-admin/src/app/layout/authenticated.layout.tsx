@@ -1,8 +1,9 @@
 import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
-import { memo, PropsWithChildren, useState } from 'react';
+import { memo, PropsWithChildren, useEffect, useState } from 'react';
 import { useAzkabanAuth } from '@azkaban/ui-components';
 import { useLocation } from 'react-router-dom';
 import { useAuthState } from '@azkaban/inventory-redux';
+import { Toaster } from '../toaster';
 
 function AuthenticatedLayout(props: PropsWithChildren) {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -10,6 +11,15 @@ function AuthenticatedLayout(props: PropsWithChildren) {
   const { username, initials, isAdmin, name } = useAuthState();
 
   const { signOut } = useAzkabanAuth();
+
+  useEffect(() => {
+    if (
+      window.location.search.includes('code=') &&
+      window.location.search.includes('state=')
+    ) {
+      window.location.href = window.location.origin;
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -31,6 +41,7 @@ function AuthenticatedLayout(props: PropsWithChildren) {
             signOut={signOut}
           />
           <main>{props.children}</main>
+          <Toaster key="Toaster" />
         </div>
       </div>
     </div>

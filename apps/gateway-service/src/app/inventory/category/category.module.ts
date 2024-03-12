@@ -15,6 +15,10 @@ import { JwtModule } from '@nestjs/jwt';
         name: 'CATEGORY_SERVICE',
         ...clientProvider(Queues.INVENTORY_CATEGORIES),
       },
+      {
+        name: 'WEBHOOK_SERVICE',
+        ...clientProvider(Queues.AZKABAN_WEBHOOK),
+      },
     ]),
   ],
   controllers: [CategoryController],

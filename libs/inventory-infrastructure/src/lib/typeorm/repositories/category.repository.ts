@@ -10,10 +10,10 @@ export class CategoryTypeORMRepository implements CategoryRepository {
 
   constructor(private readonly repository: Repository<CategoryTypeORMEntity>) {}
 
-  async save(data: CategoryDao): Promise<string> {
+  async save(data: CategoryDao): Promise<CategoryDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -26,7 +26,7 @@ export class CategoryTypeORMRepository implements CategoryRepository {
     });
     if (entity) {
       return entity.map((entity: CategoryTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];
@@ -44,7 +44,7 @@ export class CategoryTypeORMRepository implements CategoryRepository {
   }
 
   async findByParentId(
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<Array<CategoryDao>> {
     const entity = await this.repository.find({
       withDeleted: true,
@@ -52,7 +52,7 @@ export class CategoryTypeORMRepository implements CategoryRepository {
     });
     if (entity) {
       return entity.map((entity: CategoryTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];

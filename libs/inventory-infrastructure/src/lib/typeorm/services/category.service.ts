@@ -11,8 +11,8 @@ export class CategoryTypeORMService {
     this.domainService = new CategoryService(repository);
   }
 
-  async createCategory(data: CreateCategoryDto): Promise<void> {
-    await this.domainService.createCategory(data);
+  async createCategory(data: CreateCategoryDto): Promise<CategoryDao> {
+    return await this.domainService.createCategory(data);
   }
 
   async getCategoryList(): Promise<Array<CategoryDao>> {
@@ -33,7 +33,7 @@ export class CategoryTypeORMService {
 
   async updateCategoryParentId(
     id: string,
-    parent_id: Nullable<string>
+    parent_id: Nullable<string>,
   ): Promise<void> {
     await this.domainService.updateParentId(id, parent_id);
   }

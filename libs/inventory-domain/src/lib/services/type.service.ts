@@ -7,14 +7,14 @@ import { TypeRepository } from '../repositories';
 export class TypeService {
   constructor(private readonly repository: TypeRepository) {}
 
-  async save(anemic: TypeAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: TypeAnemic): Promise<TypeAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createType(data: TypeData): Promise<void> {
+  async createType(data: TypeData): Promise<TypeAnemic> {
     const factory = new TypeFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getTypes(): Promise<Array<TypeAnemic>> {

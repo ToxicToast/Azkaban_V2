@@ -7,14 +7,14 @@ import { ItemDetailRepository } from '../repositories';
 export class ItemDetailService {
   constructor(private readonly repository: ItemDetailRepository) {}
 
-  async save(anemic: ItemDetailAnemic): Promise<void> {
-    await this.repository.save(anemic);
+  async save(anemic: ItemDetailAnemic): Promise<ItemDetailAnemic> {
+    return await this.repository.save(anemic);
   }
 
-  async createItemDetail(data: ItemDetailData): Promise<void> {
+  async createItemDetail(data: ItemDetailData): Promise<ItemDetailAnemic> {
     const factory = new ItemDetailFactory();
     const aggregate = factory.createFactory(data);
-    await this.save(aggregate.toAnemic());
+    return await this.save(aggregate.toAnemic());
   }
 
   async getItemDetails(): Promise<Array<ItemDetailAnemic>> {
@@ -26,7 +26,7 @@ export class ItemDetailService {
   }
 
   async getItemDetailByItemId(
-    item_id: string
+    item_id: string,
   ): Promise<Array<ItemDetailAnemic>> {
     return await this.repository.findByItemId(item_id);
   }
@@ -51,7 +51,7 @@ export class ItemDetailService {
 
   async updateExpirationDate(
     id: string,
-    expiration_date: Nullable<Date>
+    expiration_date: Nullable<Date>,
   ): Promise<void> {
     const itemDetail = await this.getItemDetailById(id);
     if (itemDetail) {
@@ -63,7 +63,7 @@ export class ItemDetailService {
 
   async updateOpeningDate(
     id: string,
-    opening_date: Nullable<Date>
+    opening_date: Nullable<Date>,
   ): Promise<void> {
     const itemDetail = await this.getItemDetailById(id);
     if (itemDetail) {

@@ -1,7 +1,8 @@
 import { CategoryModel } from './category.model';
+import { Status } from '../status.enum';
 
 export const categoryState: CategoryModel = {
-  status: 'unknown',
+  status: Status.UNKNOWN,
   data: [],
   selectedId: null,
   selectedCategory: null,

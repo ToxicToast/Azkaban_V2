@@ -10,10 +10,10 @@ export class TypeTypeORMRepository implements TypeRepository {
 
   constructor(private readonly repository: Repository<TypeTypeORMEntity>) {}
 
-  async save(data: TypeDao): Promise<string> {
+  async save(data: TypeDao): Promise<TypeDao> {
     const entity = this.mapper.domainToEntity(data);
-    await this.repository.save(entity);
-    return entity.id;
+    const saved = await this.repository.save(entity);
+    return this.mapper.entityToDomain(saved);
   }
 
   async deleteById(id: string): Promise<void> {
@@ -26,7 +26,7 @@ export class TypeTypeORMRepository implements TypeRepository {
     });
     if (entity) {
       return entity.map((entity: TypeTypeORMEntity) =>
-        this.mapper.entityToDomain(entity)
+        this.mapper.entityToDomain(entity),
       );
     }
     return [];

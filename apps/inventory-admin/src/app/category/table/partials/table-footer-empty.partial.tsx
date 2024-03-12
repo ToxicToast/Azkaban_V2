@@ -1,15 +1,9 @@
-import { TableCell, TableFooter, TableRow } from '@azkaban/ui-components';
+import { TableFooterEmpty } from '@azkaban/ui-components';
 
 interface Props {
   length: number;
 }
 
 export function TableFooterEmptyPartial(props: Props) {
-  return (
-    <TableFooter>
-      <TableRow>
-        <TableCell colSpan={props.length}>&nbsp;</TableCell>
-      </TableRow>
-    </TableFooter>
-  );
+  return <TableFooterEmpty length={props.length} />;
 }
