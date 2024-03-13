@@ -34,8 +34,8 @@ export class LocationService {
     return await this.infrastructureService.getLocationById(id);
   }
 
-  async createLocation(data: CreateLocationDto): Promise<void> {
-    await this.infrastructureService.createLocation(data);
+  async createLocation(data: CreateLocationDto): Promise<LocationDao> {
+    return await this.infrastructureService.createLocation(data);
   }
 
   async updateLocation(id: string, data: UpdateLocationDto): Promise<void> {

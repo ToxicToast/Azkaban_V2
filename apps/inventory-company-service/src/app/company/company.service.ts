@@ -16,13 +16,13 @@ export class CompanyService {
 
   constructor(
     @Inject('COMPANY_REPOSITORY')
-    private readonly companyRepository: Repository<CompanyTypeORMEntity>
+    private readonly companyRepository: Repository<CompanyTypeORMEntity>,
   ) {
     this.infrastructureRepository = new CompanyTypeORMRepository(
-      this.companyRepository
+      this.companyRepository,
     );
     this.infrastructureService = new CompanyTypeORMService(
-      this.infrastructureRepository
+      this.infrastructureRepository,
     );
   }
 
@@ -34,8 +34,8 @@ export class CompanyService {
     return await this.infrastructureService.getCompanyById(id);
   }
 
-  async createCompany(data: CreateCompanyDto): Promise<void> {
-    await this.infrastructureService.createCompany(data);
+  async createCompany(data: CreateCompanyDto): Promise<CompanyDao> {
+    return await this.infrastructureService.createCompany(data);
   }
 
   async updateCompany(id: string, data: UpdateCompanyDto): Promise<void> {

@@ -34,8 +34,8 @@ export class SizeService {
     return await this.infrastructureService.getSizeById(id);
   }
 
-  async createSize(data: CreateSizeDto): Promise<void> {
-    await this.infrastructureService.createSize(data);
+  async createSize(data: CreateSizeDto): Promise<SizeDao> {
+    return await this.infrastructureService.createSize(data);
   }
 
   async updateSize(id: string, data: UpdateSizeDto): Promise<void> {

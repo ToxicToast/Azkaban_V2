@@ -55,8 +55,8 @@ export class ItemService {
     return await this.infrastructureService.getItemByTypeId(type_id);
   }
 
-  async createItem(data: CreateItemDto): Promise<void> {
-    await this.infrastructureService.createItem(data);
+  async createItem(data: CreateItemDto): Promise<ItemDao> {
+    return await this.infrastructureService.createItem(data);
   }
 
   async updateItem(id: string, data: UpdateItemDto): Promise<void> {
