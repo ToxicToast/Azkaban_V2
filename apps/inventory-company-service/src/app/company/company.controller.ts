@@ -23,7 +23,7 @@ export class CompanyController {
   }
 
   @MessagePattern(InventoryCompanyTopics.CREATE)
-  async createCompany(@Payload() data: CreateCompanyDto): Promise<void> {
+  async createCompany(@Payload() data: CreateCompanyDto): Promise<CompanyDao> {
     return await this.service.createCompany(data);
   }
 

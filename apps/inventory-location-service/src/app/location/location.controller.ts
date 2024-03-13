@@ -23,7 +23,9 @@ export class LocationController {
   }
 
   @MessagePattern(InventoryLocationTopics.CREATE)
-  async createLocation(@Payload() data: CreateLocationDto): Promise<void> {
+  async createLocation(
+    @Payload() data: CreateLocationDto,
+  ): Promise<LocationDao> {
     return await this.service.createLocation(data);
   }
 

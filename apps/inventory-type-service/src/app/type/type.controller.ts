@@ -23,7 +23,7 @@ export class TypeController {
   }
 
   @MessagePattern(InventoryTypeTopics.CREATE)
-  async createType(@Payload() data: CreateTypeDto): Promise<void> {
+  async createType(@Payload() data: CreateTypeDto): Promise<TypeDao> {
     return await this.service.createType(data);
   }
 

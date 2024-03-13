@@ -34,8 +34,8 @@ export class TypeService {
     return await this.infrastructureService.getTypeById(id);
   }
 
-  async createType(data: CreateTypeDto): Promise<void> {
-    await this.infrastructureService.createType(data);
+  async createType(data: CreateTypeDto): Promise<TypeDao> {
+    return await this.infrastructureService.createType(data);
   }
 
   async updateType(id: string, data: UpdateTypeDto): Promise<void> {

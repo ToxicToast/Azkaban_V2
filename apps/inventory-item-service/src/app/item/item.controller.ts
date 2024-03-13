@@ -58,7 +58,7 @@ export class ItemController {
   }
 
   @MessagePattern(InventoryItemTopics.CREATE)
-  async createItem(@Payload() data: CreateItemDto): Promise<void> {
+  async createItem(@Payload() data: CreateItemDto) {
     return await this.service.createItem(data);
   }
 

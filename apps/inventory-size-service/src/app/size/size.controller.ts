@@ -23,7 +23,7 @@ export class SizeController {
   }
 
   @MessagePattern(InventorySizeTopics.CREATE)
-  async createSize(@Payload() data: CreateSizeDto): Promise<void> {
+  async createSize(@Payload() data: CreateSizeDto): Promise<SizeDao> {
     return await this.service.createSize(data);
   }
 
