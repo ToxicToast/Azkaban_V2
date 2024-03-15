@@ -1,5 +1,6 @@
 export * from './store';
 //
+export * from './notification/notification.hook';
 export * from './category/category.hook';
 export * from './brand/brand.hook';
 export * from './location/location.hook';

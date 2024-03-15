@@ -3,7 +3,7 @@ import { HeaderRightSidePartial } from './partials/header-right-side.partial';
 import { Notifications } from './Notifications';
 import { ThemeToggle } from './ThemeToggle';
 import { UserMenu } from './UserMenu';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface Props {
   sidebarOpen: boolean;
@@ -13,12 +13,33 @@ interface Props {
   givenName: string;
   isAdministrator: boolean;
   signOut: () => void;
+  notifications?: Array<{
+    id: string;
+    title: string;
+    description: string;
+    date: string;
+  }>;
+  removeNotification: (id: string) => void;
 }
 
 export function Header(props: Props) {
   const [searchModalOpen, setSearchModalOpen] = useState<boolean>(false);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [usermenuOpen, setUsermenuOpen] = useState<boolean>(false);
+
+  const getNotifications = useCallback(() => {
+    const notifications = props.notifications?.map((notification) => {
+      return {
+        id: notification.id,
+        icon: '📣',
+        title: notification.title,
+        description: notification.description,
+        date: notification.date,
+      };
+    });
+
+    return notifications ?? [];
+  }, [props.notifications]);
 
   return (
     <header className="sticky top-0 bg-white dark:bg-[#182235] border-b border-slate-200 dark:border-slate-700 z-30">
@@ -37,15 +58,8 @@ export function Header(props: Props) {
             <Notifications
               dropdownOpen={dropdownOpen}
               setDropdownOpen={setDropdownOpen}
-              notifications={[
-                {
-                  icon: '📣',
-                  title: 'Edit your information in a swipe',
-                  description:
-                    'Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.',
-                  date: 'Feb 12, 2021',
-                },
-              ]}
+              notifications={getNotifications()}
+              removeNotification={props.removeNotification}
             />
             <ThemeToggle />
             <hr className="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" />

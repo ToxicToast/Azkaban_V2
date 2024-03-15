@@ -10,11 +10,13 @@ interface Props {
   dropdownOpen: boolean;
   setDropdownOpen: (value: boolean) => void;
   notifications: Array<{
+    id: string;
     icon: string;
     title: string;
     description: string;
     date: string;
   }>;
+  removeNotification: (id: string) => void;
 }
 
 export function Notifications(props: Props) {
@@ -27,7 +29,10 @@ export function Notifications(props: Props) {
         />
       </PopoverTrigger>
       <PopoverContent className="w-80">
-        <NotificationContentPartial notifications={props.notifications} />
+        <NotificationContentPartial
+          notifications={props.notifications}
+          removeNotification={props.removeNotification}
+        />
       </PopoverContent>
     </Popover>
   );

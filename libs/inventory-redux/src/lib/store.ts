@@ -9,6 +9,7 @@ import BrandReducer from './brand/brand.slice';
 import { brandApi } from './brand/brand.api';
 import LocationReducer from './location/location.slice';
 import { locationApi } from './location/location.api';
+import NotificationReducer from './notification/notification.slice';
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     [brandApi.reducerPath]: brandApi.reducer,
     location: LocationReducer,
     [locationApi.reducerPath]: locationApi.reducer,
+    notification: NotificationReducer,
   },
   middleware: (getDefaultMiddleware: GetDefaultMiddleware) =>
     getDefaultMiddleware()

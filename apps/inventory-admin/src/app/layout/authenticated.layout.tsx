@@ -2,13 +2,14 @@ import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { useAzkabanAuth } from '@azkaban/ui-components';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useAuthState } from '@azkaban/inventory-redux';
+import { useAuthState, useNotificationState } from '@azkaban/inventory-redux';
 import { Toaster } from '../toaster';
 
 function AuthenticatedLayout() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const location = useLocation();
   const { username, initials, isAdmin, name, logoutUser } = useAuthState();
+  const { notificationData, removeNotification } = useNotificationState();
 
   const { signOut } = useAzkabanAuth();
 
@@ -17,6 +18,24 @@ function AuthenticatedLayout() {
     logoutUser();
     signOut();
   }, [logoutUser, signOut]);
+
+  const getNotificationData = useCallback(() => {
+    return notificationData.map(
+      (notification: {
+        event: string;
+        id: string;
+        title: string;
+        created_at: string;
+      }) => {
+        return {
+          id: notification.id,
+          title: 'New Notification',
+          description: notification.title + ' ' + `(${notification.event})`,
+          date: notification.created_at,
+        };
+      },
+    );
+  }, [notificationData]);
 
   useEffect(() => {
     if (
@@ -45,6 +64,8 @@ function AuthenticatedLayout() {
             givenName={name}
             isAdministrator={isAdmin}
             signOut={onSignOut}
+            notifications={getNotificationData()}
+            removeNotification={(id: string) => removeNotification(id)}
           />
           <main>
             <Outlet />

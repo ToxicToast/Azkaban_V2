@@ -2,11 +2,13 @@ import { NotificationContentLoopPartial } from './notification-content-loop.part
 
 interface Props {
   notifications: Array<{
+    id: string;
     icon: string;
     title: string;
     description: string;
     date: string;
   }>;
+  removeNotification: (id: string) => void;
 }
 
 export function NotificationContentPartial(props: Props) {
@@ -19,10 +21,12 @@ export function NotificationContentPartial(props: Props) {
         <NotificationContentLoopPartial
           key={index}
           index={index}
+          id={notification.id}
           icon={notification.icon}
           title={notification.title}
           description={notification.description}
           date={notification.date}
+          removeNotification={props.removeNotification}
         />
       ))}
     </>
