@@ -2,7 +2,9 @@ import { memo, useEffect } from 'react';
 
 function SSE() {
   useEffect(() => {
-    const eventSource = new EventSource(process.env.NX_SSE_URL ?? '');
+    const eventSource = new EventSource(
+      'https://api.toxictoast.de/sse/notification',
+    );
 
     eventSource.onmessage = (event) => {
       console.log('event', event);
