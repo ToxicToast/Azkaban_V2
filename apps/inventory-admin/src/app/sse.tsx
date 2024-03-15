@@ -3,7 +3,7 @@ import { memo, useEffect } from 'react';
 function SSE() {
   useEffect(() => {
     const eventSource = new EventSource(
-      'https://api.toxictoast.de/sse/notification',
+      'https://events.toxictoast.de/api/sse/notification/event',
     );
 
     eventSource.onmessage = (event) => {

@@ -1,0 +1,59 @@
+{
+  "name": "events-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/events-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/events-service",
+        "main": "apps/events-service/src/main.ts",
+        "tsConfig": "apps/events-service/tsconfig.app.json",
+        "assets": ["apps/events-service/src/assets"],
+        "webpackConfig": "apps/events-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "events-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "events-service:build:development"
+        },
+        "production": {
+          "buildTarget": "events-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/events-service/jest.config.ts"
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/events-service/Dockerfile . -t toxictoast/events-service:{args.VERSION}"
+    },
+    "docker-push": {
+      "command": "docker push toxictoast/events-service:{args.VERSION}"
+    }
+  },
+  "tags": ["scope:gateway"]
+}
