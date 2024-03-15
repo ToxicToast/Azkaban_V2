@@ -51,3 +51,4 @@ Thumbs.db
 /apps/inventory-type-service/.env
 /apps/inventory-admin/.env
 /apps/webhook-service/.env
+/apps/events-service/.env

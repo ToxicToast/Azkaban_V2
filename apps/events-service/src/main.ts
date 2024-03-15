@@ -5,7 +5,9 @@ import compression from 'compression';
 import helmet from 'helmet';
 
 async function createApp(): Promise<INestApplication> {
-  return await NestFactory.create(AppModule);
+  return await NestFactory.create(AppModule, {
+    cors: true,
+  });
 }
 
 function configureApp(app: INestApplication): void {
