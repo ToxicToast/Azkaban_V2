@@ -21,6 +21,7 @@ export class ItemAggregate
     private company_id: Nullable<string>,
     private size_id: Nullable<string>,
     private type_id: Nullable<string>,
+    private warehouse_id: Nullable<string>,
     private title: string,
     private slug: string,
     private current_sku: number,
@@ -31,7 +32,7 @@ export class ItemAggregate
     private active: boolean,
     private readonly created_at: Date,
     private updated_at: Nullable<Date>,
-    private deleted_at: Nullable<Date>
+    private deleted_at: Nullable<Date>,
   ) {
     super({
       created_at,
@@ -59,6 +60,7 @@ export class ItemAggregate
       company_id: this.company_id,
       size_id: this.size_id,
       type_id: this.type_id,
+      warehouse_id: this.warehouse_id,
       title: this.getTitle(),
       slug: this.getSlug(),
       current_sku: this.current_sku,
@@ -100,6 +102,11 @@ export class ItemAggregate
 
   updateTypeId(type_id: Nullable<string>): void {
     this.type_id = type_id;
+    this.updateUpdatedAt();
+  }
+
+  updateWarehouseId(warehouse_id: Nullable<string>): void {
+    this.warehouse_id = warehouse_id;
     this.updateUpdatedAt();
   }
 

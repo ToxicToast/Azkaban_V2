@@ -122,4 +122,19 @@ export class ItemTypeORMRepository implements ItemRepository {
     }
     return [];
   }
+
+  async findByWarehouseId(
+    warehouse_id: Nullable<string>,
+  ): Promise<Array<ItemDao>> {
+    const entity = await this.repository.find({
+      withDeleted: true,
+      where: { warehouse_id },
+    });
+    if (entity) {
+      return entity.map((entity: ItemTypeORMEntity) =>
+        this.mapper.entityToDomain(entity),
+      );
+    }
+    return [];
+  }
 }

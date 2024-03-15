@@ -54,6 +54,12 @@ export class ItemService {
     return await this.repository.findByTypeId(type_id);
   }
 
+  async getItemByWarehouseId(
+    warehouse_id: Nullable<string>,
+  ): Promise<Array<ItemAnemic>> {
+    return await this.repository.findByWarehouseId(warehouse_id);
+  }
+
   async updateCategoryId(
     id: string,
     category_id: Nullable<string>,
@@ -104,6 +110,18 @@ export class ItemService {
     if (item !== null) {
       const aggregate = new ItemFactory().reconstitute(item);
       aggregate.updateTypeId(type_id);
+      await this.save(aggregate.toAnemic());
+    }
+  }
+
+  async updateWarehouseId(
+    id: string,
+    type_id: Nullable<string>,
+  ): Promise<void> {
+    const item = await this.getItemById(id);
+    if (item !== null) {
+      const aggregate = new ItemFactory().reconstitute(item);
+      aggregate.updateWarehouseId(type_id);
       await this.save(aggregate.toAnemic());
     }
   }

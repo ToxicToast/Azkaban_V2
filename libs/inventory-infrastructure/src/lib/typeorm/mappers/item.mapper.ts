@@ -13,6 +13,7 @@ export class ItemTypeORMMapper implements Mapper<ItemDao, ItemTypeORMEntity> {
       company_id,
       size_id,
       type_id,
+      warehouse_id,
       current_sku,
       min_sku,
       max_sku,
@@ -32,6 +33,7 @@ export class ItemTypeORMMapper implements Mapper<ItemDao, ItemTypeORMEntity> {
     entity.company_id = company_id;
     entity.size_id = size_id;
     entity.type_id = type_id;
+    entity.warehouse_id = warehouse_id;
     entity.title = title;
     entity.slug = slug;
     entity.current_sku = current_sku;
@@ -53,6 +55,7 @@ export class ItemTypeORMMapper implements Mapper<ItemDao, ItemTypeORMEntity> {
       company_id,
       size_id,
       type_id,
+      warehouse_id,
       current_sku,
       min_sku,
       max_sku,
@@ -72,6 +75,7 @@ export class ItemTypeORMMapper implements Mapper<ItemDao, ItemTypeORMEntity> {
       company_id,
       size_id,
       type_id,
+      warehouse_id,
       current_sku,
       min_sku,
       max_sku,

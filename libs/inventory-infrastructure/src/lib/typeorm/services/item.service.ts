@@ -53,6 +53,12 @@ export class ItemTypeORMService {
     return await this.domainService.getItemByTypeId(type_id);
   }
 
+  async getItemByWarehouseId(
+    warehouse_id: Nullable<string>,
+  ): Promise<Array<ItemDao>> {
+    return await this.domainService.getItemByWarehouseId(warehouse_id);
+  }
+
   async updateCategoryId(
     id: string,
     category_id: Nullable<string>,
@@ -80,6 +86,13 @@ export class ItemTypeORMService {
 
   async updateTypeId(id: string, type_id: Nullable<string>): Promise<void> {
     await this.domainService.updateTypeId(id, type_id);
+  }
+
+  async updateWarehouseId(
+    id: string,
+    warehouse_id: Nullable<string>,
+  ): Promise<void> {
+    await this.domainService.updateWarehouseId(id, warehouse_id);
   }
 
   async updateTitle(id: string, title: string): Promise<void> {

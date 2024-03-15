@@ -7,6 +7,7 @@ export interface CreateItemDto {
   location_id?: Optional<Nullable<string>>;
   size_id?: Optional<Nullable<string>>;
   type_id?: Optional<Nullable<string>>;
+  warehouse_id?: Optional<Nullable<string>>;
   title: string;
   current_sku?: Optional<number>;
   min_sku?: Optional<number>;
@@ -22,6 +23,7 @@ export interface UpdateItemDto {
   location_id?: Optional<Nullable<string>>;
   size_id?: Optional<Nullable<string>>;
   type_id?: Optional<Nullable<string>>;
+  warehouse_id?: Optional<Nullable<string>>;
   title?: Optional<string>;
   slug?: Optional<string>;
   current_sku?: Optional<number>;

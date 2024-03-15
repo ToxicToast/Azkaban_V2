@@ -28,6 +28,7 @@ export enum InventoryItemTopics {
   LOCATION = 'inventory.item.location',
   SIZE = 'inventory.item.size',
   TYPE = 'inventory.item.type',
+  WAREHOUSE = 'inventory.item.warehouse',
   ID = 'inventory.item.id',
   CREATE = 'inventory.item.create',
   UPDATE = 'inventory.item.update',

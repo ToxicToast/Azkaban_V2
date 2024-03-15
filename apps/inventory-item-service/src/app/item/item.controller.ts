@@ -57,6 +57,13 @@ export class ItemController {
     return await this.service.getItemByTypeId(id);
   }
 
+  @MessagePattern(InventoryItemTopics.WAREHOUSE)
+  async getItemByWarehouseId(
+    @Payload() id: Nullable<string>,
+  ): Promise<Array<ItemDao>> {
+    return await this.service.getItemByWarehouseId(id);
+  }
+
   @MessagePattern(InventoryItemTopics.CREATE)
   async createItem(@Payload() data: CreateItemDto) {
     return await this.service.createItem(data);

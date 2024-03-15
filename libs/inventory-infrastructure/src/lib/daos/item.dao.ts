@@ -7,6 +7,7 @@ export interface ItemDao {
   location_id: Nullable<string>;
   size_id: Nullable<string>;
   type_id: Nullable<string>;
+  warehouse_id: Nullable<string>;
   title: string;
   slug: string;
   current_sku: number;

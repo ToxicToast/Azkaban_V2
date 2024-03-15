@@ -8,6 +8,7 @@ interface ItemAdditions {
   findByLocationId(location_id: Nullable<string>): Promise<Array<ItemAnemic>>;
   findBySizeId(size_id: Nullable<string>): Promise<Array<ItemAnemic>>;
   findByTypeId(type_id: Nullable<string>): Promise<Array<ItemAnemic>>;
+  findByWarehouseId(warehouse_id: Nullable<string>): Promise<Array<ItemAnemic>>;
 }
 
 export type ItemRepository = Chainable<Repository<ItemAnemic>, ItemAdditions>;
