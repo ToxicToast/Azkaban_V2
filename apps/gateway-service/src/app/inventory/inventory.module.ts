@@ -7,6 +7,7 @@ import { ItemDetailModule } from './item-detail/item-detail.module';
 import { LocationModule } from './location/location.module';
 import { SizeModule } from './size/size.module';
 import { TypeModule } from './type/type.module';
+import { WarehouseModule } from './warehouse/warehouse.module';
 
 @Module({
   imports: [
@@ -49,6 +50,10 @@ import { TypeModule } from './type/type.module';
           {
             path: 'type',
             module: TypeModule,
+          },
+          {
+            path: 'warehouse',
+            module: WarehouseModule,
           },
         ],
       },
