@@ -1,11 +1,11 @@
 import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
-import { memo, PropsWithChildren, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useAzkabanAuth } from '@azkaban/ui-components';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useAuthState } from '@azkaban/inventory-redux';
 import { Toaster } from '../toaster';
 
-function AuthenticatedLayout(props: PropsWithChildren) {
+function AuthenticatedLayout() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const location = useLocation();
   const { username, initials, isAdmin, name } = useAuthState();
@@ -40,7 +40,9 @@ function AuthenticatedLayout(props: PropsWithChildren) {
             isAdministrator={isAdmin}
             signOut={signOut}
           />
-          <main>{props.children}</main>
+          <main>
+            <Outlet />
+          </main>
           <Toaster key="Toaster" />
         </div>
       </div>

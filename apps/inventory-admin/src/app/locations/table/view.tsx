@@ -61,6 +61,33 @@ export function LocationTableView() {
         },
       },
       {
+        id: 'freezer',
+        accessorKey: 'freezer',
+        header: 'Freezer',
+        cell: ({ row }) => (
+          <Button
+            variant={
+              row.original.isDeleted
+                ? 'ghost'
+                : row.getValue('freezer')
+                  ? 'success'
+                  : 'ghost'
+            }
+            onClick={() => {
+              setLocationId(row.original.id);
+              // openStatusModal();
+            }}
+            disabled={row.original.isDeleted}
+          >
+            {row.getValue('active') ? (
+              <TableRowButtonTrue />
+            ) : (
+              <TableRowButtonFalse />
+            )}
+          </Button>
+        ),
+      },
+      {
         id: 'active',
         accessorKey: 'active',
         header: 'Status',

@@ -1,6 +1,7 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo } from 'react';
+import { Outlet } from 'react-router-dom';
 
-function GuestLayout(props: PropsWithChildren) {
+function GuestLayout() {
   return (
     <div className="font-exo antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
       <main className="bg-slate-100 dark:bg-slate-900">
@@ -60,7 +61,7 @@ function GuestLayout(props: PropsWithChildren) {
               </div>
 
               <div className="w-full max-w-sm mx-auto px-4 py-8">
-                {props.children}
+                <Outlet />
               </div>
             </div>
           </div>
