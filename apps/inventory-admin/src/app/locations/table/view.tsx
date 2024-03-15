@@ -214,6 +214,7 @@ export function LocationTableView() {
             <TableBodyEmpty length={table.getAllColumns().length} />
           </Show>
         </TableBody>
+        <TableFooterEmpty length={table.getAllColumns().length} />
       </Table>
     </div>
   );
