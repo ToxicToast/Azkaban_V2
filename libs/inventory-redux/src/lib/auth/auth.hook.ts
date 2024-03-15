@@ -12,7 +12,7 @@ import {
 import { useCallback } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { AppDispatch, useAppSelector } from '../store';
-import { setUser } from './auth.slice';
+import { setUser, setLogout } from './auth.slice';
 
 export function useAuthState() {
   const { user } = useAuth();
@@ -37,6 +37,10 @@ export function useAuthState() {
     );
   }, [user]);
 
+  const logoutUser = useCallback(() => {
+    dispatch(setLogout());
+  }, []);
+
   return {
     email,
     name,
@@ -47,5 +51,6 @@ export function useAuthState() {
     isAuth,
     initials,
     loginUser,
+    logoutUser,
   };
 }

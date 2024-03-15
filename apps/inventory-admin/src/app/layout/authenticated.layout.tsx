@@ -1,5 +1,5 @@
 import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
-import { memo, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useAzkabanAuth } from '@azkaban/ui-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAuthState } from '@azkaban/inventory-redux';
@@ -8,9 +8,15 @@ import { Toaster } from '../toaster';
 function AuthenticatedLayout() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const location = useLocation();
-  const { username, initials, isAdmin, name } = useAuthState();
+  const { username, initials, isAdmin, name, logoutUser } = useAuthState();
 
   const { signOut } = useAzkabanAuth();
+
+  const onSignOut = useCallback(() => {
+    sessionStorage.clear();
+    logoutUser();
+    signOut();
+  }, [logoutUser, signOut]);
 
   useEffect(() => {
     if (
@@ -38,7 +44,7 @@ function AuthenticatedLayout() {
             initials={initials}
             givenName={name}
             isAdministrator={isAdmin}
-            signOut={signOut}
+            signOut={onSignOut}
           />
           <main>
             <Outlet />

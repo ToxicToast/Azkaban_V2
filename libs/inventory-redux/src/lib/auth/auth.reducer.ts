@@ -10,7 +10,7 @@ export function setUserAction(
   action: PayloadAction<{
     profile: Nullable<IdTokenClaims>;
     id_token: Nullable<string>;
-  }>
+  }>,
 ) {
   const payload = action.payload;
   const profileObject = (payload?.profile as ProfileWithGroups) ?? null;
@@ -21,4 +21,14 @@ export function setUserAction(
   state.token = payload?.id_token ?? null;
   state.isAdmin = profileObject?.groups?.includes('inventory-admin') ?? false;
   state.isAuth = profileObject?.groups?.includes('inventory') ?? false;
+}
+
+export function setLogoutAction(state: AuthModel) {
+  state.email = null;
+  state.name = null;
+  state.username = null;
+  state.groups = [];
+  state.token = null;
+  state.isAdmin = false;
+  state.isAuth = false;
 }
