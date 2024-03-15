@@ -5,4 +5,5 @@ export enum WebhookInventoryTopics {
   LOCATIONCREATED = 'inventory.location.created',
   SIZECREATED = 'inventory.size.created',
   TYPECREATED = 'inventory.type.created',
+  OCRCREATED = 'azkaban.upload.ocr.created',
 }

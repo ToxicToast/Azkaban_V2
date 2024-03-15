@@ -84,4 +84,14 @@ export class WebhookController {
       'https://api.toxictoast.de',
     );
   }
+
+  @MessagePattern(WebhookInventoryTopics.OCRCREATED)
+  async handleAzkabanOcrCreated(@Payload() data: unknown) {
+    await this.webhookMake.sendMakeHook<unknown>('azkaban-ocr', data);
+    await this.webhookApiAlerts.sendApiAlertsHook(
+      `📦 Created new OCR Upload`,
+      ['azkaban', 'upload', 'ocr'],
+      'https://api.toxictoast.de',
+    );
+  }
 }

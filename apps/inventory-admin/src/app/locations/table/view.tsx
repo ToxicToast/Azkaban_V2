@@ -18,10 +18,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { LocationTableBodyRowPartial } from './partials/table-body-row.partial';
-import { TableRowButtonTruePartial } from '../../category/table/partials/table-row-button-true.partial';
-import { TableRowButtonFalsePartial } from '../../category/table/partials/table-row-button-false.partial';
+import { TableRowButtonTruePartial } from './partials/table-row-button-true.partial';
+import { TableRowButtonFalsePartial } from './partials/table-row-button-false.partial';
 import { Category } from '@azkaban/inventory-redux';
-import { TableRowActionsPartial } from '../../category/table/partials/table-row-actions.partial';
+import { TableRowActionsPartial } from './partials/table-row-actions.partial';
+import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
 
 export function LocationTableView() {
   const {
@@ -206,6 +207,9 @@ export function LocationTableView() {
                 ))}
               </LocationTableBodyRowPartial>
             ))}
+          </Show>
+          <Show show={table.getRowModel().rows?.length === 0}>
+            <TableBodyEmptyPartial length={table.getAllColumns().length} />
           </Show>
         </TableBody>
       </Table>
