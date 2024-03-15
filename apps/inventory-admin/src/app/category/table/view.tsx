@@ -10,20 +10,20 @@ import {
   Button,
   Show,
   Table,
+  TableActions,
   TableBody,
+  TableBodyEmpty,
+  TableBodyRow,
   TableCell,
+  TableFooterEmpty,
   TableHead,
   TableHeader,
+  TableHeaderCount,
   TableRow,
+  TableRowButtonFalse,
+  TableRowButtonTrue,
   TableTitleSort,
 } from '@azkaban/ui-components';
-import { CategoryTableBodyRowPartial } from './partials/table-body-row.partial';
-import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
-import { TableFooterEmptyPartial } from './partials/table-footer-empty.partial';
-import { TableHeaderCountPartial } from './partials/table-header-count.partial';
-import { TableRowActionsPartial } from './partials/table-row-actions.partial';
-import { TableRowButtonFalsePartial } from './partials/table-row-button-false.partial';
-import { TableRowButtonTruePartial } from './partials/table-row-button-true.partial';
 import { Category } from '@azkaban/inventory-redux';
 
 export function CategoryTableView() {
@@ -82,9 +82,9 @@ export function CategoryTableView() {
             disabled={row.original.isDeleted}
           >
             {row.getValue('active') ? (
-              <TableRowButtonTruePartial />
+              <TableRowButtonTrue />
             ) : (
-              <TableRowButtonFalsePartial />
+              <TableRowButtonFalse />
             )}
           </Button>
         ),
@@ -104,12 +104,12 @@ export function CategoryTableView() {
                 }}
                 disabled={row.original.isDeleted}
               >
-                <TableRowButtonTruePartial />
+                <TableRowButtonTrue />
               </Button>
             </Show>
             <Show show={!row.original.isParent}>
               <Button variant="ghost" disabled={row.original.isDeleted}>
-                <TableRowButtonFalsePartial />
+                <TableRowButtonFalse />
               </Button>
             </Show>
           </>
@@ -130,12 +130,12 @@ export function CategoryTableView() {
                 }}
                 disabled={row.original.isDeleted}
               >
-                <TableRowButtonTruePartial />
+                <TableRowButtonTrue />
               </Button>
             </Show>
             <Show show={!row.original.isChild}>
               <Button variant="ghost" disabled={row.original.isDeleted}>
-                <TableRowButtonFalsePartial />
+                <TableRowButtonFalse />
               </Button>
             </Show>
           </>
@@ -147,7 +147,7 @@ export function CategoryTableView() {
         cell: ({ row }) => {
           const category = row.original as Category;
           return (
-            <TableRowActionsPartial
+            <TableActions
               id={category.id}
               isAdmin={isAdmin}
               isDeleted={!!category.deleted_at}
@@ -163,6 +163,7 @@ export function CategoryTableView() {
                 setCategoryId(id);
                 openRestoreModal();
               }}
+              onForceDelete={console.error}
             />
           );
         },
@@ -173,7 +174,8 @@ export function CategoryTableView() {
   return (
     <div className="rounded-md border mt-8">
       <Table>
-        <TableHeaderCountPartial
+        <TableHeaderCount
+          title="Categories"
           count={categoryData.length ?? 0}
           length={table.getAllColumns().length}
         />
@@ -198,7 +200,7 @@ export function CategoryTableView() {
         <TableBody>
           <Show show={table.getRowModel().rows?.length > 0}>
             {table.getRowModel().rows.map((row) => (
-              <CategoryTableBodyRowPartial
+              <TableBodyRow
                 key={row.id}
                 isSelected={Boolean(row.getIsSelected() && 'selected')}
               >
@@ -207,14 +209,14 @@ export function CategoryTableView() {
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-              </CategoryTableBodyRowPartial>
+              </TableBodyRow>
             ))}
           </Show>
           <Show show={table.getRowModel().rows?.length === 0}>
-            <TableBodyEmptyPartial length={table.getAllColumns().length} />
+            <TableBodyEmpty length={table.getAllColumns().length} />
           </Show>
         </TableBody>
-        <TableFooterEmptyPartial length={table.getAllColumns().length} />
+        <TableFooterEmpty length={table.getAllColumns().length} />
       </Table>
     </div>
   );

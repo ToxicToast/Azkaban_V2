@@ -1,15 +1,21 @@
 import {
-  Button,
-  Show,
   Table,
-  TableBody,
-  TableCell,
-  TableHead,
   TableHeader,
+  TableBody,
+  Button,
   TableRow,
+  TableHead,
+  Show,
+  TableCell,
   TableTitleSort,
+  TableBodyRow,
+  TableBodyEmpty,
+  TableRowButtonTrue,
+  TableRowButtonFalse,
+  TableHeaderCount,
+  TableActions,
+  TableFooterEmpty,
 } from '@azkaban/ui-components';
-import { TableHeaderCountPartial } from './partials/table-header-count.partial';
 import { useLocationTableViewModel } from './view-model';
 import {
   flexRender,
@@ -17,13 +23,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { LocationTableBodyRowPartial } from './partials/table-body-row.partial';
-import { TableRowButtonTruePartial } from './partials/table-row-button-true.partial';
-import { TableRowButtonFalsePartial } from './partials/table-row-button-false.partial';
-import { Category } from '@azkaban/inventory-redux';
-import { TableRowActionsPartial } from './partials/table-row-actions.partial';
-import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
-
+import { Location } from '@azkaban/inventory-redux';
 export function LocationTableView() {
   const {
     locationData,
@@ -80,9 +80,9 @@ export function LocationTableView() {
             disabled={row.original.isDeleted}
           >
             {row.getValue('active') ? (
-              <TableRowButtonTruePartial />
+              <TableRowButtonTrue />
             ) : (
-              <TableRowButtonFalsePartial />
+              <TableRowButtonFalse />
             )}
           </Button>
         ),
@@ -102,12 +102,12 @@ export function LocationTableView() {
                 }}
                 disabled={row.original.isDeleted}
               >
-                <TableRowButtonTruePartial />
+                <TableRowButtonTrue />
               </Button>
             </Show>
             <Show show={!row.original.isParent}>
               <Button variant="ghost" disabled={row.original.isDeleted}>
-                <TableRowButtonFalsePartial />
+                <TableRowButtonFalse />
               </Button>
             </Show>
           </>
@@ -128,12 +128,12 @@ export function LocationTableView() {
                 }}
                 disabled={row.original.isDeleted}
               >
-                <TableRowButtonTruePartial />
+                <TableRowButtonTrue />
               </Button>
             </Show>
             <Show show={!row.original.isChild}>
               <Button variant="ghost" disabled={row.original.isDeleted}>
-                <TableRowButtonFalsePartial />
+                <TableRowButtonFalse />
               </Button>
             </Show>
           </>
@@ -143,12 +143,12 @@ export function LocationTableView() {
         id: 'actions',
         enableHiding: false,
         cell: ({ row }) => {
-          const category = row.original as Category;
+          const location = row.original as Location;
           return (
-            <TableRowActionsPartial
-              id={category.id}
+            <TableActions
+              id={location.id}
               isAdmin={isAdmin}
-              isDeleted={!!category.deleted_at}
+              isDeleted={!!location.deleted_at}
               onEdit={(id: string) => {
                 setLocationId(id);
                 openEditModal();
@@ -161,6 +161,7 @@ export function LocationTableView() {
                 setLocationId(id);
                 openRestoreModal();
               }}
+              onForceDelete={console.error}
             />
           );
         },
@@ -171,7 +172,8 @@ export function LocationTableView() {
   return (
     <div className="rounded-md border mt-8">
       <Table>
-        <TableHeaderCountPartial
+        <TableHeaderCount
+          title="Locations"
           count={locationData.length ?? 0}
           length={table.getAllColumns().length}
         />
@@ -196,7 +198,7 @@ export function LocationTableView() {
         <TableBody>
           <Show show={table.getRowModel().rows?.length > 0}>
             {table.getRowModel().rows.map((row) => (
-              <LocationTableBodyRowPartial
+              <TableBodyRow
                 key={row.id}
                 isSelected={Boolean(row.getIsSelected() && 'selected')}
               >
@@ -205,11 +207,11 @@ export function LocationTableView() {
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-              </LocationTableBodyRowPartial>
+              </TableBodyRow>
             ))}
           </Show>
           <Show show={table.getRowModel().rows?.length === 0}>
-            <TableBodyEmptyPartial length={table.getAllColumns().length} />
+            <TableBodyEmpty length={table.getAllColumns().length} />
           </Show>
         </TableBody>
       </Table>

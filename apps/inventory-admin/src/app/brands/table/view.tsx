@@ -8,6 +8,13 @@ import {
   Show,
   TableCell,
   TableTitleSort,
+  TableBodyRow,
+  TableBodyEmpty,
+  TableRowButtonTrue,
+  TableRowButtonFalse,
+  TableHeaderCount,
+  TableActions,
+  TableFooterEmpty,
 } from '@azkaban/ui-components';
 import { useBrandTableViewModel } from './view-model';
 import {
@@ -17,13 +24,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { Brand } from '@azkaban/inventory-redux';
-import { TableHeaderCountPartial } from './partials/table-header-count.partial';
-import { TableBodyEmptyPartial } from './partials/table-body-empty.partial';
-import { TableFooterEmptyPartial } from './partials/table-footer-empty.partial';
-import { TableRowActionsPartial } from './partials/table-row-actions.partial';
-import { BrandTableBodyRowPartial } from './partials/table-body-row.partial';
-import { TableRowButtonTruePartial } from './partials/table-row-button-true.partial';
-import { TableRowButtonFalsePartial } from './partials/table-row-button-false.partial';
 
 export function BrandsTableView() {
   const {
@@ -80,9 +80,9 @@ export function BrandsTableView() {
             disabled={row.original.isDeleted}
           >
             {row.getValue('active') ? (
-              <TableRowButtonTruePartial />
+              <TableRowButtonTrue />
             ) : (
-              <TableRowButtonFalsePartial />
+              <TableRowButtonFalse />
             )}
           </Button>
         ),
@@ -91,12 +91,12 @@ export function BrandsTableView() {
         id: 'actions',
         enableHiding: false,
         cell: ({ row }) => {
-          const category = row.original as Brand;
+          const brand = row.original as Brand;
           return (
-            <TableRowActionsPartial
-              id={category.id}
+            <TableActions
+              id={brand.id}
               isAdmin={isAdmin}
-              isDeleted={!!category.deleted_at}
+              isDeleted={!!brand.deleted_at}
               onEdit={(id: string) => {
                 setBrandId(id);
                 openEditModal();
@@ -109,6 +109,7 @@ export function BrandsTableView() {
                 setBrandId(id);
                 openRestoreModal();
               }}
+              onForceDelete={console.error}
             />
           );
         },
@@ -119,7 +120,8 @@ export function BrandsTableView() {
   return (
     <div className="rounded-md border mt-8">
       <Table>
-        <TableHeaderCountPartial
+        <TableHeaderCount
+          title="Brands"
           count={brandData.length ?? 0}
           length={table.getAllColumns().length}
         />
@@ -144,7 +146,7 @@ export function BrandsTableView() {
         <TableBody>
           <Show show={table.getRowModel().rows?.length > 0}>
             {table.getRowModel().rows.map((row) => (
-              <BrandTableBodyRowPartial
+              <TableBodyRow
                 key={row.id}
                 isSelected={Boolean(row.getIsSelected() && 'selected')}
               >
@@ -153,14 +155,14 @@ export function BrandsTableView() {
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-              </BrandTableBodyRowPartial>
+              </TableBodyRow>
             ))}
           </Show>
           <Show show={table.getRowModel().rows?.length === 0}>
-            <TableBodyEmptyPartial length={table.getAllColumns().length} />
+            <TableBodyEmpty length={table.getAllColumns().length} />
           </Show>
         </TableBody>
-        <TableFooterEmptyPartial length={table.getAllColumns().length} />
+        <TableFooterEmpty length={table.getAllColumns().length} />
       </Table>
     </div>
   );
