@@ -1,6 +1,6 @@
 import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
 import { memo, useCallback, useEffect, useState } from 'react';
-import { useAzkabanAuth } from '@azkaban/ui-components';
+import { NotificationHelper, useAzkabanAuth } from '@azkaban/ui-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAuthState, useNotificationState } from '@azkaban/inventory-redux';
 import { Toaster } from '../toaster';
@@ -20,21 +20,7 @@ function AuthenticatedLayout() {
   }, [logoutUser, signOut]);
 
   const getNotificationData = useCallback(() => {
-    return notificationData.map(
-      (notification: {
-        event: string;
-        id: string;
-        title: string;
-        created_at: string;
-      }) => {
-        return {
-          id: notification.id,
-          title: 'New Notification',
-          description: notification.title + ' ' + `(${notification.event})`,
-          date: notification.created_at,
-        };
-      },
-    );
+    return NotificationHelper(notificationData);
   }, [notificationData]);
 
   useEffect(() => {
