@@ -52,3 +52,4 @@ Thumbs.db
 /apps/inventory-admin/.env
 /apps/webhook-service/.env
 /apps/events-service/.env
+/apps/homeassistant-service/.env

@@ -13,4 +13,6 @@ export enum Queues {
   INVENTORY_WAREHOUSE = 'inventory_warehouse_queue',
   // Twitch
   TWITCH = 'twitch_queue',
+  // Homeassistant
+  HOMEASSISTANT = 'azkaban_homeassistant_queue',
 }

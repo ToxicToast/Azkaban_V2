@@ -30,7 +30,7 @@ function configureApp(app: INestApplication): void {
 }
 
 async function startApp(app: INestApplication): Promise<void> {
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3000;
   //
   await app.startAllMicroservices();
   await app.listen(port);

@@ -20,7 +20,7 @@ export function NotificationContentLoopPartial(props: Props) {
   return (
     <ul key={props.index}>
       <li
-        className="border-b border-slate-200 dark:border-slate-700 last:border-0"
+        className="border-b border-slate-300 dark:border-slate-200 last:border-0"
         onClick={() => {
           props.removeNotification(props.id);
         }}
