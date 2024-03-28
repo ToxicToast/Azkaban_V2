@@ -1,0 +1,21 @@
+{
+  "name": "@azkaban/twitch-hooks",
+  "version": "0.6.1",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "express": "^4.18.1",
+    "@twurple/eventsub-http": "^7.1.0",
+    "@twurple/auth": "^7.1.0",
+    "@twurple/chat": "^7.1.0",
+    "@nestjs/common": "^10.3.1",
+    "uuid": "^9.0.1",
+    "slugify": "^1.6.6",
+    "typeorm": "^0.3.20",
+    "@nestjs/microservices": "^10.3.1",
+    "@twurple/api": "^7.1.0"
+  }
+}

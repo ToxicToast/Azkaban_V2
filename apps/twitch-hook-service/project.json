@@ -14,7 +14,7 @@
         "outputPath": "dist/apps/twitch-hook-service",
         "main": "apps/twitch-hook-service/src/main.ts",
         "tsConfig": "apps/twitch-hook-service/tsconfig.app.json",
-        "assets": [],
+        "assets": ["apps/twitch-hook-service/src/package.json"],
         "webpackConfig": "apps/twitch-hook-service/webpack.config.js"
       },
       "configurations": {
@@ -45,7 +45,6 @@
       }
     },
     "docker-build": {
-      "dependsOn": ["build"],
       "command": "docker build -f apps/twitch-hook-service/Dockerfile . -t toxictoast/twitch-hook-service:{args.VERSION}"
     },
     "docker-push": {

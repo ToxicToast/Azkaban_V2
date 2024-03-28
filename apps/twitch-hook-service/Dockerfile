@@ -7,20 +7,15 @@
 FROM docker.io/node:lts-alpine
 
 ENV HOST=0.0.0.0
-ENV PORT=3011
+ENV PORT=3012
 
 WORKDIR /app
 
 RUN addgroup --system twitch-hook-service && \
           adduser --system -G twitch-hook-service twitch-hook-service
 
-COPY package.json .
-COPY package-lock.json .
 COPY dist/apps/twitch-hook-service .
 RUN chown -R twitch-hook-service:twitch-hook-service .
-
-# You can remove this install step if you build with `--bundle` option.
-# The bundled output will include external dependencies.
-RUN npm ci --omit=dev --omit=optional
+RUN npm install
 
 CMD [ "node", "main.js" ]
