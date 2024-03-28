@@ -11,13 +11,13 @@ ENV PORT=3011
 
 WORKDIR /app
 
-RUN addgroup --system homeassistant-service && \
-          adduser --system -G homeassistant-service homeassistant-service
+RUN addgroup --system twitch-hook-service && \
+          adduser --system -G twitch-hook-service twitch-hook-service
 
 COPY package.json .
 COPY package-lock.json .
-COPY dist/apps/homeassistant-service .
-RUN chown -R homeassistant-service:homeassistant-service .
+COPY dist/apps/twitch-hook-service .
+RUN chown -R twitch-hook-service:twitch-hook-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.

@@ -37,7 +37,7 @@ export class Bot {
   private initPlugins(): void {
     this.plugins.forEach((plugin: Plugin<unknown>, index: number) => {
       Logger.debug(
-        `Loading plugin: ${plugin.name} - ${index + 1} / ${this.plugins.length}`
+        `Loading plugin: ${plugin.name} - ${index + 1} / ${this.plugins.length}`,
       );
       this.loadPlugin(plugin);
     });
@@ -62,5 +62,9 @@ export class Bot {
 
   get api(): Api {
     return this.apiProvider;
+  }
+
+  get auth(): Auth {
+    return this.authProvider;
   }
 }

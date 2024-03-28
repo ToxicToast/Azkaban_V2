@@ -6,4 +6,6 @@ export interface Authentication {
   clientSecret: Optional<string>;
   accessToken?: Optional<string>;
   refreshToken?: Optional<string>;
+  botOnly?: Optional<boolean>;
+  mockServerPort?: Optional<number>;
 }

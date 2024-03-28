@@ -9,7 +9,11 @@ export class Api {
   }
 
   private initApi(): ApiClient {
-    return new ApiClient({ authProvider: this.authProvider.instanceApp });
+    return new ApiClient({
+      authProvider:
+        this.authProvider.instanceApp ?? this.authProvider.instanceBot,
+      mockServerPort: this.authProvider.mockServerPort,
+    });
   }
 
   get instance(): ApiClient {

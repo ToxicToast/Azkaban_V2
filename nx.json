@@ -134,5 +134,13 @@
       "e2eTestRunner": "none"
     }
   },
-  "plugins": ["@nx-go/nx-go"]
+  "plugins": [
+    "@nx-go/nx-go",
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    }
+  ]
 }
