@@ -1,5 +1,6 @@
 import express from 'express';
 import { EventSubMiddleware } from '@twurple/eventsub-http';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { Bot } from '@azkaban/toasty';
 import * as process from 'process';
 
