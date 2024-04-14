@@ -1,10 +1,14 @@
 import express from 'express';
+import axios from 'axios';
 import { EventSubMiddleware } from '@twurple/eventsub-http';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { Bot } from '@azkaban/toasty';
-import * as process from 'process';
+import { HelixStream, HelixUser } from '@twurple/api';
 
 const app = express();
+const axiosClient = axios.create({
+  baseURL: 'https://api.toxictoast.de/',
+});
 const botClient = new Bot({
   authentication: {
     userId: process.env.TWITCH_USER_ID,
@@ -28,6 +32,44 @@ app.get('/', (req, res) => {
   res.send('=== Azkaban Twitch Hook Service ===').status(200);
 });
 
+const buildStreamOnlineData = async (
+  broadcaster: HelixUser,
+  streamData: HelixStream,
+): Promise<void> => {
+  const broadcasterId = broadcaster.id ?? 'No Id';
+  const displayName = broadcaster.displayName ?? 'No DisplayName';
+  const title = streamData.title ?? 'No Title';
+  const game = streamData.gameName ?? 'No Game';
+  const startedAt = streamData.startDate ?? new Date();
+  const thumbnail = streamData.thumbnailUrl ?? '';
+  console.error(
+    'Stream Online:',
+    displayName,
+    title,
+    game,
+    startedAt,
+    thumbnail,
+  );
+  await axiosClient.post('/twitch/stream/online', {
+    broadcasterId,
+    displayName,
+    title,
+    game,
+    startedAt,
+    thumbnail,
+  });
+};
+
+const buildStreamOfflineData = async (
+  broadcaster: HelixUser,
+): Promise<void> => {
+  const broadcasterId = broadcaster.id ?? 'No Id';
+  console.error('Stream Offline:', broadcasterId);
+  await axiosClient.post('/twitch/stream/offline', {
+    broadcasterId,
+  });
+};
+
 middleware.apply(app);
 const port = process.env.PORT || 3012;
 const server = app.listen(port, async () => {
@@ -40,11 +82,7 @@ const server = app.listen(port, async () => {
     try {
       const broadcaster = await stream.getBroadcaster();
       const streamData = await stream.getStream();
-      console.debug(
-        `Stream Online:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-        streamData?.title ?? 'No Title',
-      );
+      await buildStreamOnlineData(broadcaster, streamData);
     } catch (e) {
       console.error(e);
     }
@@ -53,11 +91,7 @@ const server = app.listen(port, async () => {
     try {
       const broadcaster = await stream.getBroadcaster();
       const streamData = await stream.getStream();
-      console.debug(
-        `CreativePepper Stream Online:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-        streamData?.title ?? 'No Title',
-      );
+      await buildStreamOnlineData(broadcaster, streamData);
     } catch (e) {
       console.error(e);
     }
@@ -66,11 +100,7 @@ const server = app.listen(port, async () => {
     try {
       const broadcaster = await stream.getBroadcaster();
       const streamData = await stream.getStream();
-      console.debug(
-        `MeltedMonsterGames Stream Online:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-        streamData?.title ?? 'No Title',
-      );
+      await buildStreamOnlineData(broadcaster, streamData);
     } catch (e) {
       console.error(e);
     }
@@ -79,11 +109,7 @@ const server = app.listen(port, async () => {
     try {
       const broadcaster = await stream.getBroadcaster();
       const streamData = await stream.getStream();
-      console.debug(
-        `TheDevDad_ Stream Online:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-        streamData?.title ?? 'No Title',
-      );
+      await buildStreamOnlineData(broadcaster, streamData);
     } catch (e) {
       console.error(e);
     }
@@ -92,10 +118,7 @@ const server = app.listen(port, async () => {
   middleware.onStreamOffline(process.env.TWITCH_USER_ID, async (stream) => {
     try {
       const broadcaster = await stream.getBroadcaster();
-      console.debug(
-        `Stream Offline:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-      );
+      await buildStreamOfflineData(broadcaster);
     } catch (e) {
       console.error(e);
     }
@@ -103,10 +126,7 @@ const server = app.listen(port, async () => {
   middleware.onStreamOffline(createPepperId, async (stream) => {
     try {
       const broadcaster = await stream.getBroadcaster();
-      console.debug(
-        `CreativePepper Stream Offline:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-      );
+      await buildStreamOfflineData(broadcaster);
     } catch (e) {
       console.error(e);
     }
@@ -114,10 +134,7 @@ const server = app.listen(port, async () => {
   middleware.onStreamOffline(meltedMonsterId, async (stream) => {
     try {
       const broadcaster = await stream.getBroadcaster();
-      console.debug(
-        `MeltedMonsterGames Stream Offline:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-      );
+      await buildStreamOfflineData(broadcaster);
     } catch (e) {
       console.error(e);
     }
@@ -125,10 +142,7 @@ const server = app.listen(port, async () => {
   middleware.onStreamOffline(devdad, async (stream) => {
     try {
       const broadcaster = await stream.getBroadcaster();
-      console.debug(
-        `TheDevDad_ Stream Offline:`,
-        broadcaster?.displayName ?? 'No DisplayName',
-      );
+      await buildStreamOfflineData(broadcaster);
     } catch (e) {
       console.error(e);
     }
