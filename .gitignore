@@ -43,6 +43,7 @@ Thumbs.db
 # Environment variables
 /apps/gateway-service/.env
 /apps/twitch-bot-service/.env
+/apps/twitch-hook-service/.env
 /apps/inventory-category-service/.env
 /apps/inventory-company-service/.env
 /apps/inventory-item-service/.env
