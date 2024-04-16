@@ -18,7 +18,7 @@ export class StreamBuilder {
 
   public async onStreamOnline(): Promise<void> {
     await this.axiosClient
-      .post('/twitch/stream/online', {
+      .post('/api/twitch/stream/online', {
         broadcasterId: this.broadcaster.id ?? undefined,
         displayName: this.broadcaster.displayName ?? undefined,
         title: this.stream?.title ?? undefined,
@@ -33,7 +33,7 @@ export class StreamBuilder {
 
   public async onStreamOffline(): Promise<void> {
     await this.axiosClient
-      .post('/twitch/stream/offline', {
+      .post('/api/twitch/stream/offline', {
         broadcasterId: this.broadcaster.id ?? undefined,
       })
       .catch((error) => {
