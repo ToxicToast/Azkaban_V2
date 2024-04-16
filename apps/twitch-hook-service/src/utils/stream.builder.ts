@@ -34,12 +34,4 @@ export class StreamBuilder {
       broadcasterId: this.broadcaster.id ?? undefined,
     });
   }
-
-  public async onChannelFollow(user: HelixUser): Promise<void> {
-    console.debug('Channel Follow', this.broadcaster, user);
-    await this.axiosClient.post('/twitch/follow', {
-      broadcasterId: this.broadcaster.id ?? undefined,
-      userId: user.id ?? undefined,
-    });
-  }
 }

@@ -39,7 +39,7 @@ const server = app.listen(port, async () => {
   new ToxictoastMiddleware(middleware);
   new CreativepepperMiddleware(middleware);
   new MeltedmonstergamesMiddleware(middleware);
-  new ThedevdadMiddleware(middleware);
   new HawokaiMiddleware(middleware);
+  new ThedevdadMiddleware(middleware);
 });
 server.on('error', console.error);
