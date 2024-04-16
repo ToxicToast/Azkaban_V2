@@ -1,6 +1,6 @@
 {
   "name": "@azkaban",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -58,8 +58,8 @@
     "docker:push:homeassistant": "nx docker-push homeassistant-service --VERSION=local",
     "serve:twitch-hook": "nx serve twitch-hook-service",
     "build:twitch-hook": "nx build twitch-hook-service --bundle --skip-nx-cache",
-    "docker:twitch-hook": "nx docker-build twitch-hook-service --VERSION=v0.6.2",
-    "docker:push:twitch-hook": "nx docker-push twitch-hook-service --VERSION=v0.6.2",
+    "docker:twitch-hook": "nx docker-build twitch-hook-service --VERSION=local",
+    "docker:push:twitch-hook": "nx docker-push twitch-hook-service --VERSION=local",
     "e2e:all": "nx run-many --target=e2e --all",
     "test:all": "nx run-many --target=test --all",
     "build:all": "nx run-many --target=build --all",
