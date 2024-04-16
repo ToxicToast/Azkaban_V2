@@ -7,6 +7,7 @@ import { CreativepepperMiddleware } from './middlewares/creativepepper.middlewar
 import { MeltedmonstergamesMiddleware } from './middlewares/meltedmonstergames.middleware';
 import { ThedevdadMiddleware } from './middlewares/thedevdad.middleware';
 import { HawokaiMiddleware } from './middlewares/hawokai.middleware';
+import { VederkindMiddleware } from './middlewares/vederkind.middleware';
 
 const app = express();
 const botClient = new Bot({
@@ -41,5 +42,6 @@ const server = app.listen(port, async () => {
   new MeltedmonstergamesMiddleware(middleware);
   new HawokaiMiddleware(middleware);
   new ThedevdadMiddleware(middleware);
+  new VederkindMiddleware(middleware);
 });
 server.on('error', console.error);
