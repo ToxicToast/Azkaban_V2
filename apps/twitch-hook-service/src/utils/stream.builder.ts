@@ -17,21 +17,27 @@ export class StreamBuilder {
   }
 
   public async onStreamOnline(): Promise<void> {
-    console.debug('Stream online', this.broadcaster, this.stream);
-    await this.axiosClient.post('/twitch/stream/online', {
-      broadcasterId: this.broadcaster.id ?? undefined,
-      displayName: this.broadcaster.displayName ?? undefined,
-      title: this.stream?.title ?? undefined,
-      game: this.stream?.gameName ?? undefined,
-      startedAt: this.stream?.startDate ?? undefined,
-      thumbnail: this.stream?.thumbnailUrl ?? undefined,
-    });
+    await this.axiosClient
+      .post('/twitch/stream/online', {
+        broadcasterId: this.broadcaster.id ?? undefined,
+        displayName: this.broadcaster.displayName ?? undefined,
+        title: this.stream?.title ?? undefined,
+        game: this.stream?.gameName ?? undefined,
+        startedAt: this.stream?.startDate ?? undefined,
+        thumbnail: this.stream?.thumbnailUrl ?? undefined,
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   public async onStreamOffline(): Promise<void> {
-    console.debug('Stream offline', this.broadcaster, null);
-    await this.axiosClient.post('/twitch/stream/offline', {
-      broadcasterId: this.broadcaster.id ?? undefined,
-    });
+    await this.axiosClient
+      .post('/twitch/stream/offline', {
+        broadcasterId: this.broadcaster.id ?? undefined,
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
