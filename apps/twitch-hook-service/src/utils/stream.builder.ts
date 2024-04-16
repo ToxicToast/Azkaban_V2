@@ -17,7 +17,8 @@ export class StreamBuilder {
   }
 
   public async onStreamOnline(): Promise<void> {
-    this.axiosClient.post('/twitch/stream/online', {
+    console.debug('Stream online', this.broadcaster, this.stream);
+    await this.axiosClient.post('/twitch/stream/online', {
       broadcasterId: this.broadcaster.id ?? undefined,
       displayName: this.broadcaster.displayName ?? undefined,
       title: this.stream?.title ?? undefined,
@@ -28,13 +29,15 @@ export class StreamBuilder {
   }
 
   public async onStreamOffline(): Promise<void> {
-    this.axiosClient.post('/twitch/stream/offline', {
+    console.debug('Stream offline', this.broadcaster, null);
+    await this.axiosClient.post('/twitch/stream/offline', {
       broadcasterId: this.broadcaster.id ?? undefined,
     });
   }
 
   public async onChannelFollow(user: HelixUser): Promise<void> {
-    this.axiosClient.post('/twitch/follow', {
+    console.debug('Channel Follow', this.broadcaster, user);
+    await this.axiosClient.post('/twitch/follow', {
       broadcasterId: this.broadcaster.id ?? undefined,
       userId: user.id ?? undefined,
     });

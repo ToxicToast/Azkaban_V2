@@ -32,7 +32,7 @@ export class MiddlewareBuilder {
       try {
         const broadcaster = await event.getBroadcaster();
         const builder = new StreamBuilder(broadcaster, null);
-        await builder.onStreamOnline();
+        await builder.onStreamOffline();
       } catch (e) {
         console.error(e);
       }
