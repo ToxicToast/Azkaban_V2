@@ -57,7 +57,7 @@
     "docker:homeassistant": "nx docker-build homeassistant-service --VERSION=local",
     "docker:push:homeassistant": "nx docker-push homeassistant-service --VERSION=local",
     "serve:twitch-hook": "nx serve twitch-hook-service",
-    "build:twitch-hook": "nx build twitch-hook-service --bundle",
+    "build:twitch-hook": "nx build twitch-hook-service --bundle --skip-nx-cache",
     "docker:twitch-hook": "nx docker-build twitch-hook-service --VERSION=v0.6.2",
     "docker:push:twitch-hook": "nx docker-push twitch-hook-service --VERSION=v0.6.2",
     "e2e:all": "nx run-many --target=e2e --all",
