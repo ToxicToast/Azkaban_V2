@@ -5,11 +5,7 @@ export class ThedevdadMiddleware {
   private readonly id = '722784403';
 
   constructor(private readonly middleware: EventSubMiddleware) {
-    const builder = new MiddlewareBuilder(
-      middleware,
-      this.id,
-      process.env.TWITCH_USER_ID,
-    );
+    const builder = new MiddlewareBuilder(this.middleware, this.id);
     builder.apply();
   }
 }

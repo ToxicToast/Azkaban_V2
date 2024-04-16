@@ -4,16 +4,10 @@ import { StreamBuilder } from './stream.builder';
 export class MiddlewareBuilder {
   private readonly middleware: EventSubMiddleware;
   private readonly channelId: string;
-  private readonly userId: string;
 
-  constructor(
-    middleware: EventSubMiddleware,
-    channelId: string,
-    userId: string,
-  ) {
+  constructor(middleware: EventSubMiddleware, channelId: string) {
     this.middleware = middleware;
     this.channelId = channelId;
-    this.userId = userId;
   }
 
   public apply(): void {
@@ -37,20 +31,5 @@ export class MiddlewareBuilder {
         console.error(e);
       }
     });
-    //
-    this.middleware.onChannelFollow(
-      this.channelId,
-      this.userId,
-      async (event) => {
-        try {
-          const broadcaster = await event.getBroadcaster();
-          const user = await event.getUser();
-          const builder = new StreamBuilder(broadcaster, null);
-          await builder.onChannelFollow(user);
-        } catch (e) {
-          console.error(e);
-        }
-      },
-    );
   }
 }

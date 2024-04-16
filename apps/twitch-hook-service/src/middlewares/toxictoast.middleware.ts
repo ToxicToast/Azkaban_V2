@@ -5,7 +5,7 @@ export class ToxictoastMiddleware {
   private readonly id = process.env.TWITCH_USER_ID;
 
   constructor(private readonly middleware: EventSubMiddleware) {
-    const builder = new MiddlewareBuilder(middleware, this.id, this.id);
+    const builder = new MiddlewareBuilder(this.middleware, this.id);
     builder.apply();
   }
 }

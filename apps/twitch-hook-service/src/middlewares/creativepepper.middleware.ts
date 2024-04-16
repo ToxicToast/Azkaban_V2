@@ -5,11 +5,7 @@ export class CreativepepperMiddleware {
   private readonly id = '29684110';
 
   constructor(private readonly middleware: EventSubMiddleware) {
-    const builder = new MiddlewareBuilder(
-      middleware,
-      this.id,
-      process.env.TWITCH_USER_ID,
-    );
+    const builder = new MiddlewareBuilder(this.middleware, this.id);
     builder.apply();
   }
 }
