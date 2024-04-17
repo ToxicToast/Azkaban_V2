@@ -61,4 +61,8 @@ export class SizeService {
   async restoreSize(id: string): Promise<void> {
     await this.infrastructureService.restoreSize(id);
   }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
+  }
 }

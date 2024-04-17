@@ -54,4 +54,9 @@ export class CompanyController {
   async deleteCompany(@Payload() id: string): Promise<void> {
     return await this.service.deleteCompany(id);
   }
+
+  @MessagePattern(InventoryCompanyTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
+  }
 }

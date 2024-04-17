@@ -61,4 +61,8 @@ export class CompanyService {
   async restoreCompany(id: string): Promise<void> {
     await this.infrastructureService.restoreCompany(id);
   }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
+  }
 }

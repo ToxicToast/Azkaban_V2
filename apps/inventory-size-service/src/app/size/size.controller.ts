@@ -54,4 +54,9 @@ export class SizeController {
   async deleteSize(@Payload() id: string): Promise<void> {
     return await this.service.deleteSize(id);
   }
+
+  @MessagePattern(InventorySizeTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
+  }
 }

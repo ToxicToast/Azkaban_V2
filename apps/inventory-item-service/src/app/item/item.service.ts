@@ -105,4 +105,8 @@ export class ItemService {
   async restoreItem(id: string): Promise<void> {
     await this.infrastructureService.restoreItem(id);
   }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
+  }
 }

@@ -61,4 +61,8 @@ export class TypeService {
   async restoreType(id: string): Promise<void> {
     await this.infrastructureService.restoreType(id);
   }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
+  }
 }

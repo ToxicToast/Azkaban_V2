@@ -11,26 +11,27 @@ export class VersionController {
   async version() {
     const inventory = {
       category: await this.service.categoryVersion(),
-      company: '',
-      item: '',
-      itemDetail: '',
-      location: '',
-      size: '',
-      type: '',
-      warehouse: '',
+      company: await this.service.companyVersion(),
+      item: await this.service.itemVersion(),
+      itemDetail: '-',
+      location: await this.service.locationVersion(),
+      size: await this.service.sizeVersion(),
+      type: await this.service.typeVersion(),
+      warehouse: '-',
     };
 
     const azkaban = {
-      auth: '',
-      upload: '',
+      auth: '-',
+      upload: 'v0.3.0',
     };
 
     const twitch = {
-      channel: '',
-      hook: '',
-      message: '',
-      stream: '',
-      user: '',
+      channel: '-',
+      hook: '-',
+      message: '-',
+      stream: '-',
+      user: '-',
+      bot: '-',
     };
 
     return {

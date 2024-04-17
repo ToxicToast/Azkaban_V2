@@ -95,4 +95,9 @@ export class ItemController {
   async deleteItem(@Payload() id: string): Promise<void> {
     return await this.service.deleteItem(id);
   }
+
+  @MessagePattern(InventoryItemTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
+  }
 }
