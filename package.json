@@ -1,6 +1,6 @@
 {
   "name": "@azkaban",
-  "version": "0.6.29",
+  "version": "0.6.30",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -62,13 +62,13 @@
     "docker:push:twitch-hook": "nx docker-push twitch-hook-service --VERSION=local",
     "serve:auth": "nx serve auth-service",
     "build:auth": "nx build auth-service",
-    "docker:auth": "nx docker-build auth-service --VERSION=v0.6.2",
-    "docker:push:auth": "nx docker-push auth-service --VERSION=v0.6.2",
+    "docker:auth": "nx docker-build auth-service --VERSION=local",
+    "docker:push:auth": "nx docker-push auth-service --VERSION=local",
     "e2e:all": "nx run-many --target=e2e --all",
     "test:all": "nx run-many --target=test --all",
     "build:all": "nx run-many --target=build --all",
-    "docker:all": "nx run-many --target=docker-build --all",
-    "docker:push": "nx run-many --target=docker-push --all",
+    "docker:all": "nx run-many --target=docker-build --all --VERSION=local",
+    "docker:push": "nx run-many --target=docker-push --all --VERSION=local",
     "serve:all": "nx run-many --target=serve --all",
     "lint:all": "nx run-many --target=lint --all",
     "tailwind:inventory-admin": "npx tailwindcss -c ./apps/inventory-admin/tailwind.config.js -i apps/inventory-admin/src/styles.css -o ./apps/inventory-admin/src/tailwind.scss"
