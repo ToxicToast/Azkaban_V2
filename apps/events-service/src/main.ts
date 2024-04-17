@@ -49,6 +49,7 @@ async function bootstrap() {
   configureCors(app);
   await startApp(app);
   Logger.log(`🚀 Azkaban-Events is running`);
+  Logger.log(`🚀 Version: ${process.env.APP_VERSION}`);
 }
 
 bootstrap().catch((err) => Logger.error(err));

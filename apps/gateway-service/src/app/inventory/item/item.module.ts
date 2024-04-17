@@ -14,7 +14,7 @@ import { ItemWebhookService } from './webhook.service';
     ClientsModule.register([
       {
         name: 'ITEM_SERVICE',
-        ...clientProvider(Queues.AZKABAN_INVENTORY),
+        ...clientProvider(Queues.INVENTORY_ITEMS),
       },
       {
         name: 'WEBHOOK_SERVICE',

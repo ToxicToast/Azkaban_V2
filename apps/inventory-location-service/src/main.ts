@@ -11,7 +11,7 @@ async function createInventoryMicroService(
   app: INestApplication,
 ): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.AZKABAN_INVENTORY),
+    ...consumerProvider(Queues.INVENTORY_LOCATION),
   });
 }
 
@@ -43,6 +43,7 @@ async function bootstrap() {
   await createInventoryMicroService(app);
   await startApp(app);
   Logger.log(`🚀 Inventory-Location-Service is running`);
+  Logger.log(`🚀 Version: ${process.env.APP_VERSION}`);
 }
 
 bootstrap().catch((err) => Logger.error(err));

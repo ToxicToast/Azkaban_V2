@@ -12,7 +12,12 @@ import {
 @Injectable()
 export class VersionService {
   constructor(
-    @Inject('INVENTORY_SERVICE') private readonly client: ClientRMQ,
+    @Inject('INV_CATEGORY_SERVICE') private readonly categoryClient: ClientRMQ,
+    @Inject('INV_COMPANY_SERVICE') private readonly companyClient: ClientRMQ,
+    @Inject('INV_ITEM_SERVICE') private readonly itemClient: ClientRMQ,
+    @Inject('INV_LOCATION_SERVICE') private readonly locationClient: ClientRMQ,
+    @Inject('INV_SIZE_SERVICE') private readonly sizeClient: ClientRMQ,
+    @Inject('INV_TYPE_SERVICE') private readonly typeClient: ClientRMQ,
   ) {}
 
   gatewayVersion(): string {
@@ -20,7 +25,7 @@ export class VersionService {
   }
 
   async categoryVersion(): Promise<string> {
-    return await this.client
+    return await this.categoryClient
       .send<string, object>(InventoryCategoryTopics.VERSION, {})
       .toPromise()
       .catch(() => {
@@ -29,7 +34,7 @@ export class VersionService {
   }
 
   async companyVersion(): Promise<string> {
-    return await this.client
+    return await this.companyClient
       .send<string, object>(InventoryCompanyTopics.VERSION, {})
       .toPromise()
       .catch(() => {
@@ -38,7 +43,7 @@ export class VersionService {
   }
 
   async itemVersion(): Promise<string> {
-    return await this.client
+    return await this.itemClient
       .send<string, object>(InventoryItemTopics.VERSION, {})
       .toPromise()
       .catch(() => {
@@ -47,7 +52,7 @@ export class VersionService {
   }
 
   async locationVersion(): Promise<string> {
-    return await this.client
+    return await this.locationClient
       .send<string, object>(InventoryLocationTopics.VERSION, {})
       .toPromise()
       .catch(() => {
@@ -56,7 +61,7 @@ export class VersionService {
   }
 
   async sizeVersion(): Promise<string> {
-    return await this.client
+    return await this.sizeClient
       .send<string, object>(InventorySizeTopics.VERSION, {})
       .toPromise()
       .catch(() => {
@@ -65,7 +70,7 @@ export class VersionService {
   }
 
   async typeVersion(): Promise<string> {
-    return await this.client
+    return await this.typeClient
       .send<string, object>(InventoryTypeTopics.VERSION, {})
       .toPromise()
       .catch(() => {
