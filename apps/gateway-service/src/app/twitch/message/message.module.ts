@@ -11,7 +11,7 @@ import { clientProvider, Queues } from '@azkaban/shared';
     ClientsModule.register([
       {
         name: 'TWITCH_MESSAGE_SERVICE',
-        ...clientProvider(Queues.AZKABAN_TWITCH),
+        ...clientProvider(Queues.TWITCH_MESSAGES),
       },
     ]),
   ],

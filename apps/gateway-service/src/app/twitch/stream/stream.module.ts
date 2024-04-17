@@ -11,7 +11,7 @@ import { StreamService } from './stream.service';
     ClientsModule.register([
       {
         name: 'TWITCH_STREAM_SERVICE',
-        ...clientProvider(Queues.AZKABAN_TWITCH),
+        ...clientProvider(Queues.TWITCH_STREAMS),
       },
     ]),
   ],
