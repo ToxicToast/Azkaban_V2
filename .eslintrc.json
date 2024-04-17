@@ -50,10 +50,7 @@
               },
               {
                 "sourceTag": "scope:auth",
-                "onlyDependOnLibsWithTags": [
-                  "scope:auth",
-                  "scope:shared"
-                ]
+                "onlyDependOnLibsWithTags": ["scope:auth", "scope:shared"]
               },
               {
                 "sourceTag": "scope:domain",
