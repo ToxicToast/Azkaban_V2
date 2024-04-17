@@ -54,3 +54,4 @@ Thumbs.db
 /apps/webhook-service/.env
 /apps/events-service/.env
 /apps/homeassistant-service/.env
+/apps/auth-service/.env

@@ -7,7 +7,7 @@ export function CategoryHeaderView() {
     <HeaderOverview
       title="Categories"
       buttonTitle="Add Category"
-      openModal={openAddModal}
+      openModal={() => openAddModal()}
       isAdmin={isAdmin}
     />
   );

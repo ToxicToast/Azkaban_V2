@@ -2,6 +2,7 @@ export enum Queues {
   // Azkaban
   AZKABAN_OCR = 'azkaban_ocr_queue',
   AZKABAN_WEBHOOK = 'azkaban_webhook_queue',
+  AZKABAN_AUTH = 'azkaban_auth_queue',
 
   // Inventory
   INVENTORY_CATEGORIES = 'inventory_category_queue',

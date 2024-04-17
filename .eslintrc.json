@@ -49,6 +49,13 @@
                 ]
               },
               {
+                "sourceTag": "scope:auth",
+                "onlyDependOnLibsWithTags": [
+                  "scope:auth",
+                  "scope:shared"
+                ]
+              },
+              {
                 "sourceTag": "scope:domain",
                 "onlyDependOnLibsWithTags": ["scope:domain", "scope:shared"]
               },
