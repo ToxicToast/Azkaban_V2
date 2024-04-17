@@ -11,7 +11,7 @@ import { clientProvider, Queues } from '@azkaban/shared';
     ClientsModule.register([
       {
         name: 'WAREHOUSE_SERVICE',
-        ...clientProvider(Queues.INVENTORY_WAREHOUSE),
+        ...clientProvider(Queues.AZKABAN_INVENTORY),
       },
       {
         name: 'WEBHOOK_SERVICE',

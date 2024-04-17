@@ -12,7 +12,7 @@ async function createHomeassistantMicroService(
   app: INestApplication,
 ): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.HOMEASSISTANT),
+    ...consumerProvider(Queues.AZKABAN_HOMEASSISTANT),
   });
   app.connectMicroservice({
     transport: Transport.MQTT,

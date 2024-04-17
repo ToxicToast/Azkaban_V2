@@ -14,7 +14,7 @@ import { SizeWebhookService } from './webhook.service';
     ClientsModule.register([
       {
         name: 'SIZE_SERVICE',
-        ...clientProvider(Queues.INVENTORY_SIZE),
+        ...clientProvider(Queues.AZKABAN_INVENTORY),
       },
       {
         name: 'WEBHOOK_SERVICE',

@@ -14,7 +14,7 @@ import { LocationWebhookService } from './webhook.service';
     ClientsModule.register([
       {
         name: 'LOCATION_SERVICE',
-        ...clientProvider(Queues.INVENTORY_LOCATION),
+        ...clientProvider(Queues.AZKABAN_INVENTORY),
       },
       {
         name: 'WEBHOOK_SERVICE',

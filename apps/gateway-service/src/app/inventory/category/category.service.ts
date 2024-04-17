@@ -1,10 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientRMQ } from '@nestjs/microservices';
-import {
-  InventoryCategoryTopics,
-  Nullable,
-  WebhookInventoryTopics,
-} from '@azkaban/shared';
+import { InventoryCategoryTopics, Nullable } from '@azkaban/shared';
 import {
   CategoryDao,
   CreateCategoryDto,

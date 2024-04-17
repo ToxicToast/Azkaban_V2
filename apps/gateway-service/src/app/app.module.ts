@@ -6,6 +6,7 @@ import { InventoryModule } from './inventory/inventory.module';
 import { TwitchModule } from './twitch/twitch.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
+import { VersionModule } from './version/version.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UploadModule } from './upload/upload.module';
     TwitchModule,
     AuthModule,
     UploadModule,
+    VersionModule,
     //
     RouterModule.register([
       {
@@ -40,6 +42,10 @@ import { UploadModule } from './upload/upload.module';
       {
         path: 'upload',
         module: UploadModule,
+      },
+      {
+        path: 'version',
+        module: VersionModule,
       },
     ]),
   ],

@@ -11,7 +11,7 @@ async function createInventoryMicroService(
   app: INestApplication,
 ): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.INVENTORY_SIZE),
+    ...consumerProvider(Queues.AZKABAN_INVENTORY),
   });
 }
 

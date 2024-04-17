@@ -10,7 +10,7 @@ async function createApp(): Promise<INestApplication> {
 }
 async function createMicroService(app: INestApplication): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.TWITCH),
+    ...consumerProvider(Queues.AZKABAN_TWITCH),
   });
 }
 
