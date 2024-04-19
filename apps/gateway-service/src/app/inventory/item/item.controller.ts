@@ -91,6 +91,16 @@ export class ItemController {
     return data;
   }
 
+  @Groups('inventory')
+  @Get('warehouse/:id')
+  async getItemByWarehouse(@Param('id') id: string) {
+    const data = await this.service.getItemByWarehouse(id);
+    if (!data) {
+      throw new HttpException('Not Found', 404);
+    }
+    return data;
+  }
+
   @Groups('inventory-admin')
   @Post()
   async createItem(@Body() data: CreateItemDto) {

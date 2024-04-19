@@ -14,16 +14,16 @@ export const locationApi = createApi({
   ],
   endpoints: (builder) => ({
     fetchLocationList: builder.query<Array<Location>, void>({
-      query: () => `/location`,
+      query: () => `/api/inventory/location`,
       providesTags: ['GetLocationList'],
     }),
     fetchLocationSingle: builder.query<Nullable<Location>, string>({
-      query: (id: string) => `/location/${id}`,
+      query: (id: string) => `/api/inventory/location/${id}`,
       providesTags: ['GetLocationSingle'],
     }),
     updateActiveLocation: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/location/${id}/activate`,
+        url: `/api/inventory/location/${id}/activate`,
         method: 'PUT',
         body: {},
       }),
@@ -31,7 +31,7 @@ export const locationApi = createApi({
     }),
     updateInactiveLocation: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/location/${id}/deactivate`,
+        url: `/api/inventory/location/${id}/deactivate`,
         method: 'PUT',
         body: {},
       }),
@@ -57,7 +57,7 @@ export const locationApi = createApi({
         slug?: Optional<string>;
         freezer?: Optional<boolean>;
       }) => ({
-        url: `/location/${id}`,
+        url: `/api/inventory/location/${id}`,
         method: 'PUT',
         body: data,
       }),
@@ -68,7 +68,7 @@ export const locationApi = createApi({
       { parent_id: Nullable<string>; title: string; freezer: boolean }
     >({
       query: (data) => ({
-        url: `/location/`,
+        url: `/api/inventory/location/`,
         method: 'POST',
         body: data,
       }),
@@ -76,7 +76,7 @@ export const locationApi = createApi({
     }),
     deleteLocation: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/location/${id}`,
+        url: `/api/inventory/location/${id}`,
         method: 'DELETE',
         body: {},
       }),
@@ -84,7 +84,7 @@ export const locationApi = createApi({
     }),
     restoreLocation: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/location/${id}/restore`,
+        url: `/api/inventory/location/${id}/restore`,
         method: 'PUT',
         body: {},
       }),

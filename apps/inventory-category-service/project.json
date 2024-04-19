@@ -16,7 +16,8 @@
         "tsConfig": "apps/inventory-category-service/tsconfig.app.json",
         "assets": ["apps/inventory-category-service/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/inventory-category-service/webpack.config.js"
+        "webpackConfig": "apps/inventory-category-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

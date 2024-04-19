@@ -12,15 +12,13 @@ ENV PORT=3009
 WORKDIR /app
 
 RUN addgroup --system webhook-service && \
-          adduser --system -G webhook-service webhook-service
+          adduser --system -G webhook-service webhook-service \
 
-COPY package.json .
-COPY package-lock.json .
 COPY dist/apps/webhook-service .
 RUN chown -R webhook-service:webhook-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
-RUN npm ci --omit=dev --omit=optional
+RUN npm i --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]

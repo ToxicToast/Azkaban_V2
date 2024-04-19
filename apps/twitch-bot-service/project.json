@@ -16,7 +16,8 @@
         "tsConfig": "apps/twitch-bot-service/tsconfig.app.json",
         "assets": ["apps/twitch-bot-service/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/twitch-bot-service/webpack.config.js"
+        "webpackConfig": "apps/twitch-bot-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

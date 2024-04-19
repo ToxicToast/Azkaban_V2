@@ -54,4 +54,9 @@ export class TypeController {
   async deleteType(@Payload() id: string): Promise<void> {
     return await this.service.deleteType(id);
   }
+
+  @MessagePattern(InventoryTypeTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
+  }
 }

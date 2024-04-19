@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Logger } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { Chainable, InventoryCategoryTopics, Nullable } from '@azkaban/shared';
 import {
@@ -61,5 +61,10 @@ export class CategoryController {
   @MessagePattern(InventoryCategoryTopics.DELETE)
   async deleteCategory(@Payload() id: string): Promise<void> {
     return await this.service.deleteCategory(id);
+  }
+
+  @MessagePattern(InventoryCategoryTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
   }
 }

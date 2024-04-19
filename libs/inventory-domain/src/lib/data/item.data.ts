@@ -6,6 +6,7 @@ export interface ItemData {
   readonly company_id?: Optional<Nullable<string>>;
   readonly size_id?: Optional<Nullable<string>>;
   readonly type_id?: Optional<Nullable<string>>;
+  readonly warehouse_id?: Optional<Nullable<string>>;
   readonly title: string;
   readonly current_sku?: Optional<Nullable<number>>;
   readonly min_sku?: Optional<Nullable<number>>;

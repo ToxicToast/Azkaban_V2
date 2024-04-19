@@ -75,4 +75,8 @@ export class CategoryService {
   async restoreCategory(id: string): Promise<void> {
     await this.infrastructureService.restoreCategory(id);
   }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
+  }
 }

@@ -14,13 +14,9 @@ WORKDIR /app
 RUN addgroup --system gateway-service && \
           adduser --system -G gateway-service gateway-service
 
-COPY package.json .
-COPY package-lock.json .
 COPY dist/apps/gateway-service .
 RUN chown -R gateway-service:gateway-service .
 
-# You can remove this install step if you build with `--bundle` option.
-# The bundled output will include external dependencies.
-RUN npm ci --omit=dev --omit=optional
+RUN npm i --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]

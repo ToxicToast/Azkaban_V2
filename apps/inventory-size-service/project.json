@@ -15,7 +15,8 @@
         "main": "apps/inventory-size-service/src/main.ts",
         "tsConfig": "apps/inventory-size-service/tsconfig.app.json",
         "assets": ["apps/inventory-size-service/src/assets"],
-        "webpackConfig": "apps/inventory-size-service/webpack.config.js"
+        "webpackConfig": "apps/inventory-size-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

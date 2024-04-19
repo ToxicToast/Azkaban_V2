@@ -51,6 +51,12 @@ export class ItemService {
       .toPromise();
   }
 
+  async getItemByWarehouse(warehouse_id: string): Promise<Array<ItemDao>> {
+    return await this.client
+      .send<Array<ItemDao>, string>(InventoryItemTopics.WAREHOUSE, warehouse_id)
+      .toPromise();
+  }
+
   async getItemById(id: string): Promise<Nullable<ItemDao>> {
     return await this.client
       .send<Nullable<ItemDao>, string>(InventoryItemTopics.ID, id)

@@ -8,6 +8,7 @@ export enum InventoryCategoryTopics {
   DEACTIVATE = 'inventory.category.deactivate',
   RESTORE = 'inventory.category.restore',
   DELETE = 'inventory.category.delete',
+  VERSION = 'inventory.category.version',
 }
 
 export enum InventoryCompanyTopics {
@@ -19,6 +20,7 @@ export enum InventoryCompanyTopics {
   DEACTIVATE = 'inventory.company.deactivate',
   RESTORE = 'inventory.company.restore',
   DELETE = 'inventory.company.delete',
+  VERSION = 'inventory.company.version',
 }
 
 export enum InventoryItemTopics {
@@ -28,6 +30,7 @@ export enum InventoryItemTopics {
   LOCATION = 'inventory.item.location',
   SIZE = 'inventory.item.size',
   TYPE = 'inventory.item.type',
+  WAREHOUSE = 'inventory.item.warehouse',
   ID = 'inventory.item.id',
   CREATE = 'inventory.item.create',
   UPDATE = 'inventory.item.update',
@@ -35,6 +38,7 @@ export enum InventoryItemTopics {
   DEACTIVATE = 'inventory.item.deactivate',
   RESTORE = 'inventory.item.restore',
   DELETE = 'inventory.item.delete',
+  VERSION = 'inventory.item.version',
 }
 
 export enum InventoryLocationTopics {
@@ -46,6 +50,7 @@ export enum InventoryLocationTopics {
   DEACTIVATE = 'inventory.location.deactivate',
   RESTORE = 'inventory.location.restore',
   DELETE = 'inventory.location.delete',
+  VERSION = 'inventory.location.version',
 }
 
 export enum InventorySizeTopics {
@@ -57,6 +62,7 @@ export enum InventorySizeTopics {
   DEACTIVATE = 'inventory.size.deactivate',
   RESTORE = 'inventory.size.restore',
   DELETE = 'inventory.size.delete',
+  VERSION = 'inventory.size.version',
 }
 
 export enum InventoryTypeTopics {
@@ -68,4 +74,5 @@ export enum InventoryTypeTopics {
   DEACTIVATE = 'inventory.type.deactivate',
   RESTORE = 'inventory.type.restore',
   DELETE = 'inventory.type.delete',
+  VERSION = 'inventory.type.version',
 }

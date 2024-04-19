@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { ChannelModule } from './channel/channel.module';
 import { StreamModule } from './stream/stream.module';
 import { MessageModule } from './message/message.module';
+import { HookModule } from './hook/hook.module';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { MessageModule } from './message/message.module';
     ChannelModule,
     StreamModule,
     MessageModule,
-    //
+    HookModule,
     RouterModule.register([
       {
         path: 'twitch',
@@ -31,6 +32,10 @@ import { MessageModule } from './message/message.module';
           {
             path: 'message',
             module: MessageModule,
+          },
+          {
+            path: 'hook',
+            module: HookModule,
           },
         ],
       },

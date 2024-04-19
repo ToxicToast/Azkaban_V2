@@ -1,4 +1,4 @@
-import { Authentication, Nullable } from '@azkaban/shared';
+import { Authentication, Nullable, Optional } from '@azkaban/shared';
 import {
   AccessToken,
   AppTokenAuthProvider,
@@ -8,12 +8,14 @@ import { Logger } from '@nestjs/common';
 
 export class Auth {
   private readonly userId: Nullable<string>;
+  private readonly botOnly: Nullable<boolean>;
   private authBotProvider: Nullable<RefreshingAuthProvider>;
   private authAppProvider: Nullable<AppTokenAuthProvider>;
   private accessToken: Nullable<string>;
   private refreshToken: Nullable<string>;
   private readonly clientId: Nullable<string>;
   private readonly clientSecret: Nullable<string>;
+  readonly mockServerPort?: Optional<number>;
 
   constructor(options: Authentication) {
     this.authBotProvider = null;
@@ -23,6 +25,8 @@ export class Auth {
     this.clientId = options.clientId ?? null;
     this.clientSecret = options.clientSecret ?? null;
     this.userId = options.userId ?? null;
+    this.botOnly = options.botOnly ?? false;
+    this.mockServerPort = options.mockServerPort;
     //
     this.init();
   }
@@ -39,16 +43,12 @@ export class Auth {
     if (!this.userId) {
       throw new Error('Missing User Id');
     }
-    this.authBotProvider.addUser(
-      this.userId,
-      {
-        accessToken: this.accessToken,
-        refreshToken: this.refreshToken,
-        expiresIn: null,
-        obtainmentTimestamp: Math.ceil(new Date().getTime() / 1000),
-      },
-      ['chat']
-    );
+    this.authBotProvider.addUser(this.userId, {
+      accessToken: this.accessToken,
+      refreshToken: this.refreshToken,
+      expiresIn: null,
+      obtainmentTimestamp: Math.ceil(new Date().getTime() / 1000),
+    });
     Logger.debug('Successfully authenticated');
     this.authBotProvider.onRefresh((_, tokenData: AccessToken) => {
       this.accessToken = tokenData.accessToken;
@@ -56,10 +56,12 @@ export class Auth {
       Logger.debug('Refreshing access token for user', this.userId, tokenData);
     });
     //
-    this.authAppProvider = new AppTokenAuthProvider(
-      this.clientId,
-      this.clientSecret
-    );
+    if (!this.botOnly) {
+      this.authAppProvider = new AppTokenAuthProvider(
+        this.clientId,
+        this.clientSecret,
+      );
+    }
   }
 
   get instanceBot(): RefreshingAuthProvider {
@@ -70,7 +72,7 @@ export class Auth {
   }
 
   get instanceApp(): AppTokenAuthProvider {
-    if (!this.authAppProvider) {
+    if (!this.authAppProvider && !this.botOnly) {
       throw new Error('Auth App Provider not initialized');
     }
     return this.authAppProvider;

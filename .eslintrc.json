@@ -44,9 +44,14 @@
                 "sourceTag": "scope:inventory",
                 "onlyDependOnLibsWithTags": [
                   "scope:inventory",
+                  "scope:infrastructure",
                   "scope:shared",
                   "scope:redux"
                 ]
+              },
+              {
+                "sourceTag": "scope:auth",
+                "onlyDependOnLibsWithTags": ["scope:auth", "scope:shared"]
               },
               {
                 "sourceTag": "scope:domain",

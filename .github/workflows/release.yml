@@ -8,7 +8,7 @@ env:
   NX_BRANCH: ${GITHUB_REF##*/}
 
 jobs:
-  CI:
+  Release:
     runs-on: ubuntu-latest
 
     steps:

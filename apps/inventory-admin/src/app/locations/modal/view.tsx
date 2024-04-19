@@ -61,8 +61,6 @@ export function LocationModalView() {
             freezer: boolean,
           ) => console.error(parentId, title, freezer)}
         />
-        LocationModalAddLocationPartial closeModal=() = closeAddModal()
-        isAdmin=isAdmin availableLocations=locationData
       </Show>
       <Show show={editModal}>
         LocationModalEditLocationPartial key=selectedId

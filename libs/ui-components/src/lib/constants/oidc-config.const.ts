@@ -1,5 +1,4 @@
 import { AuthProviderProps } from 'react-oidc-context';
-
 export const oidcConfig = {
   authority: process.env.NX_AUTHENTIK_AUTHORITY,
   client_id: process.env.NX_AUTHENTIK_CLIENT_ID,

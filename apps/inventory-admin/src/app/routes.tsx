@@ -2,9 +2,13 @@ import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { lazy } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './routes.css';
+import SSE from './sse';
 
 const LazyLoginPage = lazy(() =>
   import('./pages/login.page').then((m) => ({ default: m.LoginPage })),
+);
+const LazyRegisterPage = lazy(() =>
+  import('./pages/register.page').then((m) => ({ default: m.RegisterPage })),
 );
 const LazyDashboardPage = lazy(() =>
   import('./dashboard/page').then((m) => ({
@@ -34,80 +38,55 @@ interface Props {
 
 const authenticatedRoutes = [
   {
-    path: '/',
-    element: (
-      <LazyAuthenticatedLayout>
-        <LazyDashboardPage />
-      </LazyAuthenticatedLayout>
-    ),
-    errorElement: (
-      <LazyAuthenticatedLayout>
-        <LazyErrorPage />
-      </LazyAuthenticatedLayout>
-    ),
+    element: <LazyAuthenticatedLayout />,
+    errorElement: <LazyErrorPage />,
     hasErrorBoundary: true,
-  },
-  {
-    path: '/categories',
-    element: (
-      <LazyAuthenticatedLayout>
-        <LazyCategoryPage />
-      </LazyAuthenticatedLayout>
-    ),
-    errorElement: (
-      <LazyAuthenticatedLayout>
-        <LazyErrorPage />
-      </LazyAuthenticatedLayout>
-    ),
-    hasErrorBoundary: true,
-  },
-  {
-    path: '/brands',
-    element: (
-      <LazyAuthenticatedLayout>
-        <LazyBrandPage />
-      </LazyAuthenticatedLayout>
-    ),
-    errorElement: (
-      <LazyAuthenticatedLayout>
-        <LazyErrorPage />
-      </LazyAuthenticatedLayout>
-    ),
-    hasErrorBoundary: true,
-  },
-  {
-    path: '/locations',
-    element: (
-      <LazyAuthenticatedLayout>
-        <LazyLocationPage />
-      </LazyAuthenticatedLayout>
-    ),
-    errorElement: (
-      <LazyAuthenticatedLayout>
-        <LazyErrorPage />
-      </LazyAuthenticatedLayout>
-    ),
-    hasErrorBoundary: true,
-  },
-  {
-    path: '*',
-    element: (
-      <LazyAuthenticatedLayout>
-        <LazyErrorPage />
-      </LazyAuthenticatedLayout>
-    ),
-    hasErrorBoundary: true,
+    children: [
+      {
+        path: '/',
+        element: <LazyDashboardPage />,
+        hasErrorBoundary: true,
+      },
+      {
+        path: '/categories',
+        element: <LazyCategoryPage />,
+        hasErrorBoundary: true,
+      },
+      {
+        path: '/brands',
+        element: <LazyBrandPage />,
+        hasErrorBoundary: true,
+      },
+      {
+        path: '/locations',
+        element: <LazyLocationPage />,
+        hasErrorBoundary: true,
+      },
+      {
+        path: '*',
+        element: <LazyErrorPage />,
+        hasErrorBoundary: true,
+      },
+    ],
   },
 ];
 const guestRoutes = [
   {
-    path: '*',
-    element: (
-      <LazyGuestLayout>
-        <LazyLoginPage />
-      </LazyGuestLayout>
-    ),
+    element: <LazyGuestLayout />,
+    errorElement: <LazyErrorPage />,
     hasErrorBoundary: true,
+    children: [
+      {
+        path: '*',
+        element: <LazyLoginPage />,
+        hasErrorBoundary: true,
+      },
+      {
+        path: '/register',
+        element: <LazyRegisterPage />,
+        hasErrorBoundary: true,
+      },
+    ],
   },
 ];
 
@@ -117,10 +96,13 @@ export function Routes(props: Props) {
   );
 
   return (
-    <TransitionGroup>
-      <CSSTransition timeout={500} classNames="fade">
-        <RouterProvider router={router} />
-      </CSSTransition>
-    </TransitionGroup>
+    <>
+      <TransitionGroup>
+        <CSSTransition timeout={500} classNames="fade">
+          <RouterProvider router={router} />
+        </CSSTransition>
+      </TransitionGroup>
+      <SSE />
+    </>
   );
 }

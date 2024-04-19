@@ -15,7 +15,8 @@
         "main": "apps/webhook-service/src/main.ts",
         "tsConfig": "apps/webhook-service/tsconfig.app.json",
         "assets": ["apps/webhook-service/src/assets"],
-        "webpackConfig": "apps/webhook-service/webpack.config.js"
+        "webpackConfig": "apps/webhook-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

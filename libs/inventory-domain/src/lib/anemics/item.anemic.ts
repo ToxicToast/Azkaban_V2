@@ -6,6 +6,7 @@ export interface ItemAnemic extends Anemic {
   readonly company_id: Nullable<string>;
   readonly size_id: Nullable<string>;
   readonly type_id: Nullable<string>;
+  readonly warehouse_id: Nullable<string>;
   readonly title: string;
   readonly slug: string;
   readonly current_sku: number;

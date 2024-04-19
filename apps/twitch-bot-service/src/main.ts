@@ -10,7 +10,7 @@ async function createApp(): Promise<INestApplication> {
 }
 async function createMicroService(app: INestApplication): Promise<void> {
   app.connectMicroservice({
-    ...consumerProvider(Queues.TWITCH),
+    ...consumerProvider(Queues.TWITCH_BOT),
   });
 }
 
@@ -30,7 +30,7 @@ function configureApp(app: INestApplication): void {
 }
 
 async function startApp(app: INestApplication): Promise<void> {
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3000;
   //
   await app.startAllMicroservices();
   await app.listen(port);
@@ -44,5 +44,6 @@ async function bootstrap() {
   await createMicroService(app);
   await startApp(app);
   Logger.log(`🚀 Twitch-Bot is running`);
+  Logger.log(`🚀 Version: ${process.env.APP_VERSION}`);
 }
 bootstrap().catch((err) => Logger.error(err));

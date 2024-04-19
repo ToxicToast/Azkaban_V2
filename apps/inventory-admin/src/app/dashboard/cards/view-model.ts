@@ -46,6 +46,10 @@ export function useDashboardCardsViewModel() {
     return String(0);
   }, []);
 
+  const getWarehouseCountString = useMemo(() => {
+    return String(0);
+  }, []);
+
   return {
     getCategoryCountString,
     getBrandsCountString,
@@ -56,5 +60,6 @@ export function useDashboardCardsViewModel() {
     getLowStockCountString,
     getTotalStockValueString,
     getReceiptsCountString,
+    getWarehouseCountString,
   };
 }

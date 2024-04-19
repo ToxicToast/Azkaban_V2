@@ -12,7 +12,8 @@ export class GroupsGuard implements CanActivate {
     }
     const request = context.switchToHttp().getRequest();
     const user = request.user;
-    const userGroups = (user?.groups ?? []) as Array<string>;
+    const userMetaData = user?.user_metadata ?? null;
+    const userGroups = userMetaData?.groups ?? [];
     return groups.some((group) => {
       return userGroups.includes(group);
     });

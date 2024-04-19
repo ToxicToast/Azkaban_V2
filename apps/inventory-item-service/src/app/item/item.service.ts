@@ -55,6 +55,10 @@ export class ItemService {
     return await this.infrastructureService.getItemByTypeId(type_id);
   }
 
+  async getItemByWarehouseId(warehouse_id: string): Promise<Array<ItemDao>> {
+    return await this.infrastructureService.getItemByWarehouseId(warehouse_id);
+  }
+
   async createItem(data: CreateItemDto): Promise<ItemDao> {
     return await this.infrastructureService.createItem(data);
   }
@@ -74,6 +78,9 @@ export class ItemService {
     }
     if (data.type_id !== undefined) {
       await this.infrastructureService.updateTypeId(id, data.type_id);
+    }
+    if (data.warehouse_id !== undefined) {
+      await this.infrastructureService.updateWarehouseId(id, data.warehouse_id);
     }
     if (data.title !== undefined) {
       await this.infrastructureService.updateTitle(id, data.title);
@@ -97,5 +104,9 @@ export class ItemService {
 
   async restoreItem(id: string): Promise<void> {
     await this.infrastructureService.restoreItem(id);
+  }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
   }
 }

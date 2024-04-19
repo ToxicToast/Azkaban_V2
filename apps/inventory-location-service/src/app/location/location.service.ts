@@ -61,4 +61,8 @@ export class LocationService {
   async restoreLocation(id: string): Promise<void> {
     await this.infrastructureService.restoreLocation(id);
   }
+
+  getVersion(): string {
+    return process.env.APP_VERSION ?? 'local';
+  }
 }

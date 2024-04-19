@@ -12,11 +12,7 @@ function App() {
   const { fetchCategoryList } = useCategoryState();
   const { fetchBrandList } = useBrandState();
   const { fetchLocationList } = useLocationState();
-  const { isAuth, loginUser } = useAuthState();
-
-  useEffect(() => {
-    loginUser();
-  }, [loginUser]);
+  const { isAuth } = useAuthState();
 
   useEffect(() => {
     if (isAuth) {

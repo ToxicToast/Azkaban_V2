@@ -56,4 +56,9 @@ export class LocationController {
   async deleteLocation(@Payload() id: string): Promise<void> {
     return await this.service.deleteLocation(id);
   }
+
+  @MessagePattern(InventoryLocationTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
+  }
 }

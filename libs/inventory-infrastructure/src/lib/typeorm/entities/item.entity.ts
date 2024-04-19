@@ -27,6 +27,9 @@ export class ItemTypeORMEntity {
   @Column({ unique: false, nullable: true, default: null, type: 'varchar' })
   type_id: string | null;
 
+  @Column({ unique: false, nullable: true, default: null, type: 'varchar' })
+  warehouse_id: string | null;
+
   @Column({ unique: true, nullable: false, type: 'varchar' })
   title: string;
 

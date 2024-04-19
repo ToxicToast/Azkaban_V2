@@ -20,6 +20,7 @@ export class ItemFactory
       anemic.company_id,
       anemic.size_id,
       anemic.type_id,
+      anemic.warehouse_id,
       anemic.title,
       anemic.slug,
       anemic.current_sku,
@@ -30,7 +31,7 @@ export class ItemFactory
       anemic.isActive,
       anemic.created_at,
       anemic.updated_at,
-      anemic.deleted_at
+      anemic.deleted_at,
     );
   }
 
@@ -44,6 +45,7 @@ export class ItemFactory
       data.company_id ?? null,
       data.size_id ?? null,
       data.type_id ?? null,
+      data.warehouse_id ?? null,
       data.title,
       slug,
       data.current_sku ?? 0,
@@ -54,7 +56,7 @@ export class ItemFactory
       data.active ?? false,
       new Date(),
       null,
-      null
+      null,
     );
   }
 }

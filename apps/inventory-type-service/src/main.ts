@@ -43,6 +43,7 @@ async function bootstrap() {
   await createInventoryMicroService(app);
   await startApp(app);
   Logger.log(`🚀 Inventory-Type-Service is running`);
+  Logger.log(`🚀 Version: ${process.env.APP_VERSION}`);
 }
 
 bootstrap().catch((err) => Logger.error(err));

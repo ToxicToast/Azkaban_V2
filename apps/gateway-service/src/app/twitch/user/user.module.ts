@@ -10,7 +10,7 @@ import { UserService } from './user.service';
     ClientsModule.register([
       {
         name: 'TWITCH_USER_SERVICE',
-        ...clientProvider(Queues.TWITCH),
+        ...clientProvider(Queues.TWITCH_USERS),
       },
     ]),
   ],

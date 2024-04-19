@@ -15,15 +15,15 @@ export const dynamicBaseQuery: BaseQueryFn<
 > = async (
   args: Either<string, FetchArgs>,
   WebApi: BaseQueryApi,
-  extraOptions: object
+  extraOptions: object,
 ) => {
-  const baseUrl = 'https://api.toxictoast.de/api/inventory/';
-  // const baseUrl = 'http://localhost:3000/api/inventory/';
+  // const baseUrl = 'https://api.toxictoast.de';
+  const baseUrl = 'http://localhost:3000';
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,
     prepareHeaders: (
       headers: Headers,
-      pick: Pick<BaseQueryApi, 'getState'>
+      pick: Pick<BaseQueryApi, 'getState'>,
     ) => {
       const token = (pick.getState() as RootState).auth.token ?? null;
       if (token !== null) {

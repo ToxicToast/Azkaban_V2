@@ -1,31 +1,30 @@
 import { Module } from '@nestjs/common';
 import { RouterModule } from '@nestjs/core';
 import { HealthModule } from './health/health.module';
-import { SseModule } from './sse/sse.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { TwitchModule } from './twitch/twitch.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
+import { VersionModule } from './version/version.module';
+import { PassportModule } from '@nestjs/passport';
+import { SupabaseStrategy } from '../strategy/supabase.strategy';
 
 @Module({
   imports: [
+    PassportModule,
     HealthModule,
-    SseModule,
     MetricsModule,
     InventoryModule,
     TwitchModule,
     AuthModule,
     UploadModule,
+    VersionModule,
     //
     RouterModule.register([
       {
         path: 'health',
         module: HealthModule,
-      },
-      {
-        path: 'sse',
-        module: SseModule,
       },
       {
         path: 'metrics',
@@ -47,7 +46,12 @@ import { UploadModule } from './upload/upload.module';
         path: 'upload',
         module: UploadModule,
       },
+      {
+        path: 'version',
+        module: VersionModule,
+      },
     ]),
   ],
+  providers: [SupabaseStrategy],
 })
 export class AppModule {}

@@ -8,7 +8,7 @@ env:
   NX_BRANCH: ${GITHUB_REF##*/}
 
 jobs:
-  CI:
+  Feature:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: 21
           cache: 'npm'
+
+      - name: 📦 Install NX-Linux
+        run: npm install @nx/nx-linux-x64-gnu
 
       - name: 📦 Install dependencies
         run: npm install

@@ -57,6 +57,13 @@ export class ItemController {
     return await this.service.getItemByTypeId(id);
   }
 
+  @MessagePattern(InventoryItemTopics.WAREHOUSE)
+  async getItemByWarehouseId(
+    @Payload() id: Nullable<string>,
+  ): Promise<Array<ItemDao>> {
+    return await this.service.getItemByWarehouseId(id);
+  }
+
   @MessagePattern(InventoryItemTopics.CREATE)
   async createItem(@Payload() data: CreateItemDto) {
     return await this.service.createItem(data);
@@ -87,5 +94,10 @@ export class ItemController {
   @MessagePattern(InventoryItemTopics.DELETE)
   async deleteItem(@Payload() id: string): Promise<void> {
     return await this.service.deleteItem(id);
+  }
+
+  @MessagePattern(InventoryItemTopics.VERSION)
+  getVersion(): string {
+    return this.service.getVersion();
   }
 }

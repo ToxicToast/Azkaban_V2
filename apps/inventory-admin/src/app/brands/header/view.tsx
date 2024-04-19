@@ -9,7 +9,7 @@ export function BrandHeaderView() {
       key="BrandHeaderOverview"
       title="Brands"
       buttonTitle="Add Brand"
-      openModal={openAddModal}
+      openModal={() => openAddModal()}
       isAdmin={isAdmin}
     />
   );
