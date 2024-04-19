@@ -19,5 +19,5 @@
       }
     }
   },
-  "tags": ["scope:inventory","scope:infrastructure"]
+  "tags": ["scope:infrastructure"]
 }
