@@ -1,26 +1,19 @@
 import { Button, Input, Label } from '@azkaban/ui-components';
 import { Link } from 'react-router-dom';
-import { useCallback, useState } from 'react';
 import { useAuthState } from '@azkaban/inventory-redux';
+import { useState } from 'react';
 
-export function LoginPage() {
-  const { loginUser } = useAuthState();
+export function RegisterPage() {
+  const { registerUser } = useAuthState();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
-
-  const onSubmit = useCallback(() => {
-    setSubmitDisabled(true);
-    loginUser(email, password);
-  }, [email, loginUser, password]);
 
   return (
     <>
       <h1 className="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">
-        Welcome Back ✨
+        Register Account ✨
       </h1>
-
       <form action="#" className="mt-6 grid grid-cols-6 gap-4">
         <div className="col-span-6">
           <Label htmlFor="Email">Email</Label>
@@ -44,19 +37,17 @@ export function LoginPage() {
           />
         </div>
       </form>
-
       <Button
         className="mt-4 w-full bg-indigo-500 hover:bg-indigo-600"
-        onClick={() => onSubmit()}
-        disabled={submitDisabled}
+        onClick={() => registerUser(email, password)}
       >
-        Sign In
+        Register Account
       </Button>
       <div className="border-t border-slate-200 dark:border-slate-700 pt-5 mt-6">
         <div className="flex flex-row gap-4 w-full pb-4">
-          <div className="text-sm w-1/2">Don't have an Account?</div>
+          <div className="text-sm w-1/2">Already have an Account?</div>
           <div className="text-sm w-1/2 text-right">
-            <Link to="/register">Register Here</Link>
+            <Link to="/">Login Here</Link>
           </div>
         </div>
       </div>

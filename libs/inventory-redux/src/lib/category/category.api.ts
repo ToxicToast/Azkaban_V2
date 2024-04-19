@@ -14,16 +14,16 @@ export const categoryApi = createApi({
   ],
   endpoints: (builder) => ({
     fetchCategoryList: builder.query<Array<Category>, void>({
-      query: () => `/category`,
+      query: () => `/api/inventory/category`,
       providesTags: ['GetCategoryList'],
     }),
     fetchCategorySingle: builder.query<Nullable<Category>, string>({
-      query: (id: string) => `/category/${id}`,
+      query: (id: string) => `/api/inventory/category/${id}`,
       providesTags: ['GetCategorySingle'],
     }),
     updateActiveCategory: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/category/${id}/activate`,
+        url: `/api/inventory/category/${id}/activate`,
         method: 'PUT',
         body: {},
       }),
@@ -31,7 +31,7 @@ export const categoryApi = createApi({
     }),
     updateInactiveCategory: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/category/${id}/deactivate`,
+        url: `/api/inventory/category/${id}/deactivate`,
         method: 'PUT',
         body: {},
       }),
@@ -55,7 +55,7 @@ export const categoryApi = createApi({
         title?: Optional<string>;
         slug?: Optional<string>;
       }) => ({
-        url: `/category/${id}`,
+        url: `/api/inventory/category/${id}`,
         method: 'PUT',
         body: data,
       }),
@@ -66,7 +66,7 @@ export const categoryApi = createApi({
       { parent_id: Nullable<string>; title: string }
     >({
       query: (data) => ({
-        url: `/category/`,
+        url: `/api/inventory/category/`,
         method: 'POST',
         body: data,
       }),
@@ -74,7 +74,7 @@ export const categoryApi = createApi({
     }),
     deleteCategory: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/category/${id}`,
+        url: `/api/inventory/category/${id}`,
         method: 'DELETE',
         body: {},
       }),
@@ -82,7 +82,7 @@ export const categoryApi = createApi({
     }),
     restoreCategory: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/category/${id}/restore`,
+        url: `/api/inventory/category/${id}/restore`,
         method: 'PUT',
         body: {},
       }),

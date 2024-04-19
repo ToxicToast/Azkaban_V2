@@ -15,7 +15,8 @@
         "main": "apps/events-service/src/main.ts",
         "tsConfig": "apps/events-service/tsconfig.app.json",
         "assets": ["apps/events-service/src/assets"],
-        "webpackConfig": "apps/events-service/webpack.config.js"
+        "webpackConfig": "apps/events-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

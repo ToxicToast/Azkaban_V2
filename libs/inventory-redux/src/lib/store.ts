@@ -3,6 +3,7 @@ import { GetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import AuthReducer from './auth/auth.slice';
+import { authApi } from './auth/auth.api';
 import CategoryReducer from './category/category.slice';
 import { categoryApi } from './category/category.api';
 import BrandReducer from './brand/brand.slice';
@@ -14,6 +15,7 @@ import NotificationReducer from './notification/notification.slice';
 export const store = configureStore({
   reducer: {
     auth: AuthReducer,
+    [authApi.reducerPath]: authApi.reducer,
     category: CategoryReducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     brand: BrandReducer,
@@ -26,7 +28,8 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(categoryApi.middleware)
       .concat(brandApi.middleware)
-      .concat(locationApi.middleware),
+      .concat(locationApi.middleware)
+      .concat(authApi.middleware),
   devTools: true,
   enhancers: (getDefaultEnhancers) => getDefaultEnhancers(),
 });

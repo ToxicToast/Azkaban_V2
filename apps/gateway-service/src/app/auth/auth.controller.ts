@@ -1,73 +1,40 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Post } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { DeviceCode, Verification } from './auth.type';
+import { Body, Controller, Post, HttpException } from '@nestjs/common';
+import { AuthService } from './auth.service';
 
 @ApiTags('auth')
 @Controller()
 export class AuthController {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(private readonly service: AuthService) {}
 
-  private async getAuthentikDeviceToken(): Promise<DeviceCode> {
-    return await this.httpService
-      .post(
-        'https://auth.toxictoast.de/application/o/device/',
-        {
-          client_id: process.env.AUTHENTIK_CLIENT_ID,
-          scope: 'openid email profile',
-        },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        },
-      )
-      .toPromise()
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => err.response.data);
+  @Post('register')
+  async registerUser(
+    @Body()
+    body: {
+      email: string;
+      password: string;
+      username: string;
+      group: string;
+    },
+  ) {
+    const data = await this.service.registerUser(
+      body.email,
+      body.password,
+      body.username,
+      body.group,
+    );
+    if (data === null) {
+      throw new HttpException('User not found', 404);
+    }
+    return data;
   }
 
-  private async getToken(deviceCode: string): Promise<void> {
-    return this.httpService
-      .post(
-        'https://auth.toxictoast.de/application/o/token/',
-        {
-          grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-          client_id: process.env.AUTHENTIK_CLIENT_ID,
-          device_code: deviceCode,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        },
-      )
-      .toPromise()
-      .then((res) => res.data)
-      .catch((err) => err.response.data);
-  }
-
-  @Post()
-  async authentikOAuth(): Promise<Verification> {
-    return await this.getAuthentikDeviceToken()
-      .then((deviceCodeObject: DeviceCode) => {
-        const { verification_uri_complete, device_code, user_code } =
-          deviceCodeObject;
-        return {
-          verification_uri_complete,
-          device_code,
-          user_code,
-        };
-      })
-      .catch(() => {
-        return null;
-      });
-  }
-
-  @Post('authenticate')
-  async authenticate(@Body() body: { deviceCode: string }) {
-    return await this.getToken(body.deviceCode);
+  @Post('login')
+  async loginUser(@Body() body: { email: string; password: string }) {
+    const data = await this.service.loginUser(body.email, body.password);
+    if (data === null) {
+      throw new HttpException('User not found', 404);
+    }
+    return data;
   }
 }

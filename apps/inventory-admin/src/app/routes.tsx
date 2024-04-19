@@ -7,6 +7,9 @@ import SSE from './sse';
 const LazyLoginPage = lazy(() =>
   import('./pages/login.page').then((m) => ({ default: m.LoginPage })),
 );
+const LazyRegisterPage = lazy(() =>
+  import('./pages/register.page').then((m) => ({ default: m.RegisterPage })),
+);
 const LazyDashboardPage = lazy(() =>
   import('./dashboard/page').then((m) => ({
     default: m.DashboardPage,
@@ -76,6 +79,11 @@ const guestRoutes = [
       {
         path: '*',
         element: <LazyLoginPage />,
+        hasErrorBoundary: true,
+      },
+      {
+        path: '/register',
+        element: <LazyRegisterPage />,
         hasErrorBoundary: true,
       },
     ],

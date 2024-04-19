@@ -1,12 +1,31 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
-import { HttpModule } from '@nestjs/axios';
-import { MeController } from './me.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { ClientsModule } from '@nestjs/microservices';
+import { clientProvider, Queues } from '@azkaban/shared';
+import { PassportModule } from '@nestjs/passport';
+import { SupabaseStrategy } from '../../strategy/supabase.strategy';
+import { AuthService } from './auth.service';
 
 @Module({
-  imports: [HttpModule, JwtModule],
-  controllers: [AuthController, MeController],
-  providers: [],
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.SUPABASE_JWT_SECRET,
+      signOptions: { expiresIn: '60min' },
+    }),
+    ClientsModule.register([
+      {
+        name: 'AUTH_SERVICE',
+        ...clientProvider(Queues.AZKABAN_AUTH),
+      },
+      {
+        name: 'WEBHOOK_SERVICE',
+        ...clientProvider(Queues.AZKABAN_WEBHOOK),
+      },
+    ]),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, SupabaseStrategy],
 })
 export class AuthModule {}

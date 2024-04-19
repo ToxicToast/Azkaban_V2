@@ -15,7 +15,8 @@
         "main": "apps/inventory-location-service/src/main.ts",
         "tsConfig": "apps/inventory-location-service/tsconfig.app.json",
         "assets": ["apps/inventory-location-service/src/assets"],
-        "webpackConfig": "apps/inventory-location-service/webpack.config.js"
+        "webpackConfig": "apps/inventory-location-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

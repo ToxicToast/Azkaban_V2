@@ -9,16 +9,16 @@ export const brandApi = createApi({
   tagTypes: ['GetBrandList', 'GetBrandSingle'],
   endpoints: (builder) => ({
     fetchBrandList: builder.query<Array<Brand>, void>({
-      query: () => `/company`,
+      query: () => `/api/inventory/company`,
       providesTags: ['GetBrandList'],
     }),
     fetchBrandSingle: builder.query<Nullable<Brand>, string>({
-      query: (id: string) => `/company/${id}`,
+      query: (id: string) => `/api/inventory/company/${id}`,
       providesTags: ['GetBrandSingle'],
     }),
     updateActiveBrand: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/company/${id}/activate`,
+        url: `/api/inventory/company/${id}/activate`,
         method: 'PUT',
         body: {},
       }),
@@ -26,7 +26,7 @@ export const brandApi = createApi({
     }),
     updateInactiveBrand: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/company/${id}/deactivate`,
+        url: `/api/inventory/company/${id}/deactivate`,
         method: 'PUT',
         body: {},
       }),
@@ -41,7 +41,7 @@ export const brandApi = createApi({
       }
     >({
       query: (id, ...data) => ({
-        url: `/company/${id}`,
+        url: `/api/inventory/company/${id}`,
         method: 'POST',
         body: data,
       }),
@@ -49,7 +49,7 @@ export const brandApi = createApi({
     }),
     addBrand: builder.mutation<void, { title: string }>({
       query: (data) => ({
-        url: `/company`,
+        url: `/api/inventory/company`,
         method: 'POST',
         body: data,
       }),
@@ -57,7 +57,7 @@ export const brandApi = createApi({
     }),
     deleteBrand: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/company/${id}`,
+        url: `/api/inventory/company/${id}`,
         method: 'DELETE',
         body: {},
       }),
@@ -65,7 +65,7 @@ export const brandApi = createApi({
     }),
     restoreBrand: builder.mutation<void, string>({
       query: (id: string) => ({
-        url: `/company/${id}/restore`,
+        url: `/api/inventory/company/${id}/restore`,
         method: 'PUT',
         body: {},
       }),

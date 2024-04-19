@@ -7,9 +7,12 @@ import { TwitchModule } from './twitch/twitch.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { VersionModule } from './version/version.module';
+import { PassportModule } from '@nestjs/passport';
+import { SupabaseStrategy } from '../strategy/supabase.strategy';
 
 @Module({
   imports: [
+    PassportModule,
     HealthModule,
     MetricsModule,
     InventoryModule,
@@ -49,5 +52,6 @@ import { VersionModule } from './version/version.module';
       },
     ]),
   ],
+  providers: [SupabaseStrategy],
 })
 export class AppModule {}

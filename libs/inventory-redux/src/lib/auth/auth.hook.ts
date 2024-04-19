@@ -10,13 +10,15 @@ import {
   selectAuthUsername,
 } from './auth.selector';
 import { useCallback } from 'react';
-import { useAuth } from 'react-oidc-context';
 import { AppDispatch, useAppSelector } from '../store';
-import { setUser, setLogout } from './auth.slice';
+import { setLogout } from './auth.slice';
+import { useLoginUserMutation, useRegisterUserMutation } from './auth.api';
 
 export function useAuthState() {
-  const { user } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
+
+  const [loginUserTrigger] = useLoginUserMutation();
+  const [registerUserTrigger] = useRegisterUserMutation();
 
   const email = useAppSelector(selectAuthEmail);
   const name = useAppSelector(selectAuthName);
@@ -27,15 +29,19 @@ export function useAuthState() {
   const isAuth = useAppSelector(selectAuthIsAuth);
   const initials = useAppSelector(selectAuthUserInitials);
 
-  const loginUser = useCallback(() => {
-    const userObject = user ?? null;
-    dispatch(
-      setUser({
-        profile: userObject?.profile ?? null,
-        id_token: userObject?.id_token ?? null,
-      }),
-    );
-  }, [user]);
+  const loginUser = useCallback(
+    (email: string, password: string) => {
+      loginUserTrigger({ email, password });
+    },
+    [loginUserTrigger],
+  );
+
+  const registerUser = useCallback(
+    (email: string, password: string) => {
+      registerUserTrigger({ email, password });
+    },
+    [loginUserTrigger],
+  );
 
   const logoutUser = useCallback(() => {
     dispatch(setLogout());
@@ -50,6 +56,7 @@ export function useAuthState() {
     isAdmin,
     isAuth,
     initials,
+    registerUser,
     loginUser,
     logoutUser,
   };

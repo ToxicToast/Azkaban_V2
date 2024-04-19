@@ -14,8 +14,9 @@
         "outputPath": "dist/apps/twitch-hook-service",
         "main": "apps/twitch-hook-service/src/main.ts",
         "tsConfig": "apps/twitch-hook-service/tsconfig.app.json",
-        "assets": ["apps/twitch-hook-service/src/package.json"],
-        "webpackConfig": "apps/twitch-hook-service/webpack.config.js"
+        "assets": [],
+        "webpackConfig": "apps/twitch-hook-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

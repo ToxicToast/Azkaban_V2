@@ -15,7 +15,8 @@
         "main": "apps/homeassistant-service/src/main.ts",
         "tsConfig": "apps/homeassistant-service/tsconfig.app.json",
         "assets": ["apps/homeassistant-service/src/assets"],
-        "webpackConfig": "apps/homeassistant-service/webpack.config.js"
+        "webpackConfig": "apps/homeassistant-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

@@ -22,6 +22,7 @@ export class VersionController {
 
     const azkaban = {
       auth: '-',
+      user: '-',
       upload: 'v0.3.0',
     };
 

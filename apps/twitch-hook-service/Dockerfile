@@ -16,6 +16,6 @@ RUN addgroup --system twitch-hook-service && \
 
 COPY dist/apps/twitch-hook-service .
 RUN chown -R twitch-hook-service:twitch-hook-service .
-RUN npm install
+RUN npm i --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]

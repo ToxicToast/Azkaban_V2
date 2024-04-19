@@ -14,13 +14,11 @@ WORKDIR /app
 RUN addgroup --system inventory-category-service && \
           adduser --system -G inventory-category-service inventory-category-service
 
-COPY package.json .
-COPY package-lock.json .
 COPY dist/apps/inventory-category-service .
 RUN chown -R inventory-category-service:inventory-category-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
-RUN npm ci --omit=dev --omit=optional
+RUN npm i --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]

@@ -14,13 +14,11 @@ WORKDIR /app
 RUN addgroup --system inventory-type-service && \
           adduser --system -G inventory-type-service inventory-type-service
 
-COPY package.json .
-COPY package-lock.json .
 COPY dist/apps/inventory-type-service .
 RUN chown -R inventory-type-service:inventory-type-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
-RUN npm ci --omit=dev --omit=optional
+RUN npm i --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]

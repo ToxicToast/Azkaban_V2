@@ -2,11 +2,13 @@ import { Module } from '@nestjs/common';
 import { HealthModule } from './health/health.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { RouterModule } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     HealthModule,
     MetricsModule,
+    AuthModule,
     //
     RouterModule.register([
       {
@@ -16,6 +18,10 @@ import { RouterModule } from '@nestjs/core';
       {
         path: 'metrics',
         module: MetricsModule,
+      },
+      {
+        path: 'auth',
+        module: AuthModule,
       },
     ]),
   ],

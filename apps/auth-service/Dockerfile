@@ -14,13 +14,11 @@ WORKDIR /app
 RUN addgroup --system auth-service && \
           adduser --system -G auth-service auth-service
 
-COPY package.json .
-COPY package-lock.json .
 COPY dist/apps/auth-service .
 RUN chown -R auth-service:auth-service .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
-RUN npm ci --omit=dev --omit=optional
+RUN npm i --omit=dev --omit=optional
 
 CMD [ "node", "main.js" ]
