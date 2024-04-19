@@ -3,7 +3,6 @@ import { authState } from './auth.state';
 import { setLogoutAction, setUserAction } from './auth.reducer';
 import { AuthModel } from './auth.model';
 import { onFullfiled } from './auth.extraReducer';
-import { onPending } from './auth.extraReducer';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -13,9 +12,7 @@ export const authSlice = createSlice({
     setLogout: setLogoutAction,
   },
   extraReducers: (builder: ActionReducerMapBuilder<AuthModel>) => {
-    onPending(builder);
     onFullfiled(builder);
-    // onRejected(builder);
   },
 });
 

@@ -5,8 +5,6 @@ import { Session } from '@supabase/auth-js/src/lib/types';
 import { toastService } from '@azkaban/ui-components';
 import { Nullable } from '@azkaban/shared';
 
-export const onPending = (builder: ActionReducerMapBuilder<AuthModel>) => {};
-
 export const onFullfiled = (builder: ActionReducerMapBuilder<AuthModel>) => {
   builder.addMatcher(
     authApi.endpoints?.loginUser.matchFulfilled,
