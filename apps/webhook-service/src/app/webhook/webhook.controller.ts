@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { WebhookInventoryTopics } from '@azkaban/shared';
+import { WebhookAuthTopics, WebhookInventoryTopics } from '@azkaban/shared';
 import {
   CategoryDao,
   CompanyDao,
@@ -85,6 +85,16 @@ export class WebhookController {
     await this.webhookApiAlerts.sendApiAlertsHook(
       `📦 Created new OCR Upload`,
       ['azkaban', 'upload', 'ocr'],
+      'https://api.toxictoast.de',
+    );
+  }
+
+  @MessagePattern(WebhookAuthTopics.USERLOGIN)
+  async handleAzkabanAuthLogin(@Payload() data: string) {
+    await this.webhookSSE.sendSSEHook<unknown>('azkaban-auth', data);
+    await this.webhookApiAlerts.sendApiAlertsHook(
+      `🪐 New User Login - ${data}`,
+      ['azkaban', 'auth', 'login'],
       'https://api.toxictoast.de',
     );
   }

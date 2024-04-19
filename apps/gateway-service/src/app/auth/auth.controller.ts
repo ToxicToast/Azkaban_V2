@@ -35,6 +35,7 @@ export class AuthController {
     if (data === null) {
       throw new HttpException('User not found', 404);
     }
+
     return data;
   }
 }

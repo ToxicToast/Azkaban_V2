@@ -6,6 +6,7 @@ import { clientProvider, Queues } from '@azkaban/shared';
 import { PassportModule } from '@nestjs/passport';
 import { SupabaseStrategy } from '../../strategy/supabase.strategy';
 import { AuthService } from './auth.service';
+import { AuthWebhookService } from './webhook.service';
 
 @Module({
   imports: [
@@ -26,6 +27,6 @@ import { AuthService } from './auth.service';
     ]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, SupabaseStrategy],
+  providers: [AuthService, AuthWebhookService],
 })
 export class AuthModule {}

@@ -1,6 +1,6 @@
 import { Header, Sidebar } from '@azkaban/ui-inventory-layout';
 import { memo, useCallback, useEffect, useState } from 'react';
-import { NotificationHelper, useAzkabanAuth } from '@azkaban/ui-components';
+import { NotificationHelper } from '@azkaban/ui-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAuthState, useNotificationState } from '@azkaban/inventory-redux';
 import { Toaster } from '../toaster';
@@ -11,13 +11,10 @@ function AuthenticatedLayout() {
   const { username, initials, isAdmin, name, logoutUser } = useAuthState();
   const { notificationData, removeNotification } = useNotificationState();
 
-  const { signOut } = useAzkabanAuth();
-
   const onSignOut = useCallback(() => {
     sessionStorage.clear();
     logoutUser();
-    signOut();
-  }, [logoutUser, signOut]);
+  }, [logoutUser]);
 
   const getNotificationData = useCallback(() => {
     return NotificationHelper(notificationData);

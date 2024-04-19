@@ -7,3 +7,7 @@ export enum WebhookInventoryTopics {
   TYPECREATED = 'inventory.type.created',
   OCRCREATED = 'azkaban.upload.ocr.created',
 }
+
+export enum WebhookAuthTopics {
+  USERLOGIN = 'azkaban.auth.login',
+}
