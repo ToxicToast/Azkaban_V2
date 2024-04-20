@@ -20,5 +20,6 @@ RUN chown -R inventory-category-service:inventory-category-service .
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
 RUN npm i --omit=dev --omit=optional
+RUN npm i --save mysql
 
 CMD [ "node", "main.js" ]
