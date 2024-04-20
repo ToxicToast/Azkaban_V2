@@ -11,8 +11,7 @@ ENV PORT=3009
 
 WORKDIR /app
 
-RUN addgroup --system webhook-service && \
-          adduser --system -G webhook-service webhook-service \
+RUN addgroup --system webhook-service && adduser --system -G webhook-service webhook-service
 
 COPY dist/apps/webhook-service .
 RUN chown -R webhook-service:webhook-service .
