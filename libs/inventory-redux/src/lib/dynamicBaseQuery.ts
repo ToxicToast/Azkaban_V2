@@ -17,8 +17,8 @@ export const dynamicBaseQuery: BaseQueryFn<
   WebApi: BaseQueryApi,
   extraOptions: object,
 ) => {
-  // const baseUrl = 'https://api.toxictoast.de';
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = 'https://api.toxictoast.de';
+  // const baseUrl = 'http://localhost:3000';
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,
     prepareHeaders: (

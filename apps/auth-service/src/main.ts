@@ -15,10 +15,7 @@ async function createAuthMicroService(app: INestApplication): Promise<void> {
 
 function configureApp(app: INestApplication): void {
   const globalPrefix = 'api';
-  const exclude = [
-    { path: 'health', method: RequestMethod.ALL },
-    { path: 'metrics', method: RequestMethod.ALL },
-  ];
+  const exclude = [{ path: 'health', method: RequestMethod.ALL }];
   //
   app.setGlobalPrefix(globalPrefix, {
     exclude,

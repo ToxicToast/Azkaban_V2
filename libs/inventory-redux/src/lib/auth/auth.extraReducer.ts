@@ -11,12 +11,14 @@ export const onFullfiled = (builder: ActionReducerMapBuilder<AuthModel>) => {
     (state: AuthModel, action: PayloadAction<Nullable<Session>>) => {
       const payload = action.payload;
       //
+      const groups = payload?.user?.user_metadata?.groups ?? [];
+      //
       state.email = payload?.user?.email ?? null;
       state.name = null;
-      state.username = null;
-      state.groups = [];
+      state.username = payload?.user?.user_metadata?.username ?? null;
+      state.groups = groups;
       state.token = payload?.access_token ?? null;
-      state.isAdmin = false;
+      state.isAdmin = groups.includes('inventory-admin');
       state.isAuth = true;
       //
       toastService.sendToast({

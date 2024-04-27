@@ -6,6 +6,9 @@ export class GroupsGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
+    // TODO: Implement the Auth Service
+    return true;
+    /*
     const groups = this.reflector.get<string[]>('groups', context.getHandler());
     if (!groups) {
       return false;
@@ -17,5 +20,6 @@ export class GroupsGuard implements CanActivate {
     return groups.some((group) => {
       return userGroups.includes(group);
     });
+     */
   }
 }

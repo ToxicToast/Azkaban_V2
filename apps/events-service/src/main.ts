@@ -14,7 +14,6 @@ function configureApp(app: INestApplication): void {
   const globalPrefix = 'api';
   const exclude = [
     { path: 'health', method: RequestMethod.ALL },
-    { path: 'metrics', method: RequestMethod.ALL },
     { path: '/', method: RequestMethod.ALL },
   ];
   //

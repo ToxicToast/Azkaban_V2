@@ -2,8 +2,8 @@ import { EventSubMiddleware } from '@twurple/eventsub-http';
 import { MiddlewareBuilder } from '../utils/middleware.builder';
 import { SupabaseBuilder } from '../utils/supabase.builder';
 
-export class VederkindMiddleware {
-  private readonly id = '821634959';
+export class LolDeltaMiddleware {
+  private readonly id = '148946736';
 
   constructor(
     private readonly middleware: EventSubMiddleware,

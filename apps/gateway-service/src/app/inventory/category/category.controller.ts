@@ -18,6 +18,7 @@ import {
 import { AuthGuard } from '../../../guard/auth.guard';
 import { Groups } from '../../../decorator/groups.decorator';
 import { GroupsGuard } from '../../../guard/groups.guard';
+import { AzkabanGroups } from '@azkaban/shared';
 
 @UseGuards(AuthGuard, GroupsGuard)
 @ApiTags('inventory-category')
@@ -25,13 +26,13 @@ import { GroupsGuard } from '../../../guard/groups.guard';
 export class CategoryController {
   constructor(private readonly service: CategoryService) {}
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get()
   async getCategories() {
     return await this.service.getCategories();
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get(':id')
   async getCategoryById(@Param('id') id: string) {
     const data = await this.service.getCategoryById(id);
@@ -41,19 +42,19 @@ export class CategoryController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('parent/:id')
   async getCategoryByParentId(@Param('id') id: string) {
     return await this.service.getCategoriesByParentId(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Post()
   async createCategory(@Body() data: CreateCategoryDto) {
     return await this.service.createCategory(data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id')
   async updateCategory(
     @Param('id') id: string,
@@ -62,25 +63,25 @@ export class CategoryController {
     return await this.service.updateCategory(id, data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Delete(':id')
   async deleteCategory(@Param('id') id: string) {
     return await this.service.deleteCategory(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/restore')
   async restoreCategory(@Param('id') id: string) {
     return await this.service.restoreCategory(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/activate')
   async activateCategory(@Param('id') id: string) {
     return await this.service.activateCategory(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/deactivate')
   async deactivateCategory(@Param('id') id: string) {
     return await this.service.deactivateCategory(id);

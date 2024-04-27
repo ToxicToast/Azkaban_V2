@@ -1,7 +1,6 @@
-import { Controller } from '@nestjs/common';
+import { Controller, NotImplementedException } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { AuthTopics, Nullable } from '@azkaban/shared';
-import { Session } from '@supabase/supabase-js';
+import { AuthTopics } from '@azkaban/shared';
 import { AuthService } from './auth.service';
 
 @Controller()
@@ -17,22 +16,19 @@ export class AuthController {
       username: string;
       group: string;
     },
-  ): Promise<Nullable<Session>> {
-    const response = await this.service.registerUser(
+  ): Promise<void> {
+    await this.service.registerUser(
       data.email,
       data.password,
       data.username,
       data.group,
     );
-    return response?.data?.session ?? null;
+    throw new NotImplementedException();
   }
 
   @MessagePattern(AuthTopics.LOGIN)
   async loginUser(@Payload() payload: { email: string; password: string }) {
-    const response = await this.service.loginUser(
-      payload.email,
-      payload.password,
-    );
-    return response?.data?.session ?? null;
+    await this.service.loginUser(payload.email, payload.password);
+    throw new NotImplementedException();
   }
 }

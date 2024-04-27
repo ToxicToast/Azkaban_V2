@@ -18,6 +18,7 @@ import {
 import { AuthGuard } from '../../../guard/auth.guard';
 import { GroupsGuard } from '../../../guard/groups.guard';
 import { Groups } from '../../../decorator/groups.decorator';
+import { AzkabanGroups } from '@azkaban/shared';
 
 @UseGuards(AuthGuard, GroupsGuard)
 @ApiTags('inventory-location')
@@ -25,13 +26,13 @@ import { Groups } from '../../../decorator/groups.decorator';
 export class LocationController {
   constructor(private readonly service: LocationService) {}
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get()
   async getLocations() {
     return await this.service.getLocations();
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get(':id')
   async getLocationById(@Param('id') id: string) {
     const data = await this.service.getLocationById(id);
@@ -41,13 +42,13 @@ export class LocationController {
     return data;
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Post()
   async createLocation(@Body() data: CreateLocationDto) {
     return await this.service.createLocation(data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id')
   async updateLocation(
     @Param('id') id: string,
@@ -56,25 +57,25 @@ export class LocationController {
     return await this.service.updateLocation(id, data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Delete(':id')
   async deleteLocation(@Param('id') id: string) {
     return await this.service.deleteLocation(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/restore')
   async restoreLocation(@Param('id') id: string) {
     return await this.service.restoreLocation(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/activate')
   async activateLocation(@Param('id') id: string) {
     return await this.service.activateLocation(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/deactivate')
   async deactivateLocation(@Param('id') id: string) {
     return await this.service.deactivateLocation(id);

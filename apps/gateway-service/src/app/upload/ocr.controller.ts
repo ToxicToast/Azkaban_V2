@@ -12,6 +12,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { OCRService } from './ocr.service';
 import { Groups } from '../../decorator/groups.decorator';
+import { AzkabanGroups } from '@azkaban/shared';
 
 // @ts-expect-error This is an Error that should not be possible, but it is... cuz express is a b...
 type ExpressMulterFile = Express.Multer.File;
@@ -22,7 +23,7 @@ type ExpressMulterFile = Express.Multer.File;
 export class OCRController {
   constructor(private readonly service: OCRService) {}
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @UseInterceptors(FileInterceptor('image'))
   @Post()
   async uploadFileAndPassValidation(@UploadedFile() file: ExpressMulterFile) {

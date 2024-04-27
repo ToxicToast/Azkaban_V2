@@ -2,18 +2,25 @@ import { HelixStream, HelixUser } from '@twurple/api';
 import axios from 'axios';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { Nullable } from '@azkaban/shared';
+import { SupabaseBuilder } from './supabase.builder';
 
 export class StreamBuilder {
   private readonly broadcaster: HelixUser;
   private readonly stream: Nullable<HelixStream>;
+  private readonly supabaseBuilder: SupabaseBuilder;
   //
   private readonly axiosClient = axios.create({
     baseURL: 'https://api.toxictoast.de/',
   });
 
-  constructor(broadcaster: HelixUser, stream: Nullable<HelixStream>) {
+  constructor(
+    broadcaster: HelixUser,
+    stream: Nullable<HelixStream>,
+    supabase: SupabaseBuilder,
+  ) {
     this.broadcaster = broadcaster;
     this.stream = stream;
+    this.supabaseBuilder = supabase;
   }
 
   public async onStreamOnline(): Promise<void> {
@@ -29,6 +36,13 @@ export class StreamBuilder {
       .catch((error) => {
         console.error(error);
       });
+    //
+    await this.supabaseBuilder.updateStreamStatusOnline(
+      this.broadcaster.id,
+      this.stream?.title ?? null,
+      this.stream?.gameName ?? null,
+      this.stream?.thumbnailUrl ?? null,
+    );
   }
 
   public async onStreamOffline(): Promise<void> {
@@ -39,5 +53,7 @@ export class StreamBuilder {
       .catch((error) => {
         console.error(error);
       });
+    //
+    await this.supabaseBuilder.updateStreamStatusOffline(this.broadcaster.id);
   }
 }

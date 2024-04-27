@@ -18,6 +18,7 @@ import {
 import { AuthGuard } from '../../../guard/auth.guard';
 import { GroupsGuard } from '../../../guard/groups.guard';
 import { Groups } from '../../../decorator/groups.decorator';
+import { AzkabanGroups } from '@azkaban/shared';
 
 @UseGuards(AuthGuard, GroupsGuard)
 @ApiTags('inventory-type')
@@ -25,13 +26,13 @@ import { Groups } from '../../../decorator/groups.decorator';
 export class TypeController {
   constructor(private readonly service: TypeService) {}
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get()
   async getTypes() {
     return await this.service.getTypes();
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get(':id')
   async getTypeById(@Param('id') id: string) {
     const data = await this.service.getTypeById(id);
@@ -41,37 +42,37 @@ export class TypeController {
     return data;
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Post()
   async createType(@Body() data: CreateTypeDto) {
     return await this.service.createType(data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id')
   async updateType(@Param('id') id: string, @Body() data: UpdateTypeDto) {
     return await this.service.updateType(id, data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Delete(':id')
   async deleteType(@Param('id') id: string) {
     return await this.service.deleteType(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/restore')
   async restoreType(@Param('id') id: string) {
     return await this.service.restoreType(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/activate')
   async activateType(@Param('id') id: string) {
     return await this.service.activateType(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/deactivate')
   async deactivateType(@Param('id') id: string) {
     return await this.service.deactivateType(id);

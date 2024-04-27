@@ -20,7 +20,6 @@ function configureApp(app: INestApplication): void {
     { path: 'sse/inventory', method: RequestMethod.ALL },
     { path: 'sse/notification', method: RequestMethod.ALL },
     { path: 'sse/twitch', method: RequestMethod.ALL },
-    { path: 'metrics', method: RequestMethod.ALL },
     { path: 'swagger', method: RequestMethod.ALL },
     { path: '/', method: RequestMethod.ALL },
   ];

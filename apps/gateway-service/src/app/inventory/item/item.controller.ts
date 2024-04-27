@@ -18,6 +18,7 @@ import { AuthGuard } from '../../../guard/auth.guard';
 import { GroupsGuard } from '../../../guard/groups.guard';
 import { Groups } from '../../../decorator/groups.decorator';
 import { ItemService } from './item.service';
+import { AzkabanGroups } from '@azkaban/shared';
 
 @UseGuards(AuthGuard, GroupsGuard)
 @ApiTags('inventory-item')
@@ -25,13 +26,13 @@ import { ItemService } from './item.service';
 export class ItemController {
   constructor(private readonly service: ItemService) {}
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get()
   async getItems() {
     return await this.service.getItems();
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get(':id')
   async getItemById(@Param('id') id: string) {
     const data = await this.service.getItemById(id);
@@ -41,7 +42,7 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('category/:id')
   async getItemByCategory(@Param('id') id: string) {
     const data = await this.service.getItemByCategory(id);
@@ -51,7 +52,7 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('company/:id')
   async getItemByCompany(@Param('id') id: string) {
     const data = await this.service.getItemByCompany(id);
@@ -61,7 +62,7 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('location/:id')
   async getItemByLocation(@Param('id') id: string) {
     const data = await this.service.getItemByLocation(id);
@@ -71,7 +72,7 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('size/:id')
   async getItemBySize(@Param('id') id: string) {
     const data = await this.service.getItemBySize(id);
@@ -81,7 +82,7 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('type/:id')
   async getItemByType(@Param('id') id: string) {
     const data = await this.service.getItemByType(id);
@@ -91,7 +92,7 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory')
+  @Groups(AzkabanGroups.INVENTORY)
   @Get('warehouse/:id')
   async getItemByWarehouse(@Param('id') id: string) {
     const data = await this.service.getItemByWarehouse(id);
@@ -101,37 +102,37 @@ export class ItemController {
     return data;
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Post()
   async createItem(@Body() data: CreateItemDto) {
     return await this.service.createItem(data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id')
   async updateItem(@Param('id') id: string, @Body() data: UpdateItemDto) {
     return await this.service.updateItem(id, data);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Delete(':id')
   async deleteItem(@Param('id') id: string) {
     return await this.service.deleteItem(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/restore')
   async restoreItem(@Param('id') id: string) {
     return await this.service.restoreItem(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/activate')
   async activateItem(@Param('id') id: string) {
     return await this.service.activateItem(id);
   }
 
-  @Groups('inventory-admin')
+  @Groups(AzkabanGroups.INVENTORY_ADMIN)
   @Put(':id/deactivate')
   async deactivateItem(@Param('id') id: string) {
     return await this.service.deactivateItem(id);

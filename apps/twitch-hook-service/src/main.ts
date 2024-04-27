@@ -8,6 +8,10 @@ import { MeltedmonstergamesMiddleware } from './middlewares/meltedmonstergames.m
 import { ThedevdadMiddleware } from './middlewares/thedevdad.middleware';
 import { HawokaiMiddleware } from './middlewares/hawokai.middleware';
 import { VederkindMiddleware } from './middlewares/vederkind.middleware';
+import { SupabaseBuilder } from './utils/supabase.builder';
+import { MonoNzMiddleware } from './middlewares/mononz.middleware';
+import { LolDeltaMiddleware } from './middlewares/loldelta.middleware';
+import { TheCaptainCoderMiddleware } from './middlewares/thecaptaincoder.middleware';
 
 const app = express();
 const botClient = new Bot({
@@ -36,12 +40,20 @@ app.get('/', (req, res) => {
 middleware.apply(app);
 const port = process.env.PORT || 3012;
 const server = app.listen(port, async () => {
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const SUPABASE_KEY = process.env.SUPABASE_KEY;
+  //
+  const supabaseBuilder = new SupabaseBuilder(SUPABASE_URL, SUPABASE_KEY);
+  //
   await middleware.markAsReady();
-  new ToxictoastMiddleware(middleware);
-  new CreativepepperMiddleware(middleware);
-  new MeltedmonstergamesMiddleware(middleware);
-  new HawokaiMiddleware(middleware);
-  new ThedevdadMiddleware(middleware);
-  new VederkindMiddleware(middleware);
+  new ToxictoastMiddleware(middleware, supabaseBuilder);
+  new CreativepepperMiddleware(middleware, supabaseBuilder);
+  new MeltedmonstergamesMiddleware(middleware, supabaseBuilder);
+  new HawokaiMiddleware(middleware, supabaseBuilder);
+  new ThedevdadMiddleware(middleware, supabaseBuilder);
+  new VederkindMiddleware(middleware, supabaseBuilder);
+  new MonoNzMiddleware(middleware, supabaseBuilder);
+  new LolDeltaMiddleware(middleware, supabaseBuilder);
+  new TheCaptainCoderMiddleware(middleware, supabaseBuilder);
 });
 server.on('error', console.error);
