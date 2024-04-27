@@ -46,7 +46,8 @@
       }
     },
     "docker-build": {
-      "command": "docker build -f apps/twitch-hook-service/Dockerfile . -t toxictoast/twitch-hook-service:{args.VERSION}"
+      "command": "docker build -f apps/twitch-hook-service/Dockerfile . -t toxictoast/twitch-hook-service:{args.VERSION}",
+      "dependsOn": ["build"]
     },
     "docker-push": {
       "command": "docker push toxictoast/twitch-hook-service:{args.VERSION}"
