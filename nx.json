@@ -80,11 +80,11 @@
     },
     "@nx/react": {
       "application": {
+        "babel": true,
         "style": "scss",
         "linter": "eslint",
         "bundler": "webpack",
-        "projectNameAndRootFormat": "derived",
-        "babel": true
+        "projectNameAndRootFormat": "derived"
       },
       "library": {
         "style": "scss",
@@ -142,5 +142,6 @@
         "targetName": "lint"
       }
     }
-  ]
+  ],
+  "useInferencePlugins": false
 }

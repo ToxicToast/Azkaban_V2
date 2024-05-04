@@ -8,7 +8,9 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { VersionModule } from './version/version.module';
 import { PassportModule } from '@nestjs/passport';
-import { SupabaseStrategy } from '../strategy/supabase.strategy';
+import { CacheModule } from '@nestjs/cache-manager';
+
+// TODO: Add CQRS
 
 @Module({
   imports: [
@@ -52,6 +54,6 @@ import { SupabaseStrategy } from '../strategy/supabase.strategy';
       },
     ]),
   ],
-  providers: [SupabaseStrategy],
+  providers: [],
 })
 export class AppModule {}

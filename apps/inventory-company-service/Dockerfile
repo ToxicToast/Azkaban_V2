@@ -20,6 +20,6 @@ RUN chown -R inventory-company-service:inventory-company-service .
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
 RUN npm i --omit=dev --omit=optional
-RUN npm i --save mysql
+RUN npm i --save mysql pg
 
 CMD [ "node", "main.js" ]

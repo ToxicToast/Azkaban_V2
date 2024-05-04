@@ -18,24 +18,45 @@ export class CategoryService {
   async getCategories(): Promise<Array<CategoryDao>> {
     return await this.client
       .send<Array<CategoryDao>, object>(InventoryCategoryTopics.LIST, {})
-      .toPromise();
+      .toPromise()
+      .then((data: Array<CategoryDao>) => {
+        return data;
+      })
+      .catch((error) => {
+        Logger.error(error);
+        return [];
+      });
   }
 
   async getCategoryById(id: string): Promise<Nullable<CategoryDao>> {
     return await this.client
       .send<Nullable<CategoryDao>, string>(InventoryCategoryTopics.ID, id)
-      .toPromise();
+      .toPromise()
+      .then((data: Nullable<CategoryDao>) => {
+        return data;
+      })
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async getCategoriesByParentId(
     parent_id: Nullable<string>,
   ): Promise<Array<CategoryDao>> {
     return await this.client
-      .send<
-        Array<CategoryDao>,
-        Nullable<string>
-      >(InventoryCategoryTopics.PARENT, parent_id)
-      .toPromise();
+      .send<Array<CategoryDao>, Nullable<string>>(
+        InventoryCategoryTopics.PARENT,
+        parent_id,
+      )
+      .toPromise()
+      .then((data: Array<CategoryDao>) => {
+        return data;
+      })
+      .catch((error) => {
+        Logger.error(error);
+        return [];
+      });
   }
 
   async createCategory(data: CreateCategoryDto): Promise<CategoryDao> {
@@ -48,39 +69,63 @@ export class CategoryService {
       .then((data: CategoryDao) => {
         this.webhookService.onCategoryCreated(data);
         return data;
+      })
+      .catch((error) => {
+        Logger.error(error);
+        return null;
       });
   }
 
   async updateCategory(id: string, data: UpdateCategoryDto): Promise<void> {
     return await this.client
-      .send<
-        void,
-        { id: string; data: UpdateCategoryDto }
-      >(InventoryCategoryTopics.UPDATE, { id, data })
-      .toPromise();
+      .send<void, { id: string; data: UpdateCategoryDto }>(
+        InventoryCategoryTopics.UPDATE,
+        { id, data },
+      )
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async deleteCategory(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCategoryTopics.DELETE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async restoreCategory(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCategoryTopics.RESTORE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async activateCategory(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCategoryTopics.ACTIVATE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async deactivateCategory(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCategoryTopics.DEACTIVATE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 }

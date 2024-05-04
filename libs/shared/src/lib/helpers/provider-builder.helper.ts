@@ -2,7 +2,7 @@ import { DataSource, EntitySchema, MixedList } from 'typeorm';
 
 export function buildDataSource(
   isTest: boolean,
-  entities: MixedList<string | EntitySchema>
+  entities: MixedList<string | EntitySchema>,
 ): Promise<DataSource> {
   const database = isTest
     ? buildTestProvider(entities)
@@ -11,7 +11,7 @@ export function buildDataSource(
 }
 
 function buildTestProvider(
-  entities: MixedList<string | EntitySchema>
+  entities: MixedList<string | EntitySchema>,
 ): DataSource {
   return new DataSource({
     type: 'sqlite',
@@ -24,10 +24,10 @@ function buildTestProvider(
 }
 
 function buildProdProvider(
-  entities: MixedList<string | EntitySchema>
+  entities: MixedList<string | EntitySchema>,
 ): DataSource {
   return new DataSource({
-    type: 'mariadb',
+    type: 'postgres',
     host: process.env.DATABASE_HOST,
     port: Number(process.env.DATABASE_PORT),
     username: process.env.DATABASE_USERNAME,

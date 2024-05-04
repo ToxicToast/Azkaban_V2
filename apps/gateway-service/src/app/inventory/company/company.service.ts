@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientRMQ } from '@nestjs/microservices';
 import { InventoryCompanyTopics, Nullable } from '@azkaban/shared';
 import {
@@ -18,13 +18,21 @@ export class CompanyService {
   async getCategories(): Promise<Array<CompanyDao>> {
     return await this.client
       .send<Array<CompanyDao>, object>(InventoryCompanyTopics.LIST, {})
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async getCompanyById(id: string): Promise<Nullable<CompanyDao>> {
     return await this.client
       .send<Nullable<CompanyDao>, string>(InventoryCompanyTopics.ID, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async createCompany(data: CreateCompanyDto): Promise<CompanyDao> {
@@ -34,39 +42,63 @@ export class CompanyService {
       .then((data: CompanyDao) => {
         this.webhookService.onCompanyCreated(data);
         return data;
+      })
+      .catch((error) => {
+        Logger.error(error);
+        return null;
       });
   }
 
   async updateCompany(id: string, data: UpdateCompanyDto): Promise<void> {
     return await this.client
-      .send<
-        void,
-        { id: string; data: UpdateCompanyDto }
-      >(InventoryCompanyTopics.UPDATE, { id, data })
-      .toPromise();
+      .send<void, { id: string; data: UpdateCompanyDto }>(
+        InventoryCompanyTopics.UPDATE,
+        { id, data },
+      )
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async deleteCompany(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCompanyTopics.DELETE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async restoreCompany(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCompanyTopics.RESTORE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async activateCompany(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCompanyTopics.ACTIVATE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 
   async deactivateCompany(id: string): Promise<void> {
     return await this.client
       .send<void, string>(InventoryCompanyTopics.DEACTIVATE, id)
-      .toPromise();
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+        return null;
+      });
   }
 }

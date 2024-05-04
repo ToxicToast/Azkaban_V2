@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { LocationService } from './location.service';
 import { ApiTags } from '@nestjs/swagger';
